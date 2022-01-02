@@ -39,8 +39,8 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
           ),
           centerTitle: true,
           title: Text(
-            'Фаслҳои маҳбуб',
-            style: TextStyle(fontSize: 18.sp),
+            'Избранные главы',
+            style: TextStyle(fontSize: 15.sp),
           ),
         ),
         // ignore: avoid_unnecessary_containers

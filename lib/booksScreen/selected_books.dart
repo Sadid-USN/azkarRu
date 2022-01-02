@@ -4,8 +4,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../colors/gradient_class.dart';
-import '../screens/pdf_api_class.dart';
-import '../widgets/books_ditails.dart';
+import 'pdf_api_class.dart';
+import 'books_ditails.dart';
 import 'list_of_all_books.dart';
 
 class SelectedBooks extends StatelessWidget {

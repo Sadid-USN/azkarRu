@@ -29,7 +29,7 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
           decoration: favoriteGradient,
         ),
         elevation: 0.0,
-        title: Text('Тақвими мелодӣ', style: TextStyle(fontSize: 18.sp)),
+        title: Text('Григорианский календарь', style: TextStyle(fontSize: 15.sp)),
         centerTitle: true,
       ),
       body: Container(

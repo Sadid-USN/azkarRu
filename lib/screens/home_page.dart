@@ -33,8 +33,8 @@ class _HomePageState extends State<HomePage> {
     tz.initializeTimeZones();
     NotificationService().dailyAtNotification(
         1,
-        "Дуо сипари мусалмон аст",
-        "Парвардигоратон фармуд: «Маро бихонед, то [дуои] шуморо иҷобат кунам» (Ғофир 60)",
+        "Молитва защита верующего",
+        "Ваш Господь сказал: «Взывайте ко Мне, и Я отвечу вам» (Аль-Гафир 60)",
         2);
   }
 
@@ -124,6 +124,7 @@ class _HomePageState extends State<HomePage> {
                                   chapter,
                                 );
                               }));
+                              
                             },
                             child: Stack(
                               children: [
@@ -186,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                                                       // ignore: sized_box_for_whitespace
                                                       Icon(
                                                         FontAwesomeIcons
-                                                            .arrowRight,
+                                                            .handPointer,
                                                         size: 14.sp,
                                                         color: Colors.blueGrey,
                                                       ),
