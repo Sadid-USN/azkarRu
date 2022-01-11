@@ -25,6 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Chapter chapter;
+  
 
   @override
   void initState() {
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         1,
         "Молитва защита верующего",
         "Ваш Господь сказал: «Взывайте ко Мне, и Я отвечу вам» (Аль-Гафир 60)",
-        2);
+        1);
   }
 
   // final controller = PageController(viewportFraction: 12.0, keepPage: true);
@@ -66,11 +67,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final currentWidth = MediaQuery.of(context).size.width;
+    final currentHeight= MediaQuery.of(context).size.height;
     final books = Provider.of<List<Book>>(context);
     return ChangeNotifierProvider(
       create: (context) => BottomNavBar(),
       child: Scaffold(
-          drawer: const DrawerModel(),
+       // backgroundColor: currentWidth < 400 ? Colors.deepOrange: Colors.greenAccent[400],
+          drawer:  const DrawerModel(),
           extendBodyBehindAppBar: true,
           appBar: AppBar(
             title: ListTile(
@@ -86,10 +90,11 @@ class _HomePageState extends State<HomePage> {
             elevation: 1.0,
             backgroundColor: Colors.transparent,
           ),
-          //  backgroundColor: gradientEndColor,
+           
           body: Container(
-            height: double.maxFinite,
-            decoration: mainScreenGradient,
+            height: currentHeight,
+            width: currentWidth,
+           decoration: mainScreenGradient,
             child: ListView(
               children: [
                 Column(
@@ -124,7 +129,6 @@ class _HomePageState extends State<HomePage> {
                                   chapter,
                                 );
                               }));
-                              
                             },
                             child: Stack(
                               children: [

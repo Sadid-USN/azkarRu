@@ -1,9 +1,10 @@
 import 'package:avrod/colors/colors.dart';
-import 'package:avrod/Calendars/gregorian_calendar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 import 'calendar_hijri.dart';
+import 'gregorian_calendar.dart';
 
 class CalendarTabBarView extends StatefulWidget {
   const CalendarTabBarView({Key? key}) : super(key: key);

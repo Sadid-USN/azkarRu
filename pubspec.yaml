@@ -42,6 +42,7 @@ dependencies:
   open_file: 
   flutter_pdfview: 
   device_preview: ^1.0.0
+  audioplayers: ^0.20.1
 
   #get:
   #get_cli: 

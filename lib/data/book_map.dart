@@ -60,14 +60,16 @@ class Texts {
   String? text;
   String? arabic;
   String? translation;
+  String? url;
 
-  Texts({this.id, this.text, this.arabic, this.translation});
+  Texts({this.id, this.text, this.arabic, this.translation, this.url});
 
   Texts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     text = json['text'];
     arabic = json['arabic'];
     translation = json['translation'];
+    url = json['url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -76,6 +78,7 @@ class Texts {
     data['text'] = text;
     data['arabic'] = arabic;
     data['translation'] = translation;
+    data['url'] = url;
     return data;
   }
 }

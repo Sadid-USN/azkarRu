@@ -1,15 +1,12 @@
 import 'dart:io';
-import 'package:avrod/booksScreen/selected_books.dart';
 import 'package:avrod/colors/gradient_class.dart';
-
-import 'package:avrod/booksScreen/pdf_api_class.dart';
-import 'package:avrod/booksScreen/all_book.dart';
-import 'package:avrod/booksScreen/books_ditails.dart';
+import 'package:avrod/screens/booksScreen/selected_books.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:sizer/sizer.dart';
+import 'all_book.dart';
 import 'reading_books_labrary_screen.dart';
 
 class ListOfAllBooks extends StatefulWidget {

@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -10,7 +12,7 @@ class ScrollingText extends StatefulWidget {
   final Axis scrollAxis;
   final double ratioOfBlankToScreen;
 
-  const ScrollingText({
+   const ScrollingText({
     required this.text,
      this.textStyle,
     this.scrollAxis=  Axis.horizontal,
@@ -31,7 +33,7 @@ class ScrollingTextState extends State<ScrollingText>
   double  position = 0.0;
   Timer ? timer;
   final double _moveDistance = 4.0;
-  final int _timerRest = 150;
+  final int _timerRest = 100;
   final GlobalKey _key = GlobalKey();
 
   @override

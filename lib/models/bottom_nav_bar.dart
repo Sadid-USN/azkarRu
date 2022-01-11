@@ -1,9 +1,10 @@
 import 'package:avrod/screens/favorite_chapter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../Calendars/calendar_tabbar.dart';
-import '../booksScreen/list_of_all_books.dart';
+
+import '../screens/booksScreen/list_of_all_books.dart';
 import '../screens/search_screen.dart';
+import '../screens/сalendars/calendar_tabbar.dart';
 import '../widgets/notification.dart';
 
 class BottomNavBar extends ChangeNotifier {
