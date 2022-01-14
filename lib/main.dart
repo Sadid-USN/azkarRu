@@ -3,12 +3,14 @@ import 'package:avrod/data/book_functions.dart';
 import 'package:avrod/screens/home_page.dart';
 import 'package:avrod/widgets/notification.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'data/book_map.dart';
+import 'generated/l10n.dart';
 
 // ignore: constant_identifier_names
 const String FAVORITES_BOX = 'favorites_box';
@@ -46,6 +48,13 @@ class _MyAppState extends State<MyApp> {
               },
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
+                localizationsDelegates: const [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
                 theme: ThemeData(
                   textTheme: GoogleFonts.ptSerifCaptionTextTheme(
                       Theme.of(context).textTheme),

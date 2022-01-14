@@ -51,7 +51,7 @@ class _DrawerModelState extends State<DrawerModel> {
                   },
                   icon: Icon(
                     Icons.share,
-                    color: Colors.blueGrey,
+                    color: Colors.white,
                     size: 20.sp,
                   )),
             ),
@@ -66,7 +66,7 @@ class _DrawerModelState extends State<DrawerModel> {
                   },
                   icon: Icon(
                     Icons.language,
-                    color: Colors.blueGrey,
+                    color: Colors.white,
                     size: 20.sp,
                   )),
             ),
@@ -81,7 +81,7 @@ class _DrawerModelState extends State<DrawerModel> {
                   },
                   icon: Icon(
                     FontAwesomeIcons.envelope,
-                    color: Colors.blueGrey,
+                    color: Colors.white,
                     size: 18.sp,
                   )),
             ),

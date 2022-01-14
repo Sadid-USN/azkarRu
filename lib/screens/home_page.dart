@@ -25,7 +25,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Chapter chapter;
-  
 
   @override
   void initState() {
@@ -68,13 +67,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
-    final currentHeight= MediaQuery.of(context).size.height;
+    final currentHeight = MediaQuery.of(context).size.height;
     final books = Provider.of<List<Book>>(context);
     return ChangeNotifierProvider(
       create: (context) => BottomNavBar(),
       child: Scaffold(
-       // backgroundColor: currentWidth < 400 ? Colors.deepOrange: Colors.greenAccent[400],
-          drawer:  const DrawerModel(),
+          // backgroundColor: currentWidth < 400 ? Colors.deepOrange: Colors.greenAccent[400],
+          drawer: const DrawerModel(),
           extendBodyBehindAppBar: true,
           appBar: AppBar(
             title: ListTile(
@@ -90,11 +89,10 @@ class _HomePageState extends State<HomePage> {
             elevation: 1.0,
             backgroundColor: Colors.transparent,
           ),
-           
           body: Container(
             height: currentHeight,
             width: currentWidth,
-           decoration: mainScreenGradient,
+            decoration: mainScreenGradient,
             child: ListView(
               children: [
                 Column(
@@ -241,7 +239,7 @@ class _HomePageState extends State<HomePage> {
             builder: (context, bottomBar, child) => CurvedNavigationBar(
                 color: Colors.white,
                 buttonBackgroundColor: Colors.white,
-                height: 45.sp,
+                height: 50.sp,
                 index: bottomBar.selectedIndex,
                 backgroundColor: Colors.indigo.shade400,
                 items: navItems,
