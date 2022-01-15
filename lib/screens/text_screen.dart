@@ -319,7 +319,7 @@ class _TextScreenState extends State<TextScreen> {
                     size: 33.0,
                     onStartIconPress: () {
                       FlutterClipboard.copy(
-                          '*${widget.chapter?.name}*\n${widget.texts![index ?? 0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![index ?? 0].arabic!}\n${widget.texts![index ?? 0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Avrod* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
+                          '*${widget.chapter?.name}*\n${widget.texts![index ?? 0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![index ?? 0].arabic!}\n${widget.texts![index ?? 0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
 
                       return true;
                     },
@@ -334,7 +334,7 @@ class _TextScreenState extends State<TextScreen> {
                   IconButton(
                       onPressed: () {
                         Share.share(
-                            '*${widget.chapter?.name}*\n${widget.texts![index ?? 0].text}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![2].arabic}\n${widget.texts![3].translation}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Avrod*  в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
+                            '*${widget.chapter?.name}*\n${widget.texts![index ?? 0].text}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![2].arabic}\n${widget.texts![index ?? 0].translation}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar*  в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
                       },
                       icon: const Icon(Icons.share,
                           size: 33.0, color: Colors.white)),
