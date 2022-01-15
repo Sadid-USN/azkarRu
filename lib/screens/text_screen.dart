@@ -4,6 +4,7 @@ import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/models/scrolling_text.dart';
 import 'package:avrod/style/my_text_style.dart';
+import 'package:clay_containers/constants.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:expandable/expandable.dart';
@@ -31,6 +32,8 @@ class _TextScreenState extends State<TextScreen> {
   AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.MEDIA_PLAYER);
 
   bool isPlaying = false;
+
+  get index => null;
 
   void stopPlaying(String url) async {
     if (isPlaying) {
@@ -109,108 +112,6 @@ class _TextScreenState extends State<TextScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 15,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: ClayContainer(
-            depth: 40,
-            customBorderRadius: const BorderRadius.only(
-                topLeft: Radius.elliptical(12, 12),
-                bottomRight: Radius.circular(0),
-                topRight: Radius.elliptical(12, 12),
-                bottomLeft: Radius.circular(12)),
-            color: clayColor,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AnimateIcons(
-                  startIcon: Icons.play_circle,
-                  endIcon: Icons.pause,
-                  controller: _buttonController,
-                  size: 40.0,
-                  onStartIconPress: () {
-                    playSound(url);
-
-                    return true;
-                  },
-                  onEndIconPress: () {
-                    playSound(url);
-                    return true;
-                  },
-                  duration: const Duration(milliseconds: 250),
-                  startIconColor: Colors.white,
-                  endIconColor: Colors.white,
-                  clockwise: false,
-                ),
-                // AnimateIcons(
-                //   startIconColor: Colors.white,
-                //   endIconColor: Colors.white,
-                //   endIcon: Icons.stop_outlined,
-                //   startIcon: Icons.stop,
-                //   controller: _buttonController,
-                //   size: 40.0,
-                //   onStartIconPress: () {
-                //     stopPlaying(url);
-
-                //     return true;
-                //   },
-                //   onEndIconPress: () {
-                //     stopPlaying(url);
-                //     return true;
-                //   },
-                // ),
-                Slider(
-                    activeColor: Colors.white,
-                    inactiveColor: Colors.blueGrey,
-                    min: 0.0,
-                    max: duration.inSeconds.toDouble(),
-                    value: position.inSeconds.toDouble(),
-                    onChanged: (double newPosition) {
-                      setState(() {});
-                    }),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    AnimateIcons(
-                      startIcon: Icons.copy,
-                      endIcon: Icons.check_circle_outline,
-                      controller: _controller,
-                      size: 33.0,
-                      onStartIconPress: () {
-                        FlutterClipboard.copy(
-                            '*${widget.chapter?.name}*\n$text\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n$arabic\n$translation\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Avrod* для iPhone\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
-
-                        return true;
-                      },
-                      onEndIconPress: () {
-                        return false;
-                      },
-                      duration: const Duration(milliseconds: 250),
-                      startIconColor: Colors.white,
-                      endIconColor: Colors.white,
-                      clockwise: false,
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          Share.share(
-                              '*${widget.chapter?.name}*\n$text\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n$arabic\n$translation\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Avrod* для iPhone\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
-                        },
-                        icon: const Icon(Icons.share,
-                            size: 33.0, color: Colors.white)),
-                    const SizedBox(
-                      width: 5,
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 10.0,
-        ),
         Slider(
           activeColor: Colors.white,
           inactiveColor: Colors.blueGrey,
@@ -223,24 +124,32 @@ class _TextScreenState extends State<TextScreen> {
           max: 30.sp,
           min: 16.sp,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Text(
-            "Произношение:",
-            textAlign: TextAlign.start,
-            style: expandableTextStyle,
-          ),
-        ),
         Container(
             padding: const EdgeInsets.all(8),
             child: Column(
               children: [
-                SelectableText(
-                  text,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: _fontSize,
-                    color: Colors.white,
+                ExpandablePanel(
+                  header: Text(
+                    "Произношение:",
+                    textAlign: TextAlign.start,
+                    style: expandableTextStyle,
+                  ),
+                  collapsed: SelectableText(
+                    text,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: _fontSize,
+                      color: Colors.white,
+                    ),
+                  ),
+                  expanded: SelectableText(
+                    text,
+                    maxLines: 1,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        color: Colors.white,
+                        overflow: TextOverflow.fade),
                   ),
                 ),
               ],
@@ -264,14 +173,7 @@ class _TextScreenState extends State<TextScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 padding: const EdgeInsets.all(40),
                 child: ExpandablePanel(
-                  header: Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Text(
-                      "Арабский:",
-                      textAlign: TextAlign.start,
-                      style: expandableTextStyle,
-                    ),
-                  ),
+                  header: const Text(''),
                   collapsed: SelectableText(
                     arabic,
                     textAlign: TextAlign.center,
@@ -320,14 +222,17 @@ class _TextScreenState extends State<TextScreen> {
                 expanded: SelectableText(
                   translation,
                   maxLines: 1,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: _fontSize,
+                    fontSize: 14,
                     color: Colors.white,
                   ),
                 ),
               ),
             )),
+        const SizedBox(
+          height: 80,
+        )
       ],
     );
   }
@@ -346,9 +251,101 @@ class _TextScreenState extends State<TextScreen> {
   final GlobalKey _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    int? index;
     return DefaultTabController(
       length: widget.texts!.length,
       child: Scaffold(
+        backgroundColor: Colors.green,
+        bottomSheet: ClayContainer(
+          curveType: CurveType.concave,
+          height: 70,
+          depth: 40,
+          color: Colors.green[500],
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              AnimateIcons(
+                startIcon: Icons.play_circle,
+                endIcon: Icons.pause,
+                controller: _buttonController,
+                size: 40.0,
+                onStartIconPress: () {
+                  playSound(widget.texts![index ?? 0].url!);
+
+                  return true;
+                },
+                onEndIconPress: () {
+                  playSound(widget.texts![index ?? 0].url!);
+                  return true;
+                },
+                duration: const Duration(milliseconds: 250),
+                startIconColor: Colors.white,
+                endIconColor: Colors.white,
+                clockwise: false,
+              ),
+              // AnimateIcons(
+              //   startIconColor: Colors.white,
+              //   endIconColor: Colors.white,
+              //   endIcon: Icons.stop_outlined,
+              //   startIcon: Icons.stop,
+              //   controller: _buttonController,
+              //   size: 40.0,
+              //   onStartIconPress: () {
+              //     stopPlaying(url);
+
+              //     return true;
+              //   },
+              //   onEndIconPress: () {
+              //     stopPlaying(url);
+              //     return true;
+              //   },
+              // ),
+              Slider(
+                  activeColor: Colors.white,
+                  inactiveColor: Colors.blueGrey,
+                  min: 0.0,
+                  max: duration.inSeconds.toDouble(),
+                  value: position.inSeconds.toDouble(),
+                  onChanged: (double newPosition) {
+                    setState(() {});
+                  }),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  AnimateIcons(
+                    startIcon: Icons.copy,
+                    endIcon: Icons.check_circle_outline,
+                    controller: _controller,
+                    size: 33.0,
+                    onStartIconPress: () {
+                      FlutterClipboard.copy(
+                          '*${widget.chapter?.name}*\n${widget.texts![index ?? 0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![index ?? 0].arabic!}\n${widget.texts![index ?? 0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Avrod* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
+
+                      return true;
+                    },
+                    onEndIconPress: () {
+                      return false;
+                    },
+                    duration: const Duration(milliseconds: 250),
+                    startIconColor: Colors.white,
+                    endIconColor: Colors.white,
+                    clockwise: false,
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        Share.share(
+                            '*${widget.chapter?.name}*\n${widget.texts![index ?? 0].text}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![2].arabic}\n${widget.texts![3].translation}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Avrod*  в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
+                      },
+                      icon: const Icon(Icons.share,
+                          size: 33.0, color: Colors.white)),
+                  const SizedBox(
+                    width: 5,
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
@@ -399,19 +396,4 @@ class _TextScreenState extends State<TextScreen> {
       ),
     );
   }
-
-  // _updateProgress() {
-  //   const oneSec = Duration(seconds: 1);
-  //   Timer.periodic(oneSec, (Timer t) {
-  //     setState(() {
-  //       _progressLoading = 0.20;
-  //       if (_progressLoading!.toStringAsFixed(1) == '1.00') {
-  //         _loading = false;
-  //         t.cancel();
-  //         _progressLoading = 0.0;
-  //         return;
-  //       }
-  //     });
-  //   });
-  // }
 }

@@ -90,7 +90,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
     return AnimationLimiter(
       child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 1 / 0.2.h,
+            childAspectRatio: 2 / 0.4.h,
             crossAxisSpacing: 3,
             mainAxisSpacing: 3,
             crossAxisCount: 2,

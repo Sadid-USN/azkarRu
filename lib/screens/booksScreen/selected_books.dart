@@ -1,22 +1,17 @@
+import 'package:avrod/colors/gradient_class.dart';
+import 'package:avrod/screens/booksScreen/books_ditails.dart';
+import 'package:avrod/screens/booksScreen/pdf_api_class.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../colors/gradient_class.dart';
-import 'pdf_api_class.dart';
-import 'books_ditails.dart';
 import 'list_of_all_books.dart';
 
 class SelectedBooks extends StatelessWidget {
   const SelectedBooks({
     Key? key,
   }) : super(key: key);
-  
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +26,7 @@ class SelectedBooks extends StatelessWidget {
         flexibleSpace: Container(
           decoration: favoriteGradient,
         ),
-        title: Text('Книги на русском', style: TextStyle(fontSize: 18.sp)),
+        title: Text('Китобхона', style: TextStyle(fontSize: 18.sp)),
         centerTitle: true,
       ),
       body: Container(
@@ -58,7 +53,7 @@ class SelectedBooks extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 5.0),
                           child: CachedNetworkImage(
-                            imageUrl: booksRu.urlImage!,
+                            imageUrl: booksRu.urlImage![index],
                             imageBuilder: (context, imageProvider) {
                               return Container(
                                 decoration: BoxDecoration(
@@ -75,7 +70,7 @@ class SelectedBooks extends StatelessWidget {
                                       booksRu.name![index],
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          fontSize: 16.sp,
+                                          fontSize: 14.sp,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white),
                                     ),

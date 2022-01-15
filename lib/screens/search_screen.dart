@@ -46,7 +46,7 @@ class _SearcScreenState extends State<SearcScreen> {
 
   @override
   Widget build(BuildContext context) {
-     final books = Provider.of<List<Book>>(context);
+    final books = Provider.of<List<Book>>(context);
     return Scaffold(
         backgroundColor: gradientStartColor,
         appBar: AppBar(
@@ -62,9 +62,7 @@ class _SearcScreenState extends State<SearcScreen> {
             actions: [
               IconButton(
                   onPressed: () {
-                    showSearch(
-                        context: context,
-                        delegate: SearchBar(list: widget.books ?? []));
+                    showSearch(context: context, delegate: CoustomSearch());
                   },
                   icon: const Icon(Icons.search)),
             ]),
@@ -91,8 +89,132 @@ class _SearcScreenState extends State<SearcScreen> {
   }
 }
 
-Widget buildBook(Book book) {
+class CoustomSearch extends SearchDelegate {
+  List<String> allData = [
+    'Дуа при пробуждении от сна',
+    'Дуа при одевании',
+    'Дуа при облачении в новую одежду',
+    'Дуа за того, кто надел новую одежду',
+    'Что следует сказать снявшему с себя одежду',
+    'Дуа перед тем, как войти в туалет',
+  ];
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+          onPressed: () {
+            query = '';
+          },
+          icon: const Icon(Icons.clear))
+    ];
+  }
 
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: const Icon(Icons.arrow_back_ios));
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> matchQuery = [];
+    for (var item in allData) {
+      if (item.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(item);
+      }
+    }
+
+    return ListView.builder(
+        scrollDirection: Axis.vertical,
+        padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
+        physics: const BouncingScrollPhysics(),
+        itemCount: matchQuery.length,
+        itemBuilder: (context, index) {
+          var result = matchQuery[index];
+          return Padding(
+            padding: const EdgeInsets.all(5),
+            child: InkWell(
+              onTap: () {},
+              child:
+
+                  // ignore: sized_box_for_whitespace
+                  Container(
+                      decoration: searchScreenGradient,
+                      height: 12.h,
+                      child: Center(
+                        child: ListTile(
+                          title: Center(
+                            child: Text(
+                              result,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          // leading: Padding(
+                          //   padding: const EdgeInsets.only(right: 15),
+                          //   child: Text(chapter.id.toString(),
+                          //       style: const TextStyle(color: Colors.white)),
+                          // ),
+                        ),
+                      )),
+            ),
+          );
+        });
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<String> matchQuery = [];
+    for (var item in allData) {
+      if (item.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(item);
+      }
+    }
+
+    return ListView.builder(
+        scrollDirection: Axis.vertical,
+        padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
+        physics: const BouncingScrollPhysics(),
+        itemCount: matchQuery.length,
+        itemBuilder: (context, index) {
+          var result = matchQuery[index];
+          return Padding(
+            padding: const EdgeInsets.all(5),
+            child: InkWell(
+              onTap: () {},
+              child:
+
+                  // ignore: sized_box_for_whitespace
+                  Container(
+                      decoration: searchScreenGradient,
+                      height: 12.h,
+                      child: Center(
+                        child: ListTile(
+                          title: Center(
+                            child: Text(
+                              result,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      )),
+            ),
+          );
+        });
+  }
+}
+
+Widget buildBook(Book book) {
   return AnimationLimiter(
     child: ListView.builder(
         scrollDirection: Axis.vertical,
@@ -124,73 +246,41 @@ Widget buildBook(Book book) {
 
                       // ignore: sized_box_for_whitespace
                       Container(
-                          decoration: searchScreenGradient,
-                          height: 12.h,
-                          child: Center(
-                            child: ListTile(
-                              title: Center(
-                                child: Text(
-                                  book.chapters![index].name!,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white),
-                                ),
-                              ),
-                              // leading: Padding(
-                              //   padding: const EdgeInsets.only(right: 15),
-                              //   child: Text(chapter.id.toString(),
-                              //       style: const TextStyle(color: Colors.white)),
-                              // ),
-                            ),
-                          )),
+                    decoration: searchScreenGradient,
+                    height: 12.h,
+                    child: ListTile(
+                      title: Center(
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return TextScreen(
+                                texts: chapter.texts,
+                                chapter: chapter,
+                              );
+                            }));
+                          },
+                          child: Text(
+                            book.chapters![index].name!,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      // leading: Padding(
+                      //   padding: const EdgeInsets.only(right: 15),
+                      //   child: Text(chapter.id.toString(),
+                      //       style: const TextStyle(color: Colors.white)),
+                      // ),
+                    ),
+                  ),
                 ),
               ),
             ),
           );
         }),
   );
-}
-
-class SearchBar extends SearchDelegate<String> {
-  List<Book>? list;
-  SearchBar({this.list});
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.clear,
-          ))
-    ];
-  }
-
-  @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: const Icon(
-          Icons.arrow_back_ios,
-          size: 22,
-        ));
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    return Container();
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    return ListView.builder(
-        itemCount: list!.length,
-        itemBuilder: (context, index) {
-          return Text(list![index].chapters![index].name ?? '');
-        });
-  }
 }
