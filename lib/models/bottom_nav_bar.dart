@@ -1,3 +1,4 @@
+import 'package:avrod/screens/booksScreen/selected_books.dart';
 import 'package:avrod/screens/favorite_chapter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -5,7 +6,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../screens/booksScreen/list_of_all_books.dart';
 import '../screens/search_screen.dart';
 import '../screens/сalendars/calendar_tabbar.dart';
-import '../widgets/notification.dart';
 
 class BottomNavBar extends ChangeNotifier {
   int selectedIndex = 2;
@@ -30,7 +30,7 @@ class BottomNavBar extends ChangeNotifier {
       }));
     } else if (index == 1) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return const ListOfAllBooks();
+        return const SelectedBooks();
       }));
     } else if (index == 2) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -47,7 +47,7 @@ class BottomNavBar extends ChangeNotifier {
       //   "Парвардигоратон фармуд: «Маро бихонед, то [дуои] шуморо иҷобат кунам» (Ғофир 60)",
       //   1,
       // );
-     
+
       _launchInBrowser(_lounchGooglePlay);
     }
     notifyListeners();

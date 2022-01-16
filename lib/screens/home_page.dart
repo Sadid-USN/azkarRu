@@ -41,15 +41,16 @@ class _HomePageState extends State<HomePage> {
   // final controller = PageController(viewportFraction: 12.0, keepPage: true);
 
   final navItems = [
-    Icon(Icons.search, color: Colors.blueGrey, size: 22.sp),
+    Icon(FontAwesomeIcons.search, color: Colors.indigo.shade400, size: 22.sp),
     Icon(
       FontAwesomeIcons.book,
-      color: Colors.blueGrey,
+      color: Colors.indigo.shade400,
       size: 22.sp,
     ),
     Icon(Icons.favorite, color: Colors.red, size: 22.sp),
-    Icon(FontAwesomeIcons.calendarAlt, color: Colors.blueGrey, size: 22.sp),
-    Icon(Icons.star, color: Colors.blueGrey, size: 22.sp),
+    Icon(FontAwesomeIcons.calendarAlt,
+        color: Colors.indigo.shade400, size: 22.sp),
+    Icon(Icons.star, color: Colors.indigo.shade400, size: 22.sp),
   ];
 
   final colorizeColors = [

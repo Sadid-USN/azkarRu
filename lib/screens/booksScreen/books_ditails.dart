@@ -21,7 +21,6 @@ class BooksInPersian {
 final booksRu = BooksRu(name: [
   '',
   '',
-  '',
   'Причины увеличения и уменьшения веры',
   '',
   'О вхождении джинов в тело человека',
@@ -30,7 +29,6 @@ final booksRu = BooksRu(name: [
   'پاسخ به 18 شبهه برگزارکنندگان جشن میلاد پیامبر',
   'اصول و مبانی دعوت در سیرت پیامبر رحمت',
 ], path: [
-  "https://docs.google.com/viewerng/viewer?hl=ar&t=59&url=https://www.alarabimag.com/books/23160.pdf",
   "https://static.toislam.ws/files/biblioteka/biblioteka_pdf/05_fiqh/09_raznoe/08_umdatul_ahkam_1_tom.pdf",
   "https://static.toislam.ws/files/biblioteka/biblioteka_pdf/08_adab/01_deyaniya_obereg_raba.pdf",
   "https://static.toislam.ws/files/biblioteka/biblioteka_pdf/01_aqida/04_prichini_uvelicheniya_i_umensheniya_imana.pdf",
@@ -41,7 +39,6 @@ final booksRu = BooksRu(name: [
   'https://aqeedeh.com/book_files/pdf/fa/pasokh-ba-18shobhe-jashn-milad-peyambar-PDF.pdf',
   'https://aqeedeh.com/book_files/pdf/fa/osul-va-mabani-davat-dar-sirat-payambar-PDF.pdf',
 ], urlImage: [
-  'https://www.almrsal.com/wp-content/uploads/2018/11/%D8%A7%D9%84%D9%82%D8%A7%D8%B9%D8%AF%D8%A9-%D8%A7%D9%84%D9%86%D9%88%D8%B1%D8%A7%D9%86%D9%8A%D8%A9.png',
   'https://toislam.ws/wp-content/uploads/2022/01/sharkh_umdat_al_ahkam_1-830x402.jpg',
   'https://toislam.ws/wp-content/uploads/2013/05/deyaniya_raba-830x402.jpg',
   'https://i.pinimg.com/originals/e7/3a/52/e73a52cf5dfeb4bfeb9979ba1487947c.jpg',
