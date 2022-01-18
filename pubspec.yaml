@@ -57,20 +57,18 @@ dependencies:
   font_awesome_flutter: ^9.2.0
   google_fonts: ^2.2.0
   google_fonts_arabic: ^1.1.7
-  google_nav_bar: null
-  hijri: null
+  google_nav_bar: ^5.0.5
+  hijri: ^3.0.0
   hijri_picker: ^3.0.0
   hive: ^2.0.5
   hive_flutter: ^1.1.0
   http: ^0.13.4
-  image_picker: null
+  #image_picker: ^0.8.4+4
   intl: ^0.17.0
-  like_button: null
-  liquid_swipe: null
-  open_file: null
-  path: null
-  path_provider: null
-  progress_indicators: null
+  like_button: ^2.0.4
+  liquid_swipe: ^2.1.1
+  open_file: ^3.2.1
+  progress_indicators: ^1.0.0
   provider: ^6.0.2
   share: ^2.0.4
   simple_animations: ^4.0.1
@@ -122,6 +120,7 @@ flutter:
   assets:
     - lib/data/book.json
     - images/
+    - lib/assets/locales/audio/
     - lib/assets/locales/en.json
     - lib/assets/locales/ru.json
   # - lib/android/app/src/raw

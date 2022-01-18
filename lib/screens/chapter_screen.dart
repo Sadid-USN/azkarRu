@@ -1,6 +1,4 @@
 // @dart=2.9
-// ignore_for_file: sized_box_for_whitespace
-
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_functions.dart';
@@ -12,12 +10,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
 import '../main.dart';
-
-// ignore: constant_identifier_names
 
 class ChapterScreen extends StatefulWidget {
   const ChapterScreen(this.bookIndex, this.chapter, {Key key})

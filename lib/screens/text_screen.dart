@@ -16,12 +16,10 @@ import 'package:sizer/sizer.dart';
 class TextScreen extends StatefulWidget {
   final List<Texts>? texts;
   final Chapter? chapter;
+  final int? index;
 
-  const TextScreen({
-    Key? key,
-    this.texts,
-    this.chapter,
-  }) : super(key: key);
+  const TextScreen({Key? key, this.texts, this.chapter, this.index})
+      : super(key: key);
 
   @override
   _TextScreenState createState() => _TextScreenState();
@@ -251,7 +249,6 @@ class _TextScreenState extends State<TextScreen> {
   final GlobalKey _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    int? index;
     return DefaultTabController(
       length: widget.texts!.length,
       child: Scaffold(
@@ -270,12 +267,12 @@ class _TextScreenState extends State<TextScreen> {
                 controller: _buttonController,
                 size: 40.0,
                 onStartIconPress: () {
-                  playSound(widget.texts![index ?? 0].url!);
+                  playSound(widget.texts![widget.index ?? 0].url!);
 
                   return true;
                 },
                 onEndIconPress: () {
-                  playSound(widget.texts![index ?? 0].url!);
+                  playSound(widget.texts![widget.index ?? 0].url!);
                   return true;
                 },
                 duration: const Duration(milliseconds: 250),
