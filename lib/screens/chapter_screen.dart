@@ -159,7 +159,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
                                       chapter.name,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          fontSize: 16.sp,
+                                          fontSize: 15.sp,
                                           fontWeight: FontWeight.w600,
                                           color: titleTextColor),
                                     ),

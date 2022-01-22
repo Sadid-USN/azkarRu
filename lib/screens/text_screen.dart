@@ -31,11 +31,9 @@ class _TextScreenState extends State<TextScreen> {
 
   bool isPlaying = false;
 
-  get index => null;
-
-  void stopPlaying(String url) async {
+  void stopPlaying() async {
     if (isPlaying) {
-      var reslult = await audioPlayer.pause();
+      var reslult = await audioPlayer.stop();
       if (reslult == 1) {
         setState(() {
           isPlaying = false;
@@ -44,8 +42,7 @@ class _TextScreenState extends State<TextScreen> {
     }
   }
 
-  void playSound(String url) async {
-    // ignore: unrelated_type_equality_checks
+  void pauseSound() async {
     if (isPlaying) {
       var result = await audioPlayer.pause();
 
@@ -54,7 +51,14 @@ class _TextScreenState extends State<TextScreen> {
           isPlaying = false;
         });
       }
-    } else if (!isPlaying) {
+    }
+  }
+
+  Duration duration = const Duration();
+  Duration position = const Duration();
+  void playSound(String url) async {
+    // ignore: unrelated_type_equality_checks
+    if (!isPlaying) {
       var result = await audioPlayer.play(url);
       if (result == 1) {
         setState(() {
@@ -76,30 +80,31 @@ class _TextScreenState extends State<TextScreen> {
 
   double _fontSize = 16.sp;
   String? creepingLine;
-  IconData btnIcon = Icons.play_arrow;
 
   AnimateIconController _controller = AnimateIconController();
   AnimateIconController _buttonController = AnimateIconController();
-  Duration duration = const Duration();
-  Duration position = const Duration();
-  double sliderPosition = 0.0;
+
+  //double sliderPosition = 0.0;
 
   @override
   void dispose() {
     _controller = AnimateIconController();
     _buttonController = AnimateIconController();
     audioPlayer.dispose();
+    audioPlayer.onAudioPositionChanged;
+    audioPlayer.onDurationChanged;
+
     super.dispose();
   }
 
   @override
   void initState() {
+    audioPlayer = AudioPlayer();
+
     _controller = AnimateIconController();
 
     super.initState();
   }
-
-  Color clayColor = Colors.green.shade600;
 
   Widget _contenAllTexts(
     String text,
@@ -248,7 +253,9 @@ class _TextScreenState extends State<TextScreen> {
 
   final GlobalKey _key = GlobalKey();
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return DefaultTabController(
       length: widget.texts!.length,
       child: Scaffold(
@@ -272,7 +279,7 @@ class _TextScreenState extends State<TextScreen> {
                   return true;
                 },
                 onEndIconPress: () {
-                  playSound(widget.texts![widget.index ?? 0].url!);
+                  pauseSound();
                   return true;
                 },
                 duration: const Duration(milliseconds: 250),
@@ -280,23 +287,13 @@ class _TextScreenState extends State<TextScreen> {
                 endIconColor: Colors.white,
                 clockwise: false,
               ),
-              // AnimateIcons(
-              //   startIconColor: Colors.white,
-              //   endIconColor: Colors.white,
-              //   endIcon: Icons.stop_outlined,
-              //   startIcon: Icons.stop,
-              //   controller: _buttonController,
-              //   size: 40.0,
-              //   onStartIconPress: () {
-              //     stopPlaying(url);
-
-              //     return true;
-              //   },
-              //   onEndIconPress: () {
-              //     stopPlaying(url);
-              //     return true;
-              //   },
-              // ),
+              // IconButton(
+              //     onPressed: () {},
+              //     icon: const Icon(
+              //       Icons.stop,
+              //       size: 40,
+              //       color: Colors.white,
+              //     )),
               Slider(
                   activeColor: Colors.white,
                   inactiveColor: Colors.blueGrey,
@@ -304,7 +301,10 @@ class _TextScreenState extends State<TextScreen> {
                   max: duration.inSeconds.toDouble(),
                   value: position.inSeconds.toDouble(),
                   onChanged: (double newPosition) {
-                    setState(() {});
+                    setState(() {
+                      newPosition = position.inSeconds.toDouble();
+                      newPosition = duration.inSeconds.toDouble();
+                    });
                   }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -316,7 +316,7 @@ class _TextScreenState extends State<TextScreen> {
                     size: 33.0,
                     onStartIconPress: () {
                       FlutterClipboard.copy(
-                          '*${widget.chapter?.name}*\n${widget.texts![index ?? 0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![index ?? 0].arabic!}\n${widget.texts![index ?? 0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
+                          '*${widget.chapter?.name}*\n${widget.texts![widget.index ?? 0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![widget.index ?? 0].arabic!}\n${widget.texts![widget.index ?? 0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
 
                       return true;
                     },
@@ -331,7 +331,7 @@ class _TextScreenState extends State<TextScreen> {
                   IconButton(
                       onPressed: () {
                         Share.share(
-                            '*${widget.chapter?.name}*\n${widget.texts![index ?? 0].text}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![2].arabic}\n${widget.texts![index ?? 0].translation}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar*  в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
+                            '*${widget.chapter?.name}*\n${widget.texts![widget.index ?? 0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![widget.index ?? 0].arabic!}\n${widget.texts![widget.index ?? 0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
                       },
                       icon: const Icon(Icons.share,
                           size: 33.0, color: Colors.white)),
@@ -347,6 +347,7 @@ class _TextScreenState extends State<TextScreen> {
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
+              stopPlaying();
             },
             icon: const Icon(Icons.arrow_back_ios),
           ),
