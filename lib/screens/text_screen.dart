@@ -17,9 +17,9 @@ import 'package:sizer/sizer.dart';
 class TextScreen extends StatefulWidget {
   final List<Texts>? texts;
   final Chapter? chapter;
-  final int index;
+  final int? index;
 
-  const TextScreen({Key? key, this.texts, this.chapter, required this.index})
+  const TextScreen({Key? key, this.texts, this.chapter, this.index})
       : super(key: key);
 
   @override
@@ -280,7 +280,7 @@ class _TextScreenState extends State<TextScreen> {
                 controller: _buttonController,
                 size: 40.0,
                 onStartIconPress: () {
-                  playSound(widget.texts![widget.index].url!);
+                  playSound(widget.texts![0].url!);
 
                   return true;
                 },
@@ -322,7 +322,7 @@ class _TextScreenState extends State<TextScreen> {
                     size: 33.0,
                     onStartIconPress: () {
                       FlutterClipboard.copy(
-                          '*${widget.chapter?.name}*\n${widget.texts![widget.index].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![widget.index].arabic!}\n${widget.texts![widget.index].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                          '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
 
                       return true;
                     },
@@ -337,7 +337,7 @@ class _TextScreenState extends State<TextScreen> {
                   IconButton(
                       onPressed: () {
                         Share.share(
-                            '*${widget.chapter?.name}*\n${widget.texts![widget.index].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![widget.index].arabic!}\n${widget.texts![widget.index].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                            '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
                       },
                       icon: const Icon(Icons.share,
                           size: 33.0, color: Colors.white)),

@@ -96,7 +96,7 @@ PODS:
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
-  - SwiftyGif (5.4.2)
+  - SwiftyGif (5.4.3)
   - url_launcher_ios (0.0.1):
     - Flutter
 
@@ -186,9 +186,9 @@ SPEC CHECKSUMS:
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410
   shared_preferences_ios: aef470a42dc4675a1cdd50e3158b42e3d1232b32
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
-  SwiftyGif: dec758a9dd3d278e5a855dbf279bf062c923c387
+  SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
   url_launcher_ios: 02f1989d4e14e998335b02b67a7590fa34f971af
 
-PODFILE CHECKSUM: 7f3ebf9b1fd15da197d4ae63bd211437d47a66bb
+PODFILE CHECKSUM: 3e6b00964a7f410e1ec689680d1c2722f18ddfc7
 
 COCOAPODS: 1.11.2
