@@ -32,20 +32,23 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_back_ios)),
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: iconColor,
+              )),
           elevation: 0.0,
           flexibleSpace: Container(
-            decoration: favoriteGradient,
+            decoration: mainScreenGradient,
           ),
           centerTitle: true,
           title: Text(
             'Избранные главы',
-            style: TextStyle(fontSize: 15.sp),
+            style: TextStyle(fontSize: 15.sp, color: iconColor),
           ),
         ),
         // ignore: avoid_unnecessary_containers
         body: Container(
-          decoration: favoriteGradient,
+          decoration: mainScreenGradient,
           child: ValueListenableBuilder(
             valueListenable: Hive.box(FAVORITES_BOX).listenable(),
             builder: (context, Box box, child) {

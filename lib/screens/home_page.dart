@@ -5,6 +5,7 @@ import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/models/bottom_nav_bar.dart';
+import 'package:avrod/style/my_text_style.dart';
 import 'package:avrod/widgets/notification.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -41,20 +42,19 @@ class _HomePageState extends State<HomePage> {
   // final controller = PageController(viewportFraction: 12.0, keepPage: true);
 
   final navItems = [
-    Icon(FontAwesomeIcons.search, color: Colors.indigo.shade400, size: 22.sp),
+    Icon(FontAwesomeIcons.search, color: iconColor, size: 22.sp),
     Icon(
       FontAwesomeIcons.book,
-      color: Colors.indigo.shade400,
+      color: iconColor,
       size: 22.sp,
     ),
     Icon(Icons.favorite, color: Colors.red, size: 22.sp),
-    Icon(FontAwesomeIcons.calendarAlt,
-        color: Colors.indigo.shade400, size: 22.sp),
-    Icon(Icons.star, color: Colors.indigo.shade400, size: 22.sp),
+    Icon(FontAwesomeIcons.calendarAlt, color: iconColor, size: 22.sp),
+    Icon(Icons.star, color: iconColor, size: 22.sp),
   ];
 
   final colorizeColors = [
-    Colors.white,
+    iconColor,
     Colors.orange,
     Colors.blue,
     Colors.indigo,
@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
     return ChangeNotifierProvider(
       create: (context) => BottomNavBar(),
       child: Scaffold(
+
           // backgroundColor: currentWidth < 400 ? Colors.deepOrange: Colors.greenAccent[400],
           drawer: const DrawerModel(),
           extendBodyBehindAppBar: true,
@@ -87,8 +88,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             centerTitle: true,
-            elevation: 1.0,
-            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            backgroundColor: const Color(0xffF2DFC7),
           ),
           body: Container(
             height: currentHeight,
@@ -159,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontSize: 19.sp,
-                                                      color: primaryTextColor,
+                                                      color: iconColor,
                                                       fontWeight:
                                                           FontWeight.w900),
                                                 ),
@@ -206,8 +207,9 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 20, top: 20),
+                                  padding: const EdgeInsets.only(
+                                    left: 20,
+                                  ),
                                   child: AvatarGlow(
                                     shape: BoxShape.circle,
                                     glowColor: Colors.green,
@@ -238,11 +240,11 @@ class _HomePageState extends State<HomePage> {
           ),
           bottomNavigationBar: Consumer<BottomNavBar>(
             builder: (context, bottomBar, child) => CurvedNavigationBar(
-                color: Colors.white,
+                color: const Color(0xffF2DFC7),
                 buttonBackgroundColor: Colors.white,
                 height: 50.sp,
                 index: bottomBar.selectedIndex,
-                backgroundColor: Colors.indigo.shade400,
+                backgroundColor: const Color(0xffF3EEE2),
                 items: navItems,
                 onTap: (index) {
                   bottomBar.onTapBar(context, index);

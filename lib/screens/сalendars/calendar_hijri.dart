@@ -23,19 +23,23 @@ class _HijriPickerScreenState extends State<HijriPickerScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_back_ios)),
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: iconColor,
+              )),
           flexibleSpace: Container(
-            decoration: favoriteGradient,
+            decoration: mainScreenGradient,
           ),
           elevation: 0.0,
           backgroundColor: gradientStartColor,
-          title: Text('Каленьдарь хиджри', style: TextStyle(fontSize: 15.sp)),
+          title: Text('Каленьдарь хиджри',
+              style: TextStyle(fontSize: 15.sp, color: iconColor)),
           centerTitle: true,
         ),
         // ignore: avoid_unnecessary_containers, sized_box_for_whitespace
         body: Container(
           height: double.infinity,
-          decoration: favoriteGradient,
+          decoration: mainScreenGradient,
           width: double.infinity,
           child: HijriMonthPicker(
             lastDate: HijriCalendar()

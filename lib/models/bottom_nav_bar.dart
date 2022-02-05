@@ -9,7 +9,7 @@ import '../screens/сalendars/calendar_tabbar.dart';
 class BottomNavBar extends ChangeNotifier {
   int selectedIndex = 2;
   final String _lounchGooglePlay =
-      'https://play.google.com/store/apps/details?id=com.darulasar.avrod';
+      'https://play.google.com/store/apps/details?id=com.darulasar.Azkar';
   Future<void> _launchInBrowser(String url) async {
     if (await canLaunch(url)) {
       await launch(url,

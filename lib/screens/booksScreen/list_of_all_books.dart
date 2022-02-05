@@ -22,8 +22,6 @@ class ListOfAllBooks extends StatefulWidget {
 }
 
 class _ListOfAllBooksState extends State<ListOfAllBooks> {
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,13 +33,13 @@ class _ListOfAllBooksState extends State<ListOfAllBooks> {
             icon: const Icon(Icons.arrow_back_ios)),
         elevation: 0.0,
         flexibleSpace: Container(
-          decoration: favoriteGradient,
+          decoration: mainScreenGradient,
         ),
         title: Text('Книги', style: TextStyle(fontSize: 15.sp)),
         centerTitle: true,
       ),
       body: Container(
-        decoration: favoriteGradient,
+        decoration: mainScreenGradient,
         child: AnimationLimiter(
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -51,7 +49,6 @@ class _ListOfAllBooksState extends State<ListOfAllBooks> {
                 crossAxisCount: 2),
             itemCount: allBooks.allBooks.length,
             itemBuilder: (context, index) {
-            
               return AnimationConfiguration.staggeredList(
                 position: index,
                 duration: const Duration(milliseconds: 500),
@@ -60,9 +57,7 @@ class _ListOfAllBooksState extends State<ListOfAllBooks> {
                     onTap: () async {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return    SelectedBooks(
-                       
-                        );
+                        return SelectedBooks();
                       }));
                     },
                     child: ListTile(
@@ -111,7 +106,7 @@ void openPDF(BuildContext context, File file) =>
         builder: (context) => ReadingBooksOnline(
               file: file,
             )));
- 
+
 
 
 

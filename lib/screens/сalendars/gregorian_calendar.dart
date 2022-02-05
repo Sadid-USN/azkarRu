@@ -24,16 +24,20 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back_ios)),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: iconColor,
+            )),
         flexibleSpace: Container(
-          decoration: favoriteGradient,
+          decoration: mainScreenGradient,
         ),
         elevation: 0.0,
-        title: Text('Григорианский календарь', style: TextStyle(fontSize: 15.sp)),
+        title: Text('Григорианский календарь',
+            style: TextStyle(fontSize: 15.sp, color: iconColor)),
         centerTitle: true,
       ),
       body: Container(
-        decoration: calendarGradient,
+        decoration: mainScreenGradient,
         child: TableCalendar(
           calendarStyle: const CalendarStyle(
               todayDecoration: BoxDecoration(

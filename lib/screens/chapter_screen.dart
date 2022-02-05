@@ -2,6 +2,7 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_functions.dart';
+import 'package:avrod/style/my_text_style.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hive/hive.dart';
 import 'package:avrod/data/book_map.dart';
@@ -48,15 +49,18 @@ class _ChapterScreenState extends State<ChapterScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back_ios)),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: iconColor,
+            )),
         elevation: 0.0,
         title: Text(
           'Список глав',
-          style: TextStyle(fontSize: 18.sp),
+          style: TextStyle(fontSize: 18.sp, color: iconColor),
         ),
         centerTitle: true,
         flexibleSpace: Container(
-          decoration: favoriteGradient,
+          decoration: mainScreenGradient,
         ),
       ),
 
@@ -67,7 +71,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
             final books = snapshot.data;
             if (snapshot.hasData) {
               return Container(
-                decoration: favoriteGradient,
+                decoration: mainScreenGradient,
                 child: buildBook(books[widget.bookIndex]),
               );
             }
@@ -110,6 +114,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
                         return TextScreen(
                           texts: chapter.texts,
                           chapter: chapter,
+                          index: index,
                         );
                       }));
                     },

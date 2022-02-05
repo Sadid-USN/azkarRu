@@ -1,3 +1,4 @@
+import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/screens/booksScreen/books_ditails.dart';
 import 'package:avrod/screens/booksScreen/pdf_api_class.dart';
@@ -21,16 +22,20 @@ class SelectedBooks extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back_ios)),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: iconColor,
+            )),
         elevation: 0.0,
         flexibleSpace: Container(
-          decoration: favoriteGradient,
+          decoration: mainScreenGradient,
         ),
-        title: Text('Китобхона', style: TextStyle(fontSize: 18.sp)),
+        title:
+            Text('Книги', style: TextStyle(fontSize: 18.sp, color: iconColor)),
         centerTitle: true,
       ),
       body: Container(
-        decoration: favoriteGradient,
+        decoration: mainScreenGradient,
         child: AnimationLimiter(
           child: ListView.builder(
             itemCount: booksRu.name!.length,

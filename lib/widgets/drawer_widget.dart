@@ -44,76 +44,69 @@ class _DrawerModelState extends State<DrawerModel> {
                 'Поделиться с другими',
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
-              leading: IconButton(
-                  onPressed: () {
-                    Share.share(
-                        'В Приложение Азкар собраны тоько достоверные молитвы из причистой сунны пророка (ﷺ).\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
-                  },
-                  icon: Icon(
-                    Icons.share,
-                    color: Colors.white,
-                    size: 20.sp,
-                  )),
+              leading: Icon(
+                Icons.share,
+                color: Colors.white,
+                size: 20.sp,
+              ),
+              onTap: () {
+                Share.share(
+                    'В Приложение Азкар собраны тоько достоверные молитвы из причистой сунны пророка (ﷺ).\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+              },
             ),
             ListTile(
               title: const Text(
-                'Языки',
+                'Поддержать',
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
-              leading: IconButton(
-                  onPressed: () {
-                    setState(() {});
-                  },
-                  icon: Icon(
-                    Icons.language,
-                    color: Colors.white,
-                    size: 20.sp,
-                  )),
+              leading: Icon(
+                FontAwesomeIcons.donate,
+                color: Colors.white,
+                size: 20.sp,
+              ),
+              onTap: () {},
             ),
             ListTile(
               title: const Text(
                 'ulamuyaman@gmail.com',
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
-              leading: IconButton(
-                  onPressed: () {
-                    _launchInBrowser(_lounchUrlGmail);
-                  },
-                  icon: Icon(
-                    FontAwesomeIcons.envelope,
-                    color: Colors.white,
-                    size: 18.sp,
-                  )),
+              leading: Icon(
+                FontAwesomeIcons.envelope,
+                color: Colors.white,
+                size: 18.sp,
+              ),
+              onLongPress: () {
+                _launchInBrowser(_lounchUrlGmail);
+              },
             ),
             ListTile(
               title: const Text(
                 '@darul_asar',
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
-              leading: IconButton(
-                  onPressed: () {
-                    _launchInBrowser(_linkInstagramm);
-                  },
-                  icon: Icon(
-                    FontAwesomeIcons.instagram,
-                    color: Colors.pinkAccent,
-                    size: 21.sp,
-                  )),
+              leading: Icon(
+                FontAwesomeIcons.instagram,
+                color: Colors.pinkAccent,
+                size: 21.sp,
+              ),
+              onTap: () {
+                _launchInBrowser(_linkInstagramm);
+              },
             ),
             ListTile(
               title: const Text(
                 'Darul-asar',
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
-              leading: IconButton(
-                  onPressed: () {
-                    _launchInBrowser(_youTubeLink);
-                  },
-                  icon: Icon(
-                    FontAwesomeIcons.youtube,
-                    color: Colors.red,
-                    size: 21.sp,
-                  )),
+              leading: Icon(
+                FontAwesomeIcons.youtube,
+                color: Colors.red,
+                size: 21.sp,
+              ),
+              onTap: () {
+                _launchInBrowser(_youTubeLink);
+              },
             ),
           ],
         ),

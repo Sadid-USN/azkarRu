@@ -1,5 +1,6 @@
 import 'package:animate_icons/animate_icons.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/models/scrolling_text.dart';
@@ -16,9 +17,9 @@ import 'package:sizer/sizer.dart';
 class TextScreen extends StatefulWidget {
   final List<Texts>? texts;
   final Chapter? chapter;
-  final int? index;
+  final int index;
 
-  const TextScreen({Key? key, this.texts, this.chapter, this.index})
+  const TextScreen({Key? key, this.texts, this.chapter, required this.index})
       : super(key: key);
 
   @override
@@ -126,36 +127,37 @@ class _TextScreenState extends State<TextScreen> {
           max: 30.sp,
           min: 16.sp,
         ),
-        Container(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              children: [
-                ExpandablePanel(
-                  header: Text(
-                    "Произношение:",
-                    textAlign: TextAlign.start,
-                    style: expandableTextStyle,
-                  ),
-                  collapsed: SelectableText(
-                    text,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: _fontSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  expanded: SelectableText(
-                    text,
-                    maxLines: 1,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        color: Colors.white,
-                        overflow: TextOverflow.fade),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              ExpandablePanel(
+                header: Text(
+                  "",
+                  textAlign: TextAlign.start,
+                  style: expandableTextStyle,
+                ),
+                collapsed: SelectableText(
+                  text,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: _fontSize,
+                    color: Colors.blueGrey,
                   ),
                 ),
-              ],
-            )),
+                expanded: SelectableText(
+                  text,
+                  maxLines: 1,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      color: Colors.blueGrey,
+                      overflow: TextOverflow.fade),
+                ),
+              ),
+            ],
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Column(
@@ -164,7 +166,7 @@ class _TextScreenState extends State<TextScreen> {
                 decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.black26,
+                          color: Color(0xffEFE2BF),
                           offset: Offset(0.0, 2.0),
                           blurRadius: 6.0)
                     ],
@@ -182,7 +184,7 @@ class _TextScreenState extends State<TextScreen> {
                     style: GoogleFonts.amiri(
                       textBaseline: TextBaseline.ideographic,
                       wordSpacing: 0.5,
-                      color: Colors.white,
+                      color: Colors.blueGrey,
                       fontSize: _fontSize,
                       fontWeight: FontWeight.bold,
                     ),
@@ -194,7 +196,7 @@ class _TextScreenState extends State<TextScreen> {
                     style: GoogleFonts.amaticSc(
                       textBaseline: TextBaseline.ideographic,
                       wordSpacing: 0.5,
-                      color: Colors.white,
+                      color: Colors.blueGrey,
                       fontSize: _fontSize,
                       fontWeight: FontWeight.bold,
                     ),
@@ -204,34 +206,39 @@ class _TextScreenState extends State<TextScreen> {
             ],
           ),
         ),
-        Container(
-            padding: const EdgeInsets.all(8),
-            child: Center(
-              child: ExpandablePanel(
-                header: Text(
-                  "Перевод:",
-                  textAlign: TextAlign.start,
-                  style: expandableTextStyle,
-                ),
-                collapsed: SelectableText(
-                  translation,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: _fontSize,
-                    color: Colors.white,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              Center(
+                child: ExpandablePanel(
+                  header: Text(
+                    "Перевод:",
+                    textAlign: TextAlign.start,
+                    style: expandableTextStyle,
                   ),
-                ),
-                expanded: SelectableText(
-                  translation,
-                  maxLines: 1,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                    color: Colors.white,
+                  collapsed: SelectableText(
+                    translation,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: _fontSize,
+                      color: Colors.blueGrey,
+                    ),
+                  ),
+                  expanded: SelectableText(
+                    translation,
+                    maxLines: 1,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      color: Colors.blueGrey,
+                    ),
                   ),
                 ),
               ),
-            )),
+            ],
+          ),
+        ),
         const SizedBox(
           height: 80,
         )
@@ -261,9 +268,9 @@ class _TextScreenState extends State<TextScreen> {
         backgroundColor: Colors.green,
         bottomSheet: ClayContainer(
           curveType: CurveType.concave,
-          height: 70,
-          depth: 40,
-          color: Colors.green[500],
+          height: 65,
+          depth: 25,
+          color: const Color(0xffD6BC9B),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -273,7 +280,7 @@ class _TextScreenState extends State<TextScreen> {
                 controller: _buttonController,
                 size: 40.0,
                 onStartIconPress: () {
-                  playSound(widget.texts![widget.index ?? 0].url!);
+                  playSound(widget.texts![widget.index].url!);
 
                   return true;
                 },
@@ -315,7 +322,7 @@ class _TextScreenState extends State<TextScreen> {
                     size: 33.0,
                     onStartIconPress: () {
                       FlutterClipboard.copy(
-                          '*${widget.chapter?.name}*\n${widget.texts![widget.index ?? 0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![widget.index ?? 0].arabic!}\n${widget.texts![widget.index ?? 0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
+                          '*${widget.chapter?.name}*\n${widget.texts![widget.index].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![widget.index].arabic!}\n${widget.texts![widget.index].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
 
                       return true;
                     },
@@ -330,7 +337,7 @@ class _TextScreenState extends State<TextScreen> {
                   IconButton(
                       onPressed: () {
                         Share.share(
-                            '*${widget.chapter?.name}*\n${widget.texts![widget.index ?? 0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![widget.index ?? 0].arabic!}\n${widget.texts![widget.index ?? 0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.avrod');
+                            '*${widget.chapter?.name}*\n${widget.texts![widget.index].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![widget.index].arabic!}\n${widget.texts![widget.index].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
                       },
                       icon: const Icon(Icons.share,
                           size: 33.0, color: Colors.white)),
@@ -348,7 +355,10 @@ class _TextScreenState extends State<TextScreen> {
               Navigator.pop(context);
               stopPlaying();
             },
-            icon: const Icon(Icons.arrow_back_ios),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: iconColor,
+            ),
           ),
           elevation: 0.0,
           title: Column(
@@ -361,7 +371,7 @@ class _TextScreenState extends State<TextScreen> {
                 child: ScrollingText(
                   text: '${widget.chapter?.name}',
                   textStyle: TextStyle(
-                      color: Colors.white,
+                      color: Colors.blueGrey,
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold),
                 ),
@@ -370,10 +380,11 @@ class _TextScreenState extends State<TextScreen> {
           ),
           centerTitle: true,
           flexibleSpace: Container(
-            decoration: favoriteGradient,
+            decoration: mainScreenGradient,
           ),
           bottom: TabBar(
-            indicatorColor: Colors.white,
+            labelColor: Colors.blueGrey,
+            indicatorColor: Colors.blueGrey,
             isScrollable: true,
             tabs: widget.texts!.map((Texts e) => Tab(text: e.id)).toList(),
           ),
@@ -382,7 +393,7 @@ class _TextScreenState extends State<TextScreen> {
           children: widget.texts!
               .map(
                 (e) => Container(
-                  decoration: favoriteGradient,
+                  decoration: mainScreenGradient,
                   child: Builder(builder: (context) {
                     return buildBook(e);
                   }),

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_map.dart';
@@ -52,24 +50,30 @@ class _SearcScreenState extends State<SearcScreen> {
         appBar: AppBar(
             elevation: 0.0,
             flexibleSpace: Container(
-              decoration: favoriteGradient,
+              decoration: mainScreenGradient,
             ),
             leading: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Icon(Icons.arrow_back_ios)),
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: iconColor,
+                )),
             actions: [
               IconButton(
                   onPressed: () {
                     showSearch(context: context, delegate: CoustomSearch());
                   },
-                  icon: const Icon(Icons.search)),
+                  icon: const Icon(
+                    Icons.search,
+                    color: iconColor,
+                  )),
             ]),
 
         // ignore: avoid_unnecessary_containers
         body: Container(
-          decoration: favoriteGradient,
+          decoration: mainScreenGradient,
           child: FutureBuilder<List<Book>>(
             future: BookFunctions.getBookLocally(context),
             builder: (contex, snapshot) {
@@ -105,7 +109,10 @@ class CoustomSearch extends SearchDelegate {
           onPressed: () {
             query = '';
           },
-          icon: const Icon(Icons.clear))
+          icon: const Icon(
+            Icons.clear,
+            color: iconColor,
+          ))
     ];
   }
 
@@ -142,7 +149,7 @@ class CoustomSearch extends SearchDelegate {
 
                   // ignore: sized_box_for_whitespace
                   Container(
-                      decoration: searchScreenGradient,
+                      decoration: mainScreenGradient,
                       height: 12.h,
                       child: Center(
                         child: ListTile(
@@ -153,7 +160,7 @@ class CoustomSearch extends SearchDelegate {
                               style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                                  color: iconColor),
                             ),
                           ),
                           // leading: Padding(
@@ -192,7 +199,7 @@ class CoustomSearch extends SearchDelegate {
 
                   // ignore: sized_box_for_whitespace
                   Container(
-                      decoration: searchScreenGradient,
+                      decoration: mainScreenGradient,
                       height: 12.h,
                       child: Center(
                         child: ListTile(
@@ -203,7 +210,7 @@ class CoustomSearch extends SearchDelegate {
                               style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                                  color: iconColor),
                             ),
                           ),
                         ),
@@ -239,6 +246,7 @@ Widget buildBook(Book book) {
                       return TextScreen(
                         texts: chapter.texts,
                         chapter: chapter,
+                        index: [index].length,
                       );
                     }));
                   },
@@ -257,6 +265,7 @@ Widget buildBook(Book book) {
                               return TextScreen(
                                 texts: chapter.texts,
                                 chapter: chapter,
+                                index: index,
                               );
                             }));
                           },
@@ -264,9 +273,9 @@ Widget buildBook(Book book) {
                             book.chapters![index].name!,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: 16.sp,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.white),
+                                color: iconColor),
                           ),
                         ),
                       ),
