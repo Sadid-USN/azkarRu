@@ -15,6 +15,8 @@ class _DrawerModelState extends State<DrawerModel> {
   final String _lounchUrlGmail = 'https://mail.google.com/mail/u/0/#inbox';
   final String _linkInstagramm =
       'https://instagram.com/darul_asar?utm_medium=copy_link';
+  final String _avrodAppLink =
+      'https://play.google.com/store/apps/details?id=com.darulasar.avrod';
   final String _youTubeLink =
       'https://www.youtube.com/channel/UCR2bhAQKRXDmE4v_rDVNOrA';
   Future<void> _launchInBrowser(String url) async {
@@ -41,7 +43,7 @@ class _DrawerModelState extends State<DrawerModel> {
             ListTile(
               title: const Text(
                 'Поделиться с другими',
-                style: TextStyle(fontSize: 16, color: Colors.white),
+                style: TextStyle(fontSize: 14, color: Colors.white),
               ),
               leading: Icon(
                 Icons.share,
@@ -56,7 +58,7 @@ class _DrawerModelState extends State<DrawerModel> {
             ListTile(
               title: const Text(
                 'Поддержать',
-                style: TextStyle(fontSize: 16, color: Colors.white),
+                style: TextStyle(fontSize: 14, color: Colors.white),
               ),
               leading: Icon(
                 FontAwesomeIcons.donate,
@@ -68,7 +70,7 @@ class _DrawerModelState extends State<DrawerModel> {
             ListTile(
               title: const Text(
                 'ulamuyaman@gmail.com',
-                style: TextStyle(fontSize: 16, color: Colors.white),
+                style: TextStyle(fontSize: 14, color: Colors.white),
               ),
               leading: Icon(
                 FontAwesomeIcons.envelope,
@@ -77,6 +79,19 @@ class _DrawerModelState extends State<DrawerModel> {
               ),
               onTap: () {
                 _launchInBrowser(_lounchUrlGmail);
+              },
+            ),
+            ListTile(
+              contentPadding: const EdgeInsets.only(left: 14),
+              title: const Text(
+                'Avrod на таджиксом',
+                style: TextStyle(fontSize: 14, color: Colors.white),
+              ),
+              leading: const CircleAvatar(
+                  radius: 15,
+                  backgroundImage: AssetImage('icons/iconavrod.png')),
+              onTap: () {
+                _launchInBrowser(_avrodAppLink);
               },
             ),
             ListTile(
@@ -96,7 +111,7 @@ class _DrawerModelState extends State<DrawerModel> {
             ListTile(
               title: const Text(
                 'Darul-asar',
-                style: TextStyle(fontSize: 16, color: Colors.white),
+                style: TextStyle(fontSize: 14, color: Colors.white),
               ),
               leading: Icon(
                 FontAwesomeIcons.youtube,

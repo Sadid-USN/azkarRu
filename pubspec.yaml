@@ -119,6 +119,7 @@ flutter:
   assets:
     - lib/data/book.json
     - images/
+    - icons/
     - lib/assets/locales/audio/
     - lib/assets/locales/en.json
     - lib/assets/locales/ru.json
