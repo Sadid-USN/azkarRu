@@ -96,11 +96,13 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
                           ),
                           title: Text(
                             likedChapters[position].name,
+                            maxLines: 2,
                             textAlign: TextAlign.start,
                             style: TextStyle(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w600,
-                                color: titleAbbBar),
+                                color: titleAbbBar,
+                                overflow: TextOverflow.ellipsis),
                           ),
                         ),
                       ),
