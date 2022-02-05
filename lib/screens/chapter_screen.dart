@@ -49,14 +49,15 @@ class _ChapterScreenState extends State<ChapterScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
               color: iconColor,
             )),
         elevation: 0.0,
         title: Text(
           'Список глав',
-          style: TextStyle(fontSize: 18.sp, color: iconColor),
+          style: TextStyle(
+              fontSize: 18.sp, color: titleAbbBar, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         flexibleSpace: Container(
@@ -86,13 +87,12 @@ class _ChapterScreenState extends State<ChapterScreen> {
 
   Widget buildBook(Book book) {
     return AnimationLimiter(
-      child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 2 / 0.4.h,
-            crossAxisSpacing: 3,
-            mainAxisSpacing: 3,
-            crossAxisCount: 2,
-          ),
+      child: ListView.separated(
+          separatorBuilder: (context, index) {
+            return Divider(
+              color: dividerColor,
+            );
+          },
           scrollDirection: Axis.vertical,
           padding: const EdgeInsets.only(top: 5),
           physics: const BouncingScrollPhysics(),
@@ -107,92 +107,63 @@ class _ChapterScreenState extends State<ChapterScreen> {
               child: ScaleAnimation(
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return TextScreen(
-                          texts: chapter.texts,
-                          chapter: chapter,
-                          index: index,
+                  child: CachedNetworkImage(
+                      imageUrl: chapter.listimage ?? '',
+                      placeholder: (context, imageProvider) {
+                        return Center(
+                          child: JumpingText(
+                            '...',
+                            end: const Offset(0.0, -0.5),
+                            style: const TextStyle(
+                                fontSize: 40, color: Colors.white),
+                          ),
                         );
-                      }));
-                    },
-                    child: CachedNetworkImage(
-                        imageUrl: chapter.listimage ?? '',
-                        placeholder: (context, imageProvider) {
-                          return Center(
-                            child: JumpingText(
-                              '...',
-                              end: const Offset(0.0, -0.5),
-                              style: const TextStyle(
-                                  fontSize: 40, color: Colors.white),
+                      },
+                      imageBuilder: (context, imageProvider) {
+                        return ListTile(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return TextScreen(
+                                texts: chapter.texts,
+                                chapter: chapter,
+                                index: index,
+                              );
+                            }));
+                          },
+                          trailing: CircleAvatar(
+                            backgroundColor: const Color(0xffF3EEE2),
+                            child: LikeButton(
+                              isLiked: isChapterLiked(chapter.id),
+                              onTap: (isLiked) async {
+                                return setLike(chapter.id ?? 0, isLiked);
+                              },
+                              size: 20.sp,
+                              circleColor: const CircleColor(
+                                  start: Color(0xffFF0000),
+                                  end: Color(0xffFF0000)),
+                              bubblesColor: const BubblesColor(
+                                dotPrimaryColor: Color(0xffffffff),
+                                dotSecondaryColor: Color(0xffBF40BF),
+                              ),
                             ),
-                          );
-                        },
-                        imageBuilder: (context, imageProvider) {
-                          return Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                  colorFilter: const ColorFilter.mode(
-                                    Colors.black38,
-                                    BlendMode.srcOver,
-                                  ),
-                                ),
-                                boxShadow: const [
-                                  BoxShadow(
-                                      color: Colors.black38,
-                                      offset: Offset(0.0, 2.0),
-                                      blurRadius: 6.0)
-                                ],
-                                gradient: const LinearGradient(
-                                    colors: [
-                                      Colors.white54,
-                                      secondaryTextColor
-                                    ],
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight),
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(16.0))),
-                            child: Stack(
-                              children: [
-                                ListTile(
-                                  title: Center(
-                                    child: Text(
-                                      chapter.name,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: titleTextColor),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 15,
-                                  right: 10,
-                                  child: LikeButton(
-                                    isLiked: isChapterLiked(chapter.id),
-                                    onTap: (isLiked) async {
-                                      return setLike(chapter.id ?? 0, isLiked);
-                                    },
-                                    size: 30.sp,
-                                    circleColor: const CircleColor(
-                                        start: Color(0xffFF0000),
-                                        end: Color(0xffFF0000)),
-                                    bubblesColor: const BubblesColor(
-                                      dotPrimaryColor: Color(0xffffffff),
-                                      dotSecondaryColor: Color(0xffBF40BF),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        }),
-                  ),
+                          ),
+                          leading: CircleAvatar(
+                            maxRadius: 25,
+                            backgroundImage: imageProvider,
+                          ),
+                          title: Text(
+                            chapter.name,
+                            maxLines: 3,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w600,
+                                color: titleAbbBar),
+                          ),
+                        );
+                      }),
                 ),
               ),
             );

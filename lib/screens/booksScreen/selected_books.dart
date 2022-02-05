@@ -30,8 +30,8 @@ class SelectedBooks extends StatelessWidget {
         flexibleSpace: Container(
           decoration: mainScreenGradient,
         ),
-        title:
-            Text('Книги', style: TextStyle(fontSize: 18.sp, color: iconColor)),
+        title: Text('Книги',
+            style: TextStyle(fontSize: 18.sp, color: titleAbbBar)),
         centerTitle: true,
       ),
       body: Container(

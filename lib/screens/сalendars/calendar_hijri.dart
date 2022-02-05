@@ -33,7 +33,7 @@ class _HijriPickerScreenState extends State<HijriPickerScreen> {
           elevation: 0.0,
           backgroundColor: gradientStartColor,
           title: Text('Каленьдарь хиджри',
-              style: TextStyle(fontSize: 15.sp, color: iconColor)),
+              style: TextStyle(fontSize: 15.sp, color: titleAbbBar)),
           centerTitle: true,
         ),
         // ignore: avoid_unnecessary_containers, sized_box_for_whitespace

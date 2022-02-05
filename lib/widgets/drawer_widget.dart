@@ -12,8 +12,7 @@ class DrawerModel extends StatefulWidget {
 }
 
 class _DrawerModelState extends State<DrawerModel> {
-  final String _lounchUrlGmail =
-      'https://accounts.google.com/signout/chrome/landing?continue=https://mail.google.com&oc=https://mail.google.com&hl=en';
+  final String _lounchUrlGmail = 'https://mail.google.com/mail/u/0/#inbox';
   final String _linkInstagramm =
       'https://instagram.com/darul_asar?utm_medium=copy_link';
   final String _youTubeLink =
@@ -76,7 +75,7 @@ class _DrawerModelState extends State<DrawerModel> {
                 color: Colors.white,
                 size: 18.sp,
               ),
-              onLongPress: () {
+              onTap: () {
                 _launchInBrowser(_lounchUrlGmail);
               },
             ),

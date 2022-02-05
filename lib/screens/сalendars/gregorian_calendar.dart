@@ -33,7 +33,7 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
         ),
         elevation: 0.0,
         title: Text('Григорианский календарь',
-            style: TextStyle(fontSize: 15.sp, color: iconColor)),
+            style: TextStyle(fontSize: 15.sp, color: titleAbbBar)),
         centerTitle: true,
       ),
       body: Container(

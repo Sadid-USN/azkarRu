@@ -223,7 +223,10 @@ class CoustomSearch extends SearchDelegate {
 
 Widget buildBook(Book book) {
   return AnimationLimiter(
-    child: ListView.builder(
+    child: ListView.separated(
+        separatorBuilder: (contex, index) => Divider(
+              color: dividerColor,
+            ),
         scrollDirection: Axis.vertical,
         padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
         physics: const BouncingScrollPhysics(),
@@ -234,58 +237,28 @@ Widget buildBook(Book book) {
           // ignore: sized_box_for_whitespace
           return AnimationConfiguration.staggeredGrid(
             position: index,
-            duration: const Duration(milliseconds: 600),
+            duration: const Duration(milliseconds: 500),
             columnCount: book.chapters!.length,
             child: ScaleAnimation(
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return TextScreen(
-                        texts: chapter.texts,
-                        chapter: chapter,
-                        index: [index].length,
-                      );
-                    }));
-                  },
-                  child:
-
-                      // ignore: sized_box_for_whitespace
-                      Container(
-                    decoration: searchScreenGradient,
-                    height: 12.h,
-                    child: ListTile(
-                      title: Center(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return TextScreen(
-                                texts: chapter.texts,
-                                chapter: chapter,
-                                index: index,
-                              );
-                            }));
-                          },
-                          child: Text(
-                            book.chapters![index].name!,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w600,
-                                color: iconColor),
-                          ),
-                        ),
-                      ),
-                      // leading: Padding(
-                      //   padding: const EdgeInsets.only(right: 15),
-                      //   child: Text(chapter.id.toString(),
-                      //       style: const TextStyle(color: Colors.white)),
-                      // ),
-                    ),
-                  ),
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return TextScreen(
+                      texts: chapter.texts,
+                      chapter: chapter,
+                      index: index,
+                    );
+                  }));
+                },
+                title: Text(
+                  book.chapters![index].name!,
+                  maxLines: 3,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontSize: 12.sp,
+                      overflow: TextOverflow.ellipsis,
+                      fontWeight: FontWeight.w600,
+                      color: textColor),
                 ),
               ),
             ),

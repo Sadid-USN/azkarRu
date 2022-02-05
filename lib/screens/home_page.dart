@@ -42,19 +42,19 @@ class _HomePageState extends State<HomePage> {
   // final controller = PageController(viewportFraction: 12.0, keepPage: true);
 
   final navItems = [
-    Icon(FontAwesomeIcons.search, color: iconColor, size: 22.sp),
+    Icon(FontAwesomeIcons.search, color: textColor, size: 22.sp),
     Icon(
       FontAwesomeIcons.book,
-      color: iconColor,
+      color: textColor,
       size: 22.sp,
     ),
     Icon(Icons.favorite, color: Colors.red, size: 22.sp),
-    Icon(FontAwesomeIcons.calendarAlt, color: iconColor, size: 22.sp),
-    Icon(Icons.star, color: iconColor, size: 22.sp),
+    Icon(FontAwesomeIcons.calendarAlt, color: textColor, size: 22.sp),
+    Icon(Icons.star, color: textColor, size: 22.sp),
   ];
 
   final colorizeColors = [
-    iconColor,
+    titleAbbBar,
     Colors.orange,
     Colors.blue,
     Colors.indigo,
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontSize: 19.sp,
-                                                      color: iconColor,
+                                                      color: textColor,
                                                       fontWeight:
                                                           FontWeight.w900),
                                                 ),

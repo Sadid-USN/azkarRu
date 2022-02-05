@@ -43,7 +43,10 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
           centerTitle: true,
           title: Text(
             'Избранные главы',
-            style: TextStyle(fontSize: 15.sp, color: iconColor),
+            style: TextStyle(
+                fontSize: 15.sp,
+                color: titleAbbBar,
+                fontWeight: FontWeight.bold),
           ),
         ),
         // ignore: avoid_unnecessary_containers
@@ -65,7 +68,10 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
 
               // ignore: avoid_unnecessary_containers
               return AnimationLimiter(
-                child: ListView.builder(
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => Divider(
+                    color: dividerColor,
+                  ),
                   physics: const BouncingScrollPhysics(),
                   itemCount: likedChapters.length,
                   itemBuilder: (context, position) {
@@ -73,7 +79,7 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
                       position: position,
                       duration: const Duration(milliseconds: 500),
                       child: ScaleAnimation(
-                        child: InkWell(
+                        child: ListTile(
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
@@ -83,55 +89,19 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
                               );
                             }));
                           },
-                          child: ListTile(
-
-                              // ignore: avoid_unnecessary_containers
-                              title: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 5.0),
-                                child: Container(
-                                  height: 100,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(12.0)),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                            color: Colors.black26,
-                                            offset: Offset(0.0, 2.0),
-                                            blurRadius: 6.0)
-                                      ],
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                              likedChapters[position]
-                                                  .listimage),
-                                          fit: BoxFit.cover)),
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      color: Colors.black26,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(12.0)),
-                                    ),
-                                    height: 80,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Center(
-                                        child: Text(
-                                          likedChapters[position].name,
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
+                          leading: CircleAvatar(
+                            maxRadius: 25,
+                            backgroundImage:
+                                NetworkImage(likedChapters[position].listimage),
+                          ),
+                          title: Text(
+                            likedChapters[position].name,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w600,
+                                color: titleAbbBar),
+                          ),
                         ),
                       ),
                     );

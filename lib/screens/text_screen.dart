@@ -142,16 +142,16 @@ class _TextScreenState extends State<TextScreen> {
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: _fontSize,
-                    color: Colors.blueGrey,
+                    color: textColor,
                   ),
                 ),
                 expanded: SelectableText(
                   text,
                   maxLines: 1,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
-                      color: Colors.blueGrey,
+                      color: textColor,
                       overflow: TextOverflow.fade),
                 ),
               ),
@@ -184,7 +184,7 @@ class _TextScreenState extends State<TextScreen> {
                     style: GoogleFonts.amiri(
                       textBaseline: TextBaseline.ideographic,
                       wordSpacing: 0.5,
-                      color: Colors.blueGrey,
+                      color: textColor,
                       fontSize: _fontSize,
                       fontWeight: FontWeight.bold,
                     ),
@@ -196,7 +196,7 @@ class _TextScreenState extends State<TextScreen> {
                     style: GoogleFonts.amaticSc(
                       textBaseline: TextBaseline.ideographic,
                       wordSpacing: 0.5,
-                      color: Colors.blueGrey,
+                      color: textColor,
                       fontSize: _fontSize,
                       fontWeight: FontWeight.bold,
                     ),
@@ -222,17 +222,16 @@ class _TextScreenState extends State<TextScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: _fontSize,
-                      color: Colors.blueGrey,
+                      color: textColor,
                     ),
                   ),
                   expanded: SelectableText(
                     translation,
                     maxLines: 1,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                      color: Colors.blueGrey,
-                    ),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        color: textColor),
                   ),
                 ),
               ),
@@ -267,10 +266,11 @@ class _TextScreenState extends State<TextScreen> {
       child: Scaffold(
         backgroundColor: Colors.green,
         bottomSheet: ClayContainer(
-          curveType: CurveType.concave,
+          spread: 0.0,
+          curveType: CurveType.none,
           height: 65,
-          depth: 25,
-          color: const Color(0xffD6BC9B),
+          depth: 10,
+          color: const Color(0xff8D7E6F),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -371,7 +371,7 @@ class _TextScreenState extends State<TextScreen> {
                 child: ScrollingText(
                   text: '${widget.chapter?.name}',
                   textStyle: TextStyle(
-                      color: Colors.blueGrey,
+                      color: titleAbbBar,
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold),
                 ),
@@ -383,8 +383,8 @@ class _TextScreenState extends State<TextScreen> {
             decoration: mainScreenGradient,
           ),
           bottom: TabBar(
-            labelColor: Colors.blueGrey,
-            indicatorColor: Colors.blueGrey,
+            labelColor: titleAbbBar,
+            indicatorColor: titleAbbBar,
             isScrollable: true,
             tabs: widget.texts!.map((Texts e) => Tab(text: e.id)).toList(),
           ),

@@ -10,3 +10,6 @@ const Color gradientEndColor = Color(0xFF39B7CD);
 const Color brownColor = Color(0xFF290015);
 const Color listColor = Color(0xFF6D5ACF);
 const Color iconColor = Colors.blueGrey;
+Color textColor = Colors.grey.shade700;
+Color dividerColor = Colors.grey.shade500;
+Color titleAbbBar = Colors.grey.shade900;
