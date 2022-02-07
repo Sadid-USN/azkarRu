@@ -11,6 +11,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../widgets/drawer_widget.dart';
@@ -109,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                         scrollDirection: Axis.horizontal,
                         autoplayDisableOnInteraction: false,
                         itemCount: books.length,
-                        itemWidth: 66.w,
+                        itemWidth: 64.w,
                         layout: SwiperLayout.STACK,
                         pagination: const SwiperPagination(
                           margin: EdgeInsets.only(top: 20),
@@ -186,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                                                                     .w500),
                                                       ),
                                                       SizedBox(
-                                                        width: 1.w,
+                                                        width: 2.w,
                                                       ),
                                                       // ignore: sized_box_for_whitespace
                                                       Icon(
@@ -226,6 +227,9 @@ class _HomePageState extends State<HomePage> {
                                       width: 80.w,
                                     ),
                                   ),
+                                ),
+                                Lottie.network(
+                                  'https://assets7.lottiefiles.com/private_files/lf30_yeszgfau.json',
                                 ),
                               ],
                             ),
