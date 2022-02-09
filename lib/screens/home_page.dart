@@ -4,7 +4,7 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_map.dart';
-import 'package:avrod/models/bottom_nav_bar.dart';
+import 'package:avrod/controllers/bottom_nav_bar.dart';
 import 'package:avrod/style/my_text_style.dart';
 import 'package:avrod/widgets/notification.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';

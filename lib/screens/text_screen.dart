@@ -2,7 +2,9 @@ import 'package:animate_icons/animate_icons.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
+import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/data/book_map.dart';
+import 'package:avrod/models/my_audioplayer.dart';
 import 'package:avrod/models/scrolling_text.dart';
 import 'package:avrod/style/my_text_style.dart';
 import 'package:clay_containers/constants.dart';
@@ -11,6 +13,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
 
@@ -40,6 +43,10 @@ class _TextScreenState extends State<TextScreen> {
         });
       }
     }
+  }
+
+  void seekAudio(Duration durationToSeek) {
+    audioPlayer.seek(durationToSeek);
   }
 
   void pauseSound() async {
@@ -79,21 +86,16 @@ class _TextScreenState extends State<TextScreen> {
   }
 
   double _fontSize = 16.sp;
-  String? creepingLine;
 
-  AnimateIconController _controller = AnimateIconController();
-  AnimateIconController _buttonController = AnimateIconController();
-
-  //double sliderPosition = 0.0;
+  AnimateIconController _copyController = AnimateIconController();
+  final AnimateIconController _buttonController = AnimateIconController();
 
   @override
   void dispose() {
-    _controller = AnimateIconController();
-    _buttonController = AnimateIconController();
     audioPlayer.dispose();
     audioPlayer.onAudioPositionChanged;
     audioPlayer.onDurationChanged;
-
+    _buttonController;
     super.dispose();
   }
 
@@ -101,7 +103,7 @@ class _TextScreenState extends State<TextScreen> {
   void initState() {
     audioPlayer = AudioPlayer();
 
-    _controller = AnimateIconController();
+    _copyController = AnimateIconController();
 
     super.initState();
   }
@@ -113,11 +115,10 @@ class _TextScreenState extends State<TextScreen> {
     String url,
   ) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Slider(
           activeColor: Colors.white,
-          inactiveColor: Colors.blueGrey,
+          inactiveColor: Colors.grey[800],
           value: _fontSize,
           onChanged: (double newSize) {
             setState(() {
@@ -263,143 +264,161 @@ class _TextScreenState extends State<TextScreen> {
   ) {
     return DefaultTabController(
       length: widget.texts!.length,
-      child: Scaffold(
-        backgroundColor: Colors.green,
-        bottomSheet: ClayContainer(
-          spread: 0.0,
-          curveType: CurveType.none,
-          height: 65,
-          depth: 10,
-          color: const Color(0xff8D7E6F),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              AnimateIcons(
-                startIcon: Icons.play_circle,
-                endIcon: Icons.pause,
-                controller: _buttonController,
-                size: 40.0,
-                onStartIconPress: () {
-                  playSound(widget.texts![0].url!);
+      child: ChangeNotifierProvider(
+        create: (context) => AudioController(),
+        child: Scaffold(
+          backgroundColor: Colors.green,
+          bottomSheet: ClayContainer(
+            spread: 0.0,
+            curveType: CurveType.none,
+            height: 70,
+            depth: 10,
+            color: const Color(0xff8D7E6F),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                AnimateIcons(
+                  startIcon: Icons.play_circle,
+                  endIcon: Icons.pause,
+                  controller: _buttonController,
+                  size: 40.0,
+                  onStartIconPress: () {
+                    playSound(widget.texts![0].url!);
 
-                  return true;
-                },
-                onEndIconPress: () {
-                  pauseSound();
-                  return true;
-                },
-                duration: const Duration(milliseconds: 250),
-                startIconColor: Colors.white,
-                endIconColor: Colors.white,
-                clockwise: false,
-              ),
-              // IconButton(
-              //     onPressed: () {},
-              //     icon: const Icon(
-              //       Icons.stop,
-              //       size: 40,
-              //       color: Colors.white,
-              //     )),
-              Slider(
-                  activeColor: Colors.white,
-                  inactiveColor: Colors.blueGrey,
-                  min: 0.0,
-                  max: duration.inSeconds.toDouble(),
-                  value: position.inSeconds.toDouble(),
-                  onChanged: (double newPosition) {
-                    setState(() {
-                      newPosition = position.inSeconds.toDouble();
-                      newPosition = duration.inSeconds.toDouble();
-                    });
-                  }),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  AnimateIcons(
-                    startIcon: Icons.copy,
-                    endIcon: Icons.check_circle_outline,
-                    controller: _controller,
-                    size: 33.0,
-                    onStartIconPress: () {
-                      FlutterClipboard.copy(
-                          '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
-
-                      return true;
-                    },
-                    onEndIconPress: () {
-                      return false;
-                    },
-                    duration: const Duration(milliseconds: 250),
-                    startIconColor: Colors.white,
-                    endIconColor: Colors.white,
-                    clockwise: false,
+                    return true;
+                  },
+                  onEndIconPress: () {
+                    pauseSound();
+                    return true;
+                  },
+                  duration: const Duration(milliseconds: 250),
+                  startIconColor: Colors.white,
+                  endIconColor: Colors.white,
+                  clockwise: false,
+                ),
+                // IconButton(
+                //     onPressed: () {},
+                //     icon: const Icon(
+                //       Icons.stop,
+                //       size: 40,
+                //       color: Colors.white,
+                //     )),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Slider(
+                          onChangeEnd: ((value) {
+                            seekAudio(Duration(seconds: value.toInt()));
+                          }),
+                          activeColor: Colors.white,
+                          inactiveColor: Colors.grey[800],
+                          min: 0.0,
+                          max: duration.inSeconds.toDouble(),
+                          value: position.inSeconds.toDouble(),
+                          onChanged: (double newPosition) {
+                            setState(() {
+                              newPosition = position.inSeconds.toDouble();
+                              newPosition = duration.inSeconds.toDouble();
+                            });
+                          }),
+                      Expanded(
+                          child: Text(
+                        position.toString().split('.').first,
+                        style:
+                            const TextStyle(fontSize: 10, color: Colors.white),
+                      )),
+                    ],
                   ),
-                  IconButton(
-                      onPressed: () {
-                        Share.share(
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    AnimateIcons(
+                      startIcon: Icons.copy,
+                      endIcon: Icons.check_circle_outline,
+                      controller: _copyController,
+                      size: 33.0,
+                      onStartIconPress: () {
+                        FlutterClipboard.copy(
                             '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+
+                        return true;
                       },
-                      icon: const Icon(Icons.share,
-                          size: 33.0, color: Colors.white)),
-                  const SizedBox(
-                    width: 5,
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-              stopPlaying();
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: iconColor,
+                      onEndIconPress: () {
+                        return false;
+                      },
+                      duration: const Duration(milliseconds: 250),
+                      startIconColor: Colors.white,
+                      endIconColor: Colors.white,
+                      clockwise: false,
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Share.share(
+                              '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                        },
+                        icon: const Icon(Icons.share,
+                            size: 33.0, color: Colors.white)),
+                    const SizedBox(
+                      width: 5,
+                    )
+                  ],
+                )
+              ],
             ),
           ),
-          elevation: 0.0,
-          title: Column(
-            children: [
-              // ignore: sized_box_for_whitespace
-              Container(
-                key: _key,
-                padding: const EdgeInsets.only(top: 5),
-                height: 40.0,
-                child: ScrollingText(
-                  text: '${widget.chapter?.name}',
-                  textStyle: TextStyle(
-                      color: titleAbbBar,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold),
-                ),
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+                stopPlaying();
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: iconColor,
               ),
-            ],
-          ),
-          centerTitle: true,
-          flexibleSpace: Container(
-            decoration: mainScreenGradient,
-          ),
-          bottom: TabBar(
-            labelColor: titleAbbBar,
-            indicatorColor: titleAbbBar,
-            isScrollable: true,
-            tabs: widget.texts!.map((Texts e) => Tab(text: e.id)).toList(),
-          ),
-        ),
-        body: TabBarView(
-          children: widget.texts!
-              .map(
-                (e) => Container(
-                  decoration: mainScreenGradient,
-                  child: Builder(builder: (context) {
-                    return buildBook(e);
-                  }),
+            ),
+            elevation: 0.0,
+            title: Column(
+              children: [
+                // ignore: sized_box_for_whitespace
+                Container(
+                  key: _key,
+                  padding: const EdgeInsets.only(top: 5),
+                  height: 40.0,
+                  child: ScrollingText(
+                    text: '${widget.chapter?.name}',
+                    textStyle: TextStyle(
+                        color: titleAbbBar,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
-              )
-              .toList(),
+              ],
+            ),
+            centerTitle: true,
+            flexibleSpace: Container(
+              decoration: mainScreenGradient,
+            ),
+            bottom: TabBar(
+              labelColor: titleAbbBar,
+              indicatorColor: titleAbbBar,
+              isScrollable: true,
+              tabs: widget.texts!.map((Texts e) => Tab(text: e.id)).toList(),
+            ),
+          ),
+          body: TabBarView(
+            children: widget.texts!
+                .map(
+                  (e) => Container(
+                    decoration: mainScreenGradient,
+                    child: Builder(builder: (context) {
+                      return buildBook(e);
+                    }),
+                  ),
+                )
+                .toList(),
+          ),
         ),
       ),
     );
