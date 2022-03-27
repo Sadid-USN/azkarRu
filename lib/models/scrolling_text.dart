@@ -1,5 +1,3 @@
-
-
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'dart:async';
@@ -12,12 +10,14 @@ class ScrollingText extends StatefulWidget {
   final Axis scrollAxis;
   final double ratioOfBlankToScreen;
 
-   const ScrollingText({
+  const ScrollingText({
     required this.text,
-     this.textStyle,
-    this.scrollAxis=  Axis.horizontal,
-    this.ratioOfBlankToScreen= 0.20,
-  }) : assert(text != null,);
+    this.textStyle,
+    this.scrollAxis = Axis.horizontal,
+    this.ratioOfBlankToScreen = 0.20,
+  }) : assert(
+          text != null,
+        );
 
   @override
   State<StatefulWidget> createState() {
@@ -28,10 +28,10 @@ class ScrollingText extends StatefulWidget {
 class ScrollingTextState extends State<ScrollingText>
     with SingleTickerProviderStateMixin {
   ScrollController? scrollController;
-  double?  screenWidth;
-  double?  screenHeight;
-  double  position = 0.0;
-  Timer ? timer;
+  double? screenWidth;
+  double? screenHeight;
+  double position = 0.0;
+  Timer? timer;
   final double _moveDistance = 4.0;
   final int _timerRest = 100;
   final GlobalKey _key = GlobalKey();
@@ -40,7 +40,7 @@ class ScrollingTextState extends State<ScrollingText>
   void initState() {
     super.initState();
     scrollController = ScrollController();
-    WidgetsBinding.instance!.addPostFrameCallback((callback) {
+    WidgetsBinding.instance.addPostFrameCallback((callback) {
       startTimer();
     });
   }

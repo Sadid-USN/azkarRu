@@ -276,100 +276,104 @@ class _TextScreenState extends State<TextScreen> {
           bottomSheet: ClayContainer(
             spread: 0.0,
             curveType: CurveType.none,
-            height: 70,
+            height: 100,
             depth: 10,
             color: const Color(0xff8D7E6F),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Column(
               children: [
-                AnimateIcons(
-                  startIcon: Icons.play_circle,
-                  endIcon: Icons.pause,
-                  controller: _buttonController,
-                  size: 40.0,
-                  onStartIconPress: () {
-                    playSound(widget.texts![currentIndex].url!);
-                    print(widget.texts.toString());
-
-                    return true;
-                  },
-                  onEndIconPress: () {
-                    pauseSound();
-                    return true;
-                  },
-                  duration: const Duration(milliseconds: 250),
-                  startIconColor: Colors.white,
-                  endIconColor: Colors.white,
-                  clockwise: false,
-                ),
-                // IconButton(
-                //     onPressed: () {},
-                //     icon: const Icon(
-                //       Icons.stop,
-                //       size: 40,
-                //       color: Colors.white,
-                //     )),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Slider(
-                          onChangeEnd: ((value) {
-                            seekAudio(Duration(seconds: value.toInt()));
-                          }),
-                          activeColor: Colors.white,
-                          inactiveColor: Colors.grey[800],
-                          min: 0.0,
-                          max: duration.inSeconds.toDouble(),
-                          value: position.inSeconds.toDouble(),
-                          onChanged: (double newPosition) {
-                            setState(() {
-                              newPosition = position.inSeconds.toDouble();
-                              newPosition = duration.inSeconds.toDouble();
-                            });
-                          }),
-                      Expanded(
-                          child: Text(
-                        position.toString().split('.').first,
-                        style:
-                            const TextStyle(fontSize: 10, color: Colors.white),
-                      )),
-                    ],
-                  ),
-                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     AnimateIcons(
-                      startIcon: Icons.copy,
-                      endIcon: Icons.check_circle_outline,
-                      controller: _copyController,
-                      size: 33.0,
+                      startIcon: Icons.play_circle,
+                      endIcon: Icons.pause,
+                      controller: _buttonController,
+                      size: 40.0,
                       onStartIconPress: () {
-                        FlutterClipboard.copy(
-                            '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                        playSound(widget.texts![currentIndex].url!);
+                        print(widget.texts.toString());
 
                         return true;
                       },
                       onEndIconPress: () {
-                        return false;
+                        pauseSound();
+                        return true;
                       },
                       duration: const Duration(milliseconds: 250),
                       startIconColor: Colors.white,
                       endIconColor: Colors.white,
                       clockwise: false,
                     ),
-                    IconButton(
-                        onPressed: () {
-                          Share.share(
-                              '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
-                        },
-                        icon: const Icon(Icons.share,
-                            size: 33.0, color: Colors.white)),
-                    const SizedBox(
-                      width: 5,
+                    // IconButton(
+                    //     onPressed: () {},
+                    //     icon: const Icon(
+                    //       Icons.stop,
+                    //       size: 40,
+                    //       color: Colors.white,
+                    //     )),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Slider(
+                              onChangeEnd: ((value) {
+                                seekAudio(Duration(seconds: value.toInt()));
+                              }),
+                              activeColor: Colors.white,
+                              inactiveColor: Colors.grey[800],
+                              min: 0.0,
+                              max: duration.inSeconds.toDouble(),
+                              value: position.inSeconds.toDouble(),
+                              onChanged: (double newPosition) {
+                                setState(() {
+                                  newPosition = position.inSeconds.toDouble();
+                                  newPosition = duration.inSeconds.toDouble();
+                                });
+                              }),
+                          Expanded(
+                              child: Text(
+                            position.toString().split('.').first,
+                            style: const TextStyle(
+                                fontSize: 10, color: Colors.white),
+                          )),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        AnimateIcons(
+                          startIcon: Icons.copy,
+                          endIcon: Icons.check_circle_outline,
+                          controller: _copyController,
+                          size: 33.0,
+                          onStartIconPress: () {
+                            FlutterClipboard.copy(
+                                '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+
+                            return true;
+                          },
+                          onEndIconPress: () {
+                            return false;
+                          },
+                          duration: const Duration(milliseconds: 250),
+                          startIconColor: Colors.white,
+                          endIconColor: Colors.white,
+                          clockwise: false,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              Share.share(
+                                  '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                            },
+                            icon: const Icon(Icons.share,
+                                size: 33.0, color: Colors.white)),
+                        const SizedBox(
+                          width: 5,
+                        )
+                      ],
                     )
                   ],
-                )
+                ),
               ],
             ),
           ),

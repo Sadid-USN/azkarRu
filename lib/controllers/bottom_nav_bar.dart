@@ -2,7 +2,10 @@ import 'package:avrod/screens/booksScreen/selected_books.dart';
 import 'package:avrod/screens/favorite_chapter_screen.dart';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../colors/colors.dart';
 import '../screens/search_screen.dart';
 import '../screens/сalendars/calendar_tabbar.dart';
 
@@ -20,6 +23,18 @@ class BottomNavBar extends ChangeNotifier {
       throw 'Пайванд кушода нашуд $url';
     }
   }
+
+  final navItems = [
+    Icon(FontAwesomeIcons.search, color: textColor, size: 22.sp),
+    Icon(
+      FontAwesomeIcons.book,
+      color: textColor,
+      size: 22.sp,
+    ),
+    Icon(Icons.favorite, color: Colors.red, size: 22.sp),
+    Icon(FontAwesomeIcons.calendarAlt, color: textColor, size: 22.sp),
+    Icon(Icons.star, color: textColor, size: 22.sp),
+  ];
 
   void onTapBar(context, int index) {
     selectedIndex = index;
