@@ -39,29 +39,42 @@ class BottomNavBar extends ChangeNotifier {
   void onTapBar(context, int index) {
     selectedIndex = index;
     if (index == 0) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return const SearcScreen();
-      }));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return const SearcScreen();
+          },
+        ),
+      );
     } else if (index == 1) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return const SelectedBooks();
-      }));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return const SelectedBooks();
+          },
+        ),
+      );
     } else if (index == 2) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return const FavoriteChaptersSceen();
-      }));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return const FavoriteChaptersSceen();
+          },
+        ),
+      );
     } else if (index == 3) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return const CalendarTabBarView();
-      }));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return const CalendarTabBarView();
+          },
+        ),
+      );
     } else if (index == 4) {
-      // NotificationService().dailyAtNotification(
-      //   1,
-      //   'Дуо сипари мусалмон аст',
-      //   "Парвардигоратон фармуд: «Маро бихонед, то [дуои] шуморо иҷобат кунам» (Ғофир 60)",
-      //   1,
-      // );
-
       _launchInBrowser(_lounchGooglePlay);
     }
     notifyListeners();

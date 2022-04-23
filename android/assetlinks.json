@@ -1,0 +1,11 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.darulasar.Azkar",
+        "sha256_cert_fingerprints":
+          ["90:B8:8F:62:EE:B7:47:73:15:14:8D:49:84:03:B9:81:F9:E4:E7:2D:A9:70:F8:C3:B4:0F:CE:6A:F8:4F:00:68"]
+      }
+    }
+  ]

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:animate_icons/animate_icons.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:avrod/colors/colors.dart';
@@ -164,43 +166,52 @@ class _TextScreenState extends State<TextScreen> {
           padding: const EdgeInsets.all(5.0),
           child: Column(
             children: [
-              Container(
-                decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color(0xffEFE2BF),
-                          offset: Offset(0.0, 2.0),
-                          blurRadius: 6.0)
-                    ],
-                    gradient: LinearGradient(
-                        colors: [Colors.white24, Colors.white38],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                padding: const EdgeInsets.all(40),
-                child: ExpandablePanel(
-                  header: const Text(''),
-                  collapsed: SelectableText(
-                    arabic,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.amiri(
-                      textBaseline: TextBaseline.ideographic,
-                      wordSpacing: 0.5,
-                      color: textColor,
-                      fontSize: _fontSize,
-                      fontWeight: FontWeight.bold,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: Color.fromARGB(44, 95, 191, 68),
+                            offset: Offset(0.0, 2.0),
+                            blurRadius: 6.0)
+                      ],
+                      // gradient: LinearGradient(
+                      //     colors: [
+                      //       Color.fromARGB(255, 240, 163, 163),
+                      //       Color.fromARGB(97, 43, 165, 217)
+                      //     ],
+                      //     begin: Alignment.centerLeft,
+                      //     end: Alignment.centerRight),
                     ),
-                  ),
-                  expanded: SelectableText(
-                    arabic,
-                    maxLines: 1,
-                    textAlign: TextAlign.justify,
-                    style: GoogleFonts.amaticSc(
-                      textBaseline: TextBaseline.ideographic,
-                      wordSpacing: 0.5,
-                      color: textColor,
-                      fontSize: _fontSize,
-                      fontWeight: FontWeight.bold,
+                    padding: const EdgeInsets.all(40),
+                    child: ExpandablePanel(
+                      header: const Text(''),
+                      collapsed: SelectableText(
+                        arabic,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.amiri(
+                          textBaseline: TextBaseline.ideographic,
+                          wordSpacing: 0.5,
+                          color: textColor,
+                          fontSize: _fontSize,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      expanded: SelectableText(
+                        arabic,
+                        maxLines: 1,
+                        textAlign: TextAlign.justify,
+                        style: GoogleFonts.amaticSc(
+                          textBaseline: TextBaseline.ideographic,
+                          wordSpacing: 0.5,
+                          color: textColor,
+                          fontSize: _fontSize,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -276,9 +287,9 @@ class _TextScreenState extends State<TextScreen> {
           bottomSheet: ClayContainer(
             spread: 0.0,
             curveType: CurveType.none,
-            height: 100,
+            height: 7.4.h,
             depth: 10,
-            color: const Color(0xff8D7E6F),
+            color: const Color.fromARGB(23, 151, 79, 8),
             child: Column(
               children: [
                 Row(

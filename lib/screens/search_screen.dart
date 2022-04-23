@@ -46,62 +46,65 @@ class _SearcScreenState extends State<SearcScreen> {
   Widget build(BuildContext context) {
     final books = Provider.of<List<Book>>(context);
     return Scaffold(
-        backgroundColor: gradientStartColor,
-        appBar: AppBar(
-            elevation: 0.0,
-            flexibleSpace: Container(
-              decoration: mainScreenGradient,
-            ),
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  color: iconColor,
-                )),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    showSearch(context: context, delegate: CoustomSearch());
-                  },
-                  icon: const Icon(
-                    Icons.search,
-                    color: iconColor,
-                  )),
-            ]),
-
-        // ignore: avoid_unnecessary_containers
-        body: Container(
-          decoration: mainScreenGradient,
-          child: FutureBuilder<List<Book>>(
-            future: BookFunctions.getBookLocally(context),
-            builder: (contex, snapshot) {
-              final book = snapshot.data;
-              if (snapshot.hasData) {
-                return buildBook(book![widget.bookIndex ?? 0]);
-              } else if (snapshot.hasError) {
-                return const Center(
-                  child: Text('Some erro occured'),
-                );
-              } else {
-                return const CircularProgressIndicator();
-              }
-            },
+      backgroundColor: const Color(0xffF3EEE2),
+      appBar: AppBar(
+          elevation: 0.0,
+          flexibleSpace: Container(
+            decoration: mainScreenGradient,
           ),
-        ));
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: iconColor,
+              )),
+          actions: []),
+
+      // ignore: avoid_unnecessary_containers
+      // body: Container(
+      //   decoration: mainScreenGradient,
+      // child: FutureBuilder<List<Book>>(
+      //   future: BookFunctions.getBookLocally(context),
+      //   builder: (contex, snapshot) {
+      //     final book = snapshot.data;
+      //     if (snapshot.hasData) {
+      //       return buildBook(contex, books);
+      //     } else if (snapshot.hasError) {
+      //       return const Center(
+      //         child: Text('Some erro occured'),
+      //       );
+      //     } else {
+      //       return const CircularProgressIndicator();
+      //     }
+      //   },
+      // ),
+      // ),
+      body: Container(
+        color: const Color(0xffF3EEE2),
+        // alignment: Alignment.center,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: IconButton(
+          onPressed: () {
+            showSearch(
+                context: context,
+                delegate: CoustomSearch(),
+                useRootNavigator: true);
+          },
+          icon: const Icon(
+            Icons.search,
+            color: iconColor,
+            size: 100,
+          ),
+        ),
+      ),
+    );
   }
 }
 
 class CoustomSearch extends SearchDelegate {
-  List<String> allData = [
-    'Дуа при пробуждении от сна',
-    'Дуа при одевании',
-    'Дуа при облачении в новую одежду',
-    'Дуа за того, кто надел новую одежду',
-    'Что следует сказать снявшему с себя одежду',
-    'Дуа перед тем, как войти в туалет',
-  ];
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -127,10 +130,13 @@ class CoustomSearch extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    final books = Provider.of<List<Book>>(context);
     List<String> matchQuery = [];
-    for (var item in allData) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
+    for (var item in books) {
+      if (item.name!.toLowerCase().contains(
+            query.toLowerCase(),
+          )) {
+        matchQuery.add(item.name!);
       }
     }
 
@@ -177,10 +183,11 @@ class CoustomSearch extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    final books = Provider.of<List<Book>>(context);
     List<String> matchQuery = [];
-    for (var item in allData) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
+    for (var item in books) {
+      if (item.name!.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(item.name!);
       }
     }
 
@@ -221,7 +228,8 @@ class CoustomSearch extends SearchDelegate {
   }
 }
 
-Widget buildBook(Book book) {
+Widget buildBook(BuildContext context, List<Book> book) {
+  final books = Provider.of<List<Book>>(context);
   return AnimationLimiter(
     child: ListView.separated(
         separatorBuilder: (contex, index) => Divider(
@@ -230,28 +238,30 @@ Widget buildBook(Book book) {
         scrollDirection: Axis.vertical,
         padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
         physics: const BouncingScrollPhysics(),
-        itemCount: book.chapters?.length ?? 0,
+        itemCount: books.length,
         itemBuilder: (context, index) {
-          final Chapter chapter = book.chapters![index];
+          final Chapter chapter = books[index].chapters![index];
 
           // ignore: sized_box_for_whitespace
           return AnimationConfiguration.staggeredGrid(
             position: index,
             duration: const Duration(milliseconds: 500),
-            columnCount: book.chapters!.length,
+            columnCount: books[index].chapters!.length,
             child: ScaleAnimation(
               child: ListTile(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return TextScreen(
-                      texts: chapter.texts,
-                      chapter: chapter,
-                      index: index,
-                    );
-                  }));
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return TextScreen(
+                        texts: chapter.texts,
+                        chapter: chapter,
+                        index: index,
+                      );
+                    },
+                  ));
                 },
                 title: Text(
-                  book.chapters![index].name!,
+                  books[index].name!,
                   maxLines: 3,
                   textAlign: TextAlign.start,
                   style: TextStyle(

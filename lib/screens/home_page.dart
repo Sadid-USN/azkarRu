@@ -63,185 +63,197 @@ class _HomePageState extends State<HomePage> {
     final books = Provider.of<List<Book>>(context);
     return ChangeNotifierProvider(
       create: (context) => BottomNavBar(),
-      child: Scaffold(
-        // backgroundColor: currentWidth < 400 ? Colors.deepOrange: Colors.greenAccent[400],
-        drawer: const DrawerModel(),
-        // extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          title: ListTile(
-            title: AnimatedTextKit(
-              totalRepeatCount: 2,
-              animatedTexts: [
-                ColorizeAnimatedText('Утренние и вечерние азкары',
-                    textStyle: colorizeTextStyle, colors: colorizeColors),
-              ],
+      child: SafeArea(
+        child: Scaffold(
+          // backgroundColor: currentWidth < 400 ? Colors.deepOrange: Colors.greenAccent[400],
+          drawer: const DrawerModel(),
+          // extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            title: ListTile(
+              title: AnimatedTextKit(
+                totalRepeatCount: 2,
+                animatedTexts: [
+                  ColorizeAnimatedText('Утренние и вечерние азкары',
+                      textStyle: colorizeTextStyle, colors: colorizeColors),
+                ],
+              ),
             ),
+            centerTitle: true,
+            elevation: 0.0,
+            backgroundColor: const Color(0xffF2DFC7),
           ),
-          centerTitle: true,
-          elevation: 0.0,
-          backgroundColor: const Color(0xffF2DFC7),
-        ),
-        body: Container(
-          height: currentHeight,
-          width: currentWidth,
-          decoration: mainScreenGradient,
-          child: ListView(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(left: 32, top: 60),
-                    height: 70.h,
-                    child: Swiper(
-                      duration: 200,
-                      curve: Curves.linearToEaseOut,
-                      scrollDirection: Axis.horizontal,
-                      autoplayDisableOnInteraction: false,
-                      itemCount: books.length,
-                      itemWidth: 67.w,
-                      layout: SwiperLayout.STACK,
-                      pagination: const SwiperPagination(
-                        margin: EdgeInsets.only(top: 20),
-                        builder: DotSwiperPaginationBuilder(
-                            activeColor: Colors.deepOrange,
-                            activeSize: 14,
-                            space: 5),
-                      ),
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            // Get.toNamed('/chapterscreen');
-                            Navigator.push(context,
-                                PageRouteBuilder(pageBuilder: (context, a, b) {
-                              return ChapterScreen(
-                                index,
-                                chapter,
+          body: Container(
+            height: currentHeight,
+            width: currentWidth,
+            decoration: mainScreenGradient,
+            child: ListView(
+              children: [
+                Column(
+                  //  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Lottie.network(
+                      'https://assets7.lottiefiles.com/private_files/lf30_yeszgfau.json',
+                      fit: BoxFit.cover,
+                      height: 10,
+                      width: currentWidth,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(left: 32, top: 60),
+                      height: 70.h,
+                      child: Swiper(
+                        duration: 200,
+                        curve: Curves.linearToEaseOut,
+                        scrollDirection: Axis.horizontal,
+                        autoplayDisableOnInteraction: false,
+                        itemCount: books.length,
+                        itemWidth: 67.w,
+                        layout: SwiperLayout.STACK,
+                        pagination: const SwiperPagination(
+                          margin: EdgeInsets.only(top: 20),
+                          builder: DotSwiperPaginationBuilder(
+                              activeColor: Colors.deepOrange,
+                              activeSize: 14,
+                              space: 5),
+                        ),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, a, b) {
+                                    return ChapterScreen(
+                                      index,
+                                      chapter,
+                                    );
+                                  },
+                                ),
                               );
-                            }));
-                          },
-                          child: Stack(
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 100,
-                                  ),
+                            },
+                            child: Stack(
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 100,
+                                    ),
 
-                                  // ignore: sized_box_for_whitespace
-                                  Container(
-                                    height: 40.h,
-                                    width: 40.h,
-                                    child: Card(
-                                      elevation: 8,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25)),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(25.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Center(
-                                              child: Text(
-                                                books[index].name,
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontSize: 19.sp,
-                                                    color: textColor,
-                                                    fontWeight:
-                                                        FontWeight.w900),
+                                    // ignore: sized_box_for_whitespace
+                                    Container(
+                                      height: 40.h,
+                                      width: 40.h,
+                                      child: Card(
+                                        elevation: 8,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(25.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Center(
+                                                child: Text(
+                                                  books[index].name,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 16.sp,
+                                                      color: textColor,
+                                                      fontWeight:
+                                                          FontWeight.w900),
+                                                ),
                                               ),
-                                            ),
-                                            Column(
-                                              children: [
-                                                const SizedBox(
-                                                  height: 30,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Узнать больше',
-                                                      style: TextStyle(
-                                                          color:
-                                                              primaryTextColor,
-                                                          fontSize: 10.sp,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 2.w,
-                                                    ),
-                                                    // ignore: sized_box_for_whitespace
-                                                    Icon(
-                                                      FontAwesomeIcons
-                                                          .handPointer,
-                                                      size: 14.sp,
-                                                      color: Colors.blueGrey,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                              Column(
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        'Узнать больше',
+                                                        style: TextStyle(
+                                                            color:
+                                                                primaryTextColor,
+                                                            fontSize: 10.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 2.w,
+                                                      ),
+                                                      // ignore: sized_box_for_whitespace
+                                                      Icon(
+                                                        FontAwesomeIcons
+                                                            .handPointer,
+                                                        size: 14.sp,
+                                                        color: Colors.blueGrey,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 20,
+                                  ],
                                 ),
-                                child: AvatarGlow(
-                                  shape: BoxShape.circle,
-                                  glowColor: Colors.green,
-                                  endRadius: 90.sp,
-                                  duration: const Duration(milliseconds: 1500),
-                                  repeat: true,
-                                  showTwoGlows: true,
-                                  repeatPauseDuration:
-                                      const Duration(milliseconds: 1000),
-                                  child: Image.asset(
-                                    books[index].image,
-                                    height: 35.h,
-                                    width: 80.w,
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 20,
+                                  ),
+                                  child: AvatarGlow(
+                                    shape: BoxShape.circle,
+                                    glowColor: Colors.green,
+                                    endRadius: 90.sp,
+                                    duration:
+                                        const Duration(milliseconds: 1500),
+                                    repeat: true,
+                                    showTwoGlows: true,
+                                    repeatPauseDuration:
+                                        const Duration(milliseconds: 1000),
+                                    child: Image.asset(
+                                      books[index].image,
+                                      height: 35.h,
+                                      width: 80.w,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Lottie.network(
-                                'https://assets7.lottiefiles.com/private_files/lf30_yeszgfau.json',
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 55,
-                  ),
-                  Consumer<BottomNavBar>(
-                    builder: (context, bottomBar, child) => CurvedNavigationBar(
-                        color: const Color(0xffF2DFC7),
-                        buttonBackgroundColor: Colors.white,
-                        height: 30.sp,
-                        index: bottomBar.selectedIndex,
-                        backgroundColor: const Color(0xffF3EEE2),
-                        items: bottomBar.navItems,
-                        onTap: (index) {
-                          bottomBar.onTapBar(context, index);
-                        }),
-                  ),
-                ],
-              )
-            ],
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.height,
+                    // ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          bottomSheet: Consumer<BottomNavBar>(
+            builder: (context, bottomBar, child) => CurvedNavigationBar(
+                color: const Color(0xffF2DFC7),
+                buttonBackgroundColor: Colors.white,
+                height: 7.h,
+                index: bottomBar.selectedIndex,
+                backgroundColor: const Color(0xffF3EEE2),
+                items: bottomBar.navItems,
+                onTap: (index) {
+                  bottomBar.onTapBar(context, index);
+                }),
           ),
         ),
       ),
