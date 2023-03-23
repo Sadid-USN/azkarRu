@@ -2,7 +2,6 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_functions.dart';
-import 'package:avrod/style/my_text_style.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hive/hive.dart';
 import 'package:avrod/data/book_map.dart';
@@ -15,10 +14,14 @@ import 'package:sizer/sizer.dart';
 import '../main.dart';
 
 class ChapterScreen extends StatefulWidget {
-  const ChapterScreen(this.bookIndex, this.chapter, {Key key})
-      : super(key: key);
+  const ChapterScreen({
+    Key key,
+    this.bookIndex,
+    this.title,
+  }) : super(key: key);
   final int bookIndex;
-  final Chapter chapter;
+  final String title;
+
   //final List<Book> books;
 
   @override
@@ -41,8 +44,6 @@ class _ChapterScreenState extends State<ChapterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final books = Provider.of<List<Book>>(context);
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -55,9 +56,9 @@ class _ChapterScreenState extends State<ChapterScreen> {
             )),
         elevation: 0.0,
         title: Text(
-          'Список глав',
+          widget.title,
           style: TextStyle(
-              fontSize: 18.sp, color: titleAbbBar, fontWeight: FontWeight.bold),
+              fontSize: 14.sp, color: textColor, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         flexibleSpace: Container(
@@ -94,7 +95,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
             );
           },
           scrollDirection: Axis.vertical,
-          padding: const EdgeInsets.only(top: 5),
+          padding: const EdgeInsets.only(top: 5, bottom: 25),
           physics: const BouncingScrollPhysics(),
           itemCount: book.chapters?.length ?? 0,
           itemBuilder: (context, index) {
@@ -108,6 +109,14 @@ class _ChapterScreenState extends State<ChapterScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: CachedNetworkImage(
+                      errorWidget: (context, url, error) {
+                        return const ListTile(
+                          leading: CircleAvatar(
+                            maxRadius: 25,
+                            backgroundImage: AssetImage('icons/iconavrod.png'),
+                          ),
+                        );
+                      },
                       imageUrl: chapter.listimage ?? '',
                       placeholder: (context, imageProvider) {
                         return Center(
@@ -153,14 +162,14 @@ class _ChapterScreenState extends State<ChapterScreen> {
                             backgroundImage: imageProvider,
                           ),
                           title: Text(
-                            chapter.name,
+                            chapter.name ?? '',
                             maxLines: 3,
                             textAlign: TextAlign.start,
                             style: TextStyle(
-                                fontSize: 12.sp,
+                                fontSize: 10.sp,
                                 overflow: TextOverflow.ellipsis,
                                 fontWeight: FontWeight.w600,
-                                color: titleAbbBar),
+                                color: textColor),
                           ),
                         );
                       }),

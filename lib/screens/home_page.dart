@@ -4,19 +4,23 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_map.dart';
-import 'package:avrod/controllers/bottom_nav_bar.dart';
-import 'package:avrod/style/my_text_style.dart';
+import 'package:avrod/controllers/global_controller.dart';
 import 'package:avrod/widgets/notification.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import '../data/titles.dart';
+import '../generated/locale_keys.g.dart';
 import '../widgets/drawer_widget.dart';
 import 'chapter_screen.dart';
 import 'package:timezone/data/latest.dart' as tz;
+
+import 'languages_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -62,20 +66,34 @@ class _HomePageState extends State<HomePage> {
     final currentHeight = MediaQuery.of(context).size.height;
     final books = Provider.of<List<Book>>(context);
     return ChangeNotifierProvider(
-      create: (context) => BottomNavBar(),
+      create: (context) => GlobalController(),
       child: SafeArea(
         child: Scaffold(
-          // backgroundColor: currentWidth < 400 ? Colors.deepOrange: Colors.greenAccent[400],
           drawer: const DrawerModel(),
           // extendBodyBehindAppBar: true,
           appBar: AppBar(
-            title: ListTile(
-              title: AnimatedTextKit(
-                totalRepeatCount: 2,
-                animatedTexts: [
-                  ColorizeAnimatedText('Утренние и вечерние азкары',
-                      textStyle: colorizeTextStyle, colors: colorizeColors),
-                ],
+            title: Consumer<GlobalController>(
+              builder: (context, controller, child) => ListTile(
+                title: Center(
+                  child: AnimatedTextKit(
+                    totalRepeatCount: 2,
+                    animatedTexts: [
+                      ColorizeAnimatedText(
+                        LocaleKeys.avrod.tr(),
+                        textStyle: colorizeTextStyle,
+                        colors: colorizeColors,
+                      ),
+                    ],
+                  ),
+                ),
+                trailing: IconButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return const LangugesPage();
+                      }));
+                    },
+                    icon: const Icon(Icons.language)),
               ),
             ),
             centerTitle: true,
@@ -123,8 +141,8 @@ class _HomePageState extends State<HomePage> {
                                 PageRouteBuilder(
                                   pageBuilder: (context, a, b) {
                                     return ChapterScreen(
-                                      index,
-                                      chapter,
+                                      bookIndex: index,
+                                      title: books[index].name,
                                     );
                                   },
                                 ),
@@ -139,9 +157,7 @@ class _HomePageState extends State<HomePage> {
                                     const SizedBox(
                                       height: 100,
                                     ),
-
-                                    // ignore: sized_box_for_whitespace
-                                    Container(
+                                    SizedBox(
                                       height: 40.h,
                                       width: 40.h,
                                       child: Card(
@@ -158,10 +174,10 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               Center(
                                                 child: Text(
-                                                  books[index].name,
+                                                  titles[index].tr(),
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
-                                                      fontSize: 16.sp,
+                                                      fontSize: 14.sp,
                                                       color: textColor,
                                                       fontWeight:
                                                           FontWeight.w900),
@@ -178,7 +194,8 @@ class _HomePageState extends State<HomePage> {
                                                             .center,
                                                     children: [
                                                       Text(
-                                                        'Узнать больше',
+                                                        LocaleKeys.learnMore
+                                                            .tr(),
                                                         style: TextStyle(
                                                             color:
                                                                 primaryTextColor,
@@ -243,7 +260,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          bottomSheet: Consumer<BottomNavBar>(
+          bottomSheet: Consumer<GlobalController>(
             builder: (context, bottomBar, child) => CurvedNavigationBar(
                 color: const Color(0xffF2DFC7),
                 buttonBackgroundColor: Colors.white,

@@ -1,16 +1,20 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../generated/locale_keys.g.dart';
+
 String _lounchUrlGmail = 'https://mail.google.com/mail/u/0/#inbox';
 String _linkInstagramm =
     'https://instagram.com/darul_asar?utm_medium=copy_link';
 String _avrodAppLink =
-    'https://play.google.com/store/apps/details?id=com.darulasar.avrod';
+    'https://play.google.com/store/apps/dev?id=4786339481234121988&hl=ru&gl=US';
 String _youTubeLink =
     'https://www.youtube.com/channel/UCR2bhAQKRXDmE4v_rDVNOrA';
+String _supportLink = 'https://taplink.cc/avrod';
 Future<void> _launchInBrowser(String url) async {
   if (await canLaunch(url)) {
     await launch(url,
@@ -46,9 +50,9 @@ class DrawerOption {
 }
 
 final DrawerOption _option = DrawerOption(
-  title: const Text(
-    'Поделиться с другими',
-    style: TextStyle(fontSize: 14, color: Colors.white),
+  title: Text(
+    LocaleKeys.share.tr(),
+    style: const TextStyle(fontSize: 14, color: Colors.white),
   ),
   icon: Icon(
     Icons.share,
@@ -61,22 +65,24 @@ final DrawerOption _option = DrawerOption(
   },
 );
 final DrawerOption _option_2 = _option.copyWith(
-  title: const Text(
-    'Поддержать',
-    style: TextStyle(fontSize: 14, color: Colors.white),
+  title: Text(
+    LocaleKeys.support.tr(),
+    style: const TextStyle(fontSize: 14, color: Colors.white),
   ),
   icon: Icon(
     FontAwesomeIcons.donate,
     color: Colors.white,
     size: 20.sp,
   ),
-  onTap: () {},
+  onTap: () {
+    _launchInBrowser(_supportLink);
+  },
 );
 
 final DrawerOption _option_3 = _option.copyWith(
-  title: const Text(
-    'ulamuyaman@gmail.com',
-    style: TextStyle(fontSize: 14, color: Colors.white),
+  title: Text(
+    LocaleKeys.email.tr(),
+    style: const TextStyle(fontSize: 14, color: Colors.white),
   ),
   icon: Icon(
     FontAwesomeIcons.envelope,
@@ -88,22 +94,22 @@ final DrawerOption _option_3 = _option.copyWith(
   },
 );
 final DrawerOption _option_4 = _option.copyWith(
-  title: const Text(
-    'Avrod на таджиксом',
-    style: TextStyle(fontSize: 14, color: Colors.white),
+  title: Text(
+    LocaleKeys.allApps.tr(),
+    style: const TextStyle(fontSize: 14, color: Colors.white),
   ),
   icon: const CircleAvatar(
     radius: 15,
-    backgroundImage: AssetImage('icons/iconavrod.png'),
+    backgroundImage: AssetImage('icons/apps.png'),
   ),
   onTap: () {
     _launchInBrowser(_avrodAppLink);
   },
 );
 final DrawerOption _option_5 = _option.copyWith(
-  title: const Text(
-    '@darul_asar',
-    style: TextStyle(fontSize: 16, color: Colors.white),
+  title: Text(
+    LocaleKeys.instagram.tr(),
+    style: const TextStyle(fontSize: 16, color: Colors.white),
   ),
   icon: Icon(
     FontAwesomeIcons.instagram,

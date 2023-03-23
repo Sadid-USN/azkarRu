@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:http/http.dart' as http;
 
 class SearcScreen extends StatefulWidget {
   final int? bookIndex;
@@ -60,46 +59,47 @@ class _SearcScreenState extends State<SearcScreen> {
                 Icons.arrow_back_ios,
                 color: iconColor,
               )),
-          actions: []),
+          actions: const []),
 
       // ignore: avoid_unnecessary_containers
-      // body: Container(
-      //   decoration: mainScreenGradient,
-      // child: FutureBuilder<List<Book>>(
-      //   future: BookFunctions.getBookLocally(context),
-      //   builder: (contex, snapshot) {
-      //     final book = snapshot.data;
-      //     if (snapshot.hasData) {
-      //       return buildBook(contex, books);
-      //     } else if (snapshot.hasError) {
-      //       return const Center(
-      //         child: Text('Some erro occured'),
-      //       );
-      //     } else {
-      //       return const CircularProgressIndicator();
-      //     }
-      //   },
-      // ),
-      // ),
       body: Container(
-        color: const Color(0xffF3EEE2),
-        // alignment: Alignment.center,
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: IconButton(
-          onPressed: () {
-            showSearch(
-                context: context,
-                delegate: CoustomSearch(),
-                useRootNavigator: true);
+        decoration: mainScreenGradient,
+        child: FutureBuilder<List<Book>>(
+          future: BookFunctions.getBookLocally(context),
+          builder: (contex, snapshot) {
+            final book = snapshot.data;
+            if (snapshot.hasData) {
+              return buildBook(contex, book![widget.bookIndex ?? 0]);
+            } else if (snapshot.hasError) {
+              return const Center(
+                child: Text('Some erro occured'),
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
           },
-          icon: const Icon(
-            Icons.search,
-            color: iconColor,
-            size: 100,
-          ),
         ),
       ),
+      // body:
+      // Container(
+      //   color: const Color(0xffF3EEE2),
+      // alignment: Alignment.center,
+      //   height: MediaQuery.of(context).size.height,
+      //   width: MediaQuery.of(context).size.width,
+      // child: IconButton(
+      //   onPressed: () {
+      //     showSearch(
+      //         context: context,
+      //         delegate: CoustomSearch(),
+      //         useRootNavigator: true);
+      //   },
+      //   icon: const Icon(
+      //     Icons.search,
+      //     color: iconColor,
+      //     size: 100,
+      //   ),
+      // ),
+      // ),
     );
   }
 }
@@ -228,7 +228,7 @@ class CoustomSearch extends SearchDelegate {
   }
 }
 
-Widget buildBook(BuildContext context, List<Book> book) {
+Widget buildBook(BuildContext context, Book book) {
   final books = Provider.of<List<Book>>(context);
   return AnimationLimiter(
     child: ListView.separated(
@@ -240,7 +240,7 @@ Widget buildBook(BuildContext context, List<Book> book) {
         physics: const BouncingScrollPhysics(),
         itemCount: books.length,
         itemBuilder: (context, index) {
-          final Chapter chapter = books[index].chapters![index];
+          final Chapter chapter = book.chapters![index];
 
           // ignore: sized_box_for_whitespace
           return AnimationConfiguration.staggeredGrid(

@@ -50,10 +50,6 @@ Widget _header(BuildContext context) {
           top: 20 + MediaQuery.of(context).padding.top, bottom: 25),
       child: Column(
         children: const [
-          // CircleAvatar(
-          //   radius: 90,
-          //   backgroundImage: AssetImage('icons/iconavrod.png'),
-          // )
           ClipRRect(
             borderRadius: BorderRadius.all(
               Radius.circular(23.0),

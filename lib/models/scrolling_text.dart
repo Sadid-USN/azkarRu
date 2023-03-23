@@ -15,9 +15,7 @@ class ScrollingText extends StatefulWidget {
     this.textStyle,
     this.scrollAxis = Axis.horizontal,
     this.ratioOfBlankToScreen = 0.20,
-  }) : assert(
-          text != null,
-        );
+  });
 
   @override
   State<StatefulWidget> createState() {
