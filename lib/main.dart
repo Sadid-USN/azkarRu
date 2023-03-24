@@ -17,7 +17,6 @@ const String FAVORITES_BOX = 'favorites_box';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
   NotificationService().initNotification();
   // await Firebase.initializeApp();
   await Hive.initFlutter();

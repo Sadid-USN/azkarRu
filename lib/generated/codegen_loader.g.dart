@@ -15,7 +15,7 @@ class CodegenLoader extends AssetLoader{
   }
 
   static const Map<String,dynamic> ru = {
-  "avrod": "Аврод ежедневные молитвы",
+  "avrod": "Азкар ежедневные молитвы",
   "lang": "Языки",
   "title1": "Дуа начало дня",
   "title2": "Молитвы намаза",
@@ -45,7 +45,7 @@ class CodegenLoader extends AssetLoader{
   "learnMore": "Узнать больше"
 };
 static const Map<String,dynamic> en = {
-  "avrod": "Avrod Daily prayers",
+  "avrod": "Azkar Daily prayers",
   "lang": "Languages",
   "title1": "Beginning of the day",
   "title2": "Salah prayers",

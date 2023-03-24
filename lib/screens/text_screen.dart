@@ -6,8 +6,6 @@ import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/data/book_map.dart';
-import 'package:avrod/models/my_audioplayer.dart';
-import 'package:avrod/models/scrolling_text.dart';
 import 'package:avrod/style/my_text_style.dart';
 import 'package:clay_containers/constants.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
@@ -400,22 +398,15 @@ class _TextScreenState extends State<TextScreen> {
               ),
             ),
             elevation: 0.0,
-            title: Column(
-              children: [
-                // ignore: sized_box_for_whitespace
-                Container(
-                  key: _key,
-                  padding: const EdgeInsets.only(top: 5),
-                  height: 40.0,
-                  child: ScrollingText(
-                    text: '${widget.chapter?.name}',
-                    textStyle: TextStyle(
-                        color: titleAbbBar,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
+            title: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Text(
+                '${widget.chapter?.name}',
+                style: TextStyle(
+                    color: textColor,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             centerTitle: true,
             flexibleSpace: Container(

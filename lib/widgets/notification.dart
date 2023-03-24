@@ -68,7 +68,7 @@ class NotificationService {
         id,
         title,
         body,
-        tz.TZDateTime.local(1).add(const Duration(days: 1)),
+        tz.TZDateTime.local(1).add(const Duration(seconds: 5)),
         const NotificationDetails(
           android: AndroidNotificationDetails('channel id', 'channel name',
               channelDescription: 'Main channel notifications',
@@ -94,3 +94,19 @@ class NotificationService {
     // }
   }
 }
+
+List<String> titleList = [
+  "Рамадан месяц надежды",
+  "Title 2",
+  "Title 3",
+  "Title 4",
+  "Title 5"
+];
+
+List<String> bodyList = [
+  "Кто выстаивал ночной намаз в рамадане с верой и надеждой на вознаграждение Аллаха, тому будут прощены совершенные им ранее грехи",
+  "Body 2",
+  "Body 3",
+  "Body 4",
+  "Body 5"
+];

@@ -38,12 +38,10 @@ class _HomePageState extends State<HomePage> {
     // var bottomNavBar = Provider.of<BottomAppBar>(context);
 
     _pageConroller = PageController(initialPage: 0, viewportFraction: 0.8);
+
     tz.initializeTimeZones();
-    NotificationService().dailyAtNotification(
-        1,
-        "Молитва защита верующего",
-        "Ваш Господь сказал: «Взывайте ко Мне, и Я отвечу вам» (Аль-Гафир 60)",
-        1);
+    NotificationService().dailyAtNotification(1, "Здоровое сердце!",
+        "О Аллах, поистине, я молю Тебя сделать моё сердце здравым!", 1);
   }
 
   // final controller = PageController(viewportFraction: 12.0, keepPage: true);
@@ -73,9 +71,11 @@ class _HomePageState extends State<HomePage> {
           // extendBodyBehindAppBar: true,
           appBar: AppBar(
             title: Consumer<GlobalController>(
-              builder: (context, controller, child) => ListTile(
-                title: Center(
-                  child: AnimatedTextKit(
+              builder: (context, controller, child) => Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Spacer(),
+                  AnimatedTextKit(
                     totalRepeatCount: 2,
                     animatedTexts: [
                       ColorizeAnimatedText(
@@ -85,15 +85,19 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                ),
-                trailing: IconButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return const LangugesPage();
-                      }));
-                    },
-                    icon: const Icon(Icons.language)),
+                  const Spacer(),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return const LangugesPage();
+                        }));
+                      },
+                      icon: Icon(
+                        Icons.language,
+                        color: textColor,
+                      )),
+                ],
               ),
             ),
             centerTitle: true,
