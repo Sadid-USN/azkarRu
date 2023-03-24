@@ -671,76 +671,76 @@
             {
                 "id": 26,
                 "listimage": "https://en.al-dirassa.com/wp-content/uploads/2021/01/end-the-salah-with-tasleem-2-salat-prayer-1024x678.jpg",
-                "name": "Зикры и дуа после намаза",
+                "name": "Dua After salam",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "«Астагфиру-Ллаха (трижды).\nАл-лахумма, Анта-с-Саляму ва мин-кя-с-саляму, табаракта, йа За-ль-джаляли ва-ль-икрами!».",
+                        "text": "«Astaghfirullāh (three times)\nAllāhumma antas-salām, wa minkas-salām, tabārakta yā dhal-Jalāli wal-'Ikrām»",
                         "arabic": "أَسْتَغْفِرُ اللَّهَ (ثَلاَثَاً) اللَّهُمَّ أَنْتَ السَّلاَمُ، وَمِنْكَ السَّلاَمُ، تَبَارَكْتَ يَا ذَا الْجَلاَلِ وَالْإِكْرَامِ ",
-                        "translation": "Прошу прошения у Аллаха, о Аллах, Ты - Мир (Салям - одно из имён Аллаха, указывающее на свободу (саляма) от каких бы то ни было недостатков.) и от Тебя - мир (То есть: Ты избавляешь от любых бед и не-), благословен Ты, о Обладатель величия и Почитаемый!",
+                        "translation": "I seek the forgiveness of Allah (three times).\nO Allah, You are Peace and from You comes peace. Blessed are You, O Owner of majesty and honor. (Reference: Muslim 1/414)",
                         "url": ""
                     },
                     {
                         "id": "Dua 2",
-                        "text": "«Ля иляха илля Ллаху вахда-ху ля шарикя ля-ху, ля-ху-ль-мульку ва ля-ху-ль-хамду ва хуа 'аля купли шайин кадир! Аллахумма, ля мани'а ли-ма а'тайта, ва ля му'тыйа ли-ма мана'-та ва ля йан-фа'у за-ль-джадди мин-кя-ль-джадду».",
+                        "text": "«Lā 'ilāha 'illallāh, waḥdahu lā sharīka lah, lahu ‘l-mulku wa lahu ‘l-ḥamd, wa huwa `alā kulli shay'in qadīr, Allāhumma lā māni`a limā 'a`tayt, wa lā mu`tiya limā mana`t, wa lā yanfa`u dhal-jaddi minkal-jadd»",
                         "arabic": "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ [ثلاثاً]، اللَّهُمَّ لاَ مَانِعَ لِمَا أَعْطَيْتَ، وَلاَ مُعْطِيَ لِمَا مَنَعْتَ، وَلاَ يَنْفَعُ ذَا الْجَدِّ مِنْكَ الجَدّ",
-                        "translation": "Нет истинного божества достойного поклонения, кроме одного лишь Аллаха, у которого нет сотоварища. Ему принадлежит владычество, Ему хвала. Он всё может! О Аллах, никто не лишит того, что Ты даровал, и никто не дарует того, чего Ты лишил, и бесполезным перед Тобой окажется могущество обладающего могуществом.",
+                        "translation": "None has the right to be worshipped but Allah alone, He has no partner, His is the dominion and His is the praise, and He is Able to do all things. O Allah, there is none who can withhold what You give, and none may give what You have withheld, and the might of the mighty person cannot benefit him against You. (Reference: Al-Bukhari 1/255, Muslim 1/414)",
                         "url": ""
                     },
                     {
                         "id": "Dua 4",
-                        "text": "«Ля иляха илля Ллаху вахда-ху ля шарикя ля-ху, ля-ху-ль-мульку, ва ля-ху-ль-хамду ва хуа 'аля купли шайин кади-рун! Ля хауля ва ля куввата илля би-Лляхи, ля иляха илля Ллаху ва ля на'буду илля ийа-ху! Ля-ху-н-ни'мату, ва ля-ху-ль-фадлю ва ля-ху-с-санау-ль-хасану! Ля иляха илля Ллаху мухлисина ля-ху-д-дина ва ляу кяриха-ль-кяфируна».",
+                        "text": "«Lā 'ilāha 'illallāh, waḥdahu lā sharīka lah, lahul-mulku, wa lahul-ḥamd, wa huwa `alā kulli shay'in qadīr. Lā ḥawla wa lā quwwata 'illā billāh, lā 'ilāha 'illallāh, wa lā na`budu 'illā 'iyyāh, lahun-ni`matu wa lahul-faḍl, wa lahuth-thanā'ul-ḥasan, lā 'ilāha 'illallāh, mukhliṣīna lahud-dīn, wa law karihal-kāfirūn»",
                         "arabic": "لَا إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ، لاَ إِلَهَ إِلاَّ اللَّهُ، وَلاَ نَعْبُدُ إِلاَّ إِيَّاهُ, لَهُ النِّعْمَةُ وَلَهُ الْفَضْلُ وَلَهُ الثَّنَاءُ الْحَسَنُ، لَا إِلَهَ إِلاَّ اللَّهُ مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ الكَافِرُونَ",
-                        "translation": "Нет истинного божества достойного поклонения, кроме одного лишь Аллаха, у которого нет сотоварища. Ему принадлежит владычество, Ему хвала, Он всё может! Нет мощи и силы ни у кого, кроме Аллаха, нет бога, кроме Аллаха, не поклоняемся мы никому, кроме Аллаха! Он оказывает благодеяния, Он обладает достоинствами (Имеются в виду высшие, абсолютные достоинства или же качества.), и Ему - достойная похвала! Нет бога, кроме Аллаха, а мы искренни в религии перед Ним, даже если это и не нравится неверным.",
+                        "translation": "None has the right to be worshipped but Allah alone, He has no partner, His is the dominion and His is the praise and He is Able to do all things. There is no power and no might except by Allah. None has the right to be worshipped but Allah, and we do not worship any other besides Him. His is grace, and His is bounty, and to Him belongs the most excellent praise. None has the right to be worshipped but Allah. (We are) sincere in making our religious devotion to Him, even though the disbelievers may dislike it. (Reference: Muslim 1/415)",
                         "url": ""
                     },
                     {
                         "id": "Dua 5",
-                        "text": "«Субхана Ллахи, ва-ль-хамду Ли-Лляхи ва Ллаху акбару, ля иляха илля Ллаху вахда-ху ля шарикя ля-ху, ля-ху-ль-мульку ва ля-ху-ль-хамду ва хуа 'аля кул-ли шаййин кадирун!».",
+                        "text": "«Subḥānallāh, walḥamdu lillāh, wallāhu 'akbar, (each said thirty-three times) Lā 'ilāha 'illallāh waḥdahu lā sharīka lahu, lahul-mulku wa lahul-ḥamd wa huwā`lā kulli shay'in qadīr»",
                         "arabic": "سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَاللَّهُ أَكْبَرُ (ثلاثاً وثلاثين) لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
-                        "translation": "Слава Аллаху, хвала Аллаху, Аллах велик (каждую из этих фраз следует повторить по тридцать три раза.), нет бога, кроме одного лишь Аллаха, у которого нет сотоварища. Ему принадлежит владычество. Ему хвала, Он всё может!",
+                        "translation": "Glory is to Allah, and praise is to Allah, and Allah is the Most Great. (each said thirty-three times) None has the right to be worshiped but Allah alone, He has no partner, His is the dominion and His is the praise and He is Able to do all things. (Reference: Muslim 1/418, Whoever says this after every prayer will be forgiven his sins even though they be as the foam of the sea)",
                         "url": ""
                     },
                     {
                         "id": "Dua 7",
-                        "text": "«Бисмилляхир-рахманир-рахим.\nКуль хуваллаху ахад Аллахус-самад, лам ялид ва лам юлад ва лам якуллаху куфуван ахад».",
+                        "text": "«Bismillāhir-Raḥmānir-Raḥīm.\nQul huwallāhu aḥad. Allāhuṣ-ṣamad. Lam yalid wa lam yūlad. Wa lam yakun lahu kufuwan aḥad»",
                         "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ* اللَّهُ الصَّمَدُ* لَمْ يَلِدْ وَلَمْ يُولَدْ* وَلَمْ يَكُن لَّهُ كُفُواً أَحَدٌ ",
-                        "translation": "Скажи: Он - Аллах - Один, Аллах Вечный, не рождал Он и не был рожден, и не был Ему равным никто(Искренность, 1 - 4.)",
+                        "translation": "(Surahs 112 al-Ikhlas, 113 al-Falaq, and 114 an-Nas) These Surahs should be recited in Arabic after each prayer. After the Maghrib and Fajr prayers, they should be recited three times each. With the Name of Allah, the Most Gracious, the Most Merciful. Say: He is Allah (the) One. The Self-Sufficient Master, Whom all creatures need, He begets not nor was He begotten, and there is none equal to Him",
                         "url": ""
                     },
                     {
                         "id": "Dua 8",
-                        "text": "«Бисмилляхир-рахманир-рахим.\nКуль а'узу бираббиль-фаляк мин шарри ма халяк ва мин шарри гасикин иза уакаб уа мин шарри-ннаф-фасати филб-'укад уа мин шарри хасидин иза хасад».",
+                        "text": "«Bismillāhir-Raḥmānir-Raḥīm.\nQul a`ūdhu birabbil-falaq. Min sharri mā khalaq. Wa min sharri ghāsiqin idhā waqab. Wa min sharrin-naffāthāti fil-`uqad. Wa min sharri ḥāsidin idhā ḥasad»",
                         "arabic": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِن شَرِّ مَا خَلَقَ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
-                        "translation": "Скажи: Прибегаю к Господу рассвета от зла того, что Он сотворил, от зла ночного мрака, когда он покрывает, от зла дующих на узлы (Речь идёт о колдуньях.) от зла зависти завистника\n(Рассвет, 1 - 5.)",
+                        "translation": "With the Name of Allah, the Most Gracious, the Most Merciful. Say: I seek refuge with (Allah) the Lord of the daybreak, from the evil of what He has created, and from the evil of the darkening (night) as it comes with its darkness, and from the evil of those who practice witchcraft when they blow in the knots, and from the evil of the envier when he envies.",
                         "url": ""
                     },
                     {
                         "id": "Dua 9",
-                        "text": "Бисмилляхир-рахманир-рахим.\n«Куль а'узу бирабби-ннас маликин-нас иляхин-нас мин шаррильуасуасль-ханноси аллази ювасвису фи судуриннас минал джиннати уа-нас».",
+                        "text": "«Bismillāhir-Raḥmānir-Raḥīm.\nQul a`ūdhu birabbin-nās\nMalikin-nās. 'Ilāhin-nās\nMin sharri ‘l-waswāsil-khannās\nAlladhī yuwaswisu fī ṣudūrin-nās\nMinal-jinnati wannās»",
                         "arabic": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ مَلِكِ النَّاسِ إِلَهِ النَّاسِ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ مِنَ الْجِنَّةِ وَ النَّاسِ} بَعْدَ كُلِّ صَلاَةٍ",
-                        "translation": "Скажи: Прибегаю к Господу людей, Царю людей, Богу людей от зла искусителя исчезающего, (Исчезает при упоминании имени Аллаха.), который искушает сердца людей, из числа джиннов и людей (Люди, 1 - 6.)",
+                        "translation": "With the Name of Allah, the Most Gracious, the Most Merciful. Say: I seek refuge with (Allah) the Lord of mankind, the King of mankind, the God of mankind, from the evil of the whisperer who withdraws, who whispers in the breasts of mankind, of jinns and men. (Reference: Abu Dawud 2/86, An-Nasa'i 3/68. See also Al-Albani, Sahih At-Tirmidhi 2/8)",
                         "url": ""
                     },
                     {
                         "id": "Dua 10",
-                        "text": "«Аллаху ля иляха илла хуваль-хайюл кайюм ля та'хузуху синатун уа ля наум, ляху ма фис-самауати уа му филь-арз, ман заллязи яшфа'у 'индаху илля биизнихи я'ляму ма байна айдӣхим уа ма хальфахум уа ля юхитуна бишайин мин 'илмихи илля би ма ша' уаси'а курсийюху-самавати валь-арз уа ля яудуху хифзухума уа хува 'алийюль 'азим».",
+                        "text": "«Allāhu lā ilāha illā huwa ‘l-Ḥayyul-Qayyūm, lā ta'khudhuhu sinatun wa lā nawm, lahu mā fis-samāwāti wa mā fil-ardh, man dhal-ladhī yashfa`u `indahu illā bi'idhnih, ya`lamu mā bayna 'aydīhim wa mā khalfahum, wa lā yuḥītūna bishay'im-min `ilmihi illā bimā shā'a, wasi `a kursiyyuhus-samāwāti wal-ardh, wa lā ya'ūduhu hifẓuhumā, wa huwal-`Aliyyu ‘l-`Aẓīm»",
                         "arabic": "اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ}عَقِبَ كلِّ صَلاَةٍ",
-                        "translation": "Аллах - нет истинного божества, кроме Него, Живого. Вечносущего; не овладевает Им ни дремота, ни сон; Ему принадлежит то, что в небесах, и то, что на земле. Кто заступится пред Ним, иначе как с Его позволения? Он знает то, что было до них, и то, что будет после них, а они постигают из Его знания лишь то, что Он пожелает. Трон Его объемлет собой небеса и землю, и не тяготит Его охрана их. Поистине, Он - Высокий, Великий.\n(Корова, 255.)",
+                        "translation": "Allah! There is none worthy of worship but He, the Ever-Living, the One Who sustains and protects all that exists. Neither slumber nor sleep overtakes Him. To Him belongs whatever is in the heavens and whatever is on the earth. Who is he that can intercede with Him except with His Permission? He knows what happens to them in this world, and what will happen to them in the Hereafter. And they will never compass anything of His Knowledge except that which He wills. His Throne extends over the heavens and the earth, and He feels no fatigue in guarding and preserving them. And He is the Most High, the Most Great. (Recite in Arabic after each prayer.) Reference: An-Nasa'i, 'Amalul-Yawm wal-Laylah (Hadith no. 100), also Ibn As-Sunni (no. 121). See also Al-Albani, Sahihul-Jami' As-Saghir 5/339 and Silsilatul-Ahadith As-Sahihah 2/697 (no. 972).",
                         "url": ""
                     },
                     {
                         "id": "Dua 11",
-                        "text": "«Ля иляха илля Ллаху вахда-ху ля шарикя ля-ху, ля-ху-ль-мульку ва ля-ху-ль-хамду юухйи ва йумиту ва хуа аля кул-ли шайин кадирун».",
+                        "text": "«Lā ilāha illallāh waḥdahu lā sharīka lah, lahu‘l-mulku wa lahu‘l-ḥamd yuḥyī wa yumīt wa huwa `alā kulli shay'in qadīr»",
                         "arabic": "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ عَشْرَ مَرّاتٍ بَعْدَ صَلاةِ الْمَغْرِبِوَالصُّبْحِ",
-                        "translation": "Нет истинного божества достойного поклонения, кроме одного лишь Аллаха, у которого нет сотоварища. Ему принадлежит владычество. Ему хвала. Он оживляет, и Он умерщвляет, и Он всё может.\n(эти слова следует повторять десять раз после утренней и закатной молитвы).",
+                        "translation": "(Recite ten times in Arabic after the Maghrib and Fajr prayers.) None has the right to be worshipped but Allah alone, Who has no partner. His is the dominion and His is the praise. He brings life and He causes death, and He is Able to do all things. (Reference: At-Tirmidhi 5/515, Ahmad 4/227. See its checking in Ibn Al-Qayyim Al-Jawziyyah's Zddul-Ma'ad 1/300)",
                         "url": ""
                     },
                     {
                         "id": "Dua 12",
-                        "text": "«Аллахумма, инни ас'алю-кя 'ильман нафи'ан, ва ризкан тайибан ва 'амалян мутакаббалян».\n (эти слова следует говорить после произнесения приветствия в конце утренней молитв)",
+                        "text": "«Allāhumma innī as'aluka `ilman nāfi`an, wa rizqan ṭayyiban, wa `amalam-mutaqabbala»",
                         "arabic": "(اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْماً نافِعاً، وَرِزْقاً طَيِّباً، وَعَمَلاً مُتَقَبَّلاً)",
-                        "translation": "О Аллах, поистине, я прошу у Тебя знания полезного, удела благого и такого дела, которое будет принято.",
+                        "translation": "[to be said after giving salam for the Fajr prayer.] O Allah, I ask You for knowledge which is beneficial, and sustenance which is good, and deeds which are acceptable. (Reference: Ibn Majah and others. See Sahih Ibn Majah 1/152 and Majma' Az-Zawa'id 10/111)",
                         "url": ""
                     }
                 ]
