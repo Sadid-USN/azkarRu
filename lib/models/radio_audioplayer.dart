@@ -15,32 +15,26 @@ class RadioAudioPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: AnimationLimiter(
-              child: ListView.builder(
-                  itemCount: listInfo.length,
-                  itemBuilder: (context, index) {
-                    return AnimationConfiguration.staggeredGrid(
-                      position: index,
-                      duration: const Duration(milliseconds: 400),
-                      columnCount: listInfo.length,
-                      child: ScaleAnimation(
-                        child: AudiPlyerCard(
-                          audioUrl: listInfo[index].audioUrl,
-                          image: listInfo[index].image,
-                          name: listInfo[index].name,
-                          subtitle: listInfo[index].subtitle,
-                        ),
-                      ),
-                    );
-                  }),
-            ),
-          ),
-        ],
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      child: AnimationLimiter(
+        child: ListView.builder(
+            itemCount: listInfo.length,
+            itemBuilder: (context, index) {
+              return AnimationConfiguration.staggeredGrid(
+                position: index,
+                duration: const Duration(milliseconds: 400),
+                columnCount: listInfo.length,
+                child: ScaleAnimation(
+                  child: AudiPlyerCard(
+                    audioUrl: listInfo[index].audioUrl,
+                    image: listInfo[index].image,
+                    name: listInfo[index].name,
+                    subtitle: listInfo[index].subtitle,
+                  ),
+                ),
+              );
+            }),
       ),
     );
   }
@@ -61,67 +55,74 @@ class AudiPlyerCard extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 16, right: 10, left: 10),
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 2,
-            offset: const Offset(0, 3),
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 16, right: 10, left: 10),
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 2,
+                offset: const Offset(0, 3),
+              ),
+            ],
+            color: const Color(0xffF2DFC7),
+            borderRadius: BorderRadius.circular(8),
           ),
-        ],
-        color: const Color(0xffF2DFC7),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: ListTile(
-        title: Text(
-          name,
-          style: TextStyle(
-              height: 1.5,
-              fontSize: 14,
-              color: textColor,
-              fontWeight: FontWeight.w700),
-        ),
-        subtitle: Text(
-          subtitle,
-          style: TextStyle(
-            fontSize: 14,
-            color: textColor,
+          child: ListTile(
+            title: Text(
+              name,
+              style: TextStyle(
+                  height: 1.5,
+                  fontSize: 14,
+                  color: textColor,
+                  fontWeight: FontWeight.w700),
+            ),
+            subtitle: Text(
+              subtitle,
+              style: TextStyle(
+                fontSize: 14,
+                color: textColor,
+              ),
+            ),
+            trailing: CircleAvatar(
+              radius: 25,
+              backgroundImage: NetworkImage(image),
+            ),
+            leading: Consumer<AudioController>(
+              builder: (context, audioController, child) => AnimateIcons(
+                startIcon: Icons.play_circle,
+                endIcon: audioController.url != audioUrl
+                    ? Icons.play_circle
+                    : Icons.pause,
+                controller: audioController.buttonController,
+                size: 45.0,
+                onStartIconPress: () {
+                  if (audioController.url != audioUrl) {
+                    audioController.stopPlaying();
+                  }
+                  audioController.playSound(audioUrl);
+                  return true;
+                },
+                onEndIconPress: () {
+                  audioController.stopPlaying();
+                  return true;
+                },
+                duration: const Duration(milliseconds: 250),
+                startIconColor: Colors.white,
+                endIconColor: Colors.white,
+                clockwise: false,
+              ),
+            ),
           ),
         ),
-        trailing: CircleAvatar(
-          radius: 25,
-          backgroundImage: NetworkImage(image),
+        const SizedBox(
+          height: 5,
         ),
-        leading: Consumer<AudioController>(
-          builder: (context, audioController, child) => AnimateIcons(
-            startIcon: Icons.play_circle,
-            endIcon: audioController.url != audioUrl
-                ? Icons.play_circle
-                : Icons.pause,
-            controller: audioController.buttonController,
-            size: 45.0,
-            onStartIconPress: () {
-              if (audioController.url != audioUrl) {
-                audioController.stopPlaying();
-              }
-              audioController.playSound(audioUrl);
-              return true;
-            },
-            onEndIconPress: () {
-              audioController.stopPlaying();
-              return true;
-            },
-            duration: const Duration(milliseconds: 250),
-            startIconColor: Colors.white,
-            endIconColor: Colors.white,
-            clockwise: false,
-          ),
-        ),
-      ),
+      ],
     );
   }
 }
