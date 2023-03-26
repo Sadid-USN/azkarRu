@@ -14,7 +14,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import '../data/titles.dart';
 import '../generated/locale_keys.g.dart';
 import '../widgets/drawer_widget.dart';
 import 'chapter_screen.dart';
@@ -179,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               Center(
                                                 child: Text(
-                                                  titles[index].tr(),
+                                                  books[index].name.tr(),
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontSize: 14.sp,
