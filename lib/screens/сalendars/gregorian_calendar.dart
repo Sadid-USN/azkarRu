@@ -20,6 +20,7 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
+        backgroundColor: const Color(0xffF2DFC7),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -28,11 +29,8 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
               Icons.arrow_back_ios,
               color: iconColor,
             )),
-        flexibleSpace: Container(
-          decoration: mainScreenGradient,
-        ),
-        elevation: 0.0,
-        title: Text('Григорианский календарь',
+        elevation: 3.0,
+        title: Text('Календарь',
             style: TextStyle(fontSize: 15.sp, color: titleAbbBar)),
         centerTitle: true,
       ),

@@ -6,7 +6,7 @@ BoxDecoration mainScreenGradient = const BoxDecoration(
   begin: Alignment.topLeft,
   end: Alignment.bottomLeft,
   colors: [
-    Color(0xffF3EEE2),
+    Color(0xffF2DFC7),
     Color(0xffF3EEE2),
   ],
 ));
@@ -17,7 +17,7 @@ BoxDecoration searchScreenGradient = const BoxDecoration(
       begin: Alignment.topLeft,
       end: Alignment.bottomLeft,
       colors: [
-        Color(0xffECDBB8),
+        Color(0xffF2DFC7),
         Color(0xffECDBB8),
       ],
     ));

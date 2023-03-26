@@ -13,13 +13,18 @@ class AudioController extends ChangeNotifier {
   String? url;
 
   void playSound(String url) async {
-    // ignore: unrelated_type_equality_checks
+    if (this.url != url) {
+      await stopPlaying();
+    }
+
     if (!isPlaying) {
       var result = await audioPlayer.play(url);
       if (result == 1) {
         isPlaying = true;
+        this.url = url;
       }
     }
+
     audioPlayer.onDurationChanged.listen((event) {
       duration = event;
     });
@@ -30,14 +35,15 @@ class AudioController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void stopPlaying() async {
+  Future<void> stopPlaying() async {
     if (isPlaying) {
-      var reslult = await audioPlayer.stop();
-      if (reslult == 1) {
+      var result = await audioPlayer.stop();
+      if (result == 1) {
         isPlaying = false;
+        url = null;
       }
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   void seekAudio(Duration durationToSeek) {

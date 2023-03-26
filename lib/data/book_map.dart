@@ -1,4 +1,3 @@
-
 class Book {
   String? name;
   String? image;

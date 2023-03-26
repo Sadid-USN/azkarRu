@@ -86,7 +86,7 @@ class _TextScreenState extends State<TextScreen> {
     });
   }
 
-  double _fontSize = 16.sp;
+  double _fontSize = 14.sp;
 
   AnimateIconController _copyController = AnimateIconController();
   final AnimateIconController _buttonController = AnimateIconController();
@@ -117,17 +117,20 @@ class _TextScreenState extends State<TextScreen> {
   ) {
     return Column(
       children: [
-        Slider(
-          activeColor: Colors.white,
-          inactiveColor: Colors.grey[800],
-          value: _fontSize,
-          onChanged: (double newSize) {
-            setState(() {
-              _fontSize = newSize;
-            });
-          },
-          max: 30.sp,
-          min: 16.sp,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: Slider(
+            activeColor: Colors.white,
+            inactiveColor: Colors.grey[800],
+            value: _fontSize,
+            onChanged: (double newSize) {
+              setState(() {
+                _fontSize = newSize;
+              });
+            },
+            max: 25.sp,
+            min: 14.sp,
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -281,7 +284,6 @@ class _TextScreenState extends State<TextScreen> {
       child: ChangeNotifierProvider(
         create: (context) => AudioController(),
         child: Scaffold(
-          backgroundColor: Colors.green,
           bottomSheet: ClayContainer(
             spread: 0.0,
             curveType: CurveType.none,
@@ -397,14 +399,14 @@ class _TextScreenState extends State<TextScreen> {
                 color: iconColor,
               ),
             ),
-            elevation: 0.0,
+            elevation: 3.0,
             title: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Text(
                 '${widget.chapter?.name}',
                 style: TextStyle(
                     color: textColor,
-                    fontSize: 16.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold),
               ),
             ),

@@ -31,7 +31,6 @@ class MyAudioPlayer extends StatelessWidget {
             size: 40.0,
             onStartIconPress: () {
               AudioController().playSound(chapter!.texts![0].url!);
-              // playSound(widget.texts![0].url!);
 
               return true;
             },

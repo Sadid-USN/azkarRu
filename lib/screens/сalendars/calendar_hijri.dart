@@ -27,11 +27,8 @@ class _HijriPickerScreenState extends State<HijriPickerScreen> {
                 Icons.arrow_back_ios,
                 color: iconColor,
               )),
-          flexibleSpace: Container(
-            decoration: mainScreenGradient,
-          ),
-          elevation: 0.0,
-          backgroundColor: gradientStartColor,
+          elevation: 3.0,
+          backgroundColor: const Color(0xffF2DFC7),
           title: Text('Каленьдарь хиджри',
               style: TextStyle(fontSize: 15.sp, color: titleAbbBar)),
           centerTitle: true,

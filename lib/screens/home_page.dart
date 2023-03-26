@@ -70,6 +70,7 @@ class _HomePageState extends State<HomePage> {
           drawer: const DrawerModel(),
           // extendBodyBehindAppBar: true,
           appBar: AppBar(
+            iconTheme: Theme.of(context).iconTheme,
             title: Consumer<GlobalController>(
               builder: (context, controller, child) => Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +102,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             centerTitle: true,
-            elevation: 0.0,
+            elevation: 3.0,
             backgroundColor: const Color(0xffF2DFC7),
           ),
           body: Container(
@@ -127,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                         curve: Curves.linearToEaseOut,
                         scrollDirection: Axis.horizontal,
                         autoplayDisableOnInteraction: false,
-                        itemCount: books.length,
+                        itemCount: books?.length ?? 0,
                         itemWidth: 67.w,
                         layout: SwiperLayout.STACK,
                         pagination: const SwiperPagination(
@@ -267,7 +268,7 @@ class _HomePageState extends State<HomePage> {
           bottomSheet: Consumer<GlobalController>(
             builder: (context, bottomBar, child) => CurvedNavigationBar(
                 color: const Color(0xffF2DFC7),
-                buttonBackgroundColor: Colors.white,
+                buttonBackgroundColor: const Color(0xffF2DFC7),
                 height: 7.h,
                 index: bottomBar.selectedIndex,
                 backgroundColor: const Color(0xffF3EEE2),

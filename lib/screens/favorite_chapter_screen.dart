@@ -2,11 +2,9 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_map.dart';
-import 'package:avrod/data/book_functions.dart';
 import 'package:avrod/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -28,6 +26,7 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
     final books = Provider.of<List<Book>>(context);
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: const Color(0xffF2DFC7),
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -36,17 +35,12 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
                 Icons.arrow_back_ios,
                 color: iconColor,
               )),
-          elevation: 0.0,
-          flexibleSpace: Container(
-            decoration: mainScreenGradient,
-          ),
+          elevation: 3.0,
           centerTitle: true,
           title: Text(
             'Избранные главы',
             style: TextStyle(
-                fontSize: 15.sp,
-                color: titleAbbBar,
-                fontWeight: FontWeight.bold),
+                fontSize: 14.sp, color: textColor, fontWeight: FontWeight.bold),
           ),
         ),
         // ignore: avoid_unnecessary_containers
