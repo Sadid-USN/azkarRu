@@ -72,51 +72,70 @@ class AudiPlyerCard extends StatelessWidget {
             color: const Color(0xffF2DFC7),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: ListTile(
-            title: Text(
-              name,
-              style: TextStyle(
-                  height: 1.5,
-                  fontSize: 14,
-                  color: textColor,
-                  fontWeight: FontWeight.w700),
-            ),
-            subtitle: Text(
-              subtitle,
-              style: TextStyle(
-                fontSize: 14,
-                color: textColor,
+          child: Stack(
+            children: [
+              ListTile(
+                title: Text(
+                  name,
+                  style: TextStyle(
+                      height: 1.5,
+                      fontSize: 14,
+                      color: textColor,
+                      fontWeight: FontWeight.w700),
+                ),
+                subtitle: Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: textColor,
+                  ),
+                ),
+                trailing: CircleAvatar(
+                  radius: 25,
+                  backgroundImage: NetworkImage(image),
+                ),
+                leading: Consumer<AudioController>(
+                  builder: (context, audioController, child) => AnimateIcons(
+                    startIcon: Icons.play_circle,
+                    endIcon: audioController.url != audioUrl
+                        ? Icons.play_circle
+                        : Icons.pause,
+                    controller: audioController.buttonController,
+                    size: 45.0,
+                    onStartIconPress: () {
+                      if (audioController.url != audioUrl) {
+                        audioController.stopPlaying();
+                      }
+                      audioController.playSound(audioUrl);
+                      return true;
+                    },
+                    onEndIconPress: () {
+                      audioController.stopPlaying();
+                      return true;
+                    },
+                    duration: const Duration(milliseconds: 250),
+                    startIconColor: Colors.white,
+                    endIconColor: Colors.white,
+                    clockwise: false,
+                  ),
+                ),
               ),
-            ),
-            trailing: CircleAvatar(
-              radius: 25,
-              backgroundImage: NetworkImage(image),
-            ),
-            leading: Consumer<AudioController>(
-              builder: (context, audioController, child) => AnimateIcons(
-                startIcon: Icons.play_circle,
-                endIcon: audioController.url != audioUrl
-                    ? Icons.play_circle
-                    : Icons.pause,
-                controller: audioController.buttonController,
-                size: 45.0,
-                onStartIconPress: () {
-                  if (audioController.url != audioUrl) {
-                    audioController.stopPlaying();
-                  }
-                  audioController.playSound(audioUrl);
-                  return true;
-                },
-                onEndIconPress: () {
-                  audioController.stopPlaying();
-                  return true;
-                },
-                duration: const Duration(milliseconds: 250),
-                startIconColor: Colors.white,
-                endIconColor: Colors.white,
-                clockwise: false,
-              ),
-            ),
+              // Positioned(
+              //   top: 10,
+              //   right: 80,
+              //   child: Consumer<AudioController>(
+              //     builder: (context, value, child) => IconButton(
+              //         onPressed: () {
+              //           value.skipTrack();
+              //         },
+              //         icon: const Icon(
+              //           Icons.skip_next,
+              //           color: Colors.white,
+              //           size: 40,
+              //         )),
+              //   ),
+              // ),
+            ],
           ),
         ),
         const SizedBox(

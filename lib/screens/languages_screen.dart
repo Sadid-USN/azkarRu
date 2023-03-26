@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:avrod/colors/colors.dart';
-import 'package:avrod/screens/home_page.dart';
 
 import '../generated/locale_keys.g.dart';
 
@@ -44,10 +43,7 @@ class LangugesPage extends StatelessWidget {
               title: "🇺🇸 English",
               onPressed: () {
                 context.setLocale(const Locale('en'));
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return const HomePage();
-                }));
+                Navigator.of(context).pop();
               },
             ),
             const SizedBox(
@@ -57,10 +53,7 @@ class LangugesPage extends StatelessWidget {
               title: '🇷🇺  Русский',
               onPressed: () {
                 context.setLocale(const Locale('ru'));
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return const HomePage();
-                }));
+                Navigator.of(context).pop();
               },
             ),
           ],

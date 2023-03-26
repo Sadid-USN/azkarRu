@@ -1,4 +1,3 @@
-import 'package:avrod/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -27,10 +26,7 @@ class RadioPlayerScreen extends StatelessWidget {
                 builder: (context, value, child) => IconButton(
                   onPressed: () {
                     value.stopPlaying();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const HomePage();
-                    }));
+                    Navigator.of(context).pop();
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios,

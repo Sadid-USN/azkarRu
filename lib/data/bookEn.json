@@ -917,7 +917,7 @@
             {
                 "id": 32,
                 "listimage": "https://images.firstpost.com/wp-content/uploads/2019/08/ramadan-3461512_1024.jpg",
-                "name": "Dua о прощении\n(Сайидуль истигфар)",
+                "name": "Dua Sayyidul istighfar",
                 "texts": [
                     {
                         "id": "Dua 1",
@@ -931,7 +931,7 @@
         ]
     },
     {
-        "name": "Поминания Аллаха перед сном",
+        "name": "Dua before sleeping",
         "image": "images/sleep.png",
         "chapters": [
             {
