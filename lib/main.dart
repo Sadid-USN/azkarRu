@@ -18,7 +18,7 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   NotificationService().initNotification();
-  // await Firebase.initializeApp();
+
   await Hive.initFlutter();
   await Hive.openBox(FAVORITES_BOX);
 

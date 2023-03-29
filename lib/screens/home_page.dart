@@ -1,4 +1,6 @@
 // @dart=2.9
+import 'dart:math';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:avrod/colors/colors.dart';
@@ -31,6 +33,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Chapter chapter;
   PageController _pageConroller;
+
+  NotificationService notificationService = NotificationService();
+  Random random = Random();
   @override
   void initState() {
     super.initState();
@@ -39,8 +44,9 @@ class _HomePageState extends State<HomePage> {
     _pageConroller = PageController(initialPage: 0, viewportFraction: 0.8);
 
     tz.initializeTimeZones();
-    NotificationService().dailyAtNotification(1, "Здоровое сердце!",
-        "О Аллах, поистине, я молю Тебя сделать моё сердце здравым!", 1);
+
+    notificationService.dailyAtNotification(1,
+        titleList[random.nextInt(11) + 1], bodyList[random.nextInt(11) + 1], 1);
   }
 
   // final controller = PageController(viewportFraction: 12.0, keepPage: true);
@@ -178,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               Center(
                                                 child: Text(
-                                                  books[index].name.tr(),
+                                                  books[index].name,
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontSize: 14.sp,
