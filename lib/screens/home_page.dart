@@ -1,7 +1,6 @@
 // @dart=2.9
 import 'dart:math';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
@@ -16,6 +15,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import '../data/titles.dart';
 import '../generated/locale_keys.g.dart';
 import '../widgets/drawer_widget.dart';
 import 'chapter_screen.dart';
@@ -31,7 +31,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Chapter chapter;
+  Chapters chapter;
   PageController _pageConroller;
 
   NotificationService notificationService = NotificationService();
@@ -45,8 +45,11 @@ class _HomePageState extends State<HomePage> {
 
     tz.initializeTimeZones();
 
-    notificationService.dailyAtNotification(1,
-        titleList[random.nextInt(11) + 1], bodyList[random.nextInt(11) + 1], 1);
+    final randomIndex = random.nextInt(10) + 1;
+    final title = titleList[randomIndex];
+    final body = bodyList[randomIndex];
+
+    notificationService.dailyAtNotification(1, title, body, 1);
   }
 
   // final controller = PageController(viewportFraction: 12.0, keepPage: true);
@@ -60,8 +63,11 @@ class _HomePageState extends State<HomePage> {
     Colors.deepOrange,
   ];
 
-  final colorizeTextStyle =
-      const TextStyle(fontSize: 16, fontWeight: FontWeight.w900);
+  final colorizeTextStyle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w900,
+    color: textColor,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -76,40 +82,33 @@ class _HomePageState extends State<HomePage> {
           // extendBodyBehindAppBar: true,
           appBar: AppBar(
             iconTheme: Theme.of(context).iconTheme,
-            title: Consumer<GlobalController>(
-              builder: (context, controller, child) => Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Spacer(),
-                  AnimatedTextKit(
-                    totalRepeatCount: 2,
-                    animatedTexts: [
-                      ColorizeAnimatedText(
-                        LocaleKeys.avrod.tr(),
-                        textStyle: colorizeTextStyle,
-                        colors: colorizeColors,
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const LangugesPage();
-                        }));
-                      },
-                      icon: Icon(
-                        Icons.language,
-                        color: textColor,
-                      )),
-                ],
-              ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Spacer(),
+                Text(
+                  LocaleKeys.avrod.tr(),
+                  style: colorizeTextStyle,
+                ),
+                const Spacer(),
+                IconButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return const LangugesPage();
+                      }));
+                    },
+                    icon: Icon(
+                      Icons.language,
+                      color: textColor,
+                    )),
+              ],
             ),
             centerTitle: true,
             elevation: 3.0,
             backgroundColor: const Color(0xffF2DFC7),
           ),
+
           body: Container(
             height: currentHeight,
             width: currentWidth,
@@ -152,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                                   pageBuilder: (context, a, b) {
                                     return ChapterScreen(
                                       bookIndex: index,
-                                      title: books[index].name,
+                                      title: titles[index],
                                     );
                                   },
                                 ),
@@ -184,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               Center(
                                                 child: Text(
-                                                  books[index].name,
+                                                  titles[index].tr(),
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontSize: 14.sp,
@@ -254,6 +253,18 @@ class _HomePageState extends State<HomePage> {
                                       height: 35.h,
                                       width: 80.w,
                                     ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 80,
+                                  right: 40,
+                                  child: Text(
+                                    "${books[index].id + 1}",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 25.sp,
+                                        color: textColor,
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               ],

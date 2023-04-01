@@ -13,7 +13,7 @@ import 'text_screen.dart';
 
 class FavoriteChaptersSceen extends StatefulWidget {
   const FavoriteChaptersSceen({Key key, this.chapter}) : super(key: key);
-  final Chapter chapter;
+  final Chapters chapter;
 
   @override
   State<FavoriteChaptersSceen> createState() => _FavoriteChaptersSceenState();
@@ -49,15 +49,15 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
           child: ValueListenableBuilder(
             valueListenable: Hive.box(FAVORITES_BOX).listenable(),
             builder: (context, Box box, child) {
-              List<Chapter> chapters = [];
+              List<Chapters> chapters = [];
               for (Book book in books) {
                 chapters.addAll(book.chapters);
               }
               final List<dynamic> likedChapterIds = box.keys.toList();
 
               final likedChapters = chapters
-                  .where(
-                      (Chapter chapter) => likedChapterIds.contains(chapter.id))
+                  .where((Chapters chapter) =>
+                      likedChapterIds.contains(chapter.id))
                   .toList();
 
               // ignore: avoid_unnecessary_containers

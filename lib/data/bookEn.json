@@ -1,5 +1,5 @@
 [
-    {
+    {    "id": 0,
         "name": "Beginning of the day",
         "image": "images/morning.png",
         "chapters": [
@@ -236,7 +236,7 @@
             }
         ]
     },
-    {
+    {    "id": 1,
         "name": "Salah prayers",
         "image": "images/duasalah.png",
         "chapters": [
@@ -811,7 +811,7 @@
             }
         ]
     },
-    {
+    {    "id": 2,
         "name": "Morning and evening azkars",
         "image": "images/silhouette.png",
         "chapters": [
@@ -930,7 +930,7 @@
             }
         ]
     },
-    {
+    {    "id": 3,
         "name": "Dua before sleeping",
         "image": "images/sleep.png",
         "chapters": [
@@ -1069,7 +1069,7 @@
             }
         ]
     },
-    {
+    {    "id": 4,
         "name": "Anxiety and sadness",
         "image": "images/sadness.png",
         "chapters": [
@@ -1253,7 +1253,7 @@
             {
                 "id": 43,
                 "listimage": "https://images.unsplash.com/photo-1413847394921-b259543f4872?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                "name": "Что следует говорить, когда человека овладевает страх",
+                "name": "Dua when a person is overcome by fear",
                 "texts": [
                     {
                         "id": "Dua 1",
@@ -1266,20 +1266,20 @@
             }
         ]
     },
-    {
-        "name": "Еда и питьё",
+    {    "id": 5,
+        "name": "Food and beverage",
         "image": "images/food.png",
         "chapters": [
             {
                 "id": 44,
                 "listimage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzHcLH7iqhUd-3LOZA9A20BXEghCkhqK4ojM8c4VdkhERGxQdMu2Tx5if9HGLaJZiErAI&usqp=CAU",
-                "name": "Dua перед разговением",
+                "name": "Dua upon breaking fast",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "«Сообщается, что Ибн ‘Умар, да будет доволен Аллах ими обоими, сказал: пророк (ﷺ), [перед] ифтаром (разговением) говорил:\n«Захаба-з-зама’у, ва-бталляти-ль-‘уруку, ва сабата-ль-аджру ин ша’а-Ллах»",
-                        "arabic": "عن ابن عمر رضي اللّه عنهما قال‏:‏ كان النبيّ صلى اللّه عليه وسلم إذا أفطر قال‏:‏ ‏»‏ذَهَبَ الظَّمأُ، وابْتَلَّتِ العُرُوقُ، وَثَبَتَ الأجْرُ إِنْ شاءَ اللَّهُ تَعالى‏» ‏‏‏",
-                        "translation": "Ушла жажда, жилы наполнились влагой и награда уже ждёт, если будет угодно Аллаху.",
+                        "text": "«Dhahabaẓ-ẓama', wabtallati ‘l-`urūq, wa thabata ‘l-'ajru in shā Allāh»",
+                        "arabic": "عن ابن عمر رضي اللّه عنهما : كان النبيّ صلى اللّه عليه وسلم إذا أفطر :» ذَهَبَ الظَّمأُ، وابْتَلَّتِ العُرُوقُ، وَثَبَتَ الأجْرُ إِنْ شاءَ اللَّهُ تَعالى » ",
+                        "translation": "The thirst is gone, the veins are moistened, and the reward is confirmed, if Allah wills. (Reference: Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209)",
                         "url": "https://ia802708.us.archive.org/8/items/Hesn_Al_Moslem_uP_bY_mUSLEm/Hesn_uP_bY_mUSLEm-069.mp3"
                     }
                 ]
@@ -1287,13 +1287,13 @@
             {
                 "id": 45,
                 "listimage": "https://www.ucf.edu/news/files/2021/04/Ramadan-Celebration.jpg",
-                "name": "Dua перед едой и после питья молока",
+                "name": "Dua Before eating",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "«Передают со слов Умм Кульсум, что ‘Аиша (да будет доволен ею Аллах) сказала: – Посланник Аллаха (ﷺ), сказал: «Когда кто—нибудь из вас приступает к еде, пусть скажет: “Бисмиллях” (с именем Аллаха) , а если он забудет сказать (это) в начале (еды), пусть скажет:\n«Бисми—Лляхи фи аввалихи ва ахирихи»\nЧерез этот же иснад сообщается, что ‘Аиша (да будет доволен ею Аллах) сказала: – (Однажды), когда Пророк (ﷺ), трапезничал в кругу шести своих сподвижников, явился какой—то бедуин и начал есть по два кусочка (за раз), и тогда Посланник Аллаха сказал: «Поистине, если бы он сказал: “С именем Аллаха”/Бисми-Ллях/, вам хватило бы (этой еды)»\nЭтот хадис передал\nат-Тирмизи (1858).\nАхмад (6/143, 207-208, 246),\nШейх аль-Албани назвал хадис достоверным. См. «Сахих ат-Тирмизи» (1858),",
+                        "text": "When anyone of you begins eating, say: «Bismillāh». And if you forget then when you remember, say: «Bismillāhi fī awwalihi wa ākhirih».",
                         "arabic": "عَنْ عَائِشَةَ قَالَتْ: قَالَ رَسُولُ اللهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: « إِذَا أَكَلَ أَحَدُكُمْ طَعَامًا فَلْيَقُلْ: بِسْمِ اللهِ، فَإِنْ نَسِيَ فِي أَوَّلِهِ فَلْيَقُلْ: بِسْمِ اللهِ فِي أَوَّلِهِ وَآخِرِهِ ».",
-                        "translation": "С именем Аллаха в начале и конце её!",
+                        "translation": "With the Name of Allah, With the Name of Allah, in the beginning, and in the end. (Reference: Abu Dawud 3/347, At-Tirmidhi 4/288. See Al- Albani's Sahih At-Tirmidhi 2/167)",
                         "url": "https://ia802708.us.archive.org/8/items/Hesn_Al_Moslem_uP_bY_mUSLEm/Hesn_uP_bY_mUSLEm-070.mp3"
                     }
                 ]
@@ -1301,18 +1301,18 @@
             {
                 "id": 46,
                 "listimage": "https://c0.wallpaperflare.com/preview/610/954/476/berry-bowl-closeup-cultural.jpg",
-                "name": "Dua после еды",
+                "name": "Dua upon completing the meal",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "«Передают со слов Абу Умамы, да будет доволен им Аллах, что после того как скатерть с едой убирали, пророк (ﷺ), обычно говорил:\n«Аль-хамду ли-Лляхи хамдан кaсиран, тайибан, мубаракaн фи-хи, гайра макфийин, ва ля мувадда‘ин, ва ля мустагнан ‘ан-ху! Рабба-на!»\nЭтот хадис приводят аль-Бухари 5458, Абу Дауд 3849, ат-Тирмизи 3456,.",
+                        "text": "«Alhamdu lillāhi ḥamdan kathīran tayyiban mubārakan fīh, ghayra makfiyyin wa lā muwadda`in, wa lā mustaghnan `anhu Rabbanā»",
                         "arabic": "عن أبي أُمامةَ رضي اللّه عنه أن النبيّ صلى اللّه عليه وسلم كان إذا رفع مائدته قال‏:‏ ‏»‏الحَمْدُ لِلَّهِ كَثِيراً طَيِّباً مُبارَكاً فِيهِ غَيْرَ مَكْفيٍّ وَلا مُوَدَّعٍ وَلا مُسْتَغْنىً عَنْهُ رَبَّنا‏»‏‏‏",
-                        "translation": "Хвала Аллаху, (хвала) многая, благая и благословенная, (хвала, которой никогда) не будет достаточно, (хвала, которую) не следует прерывать, (хвала, без которой нам) не обойтись! (Он) – Господь наш!\nВ другой версии этого хадиса со слов Абу Умамы сообщается, что пророк (ﷺ), после завершения трапезы сказал:\nХвала Аллаху, Который удовлетворил наши потребности и утолил нашу жажду! Невозможно ни отплатить (за Твои милости), ни отрицать их!\nАль-хамду ли-Лляхи аллязи кaфа-на ва арва-на гайра макфийин ва ля макфурин!».",
+                        "translation": "All praise is to Allah, praise in abundance, good and blessed. It cannot [be compensated for, nor can it] be left, nor can it be done without, our Lord. (Reference: Al-Bukhari 6/214, At-Tirmidhi 5/507)",
                         "url": ""
                     },
                     {
                         "id": "Dua 2",
-                        "text": "«Передают со слов ‘Абдуллаха бин ‘Аббаса, да будет доволен Аллах ими обоими, что посланник Аллаха (ﷺ), сказал: – Пусть тот, кто съест что-либо скажет:\n«Аллахумма, барик ля-на фи-хи ва ат‘ым-на хайран мин-ху»\nИ пусть тот, кому Аллах пошлёт молоко, скажет:\n«Аллахумма, барик ля-на фи-хи ва зид-на мин-ху»\nибо, поистине, ничто, кроме молока, не может служить заменой и еде, и питью.\nЭтот хадис приводят Абу Дауд 3730, ан-Насаи в «‘Амаль аль-йаум ва-л-лейля» 286 и 287,Ибн аль-Къаййим, хафиз Ибн Хаджар и шейх аль-Албани назвали хадис хорошим. См. «Задуль-ма’ад» 2/366",
+                        "text": "Whomever Allah has given food, should say: «Allāhumma bārik lanā fīhi, wa aṭ`imnā khayran minh».  Whomever Allah has given milk to drink, should say : «Allāhumma bārik lanā fīhi, wa zidnā minh».",
                         "arabic": "عن ابن عباس رضي اللّه عنهما قال‏:‏ قال رسول اللّه صلى اللّه عليه وسلم‏:‏ ‏«‏إذَا أكَلَ أحَدُكُمْ طَعاماً‏»‏ وفي رواية ابن السني ‏»‏مَنْ أطْعَمَهُ اللَّهُ طَعاماً فَلْيَقُلِ‏:‏ اللَّهُمَّ بارِكْ لَنا فِيهِ وأطْعِمْنا خَيْراً مِنْهُ، وَمَنْ سَقاهُ اللَّهُ تعالى لَبَناً فَلْيَقُلِ‏:‏ اللَّهُمَّ بارِكْ لَنا فِيهِ وَزِدْنا مِنْهُ، فإنَّهُ لَيْسَ شَيْءٌ يُجْزِىءُ منَ الطَّعامِ وَالشَّرَابِ غَيْرَ اللَّبَنِ‏»‏. قال الترمذي‏:‏ حديث حسن‏ .‏ ‏",
                         "translation": "О Аллах, сделай это благословенным для нас и накорми нас тем, что лучше этого.\nО Аллах, сделай его благословенным для нас и добавь нам этого",
                         "url": ""
@@ -1321,14 +1321,14 @@
                         "id": "Dua 3",
                         "text": "«Сообщается, что Абу Аййуб Халид бин Зайд аль-Ансари, да будет доволен им Аллах, сказал: – После еды или питья посланник Аллаха (ﷺ), обычно говорил:\n«Аль-хамду ли-Лляхи аллязи ат‘ама, ва сака, ва  саввага-ху, ва джа‘аля ля-ху махраджан».\nЭтот хадис приводят Абу Дауд 3851, ан-Насаи в «‘Амаль аль-йаум ва-л-лейля» 285, Шейх аль-Албани назвал хадис достоверным. См. «Сильсиля ас-сахиха» 261.",
                         "arabic": "عن أبي أيوب خالد بن زيد الأنصاري رضي اللّه عنه قال‏:‏ كان رسول اللّه صلى اللّه عليه وسلم إذا أكَلَ أو شَرِبَ قال‏:‏ ‏»‏الحَمْدُ لِلَّهِ الَّذي أطْعَمَ وَسَقَى، وَسَوَّغَهُ، وَجَعَلَ لَهُ مَخْرَجاً‏»‏‏.‏",
-                        "translation": "Хвала Аллаху, Который накормил и напоил (нас этим) и облегчил вход (для каждого куска пищи и глотка воды), и устроил (для этого) выход.",
+                        "translation": "O Allah, bless us in it and provide us with better than it. O Allah, bless us in it and give us more of it. (Reference: At-Tirmidhi 5/506. See also Al-Albani, Sahih At-Tirmidhi 3/158)",
                         "url": ""
                     },
                     {
                         "id": "Dua 4",
-                        "text": "«Сообщается со слов таби'ина по имени ‘Абд ар-Рахман бин Джубайр, о том, что один человек, который прислуживал пророку (ﷺ), в течение восьми лет, сообщил ему, что он слышал, как пророк (ﷺ), произносил слова: «С именем Аллаха /Би-сми-Ллях/», когда ему подавали еду, а после еды он говорил:\n«Аллахумма, ат‘амта, ва сакайта, ва агнайта, ва акнайта, ва хадайта, ва ахсанта ва ля-кя-ль-хамду ‘аля ма а‘тайта»\nЭтот хадис с хорошим иснадом приводят Ахмад 4/62 и 5/375, ан-Насаи в «Сунан аль-Кубра» 6898,афиз Ибн Хаджар, шейх аль-Албани, Шу’айб аль-Арнаут и Салим аль-Хиляли назвали хадис достоверным. См. «Натаидж аль-афкар» 2/280",
-                        "arabic": "عن عبد الرحمن بن جُبير التابعي؛ بأنه حدَّثه رجلٌ خدمَ النبيَّ صلى اللّه عليه وسلم ثماني سنين أنه كان يسمعُ النبيَّ صلى اللّه عليه وسلم إذا قَرَّبَ إليه طعاماً يقول‏:‏ ‏«‏باسم اللَّهِ‏»‏ فإذا فَرغَ من طعامه قال‏:‏ ‏»‏ اللَّهُمَّ أطْعَمْتَ وَسَقَيْتَ وَأغْنَيْتَ وأقْنَيْتَ وَهَدَيْتَ وأحْسَنْتَ، فَلَكَ الحَمْدُ على ما أعْطَيْتَ ‏»",
-                        "translation": "О Аллах, ты накормил, напоил, избавил (от нужды), наделил, даровал и оказал благодеяние, хвала же Тебе за то, что Ты дал (мне).",
+                        "text": "Narrated a tabi'in named 'Abd ar-Rahman bin Jubayr, that a man who served the Prophet (ﷺ) for eight years informed him that he heard the Prophet (ﷺ) say Bismillah when food was presented to him, and after eating he would say:Allahumma: Al-laa-hum-ma at'amta: a-tam-ta wa: wa suqayta: su-qa-yta ughniyta: ugh-ni-yta wa: wa aqniyta: aq-ni-yta wa: wa hudayta: hu-da-yta wa: wa ahsanta: ahsan-ta fala: fa-la ka: ka alhamdu: al-ham-du 'ala: 'a-la ma: ma a'tayt: a-'tayt",
+                        "arabic": "عَنْ عَبْدِ الرَّحْمَنِ بْنِ جُبَيْرِ التّابِعي ؛ بِأَنَّهُ حَدَّثَهُ رَجُلٌ خَدَمَ النَّبيُّ صَلَّى اللَّهُ عَلَيْهُ وَسَلَّمَ ثَمانيَ سِنِينَ أَنَّهُ كَانَ يُسْمِعُ النَّبيُّ صَلَّى اللَّهُ عَلَيْهُ وَسَلَّمَ إِذَا قُرْبَ إِلَيْهُ طَعَامًا يَقُولُ : « بِاسْمِ اللَّهِ » فَإِذَا فَرَغَ مِنْ طَعامِهِ قَالَ : » اللَّهُمَّ أَطْعَمَتْ وَسُقيْتَ وَأُغْنيُتْ وأَقْنيُتْ وَهُديُتْ وَأَحْسَنَتْ ، فَلَكَ الحَمْدُ عَلَى مَا أَعْطَيُتْ »",
+                        "translation": "In the name of Allah. O Allah, you have fed us, given us drink, provided us with wealth, sufficed us and guided us, and we praise You for what You have given us. This hadith with a good chain of narration is mentioned in Ahmad 4/62 and 5/375, an-Nasa'i in Sunan al-Kubra 6898, and Hafiz Ibn Hajar, Sheikh al-Albani, Shu'aib al-Arna'ut, and Salim al-Hilali have declared it to be authentic. See Nata'idj al-Afkar 2/280.",
                         "url": ""
                     }
                 ]
@@ -1336,13 +1336,13 @@
             {
                 "id": 47,
                 "listimage": "https://images.squarespace-cdn.com/content/v1/586d154f03596e5605562ea7/1587140583082-QWZELW7ZQ139NLXTRQSN/muslim+prayer+coronavirus+social+distancing?format=1000w",
-                "name": "Dua за того, кто угостил едой",
+                "name": "Dua of the guest for the host",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "«Абдуллах ибн Буср рассказывал, как однажды его отец приготовил для Пророка (ﷺ), угощенье и пригласил к себе в гости. Посланник Аллаха (ﷺ), принял приглашение, а когда завершил трапезу, сказал:\n«Аллахумма-гфир ляхум ва-рхамхум ва-барик ляхум фима разактахум».",
+                        "text": "«Allāhumma bārik lahum fī mā razaqtahum, wagh’fir lahum warḥamhum».",
                         "arabic": "اللَّهُمَّ بَارِكْ لَهُمْ فِيمَا رَزَقْتَهُم، وَاغْفِرْ لَهُمْ وَارْحَمْهُمْ",
-                        "translation": "О Аллах! Прости их, помилуй и благослови их в том, чем Ты их наделил!",
+                        "translation": "O Allah, bless them in what You have provided for them, and forgive them and have mercy on them. (Reference: Muslim 3/1615)",
                         "url": ""
                     }
                 ]
@@ -1350,13 +1350,13 @@
             {
                 "id": 48,
                 "listimage": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGRyaW5rJTIwd2F0ZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-                "name": "Dua за того, кто напоил водой",
+                "name": "Dua to one who intends to give food or drink",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "«Аллахумма ат’им ман ат’амани, ва-ски ман сакани».",
+                        "text": "«Allāhumma aṭ`im man aṭ`amanī wasqi man saqānī».",
                         "arabic": "اللَّهُمَّ أَطْعِمْ مَنْ أَطْعَمَنِي، وَاسْقِ مَنْ سَقَانِي",
-                        "translation": "О Аллах! Накорми того, кто накормит меня, и напои того, кто напоит меня!",
+                        "translation": "O Allah, feed the one who has fed me, and give drink to the one who has given me drink. (Reference: Muslim 3/126)",
                         "url": ""
                     }
                 ]
@@ -1364,13 +1364,13 @@
             {
                 "id": 49,
                 "listimage": "https://media.istockphoto.com/photos/family-ready-for-ftar-meal-in-ramadan-picture-id956134334?k=20&m=956134334&s=612x612&w=0&h=h-TY0VVV0xLxoJuYX-uG4q5NVn78ctsXQyOQSeq6Qcw=",
-                "name": "Dua за тех, кто приготовил ифтар",
+                "name": "Dua when breaking fast in someone’s home",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "«Передают со слов Анаса, да будет доволен им Аллах, что однажды пророк (ﷺ), который принёс с собой хлеб и оливковое масло, пришёл к Са’ду бин ‘Убаде, поел, а потом сказал:\n«Афтара ‘инда-куму-с-са’имуна, ва акяля та‘ама-куму-ль-абрару, ва саллят ‘аляй-куму-ль-маля’икяту!»\nЭтот хадис с достоверным иснадом приводят Ахмад 3/138, Абу Дауд 3854, Ибн Маджах 1747, аль-Байхакъи 7/287 и др. Шейх аль-Албани назвал хадис достоверным. См. «аль-Калим ат-таййиб» 193.",
+                        "text": "«Afṭara `indakumuṣ-ṣā'imūn,` wa akala ṭa`āmakumu ‘l-'abrār,` wa ṣallat `alaykumu ‘l-malā'ikah»",
                         "arabic": "عن أنس رضي اللّه عنه؛أن النبي صلى اللّه عليه وسلم جاء إلى سعد بن عبادة فجاء بخبز وزيت فأكل، ثم قال النبيُّ صلى اللّه عليه وسلم‏:‏ ‏»‏أفْطَرَ عِنْدَكُمُ الصَّائِمُونَ، وأكَلَ طَعَامَكُمُ الأبْرَارُ، وَصَلَّتْ عَلَيْكُمُ المَلاَئِكَةُ ‏»‏‏.",
-                        "translation": "Постящиеся совершили у вас ифтар, и вкусили вашу еду праведные и да благословит вас ангелы!",
+                        "translation": "With you, those who are fasting have broken their fast, you have fed those who are righteous, and the angels recite their prayers upon you. Reference: (Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730)",
                         "url": ""
                     }
                 ]
@@ -1378,13 +1378,13 @@
             {
                 "id": 50,
                 "listimage": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.cookinglight.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F4_3_horizontal_-_1200x900%2Fpublic%2Fimage%2F2018%2F03%2Fmain%2F1803w-dining-out-guide.jpg%3Fitok%3DrgwsP8GX",
-                "name": "Dua постящегося, который не собирается прерывать свой пост",
+                "name": "Dua by one fasting when presented with food and does not break his fast",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "Сообщается, что посланник Аллаха, да благословит его Аллах и приветствует, сказал: «Когда кого-нибудь из вас пригласят на трапезу, пусть ответит (на него), и если он не постится, пусть поест, а если соблюдает пост, пусть помолится (за хозяев)».\nЭтот хадис передали Ахмад 2/507, Муслим 1431, Абу Дауд 2460, ат-Тирмизи 780, ан-Насаи в «Сунан аль-Кубра» 2/62, Ибн Маджах 1750 и аль-Байхакъи 7/263 со слов Абу Хурайры.",
+                        "text": "«When you are invited (to eat) then reply to the invitation. If you are fasting then invoke Allah's blessings (on your host, say may Allah bless you or any dua), and if you are not fasting then eat».",
                         "arabic": "إِذَا دُعِيَ أَحَدُكُمْ، فَلْيُجِبْ، فإنْ كانَ صَائِمًا، فَلْيُصَلِّ، وإنْ كانَ مُفْطِرًا، فَلْيَطْعَمْ (رواه مسلم) فليُصَلِّ قيل: مَعناه، أي: فليدْعُ لأهلِ البَيتِ بالخيرِ والبركةِ ويَشتغِل بالدُّعاءِ لهم، وقيلَ: مَعناه، أي: فليُصلِّ رَكعاتٍ، وليشتغِل بالصَّلاةِ عن الطعامِ؛ لأنَّه صائمٌ،",
-                        "translation": "В другой версии хадиса со слов Абу Хурайры сообщается о то том, что пророк (ﷺ), сказал: «Если кого-то из вас пригласят на трапезу в то время, когда он постится, пусть скажет: “Я соблюдаю пост”».\nЭтот хадис передали Ахмад 2/242, Муслим 1150",
+                        "translation": "The phrase «فليُصَلِّ» is interpreted: Let him offer prayer, which means that the person should supplicate for the people of the household with goodness and blessings and be engaged in prayer for them. Some also interpret it: Let him perform two rak'ahs (units of prayer), and to be occupied in prayer instead of eating because he is fasting.",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/019_khiga_eda/01_hadeeth_1320_1324.mp3?_=1"
                     }
                 ]
@@ -1392,40 +1392,40 @@
             {
                 "id": 51,
                 "listimage": "https://images.unsplash.com/photo-1592623159714-59671c62aebd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=659&q=80",
-                "name": "Что следует говорить постящемуся если кто-нибудь станет ругать его",
+                "name": "Dua when insulted while fasting",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "«Передают со слов Абу Хурайры, да будет доволен им Аллах, что посланник Аллаха, да благословит его Аллах и приветствует, сказал: «Пост является щитом, и в тот день, когда кто-нибудь из вас будет поститься, пусть избегает всего непристойного и не повышает голос, если же кто-нибудь станет бранить его или (попытается) завязать с ним ссору, пусть скажет: “Поистине, я – (человек,) соблюдающий пост!».",
+                        "text": "«Innī ṣā'im,innī ṣā'im».",
                         "arabic": "وعن أَبي هريرة — رضي الله عنه — ، قَالَ : قَالَ رسول الله — صلى الله عليه وسلم — : (( قَالَ اللهُ — عز وجل — : كُلُّ عَمَلِ ابْنِ آدَمَ لَهُ إِلاَّ الصِّيَام ، فَإنَّهُ لِي وَأنَا أجْزِي بِهِ ، وَالصِّيَامُ جُنَّةٌ ، فَإذَا كَانَ يَومُ صَوْمِ أحَدِكُمْ فَلاَ يَرْفُثْ وَلاَ يَصْخَبْ فإنْ سَابَّهُ أحَدٌ أَوْ قَاتَلَهُ فَلْيَقُلْ: إنِّي صَائِمٌ . وَالذِي نَفْسُ مُحَمَّدٍ بِيَدِهِ لَخُلُوفُ فَمِ الصَّائِمِ أطْيَبُ عِنْدَ اللهِ مِنْ رِيحِ المِسْكِ . لِلصَّائِمِ فَرْحَتَانِ يَفْرَحُهُمَا : إِذَا أفْطَرَ فَرِحَ بفطره ، وَإذَا لَقِيَ رَبَّهُ فَرِحَ بِصَوْمِهِ )) متفقٌ عَلَيْهِ ، وهذا لفظ روايةِ البُخَارِي",
-                        "translation": "Всевышний Аллах сказал: «Аллах не любит, когда злословят вслух, если только этого не делает тот, с кем поступили несправедливо. Аллах - Слышащий, Знающий».\n(Ан-Ниса 148).",
+                        "translation": "I am fasting. I am fasting. (Reference: Al-Bukhari, cf. Al-Asqalani, Fathul-BAri 4/103, Muslim 2/806)",
                         "url": "https://audionerd.ru/mp3/Ly9tb29zaWMubXkubWFpbC5ydS9maWxlL2Q2N2JkYmI3ODFjOTViNjhmODM0NzhlOTM1MzNmMWFkLm1wMw==/%D1%88%D0%B5%D0%B9%D1%85%20%D0%B0%D0%B1%D1%83%20%D0%AF%D1%85%D1%8C%D1%8F%20%D0%9A%D1%80%D1%8B%D0%BC%D1%81%D0%BA%D0%B8%D0%B9%20%20-%20%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F%20%D1%86%D0%B5%D0%BB%D1%8C%20%D0%A0%D0%B0%D0%BC%D0%B0%D0%B4%D0%B0%D0%BD%D0%B0%20(26.05.17)"
                     }
                 ]
             }
         ]
     },
-    {
-        "name": "Памятка по умре и хаджу",
+    {    "id": 6,
+        "name": "Hajj Prayers",
         "image": "images/hajj.png",
         "chapters": [
             {
                 "id": 52,
                 "listimage": "https://inspiration.rehlat.com/wp-content/uploads/2018/07/Hajj-Pilgrimage.jpg",
-                "name": "Умра Вхождение в состояние ихрама",
+                "name": "Talbiyah for 'Umrah",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "При вхождении в состоянии ихрама произнесите: «Ляббай-ка Ллахумма би-‘умра»",
+                        "text": "«Labbaik Allahumma bi-'umrah»",
                         "arabic": "لَبَّيْكَ اللَّهُمَّ بِعُمْرَة",
-                        "translation": "Вот я пред Тобой, о Аллах, совершая ‘умру",
+                        "translation": "(Here I am at Your service, O Allah, (performing) 'umrah",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_03_rukny.mp3?_=3"
                     },
                     {
                         "id": "Dua 2",
-                        "text": "Обратитесь лицом к кибле и скажите: «Аллахумма хазихи ‘умра ля рийа’ фи-ха ва ля сум‘а»",
+                        "text": "Face towards the Qibla and say: «Allahumma hazihii 'umratan li-riya'i fiiha wa laa sum'a»",
                         "arabic": "اللَّهُمَّ حَجَّةٌ لَا رِيَاءَ فِيهَا وَلَا سُمْعَةَ",
-                        "translation": "О Аллах, эта ‘умра — нет в ней показухи и стремления к славе!",
+                        "translation": "O Allah, this is an 'Umrah in which I seek Your pleasure and satisfaction, and not for showing off or fame",
                         "url": "http://files.alhadis.ru/audio/abu_yahya/aqida/kitabut_tauheed/kitabut_tauheed_006.mp3"
                     }
                 ]
@@ -1433,13 +1433,13 @@
             {
                 "id": 53,
                 "listimage": "http://www.lahaonline.com/media/images/articles//sonanfadael/labaik3534935980000.jpg",
-                "name": "Умра Тальбия",
+                "name": "The Talbiya for the one doing Hajj or 'Umrah",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "Затем начните громко произносить тальбию:\n«Ляббай-ка Ллахумма ляббай-ка! Ляббай-ка ля шарика ля-ка ляббай-ка! Инна ль-хамда ва ни‘мата ля-ка ва-ль-мульк ля шарика ля-ка»",
+                        "text": "Then start reciting the talbiyah out loud:\n«Labbayk-Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna ‘l-ḥamda, wanni`mata, laka wa ‘l-mulk, lā sharīka lak.»",
                         "arabic": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ ، لَا شَرِيكَ لَكَ",
-                        "translation": "Вот я пред Тобой, о Аллах! Вот я пред Тобой! Вот я пред Тобой, и нет у Тебя сотоварища! Вот я пред Тобой! Поистине, Тебе надлежит хвала и Тебе принадлежит милость и владычество! Нет у Тебя сотоварища!\nДостигнув заповедной территории Мекки и увидев дома Мекки, следует прекратить произносить тальбию.",
+                        "translation": "I am here at Your service, O Allah, I am here at Your service I am here at Your service, You have no partner, I am here at Your service Surely the praise, and blessings are Yours, and the dominion You have no partner. (Reference Al-Bukhari, cf. Al-Asqalani, Fathul-Bari 3/408, Muslim 2/841)",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_11_talbiyah_vhod_v_masjeedul_haram.mp3?_=11"
                     }
                 ]
@@ -1447,13 +1447,13 @@
             {
                 "id": 54,
                 "listimage": "https://i.pinimg.com/originals/1b/58/b4/1b58b4644e5ad643b7e99e455c51760b.jpg",
-                "name": "Умра дуа при вхождении в Заповедную мечеть",
+                "name": "Dua when entering the Sacred Mosque",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "Войдя в Заповедную мечеть с правой ноги, скажите: «Аллахумма, салли ‘аля Мухаммадин ва саллим! Аллахумма, ифтах ли абваба рахмати-ка!»",
+                        "text": "Entering the Sacred Mosque on the right foot, say: «Allahumma salli 'ala Muhammadin wa sallim, ilhammaftah li abwaba rahmatik»",
                         "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَسَلَّمَ لِلْهَمّ افْتَحْ لِي أَبْوَابَ رَحْمَتِك",
-                        "translation": "О Аллах, благослови Мухаммада и ниспошли ему мир! О Аллах, открой для меня врата Своего милосердия!",
+                        "translation": "O Allah, send blessings and peace upon Muhammad, and open for me the doors of Your mercy. (Muslim 1/494)",
                         "url": "https://ia902708.us.archive.org/8/items/Hesn_Al_Moslem_uP_bY_mUSLEm/Hesn_uP_bY_mUSLEm-014.mp3"
                     }
                 ]
@@ -1461,20 +1461,20 @@
             {
                 "id": 55,
                 "listimage": "https://i.pinimg.com/736x/05/43/b1/0543b1b0ac7fdc183bfaea1fc231adab--madina-mecca.jpg",
-                "name": "Умра Таваф Обход Каабы",
+                "name": "Tawaf - Circumambulation of the Kaaba",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "Начните семикратный обход Каабы (таваф) Направьтесь к Чёрному камню. Если нет возможности прикоснуться к Чёрному камню, то обратитесь к нему лицом, укажите на него рукой и произнесите такбир:«Аллаху акбар» Аллах превелик! Начните семикратный обход Каабы (таваф) от Чёрного камня. Прохождение от Чёрного камня до Чёрного камня считается за один круг. Начиная новый круг, укажите рукой на Чёрный камень и произнесите такбир. С самого начала этого обхода Каабы и до его завершения мужчины обнажают правое плечо. Первые три круга, от Чёрного камня до Чёрного камня, мужчинам необходимо пройти быстрым шагом, а оставшиеся четыре — обычным шагом. При возможности прикасайтесь к йеменскому углу во время каждого круга. Всякий раз, проходя между йеменским углом и Чёрным камнем, следует сказать:\n«Рабба-на, ати-на фи д-дунья хасанатан ва фи-ль-ахирати хасанатан ва-кы-на азабан-нар»",
+                        "text": "Begin the seven-fold circumambulation of the Kaaba (tawaf). Face the Black Stone. If it is not possible to touch the Black Stone, face it and point to it with your hand and say «Allahu Akbar». Begin the seven-fold circumambulation of the Kaaba from the Black Stone. Each circuit begins and ends at the Black Stone. At the start of each circuit, point to the Black Stone and say «Allahu Akbar» Men should bare their right shoulder during the entire circumambulation. The first three circuits should be performed at a brisk pace, while the remaining four can be performed at a normal walking speed. If possible, touch the Yemeni corner during each circuit. Each time passing between the Yemeni corner and the Black Stone, recite: «Rabbana atina fi dunya hasanatan wa fil akhirati hasanatan waqina adhaban-nar»",
                         "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-                        "translation": "«Господь наш! Одари нас добром в этом мире и добром в Последней жизни и защити нас от мучений в Огне!\n (сура Аль-Бакара 201)",
+                        "translation": "God is the greatest. Our Lord, grant us good in this world and good in the hereafter, and protect us from the punishment of the Fire",
                         "url": "https://www.everyayah.com/data/Hudhaify_128kbps/002201.mp3"
                     },
                     {
                         "id": "Dua 2",
-                        "text": "Намаз после обхода Каабы и питьё воды Замзам\nЗавершив семикратный обход Каабы, мужчина прикрывает правое плечо. Затем направьтесь к месту стояния Ибрахима и произнесите:«Ва тахизу мим маками Ибрахима мусалля»\nПри возможности за местом стояния Ибрахима либо же в любом месте Заповедной мечети совершите два рак‘ата намаза. Не забудьте установить перед собой преграду так, чтобы между вами и этой преградой никто не проходил. В первом рак‘ате после суры\n«Аль-Фатиха» прочтите суру\n«АльКяфирун», а во втором рак‘ате после суры\n«АльФатиха» прочтите суру \n«Аль-Ихляс». Завершив намаз, отправьтесь к источнику с водой Замзам, выпейте воду и полейте её себе на голову. Возвратитесь к Чёрному камню, укажите на него рукой и произнесите такбир Аллаху акбар.",
+                        "text": "Prayer after circumambulating the Kaaba and drinking Zamzam water\nHaving completed the circumambulation of the Kaaba seven times, the man covers his right shoulder. Then head to the place of Ibrahim’s standing and say: “Wa takhizu mim maqami of Ibrahim Musalla”\nIf possible, perform two rak'ats of prayer behind the place of Ibrahim's standing or anywhere in the Sacred Mosque. Be sure to set up a barrier in front of you so that no one passes between you and this barrier. In the first rak'ah after the sura\nAl-Fatiha read the sura\nAl-Kafirun, and in the second rak'ah after the sura\nAl-Fatiha read the sura \nAl-Ikhlyas. After completing the prayer, go to the source of Zamzam water, drink water and pour it on your head. Return to the Black Stone, point to it with your hand and say takbir Allahu Akbar",
                         "arabic": "وَٱتَّخِذُواْ مِن مَّقَامِ إِبْرَاهِيمَ مُصَلًّى",
-                        "translation": "«Изберите же место [стояния] Ибрахима местом моления»\n (сура Аль-Бакара 225)",
+                        "translation": "«And take you the Maqam of Ibrahim as a place of Salat. (2:125)»\n (Al-Bakarah: 225)",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_12_tawaf.mp3?_=12"
                     }
                 ]
@@ -1482,13 +1482,13 @@
             {
                 "id": 56,
                 "listimage": "https://upload.wikimedia.org/wikipedia/commons/2/22/Sa%27yee_To_Go_Safa_start.jpg",
-                "name": "Умра Ритуальное прохождение между холмами Сафа и Марва (са‘й)",
+                "name": "Ritual passage between the hills of Safa and Marwa (sa‘y)",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "Направьтесь к холму Сафа для совершения семикратного ритуального прохождения между холмами Сафа и Марва (са‘й). Начните са‘й у холма Сафа. Приблизившись к Сафе, прочтите:\n«Инна с-Сафа ва-ль-Марва мин ша‘а’ири Ллях фа-ман хаджжа ль-байта ау и ‘тамара фа-ля джунаха ‘алей-хи ай-йаттаууафа би-хима ва ман татавва‘а хайран фа-инна Ллаха Шакирун ‘Алим»\nЗатем скажите:«Набда’у би-ма бада’а Ллаху би-хи»\nМы начинаем с того, с чего начал Аллах.\nПоднимитесь на холм Сафа, повернитесь лицом к Каабе и произнесите:\n«Аллаху акбар! Аллаху акбар! Аллаху акбар! Ля иляха илля Ллаху вахда-ху ля шарика ля-ху! Ля-ху ль-мульку ва ля-ху ль-хамду йухьйи ва йумиту ва хува ‘аля кулли шай’ин кадир! Ля иляха илля Ллаху вахда-ху ля шарика ля-ху анджаза ва‘да-ху ва насара ‘абда-ху ва хазама ль-ахзаба вахда-ху»\nПроизнесите эти слова три раза. В промежутке после первого и второго раза произнесите те мольбы, которые пожелаете. После третьего раза мольба не произносится.\nЗатем спуститесь с холма Сафа и направьтесь к холму Марва, начав ритуальное прохождение. Одно прохождение от Сафы до Марвы считается за один раз. На холме Марва следует повторить то же самое, что и на холме Сафа: обратиться лицом к Каабе, произнести такбиры и свидетельство единобожия и воззвать к Аллаху с мольбами. Дойдя до первой отметки, обозначенной зелёным цветом, мужчинам необходимо пробежать до второй отметки. Остальной путь совершается обычным шагом. Во время обряда са‘й можно обратиться к Аллаху с такой мольбой:\n«Рабби гфир ва-рхам инна-ка анта ль-а‘аззу ль-акрам»",
+                        "text": "Head to Safa Hill for a seven-fold ritual passage between Safa and Marwa (sa‘i) hills. Start sa‘i at Safa Hill. Approaching Safa, read:\nInna s-Safa wa-l-Marwa min sha'a'iri Llah fa-man hajja l-bayta au and 'tamara fa-la junaha 'alei-hi ai-yattaauwafa bi-hima wa man tatavwa'a khairan fa-inna Llaha Shakirun 'Alim\nThen say: Nabda'u bi-ma bada'a Llahu bi-hi\nWe start from where Allah began.\nClimb the hill of Safa, turn your face to the Kaaba and say:\n“Allahu akbar! Allahu Akbar! Allahu Akbar! La ilaha illa Allah wahda-hu la ball la-hu! La-hu l-mulku wa la-hu l-hamdu yuhyi wa yumitu wa huva ‘ala kulli shay’in kadir! La ilaha illa Llahu wahda-hu la shara la-hu anjaza wa‘da-hu wa nasara ‘abda-hu wa hazama l-ahzaba wahda-hu”\nSay these words three times. In the interval after the first and second time, say those prayers that you wish. After the third time, the supplication fails.\nThen, descend Safa Hill and head towards Marwa Hill, starting the ritual passage. One passage from Safa to Marwa counts as one run. On the Marva hill, you should repeat the same thing as on the Safa hill: turn your face to the Kaaba, pronounce the takbirs and testify to monotheism and appeal to Allah with prayers. Having reached the first mark, marked in green, men need to run to the second mark. The rest of the way is done at a normal pace. During the ritual of sa‘y, you can turn to Allah with such a prayer: \n“Rabbi gfir va-rham inna-ka anta l-a‘azzu l-akram”",
                         "arabic": "عن جابرٍ رَضِيَ اللهُ عنه أنه قال في صِفَةِ حجَّةِ النبيِّ صلَّى اللهُ عليه وسلَّم: ((ثمَّ خرج مِنَ البابِ إلى الصَّفا، فلمَّا دنا مِنَ الصَّفا قرأ: إِنَّ الصَّفَا وَالْمَرْوَةَ مِن شَعَائِرِ اللَّهِ [البقرة: 158] أبدأُ بما بدأ اللهُ به. فبدأ بالصَّفا فرَقِيَ عليه، حتى رأى البيتَ، فاستقبل القبلةَ، فوحَّد اللهَ وكبَّره، وقال: لا إلهَ إلَّا اللهُ وَحْدَه لا شريكَ له، له المُلْك وله الحَمْدُ، وهو على كلِّ شيءٍ قديرٌ، لا إلهَ إلَّا اللهُ وحده، أنجَزَ وَعْدَه، ونَصَر عبْدَه، وهزَمَ الأحزابَ وَحْدَه، ثم دعا بين ذلك، قال مثل هذا ثلاثَ مرَّاتٍ، ثم نزل إلى المروةِ حتى إذا انصبَّت قَدَماه في بطنِ الوادي سعى حتى إذا صَعِدَتَا ،مشى حتى أتى المروةَ ففَعَلَ على المروةِ كما فَعَلَ على الصَّفا",
-                        "translation": "Воистину, Сафа и Марва — одни из обрядовых знамений Аллаха. Кто совершает хадж к Каабе или ‘умру, тот не совершит греха, если пройдёт между ними. А если кто добровольно совершает доброе дело, то ведь Аллах — Признательный, Знающий» (сура 2 «Аль-Бакара», аят 158).\nАллах Превелик, Аллах Превелик, Аллах Превелик! Нет божества, кроме Аллаха, у Которого нет сотоварища! Ему принадлежит власть и надлежит хвала, Он оживляет и умерщвляет, и Он властен над всем сущим! Нет божества, кроме Аллаха, у Которого нет сотоварища! Он выполнил Своё обещание, помог Своему рабу и в одиночку разбил враждебные племена.\nГосподи, прости и помилуй, ибо Ты — Величайший и Щедрейший!",
+                        "translation": "Indeed, Safa and Marwah are among the symbols of Allah. So whoever makes Hajj to the House or performs 'umrah - there is no blame upon him for walking between them. And whoever volunteers good - then indeed, Allah is appreciative and Knowing. (Al-Bakarah: 158).\nAllah is the Greatest, Allah is the Greatest, Allah is the Greatest! There is no deity worthy of worship except Allah, Who has no partner. To Him belongs the dominion and to Him belongs all praise. He gives life and causes death, and He has power over all things. There is no deity worthy of worship except Allah, Who has no partner. He fulfilled His promise, aided His servant, and alone defeated the confederates. O Lord, forgive and have mercy, for You are the Most Great and the Most Generous!",
                         "url": "https://ia902708.us.archive.org/8/items/Hesn_Al_Moslem_uP_bY_mUSLEm/Hesn_uP_bY_mUSLEm-119.mp3"
                     }
                 ]
@@ -1496,18 +1496,18 @@
             {
                 "id": 57,
                 "listimage": "https://docplayer.info/docs-images/107/179354704/images/1-0.jpg",
-                "name": "Умра завершение бритьё головы либо укорачивание волос",
+                "name": "Completion of shaving the head or shortening of the hair",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "«Затем мужчина равномерно укорачивает волосы на своей голове либо обривает её, а женщина состригает локон величиной с треть пальца.\nСо слов ‘Абдуллаха ибн ‘Умара (да будет доволен Аллах им и его отцом) сообщается, что однажды Посланник Аллаха (да благословит его Аллах и приветствует) сказал: «О Аллах, помилуй обривших свои головы!» Люди сказали: «А тех, кто просто укоротил свои волосы, о Посланник Аллаха?» Однако Пророк (да благословит его Аллах и приветствует) снова сказал: «О Аллах, помилуй обривших свои головы!» Люди опять сказали: «А тех, кто просто укоротил свои волосы, о Посланник Аллаха?» Пророк (да благословит его Аллах и приветствует) снова сказал: «О Аллах, помилуй обривших свои головы!» И когда люди опять сказали: «А тех, кто просто укоротил свои волосы, о Посланник Аллаха?» — он сказал: «И тех, кто просто укоротил свои волосы!» [Достоверный] - [Согласован Аль-Бухари и Муслимом]\nПримечание: приехавшим в хадж лучше укоротить волосы, если они не успеют отрасти после ‘умры до хаджа, так как бритьё головы совершается во время хаджа. Приехавшим совершить только ‘умру (без хаджа) лучше обрить голову»",
+                        "text": "Then a man evenly shortens the hair on his head or shaves it, while a woman cuts a lock of hair the size of a fingertip. According to Abdullah ibn Umar (may Allah be pleased with him and his father), the Messenger of Allah (peace be upon him) once said, 'O Allah, have mercy on those who shave their heads!' The people said, 'What about those who merely shorten their hair, O Messenger of Allah?' He repeated, 'O Allah, have mercy on those who shave their heads!' They again said, 'What about those who merely shorten their hair, O Messenger of Allah?' He again said, 'O Allah, have mercy on those who shave their heads!' When they asked about those who merely shorten their hair, he said, 'And those who merely shorten their hair!' (Agreed upon by Al-Bukhari and Muslim) Note: Those who come for Hajj are advised to shorten their hair if they cannot grow it back before Hajj, as shaving the head is performed during Hajj. Those who come only for 'Umrah (without Hajj) are advised to shave their head",
                         "arabic": "ثم يقوم الرجل بقصر شعر رأسه بالتساوي أو يحلقه ، وتقص المرأة شعرها بحجم ثلث الإصبع. ملاحظة: لمن جاء إلى الحج: الأفضل تقصير شعره إذا لم يكن لديه وقت للنمو مرة أخرى بعد العمرة قبل الحج ، لأن الحلق يكون في الحج. والذين جاءوا لأداء العمرة فقط (دون حج) الحلق أحسن لهم",
                         "translation": "..............",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/007_uroki_hajja/44_britye_golovi_narushenie_poryadka.mp3?_=44"
                     },
                     {
                         "id": "2",
-                        "text": "Полный выход из состояния ихрама На этом ‘умра заканчивается. Мужчина снимает одеяние ихрам. Ограничения, действовавшие в состоянии ихрама, сняты. Теперь следует дождаться времени начала хаджа — 8 числа месяца зу-ль-хиджжа.",
+                        "text": "Complete exit from the state of ihram. This marks the end of 'Umrah. The man removes his ihram clothing. The restrictions that were in place during the state of ihram are lifted. Now he must wait for the time of the beginning of Hajj - on the 8th day of the month of Dhu al-Hijjah",
                         "arabic": "بعد الطواف والسعي والتقصير أو الحلق يتحلل الحاج تحليلا كاملا وبهذا ينتهي العمرة.  يخلع الرجل رداء الإحرام. الآن علينا أن ننتظر وقت بدء الحج - وهو 8 من شهر ذي الحجة.",
                         "translation": ".............",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/006_umra/002_umra.mp3?_=2"
@@ -1517,18 +1517,18 @@
             {
                 "id": 58,
                 "listimage": "https://english.alaraby.co.uk/sites/default/files/media/images/E1BA5715-10BD-4B2F-B53F-308838FF9BC5.jpg",
-                "name": "Хадж",
+                "name": "Hajj",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "8-е зу-ль-хиджжа — день ат-тарвия Вхождение в состояние ихрама Войдите в состояние ихрама в месте проживания после рассвета (фаджр) и до полудня (зухр). Вознамерьтесь совершить хадж и произнесите:\n«Ляббай-ка Ллахумма би-хадж»\nОбратитесь лицом к кибле и скажите:\n«Аллахумма хазихи хиджжа ля рийа’ фи-ха ва ля сум‘а»\nЗатем начните громко произносить тальбию, постоянно повторяя её, пока не бросите камешки в Большой столб (10-го зу-льхиджжа):\n«Ляббай-ка Ллахумма ляббай-ка! Ляббай-ка ля шарика ля-ка ляббай-ка! Инна ль-хамда ва ни‘мата ля-ка ва-ль-мульк ля шарика ля-ка»",
+                        "text": "8th Dhu-l-Hijjah - At-Tarwiyyah Day Entering the State of Ihram Enter the state of Ihram at your place of residence after dawn (Fajr) and before noon (Zuhr). Set out to perform the hajj and say:\nLabbai-ka Llahumma bi-hajj\nFace the qibla and say:\nAllahumma hazihi hijja la riya' fi-ha wa la sum'a\nThen begin to say the talbiyah out loud, constantly repeating it until you throw pebbles at the Great Pillar (10th dhu-lhijj):\n“Lyabbai-ka Llahumma lyabbai-ka! Lyabbay-ka la ball la-ka lyabbay-ka! Inna l-hamda wa ni'mata la-ka wa-l-mulk la ball la-ka“",
                         "arabic": " لبيك اللهم بحج \nاللهم هذه الحج لا رياء فيها ولا سمعة  لبَّيكَ اللهمَّ لبَّيكَ، لبَّيكَ لا شريكَ لك لبَّيكَ؛ إنَّ الحمدَ والنِّعمةَ لك والمُلْك، لا شريكَ لك",
-                        "translation": "Вот я пред Тобой, о Аллах, [совершая] хадж.\nО Аллах, этот хадж — нет в нём показухи и стремления к славе!\nВот я пред Тобой, о Аллах! Вот я пред Тобой! Вот я пред Тобой, и нет у Тебя сотоварища! Вот я пред Тобой! Поистине, Тебе надлежит хвала и Тебе принадлежит милость и владычество! Нет у Тебя сотоварища!",
+                        "translation": "Here I am at Your service, O Allah, [performing] Hajj. O Allah, this Hajj is not for show or fame! Here I am at Your service, O Allah! Here I am at Your service! Here I am at Your service, and You have no partner! Here I am at Your service! Truly, all praise, grace, and sovereignty belong to You alone! You have no partner!",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_02_shurooty.mp3?_=2"
                     },
                     {
                         "id": "Dua 2",
-                        "text": "«Перемещение в долину Мина».\nЗатем спокойно отправляйтесь в долину Мина и совершите в ней полуденный (зухр), предвечерний (‘аср), закатный (магриб) и ночной (‘иша’) намазы, сокращая их, но не совмещая. Переночуйте в долине Мина.",
+                        "text": "«Moving to the Mina Valley».\nThen calmly proceed to the Mina Valley and perform the Zuhr, Asr, Maghrib, and Isha prayers there, shortening them but not combining them. Spend the night in the Mina Valley",
                         "arabic": "السنة أن يقيم في منى كما أقام النبي في منى عليه الصلاة والسلام، ولو كان من أهل جدة أو الطائف إلا إذا دعت حاجة أن يذهب في النهار ويرجع حتى يبيت في منى، إذا دعت الحاجة لأهله هناك أو في أضحية يذبحها هناك ويرجع فلا بأس، لكن السنة أن يقيم في منى حتى يكمل كما أقام النبي والصحابة في منى، فإن دعت حاجة إلى أن يذهب إلى جدة أو إلى الطائف ويرجع في يومه ويبيت في منى؛ فلا بأس بالذهاب عند الحاجة، والرجوع من غير وداع؛ لأن الوداع يكون بعد كمال الحج، يكون الوداع بعد الرمي وبعد الطواف والسعي، بعد كل شيء بعد النهاية. نعم.  من فتاوى ابن باز رحمه الله ",
                         "translation": ".............",
                         "url": "https://files.zadapps.info/binbaz.org.sa/fatawa/nour_3la_aldarb/nour_770/nour_77014.mp3"
@@ -1538,11 +1538,11 @@
             {
                 "id": 59,
                 "listimage": "https://www.almowaten.net/wp-content/uploads/2021/07/%D9%85%D8%B3%D8%AC%D8%AF-%D8%A7%D9%84%D9%85%D8%B4%D8%B9%D8%B1-%D8%A7%D9%84%D8%AD%D8%B1%D8%A7%D9%85.jpg",
-                "name": "9-е зуль-хиджжа день стояния на Арафате",
+                "name": "The 9th of Dhu al-Hijjah - the Day of Standing at Arafat",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "«Совершите рассветный намаз (фаджр) в долине Мина, а после восхода солнца отправляйтесь к долине Арафат. Постоянно произносите тальбию и такбир (слова «Аллаху акбар»)»",
+                        "text": "«Perform the Fajr prayer in the Mina Valley, and after sunrise, proceed to the Arafat Valley. Continuously recite the Talbiyah and Takbir (the words 'Allahu Akbar')»",
                         "arabic": "(رَكِبَ النَّبِيُّ - صلى الله عليه وسلم - الْقَصْوَاءَ حَتَّى أَتَى الْمَشْعَرَ الْحَرَامَ فَاسْتَقْبَلَ الْقِبْلَةَ (فَدَعَاهُ، وَكَبَّرَهُ، وَهَللَّهُ، وَوَحَّدَهُ) فَلَمْ يَزَلْ وَاقِفاً حَتَّى أَسْفَرَ جِدَّاً فَدَفَعَ قَبْلَ أَنْ تَطْلُعَ الشَّمسُ)",
                         "translation": ".............",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_15_stoyanie_na_arafah.mp3?_=15"
@@ -1552,11 +1552,11 @@
             {
                 "id": 60,
                 "listimage": "https://www.teahub.io/photos/full/243-2436152_a-muslim-pilgrim-prays-at-mount-arafat-beautiful.jpg",
-                "name": "Перемещение в долину Арафат",
+                "name": "Moving to the Arafat Valley",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "При возможности остановитесь в местечке Намира поблизости от Арафата и пробудьте там до полудня. Затем отправляйтесь к вади Урана (перед Арафатом). Выслушайте проповедь имама, а затем, когда наступит время полуденного намаза, совершите вместе с ним полуденный (зухр) и предвечерний (‘аср) намазы в сокращённой и совмещённой форме. Для обоих этих намазов произносится один азан и два икамата. Между этими двумя намазами дополнительные молитвы не совершаются.",
+                        "text": "If possible, stop at the place of Namirah near Arafat and stay there until noon. Then proceed to Wadi Uranah (before Arafat). Listen to the sermon of the Imam, and when it is time for the Zuhr and Asr prayers, perform them with him in shortened and combined form. For both of these prayers, one call to prayer (Adhan) and two calls to stand for prayer (Iqamah) are made. No additional prayers are performed between these two prayers.",
                         "arabic": "وقد وقف المسلمون الذين حجوا مع النبي ﷺ معه يوم التاسع بعرفة ولم يقف أحد من قبله ولا بعده، وقال ﷺ: خذوا عني مناسككم[4] فدل ذلك على أن الواجب على المسلمين أن يحجوا كما حج ﷺ في الوقفة والإفاضة وغير ذلك، ثم خلفاؤه الراشدون  وهم أبو بكر وعمر وعثمان وعلي ساروا على منهجه الشريف فوقفوا يوم التاسع ووقف معهم المسلمون في حجاتهم ولم يقفوا قبل يوم التاسع ولا بعده.",
                         "translation": "..................",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_16_nochefka_v_muzdalife.mp3?_=16"
@@ -1566,11 +1566,11 @@
             {
                 "id": 61,
                 "listimage": "https://p0.pikrepo.com/preview/850/795/people-in-white-shirts-standing-on-green-grass-field-during-daytime-thumbnail.jpg",
-                "name": "Стояние на Арафате",
+                "name": "Standing at Arafat",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "Затем направьтесь к Арафату и оставайтесь там до захода солнца. При возможности остановитесь около больших камней, рассеянных у подножия горы Рахма (джабаль ар-Рахма). Если же нет возможности это сделать, то вся долина Арафат является местом стояния. Следует стоять, обратившись лицом к кибле, воздев вверх руки, взывая с мольбами к Аллаху и произнося тальбию. Также крайне желательно произносить следующую мольбу:\n«Ля иляха илля Ллаху вахда-ху ля шарика ля-ху! Ля-ху ль-мульку ва ля-ху ль-хамду ва хува ‘аля кулли шай’ин кадир!»",
+                        "text": "Then head towards Arafat and stay there until sunset. If possible, stop near the large rocks scattered at the foot of Jabal al-Rahmah (the Mountain of Mercy). If not, then the entire Arafat valley is a place of standing. You should stand facing the Qibla, raising your hands and supplicating to Allah and reciting the Talbiyah. It is also highly recommended to recite the following supplication:\n«La ilaha illa Allah, wahdahu la sharika lahu. Lahul-mulku wa lahul-hamdu, wa huwa 'ala kulli shay'in qadir»",
                         "arabic": "لماذا الوقوف بعرفة أهم أركان الحج؟ لأن الرسول ﷺ قال في ذلك: الحج عرفة بيَّن الرسول ﷺ أن الحج هو عرفة هو الركن الأعظم، من فاته الوقوف بعرفة فاته الحج؛ لأن الرسول ﷺ بيَّن ذلك، قال: الحج عرفة، فمن أدرك عرفة بليل فقد أدرك الحج، فدل ذلك على أن من لم يدرك عرفة فقد فاته الحج. نعم.",
                         "translation": "Нет истинного божества, кроме Аллаха, у Которого нет сотоварища! Ему принадлежит власть и надлежит хвала, Он оживляет и умерщвляет, и Он властен над всем сущим.",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_15_stoyanie_na_arafah.mp3?_=15"
@@ -1580,11 +1580,11 @@
             {
                 "id": 62,
                 "listimage": "https://mardmod.files.wordpress.com/2013/10/arafah_07.jpg",
-                "name": "Перемещение из Арафата в Муздалифу",
+                "name": "Moving from Arafat to Muzdalifah",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "После захода солнца отправляйтесь из Арафата в Муздалифу, соблюдая спокойствие.\nНочёвка в Муздалифе Добравшись до Муздалифы, совершите закатный (магриб) и ночной (‘иша’) намазы в сокращённой и совмещённой форме. Возглашается азан, затем икамат и совершается закатный намаз (магриб) в три рак‘ата, после чего возглашает икамат и совершается сокращённый ночной намаз (‘иша’) в два рак‘ата. Между этими двумя намазами дополнительные молитвы не совершаются. Затем ложитесь спать до рассвета.",
+                        "text": "After sunset, proceed from Arafat to Muzdalifah while maintaining calmness. Upon arriving in Muzdalifah, perform the Maghrib and Isha prayers in shortened and combined form. The Adhan is called, followed by the Iqamah, and then the Maghrib prayer is performed in three Rak'ahs. After that, the Iqamah is called again, and the shortened Isha prayer is performed in two Rak'ahs. No additional prayers are performed between these two prayers. Then, go to sleep until dawn",
                         "arabic": "فقد دلت السنة عن رسول الله عليه الصلاة والسلام على أن المبيت في مزدلفة أمر مفترض؛ لأن الرسول ﷺ بات بها وقال: خذوا عني مناسككم -اللهم صل عليه وسلم- فالواجب على الحاج أن يبيت بها إذا انصرف من عرفات بعد الغروب يقصد المزدلفة فيصلي بها المغرب والعشاء قصراً وجمعاً، العشاء ثنتين والمغرب ثلاث بأذان واحد وإقامتين، ويبيت بها حتى يصلي بها الفجر، فإذا صلى بها الفجر جلس بها أيضاً يذكر الله ويدعوه مستقبل القبلة، وإن قرب من المشعر فحسن، ولكن كل مزدلفة موقف الحمد لله، في أي مكان منها يذكر الله ويدعو مستقبل القبلة حتى يسفر، فإذا أسفر انصرف إلى منى كما فعله النبي عليه الصلاة والسلام. وهذا المبيت واجب عند أهل العلم على الصحيح، وقال بعضهم: يكفي المرور بها، ولكنه قول ضعيف، ويجوز للضعفاء من النساء والصبيان وكبار السن، ومن كان معهم بصحبتهم الانصراف من مزدلفة في آخر الليل بعد مضي نصف الليل، والأفضل بعد غروب القمر، كما جاء في حديث أسماء بنت أبي بكر فإذا غاب القمر انصرفوا إلى منى كما أذن النبي صلى الله عليه وسلم لـسودة ولغيرها ولـأم سلمة . هذا هو المشروع، ومن بقي من الضعفة مع الناس فلا بأس، فإذا انصرفوا من مزدلفة في آخر الليل توجهوا إلى منى ورموا الجمرة إن شاءوا، وإن شاءوا جلسوا في منى حتى يرموها نهاراً، هم مخيرون، ومن رماها ليلاً كما رمت أم سلمة في آخر الليل فلا بأس، للضعفة يرمونها ليلاً في آخر الليل ثم ينصرفون إذا شاءوا إلى مكة للطواف ولا سيما النساء، فإنهم يخشون أن تنزل بهم العادة الشهرية فتمنعهم من الطواف، فإذا توجهوا إلى مكة مسرعين آخر الليل من الطواف فلا بأس، كل هذا لا حرج فيه بحمد الله. أما الأقوياء فالسنة لهم المبيت بمزدلفة حتى يصلوا بها فجر، وحتى يقفوا بها بعد الفجر حتى يسفروا، هذه السنة، ومن انصرف من بها الأقوياء مع الضعفة في آخر الليل أجزأه ذلك وصح حجه في أصح قولي العلماء، ولكنه ترك الأفضل. ابن باز رحمه الله.",
                         "translation": ".............",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_16_nochefka_v_muzdalife.mp3?_=16"
@@ -1594,12 +1594,12 @@
             {
                 "id": 63,
                 "listimage": "https://images.unsplash.com/photo-1533415648777-407b626eb0fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8N3x8fGVufDB8fHx8&w=1000&q=80",
-                "name": "10-е зуль-хиджжа День жертвоприношения",
+                "name": "The 10th of Dhu al-Hijjah - the Day of Sacrifice",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "Совершите рассветный намаз (фаджр) в Муздалифе в самое раннее время, отведённое для него.\nПеремещение в Аль-Маш‘ар-аль-Харам Затем отправляйтесь к АльМаш‘ар-аль-Харам (гора, расположенная в Муздалифе), поднимитесь на неё и обратитесь лицом к кибле. Произносите слова восхваления Аллаха (альхамду ли-Ллях), возвеличивания Его (Аллаху акбар) и единобожия (ля иляха илля Ллах). Взывайте с мольбами к Аллаху, пока не станет совсем светло. Если нет возможности прийти к Аль-Маш‘ар-аль-Харам, то это можно делать в любом месте долины Муздалифа.\nПеремещение в долину Мина Затем до восхода солнца отправляйтесь из Муздалифы в Мину, соблюдая спокойствие.",
-                        "arabic": "",
+                        "text": "Perform the Fajr prayer in Muzdalifah at the earliest time allotted for it. Then proceed to Al-Mash'ar-al-Haram (a mountain located in Muzdalifah), climb it and face the Qibla. Recite words of praise to Allah (Alhamdulillah), magnify Him (Allahu Akbar), and recite the declaration of faith (La ilaha illa Allah). Supplicate to Allah until it becomes completely light. If it is not possible to come to Al-Mash'ar-al-Haram, this can be done at any place in the Muzdalifah valley.  Then, before sunrise, proceed from Muzdalifah to Mina while maintaining calmness.",
+                        "arabic": "أدِّ صلاة الفجر في مزدلفة في أقرب وقت مخصص لها. ثم انتقل إلى المشعر الحرام (جبل يقع في مزدلفة) وتسلقه وواجه القبلة. سبّح الله (الحمدلله) وتكبّر (الله أكبر) واقرأ الشهادة (لا إله إلا الله) وادعو الله حتى يصبح النهار. إذا لم يكن بإمكانك الوصول إلى المشعر الحرام فبإمكانك القيام بهذا العمل في أي مكان في وادي مزدلفة. ثم، قبل شروق الشمس، انتقل من مزدلفة إلى منى وأنت تحافظ على الهدوء",
                         "translation": ".............",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_17_deyaniya_dnya_nahra_1.mp3?_=17"
                     }
@@ -1608,12 +1608,12 @@
             {
                 "id": 64,
                 "listimage": "https://i.dawn.com/primary/2015/09/560852bc44ae2.jpg",
-                "name": "Бросание камешков в Большой столб",
+                "name": "Stoning of the Jamarat (throwing pebbles) at the Big Pillar",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "Прибыв в долину Мина, соберите в ней семь камешков величиной чуть больше горошины для бросания в Большой столб. При возможности выполните этот обряд до полудня. Если такой возможности нет, то это можно сделать до наступления ночи. Обратитесь лицом к Большому столбу и встаньте так, чтобы Мекка была слева, а Мина — справа. Бросайте камешки в Большой столб по одному. При каждом броске камешка произносите слова «Аллаху акбар» (‘Аллах превелик’).",
-                        "arabic": "",
+                        "text": "Upon arrival at the Mina valley, collect seven pebbles that are slightly larger than a chickpea to throw at the Big Pillar. If possible, perform this ritual before noon. If not, it can be done before nightfall. Stand facing the Big Pillar with Mecca to your left and Mina to your right. Throw the pebbles one by one at the Big Pillar, saying 'Allahu Akbar' (Allah is the greatest) with each throw.",
+                        "arabic": "عند وصولك إلى وادي منى، اجمع سبع حصيات أكبر من حبة الحمص تقريباً لرميها على الجمرات الكبيرة. إذا امكن، فأد الطواف قبل الظهر، وإلا فبإمكانك القيام بهذا الطقس قبل المغرب. واقف باتجاه الجمرات الكبيرة مع مكة على يسارك ومنى على يمينك، وارم الحصيات واحدة تلو الأخرى على الجمرات الكبيرة، وتقول  الله أكبر بعد كل رمي ",
                         "translation": ".............",
                         "url": "https://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_16_nochefka_v_muzdalife.mp3?_=16"
                     }
@@ -1622,11 +1622,11 @@
             {
                 "id": 65,
                 "listimage": "https://cdn.al-ain.com/lg/images/2021/6/29/173-183705-hajj-major-and-minor-dissolution-difference-2.jpeg",
-                "name": "Частичный выход из состояния ихрама",
+                "name": "Partial release from the state of Ihram",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "Бросив последний камешек, прекратите произносить тальбию, вернитесь в место проживания в Мине, наденьте обычную одежду, умаститесь благовониями. После бросания камешков в Большой столб с находящегося в ихраме снимаются все ограничения, кроме интимных отношений.\nЖертвоприношение\nЕсли вы купили сертификат о принесении в жертву животного, то это дозволено. Если нет, то отправьтесь на скотобойню и совершите жертвоприношение.",
+                        "text": "After throwing the last pebble, stop reciting the Talbiyah, return to your accommodation in Mina, wear regular clothing, and apply fragrance. After stoning the Big Pillar, all restrictions of Ihram are lifted except for intimate relations. Sacrifice: If you have purchased a certificate for sacrificing an animal, then it is permissible. If not, go to the slaughterhouse and perform the sacrifice.",
                         "arabic": " ماذا يقصد بالتحلل الأول والتحلل الثاني؟ الجواب: يقصد بالتحلل الأول إذا فعل اثنين من ثلاثة، إذا رمى وحلق أو قصر، أو رمى وطاف وسعى إن كان عليه سعي، أو طاف وسعى وحلق أو قصر، فهذا هو التحلل الأول. وإذا فعل الثلاثة: الرمي، والطواف، والسعي إن كان عليه سعي، والحلق أو التقصير، فهذا هو التحلل الثاني. فإذا فعل اثنين فقط لبس المخيط وتطيب وحل له كل ما حرم عليه بالإحرام ما عدا الجماع، فإذا جاء بالثالث حل له الجماع. وذهب بعض العلماء إلى أنه إذا رمى الجمرة يوم العيد يحصل له التحلل الأول وهو قول جيد ولو فعله إنسان فلا حرج عليه إن شاء الله، لكن الأولى والأحوط ألا يعجل حتى يفعل معه ثانيًا بعده الحلق أو التقصير أو يضيف إليه الطواف والسعي إن كان عليه سعي؛ لحديث عائشة -وإن كان في إسناده نظر- أن النبي ﷺ قال: إذا رميتم وحلقتم فقد حل لكم الطيب وكل شيء إلا النساء ولأحاديث أخرى جاءت في الباب، ولأنه ﷺ لما رمى الجمرة يوم العيد ونحر هديه وحلق، طيبته عائشة. وظاهر النص أنه لم يتطيب إلا بعد أن رمى ونحر وحلق. فالأفضل والأحوط أن لا يتحلل التحلل الأول إلا بعد أن يرمي وحتى يحلق أو يقصر، وإن تيسر أيضًا أن ينحر الهدي بعد الرمي وقبل الحلق فهو أفضل، وفيه جمع بين الأحاديث. ابن باز رحمه الله",
                         "translation": ".............",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/033_at_tahqiq_ual_idah_ibn_baz/09_tahqiq_ual_idah.mp3?_=9"
@@ -1636,11 +1636,11 @@
             {
                 "id": 66,
                 "listimage": "https://img.freepik.com/free-vector/hajj-umrah-islamic-pilgrimage-ritual-muslim-characters-shave-trim-hair-ritual-hajj-pilgrimage-hajj-pilgrims-shave-their-heads-tahallul-with-shaved-hair-vector-illustration-flat-style_7737-2218.jpg?size=626&ext=jpg",
-                "name": "Бритьё головы",
+                "name": "Shaving the head",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "После жертвоприношения мужчина сбривает волосы на своей голове (более желательно) или равномерно укорачивает волосы (менее желательно), а женщина состригает локон величиной с треть пальца",
+                        "text": "After performing the sacrifice, a man shaves his head (preferably) or trims his hair evenly (less preferable), while a woman cuts a lock of hair the size of a fingertip.",
                         "arabic": "السؤال: أيهما أفضل الحلق أو التقصير بعد أداء النسك في العمرة والحج؟ وهل يجزئ تقصير بعض الرأس؟ الجواب: الأفضل الحلق في العمرة والحج جميعًا؛ لأن الرسول ﷺ دعا للمحلقين ثلاثًا بالمغفرة والرحمة، وللمقصرين واحدة، فالأفضل الحلق، لكن إذا كانت العمرة قرب الحج فالأفضل فيها التقصير حتى يتوفر الحلق في الحج؛ لأن الحج أكمل من العمرة فيكون الأكمل للأكمل، أما إن كانت العمرة بعيدة عن الحج مثلًا في شوال يمكن لشعر الرأس أن يطول فإنه يحلق حتى يحوز فضل الحلق. ولا يجوز تقصير بعض الرأس ولا حلق بعضه، في أصح قولي العلماء، بل الواجب حلق الرأس كله أو تقصيره كله، والأفضل أن يبدأ بالشق الأيمن في الحلق والتقصير. نشر في جريدة (الندوة) العدد 9869 بتاريخ 12/12/1411هـ. (مجموع فتاوى ومقالات الشيخ ابن باز 17/ 313). ",
                         "translation": ".............",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_18_deyaniya_dnya_nahra_2.mp3?_=18"
@@ -1650,18 +1650,18 @@
             {
                 "id": 67,
                 "listimage": "https://t3.ftcdn.net/jpg/03/69/05/50/360_F_369055028_VpSOgPvfuwfjoeuHLFrE6yurYnfCeFr0.jpg",
-                "name": "Основной обход Каабы",
+                "name": "The main Tawaf around the Kaaba",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "Затем отправьтесь в Мекку для совершения основного обхода Каабы (таваф аль-ифада). Облачаться в одеяние ихрам не нужно. Войдя в Заповедную мечеть, совершите всё то же самое, что вы совершали во время ‘умры: мольба при вхождении в мечеть, семикратный обход Каабы (таваф), дополнительная молитва из двух рак‘атов после тавафа, питьё воды из источника Замзам, семикратное прохождение между холмами Сафа из мечети.\nВнимание! Этот обход Каабы совершается обычным шагом от начала до конца.",
+                        "text": "Afterward, proceed to Mecca to perform the main Tawaf around the Kaaba (Tawaf al-Ifadah). You do not need to wear the Ihram attire for this. Upon entering the Sacred Mosque, perform the same rituals you did during the Umrah: supplication upon entering the mosque, circling the Kaaba seven times (Tawaf), performing an additional two-rakat prayer after Tawaf, drinking water from the Zamzam well, and walking seven times between the hills of Safa and Marwa from the mosque. Note: This Tawaf is performed at a normal walking pace from start to finish.",
                         "arabic": "ما أفضل وقت لطواف الإفاضة؟ وهل ينعقد التَّحلل بالحلِّ يوم النحر إذا أخَّر الحاجُّ الطواف إلى اليوم الثاني؟ الجواب: طواف الإفاضة يبتدئ بعد طلوع الشمس عند أهل العلم، وأما الضعفاء من الشيوخ والنساء فيبتدئ بعد نصف الليل عند جمعٍ من أهل العلم؛ لأن الرسول ﷺ رخَّص للضّعفاء، فلهم أن يرموا في النصف الأخير من ليلة النحر، ولأتباعهم ومَن معهم كذلك على الصَّحيح.",
                         "translation": ".............",
                         "url": "https://files.zadapps.info/binbaz.org.sa/fatawa/fatawa_dross/fatawa_dross0438.mp3"
                     },
                     {
-                        "id": "Примечание!",
-                        "text": "Тот паломник, который не смог совершить основной обход Каабы до наступления вечера 10-го зу-льхиджжа, должен снова войти в состояние ихрама, в котором он находился до бросания камешков: он должен снять свою обычную одежду, надеть одеяние ихрама и оставаться в состоянии ихрама до тех пор, пока не совершит основной обход Каабы. Пророк r сказал: «Если же вас застал вечер до того, как вы совершите обход этого Дома, то вы возвращаетесь в то же состояние ихрама, в котором были до бросания камешков, пока не совершите обход Каабы»\n[Абу Давуд. Сунан. № 1999; Ибн Хузайма. Сахих. № 2958; аль-Хаким. Мустадрак. № 1800; аль-Байхаки. Ас-Сунан аль-кубра. № 9601].",
+                        "id": "Note!",
+                        "text": "Note: A pilgrim who cannot perform the main Tawaf around the Kaaba before the sunset of the 10th of Dhu al-Hijjah must re-enter the state of Ihram in which he was before stoning the pillars. He must remove his regular clothing, wear the Ihram attire, and remain in the state of Ihram until he performs the main Tawaf around the Kaaba. The Prophet (peace be upon him) said: If the evening comes before you have performed the Tawaf of this House, then you should return to the same state of Ihram in which you were before stoning the pillars until you perform the Tawaf of the Kaaba. [Abu Dawud, Sunan, № 1999; Ibn Khuzaymah, Sahih, №. 2958; Al-Hakim, Mustadrak, №. 1800; Al-Bayhaqi, Al-Sunan Al-Kubra, №. 9601]",
                         "arabic": "السؤال: رجل لم يطف طواف الإفاضة ورجع إلى بلاده وجامع أهله فماذا عليه؟ الجواب: عليه التوبة إلى الله، وعليه ذبيحة تذبح في مكة للفقراء، وعليه أن يرجع ويطوف طواف الإفاضة، وهذا خطأ عظيم عليه التوبة إلى الله والاستغفار والرجوع إلى مكة لطواف الإفاضة، وعليه دم يذبح في مكة؛ لأن إتيانه زوجته قبل طواف الإفاضة لا يجوز وفيه دم، والصواب أنه يكفيه شاة رأس من الغنم أو سبع بدنة أو سبع بقرة. من برنامج (نور على الدرب). (مجموع فتاوى ومقالات الشيخ ابن باز 17/ 180). ",
                         "translation": ".............",
                         "url": "https://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_12_tawaf.mp3?_=12"
@@ -1671,26 +1671,26 @@
             {
                 "id": 68,
                 "listimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/As_pilgrims_prepare_to_return_to_their_homes%2C_Saudi_authorities_begin_to_prep_for_next_year%27s_Hajj_-_Flickr_-_Al_Jazeera_English.jpg/800px-As_pilgrims_prepare_to_return_to_their_homes%2C_Saudi_authorities_begin_to_prep_for_next_year%27s_Hajj_-_Flickr_-_Al_Jazeera_English.jpg",
-                "name": "Полный выход из состояния ихрама",
+                "name": "Complete exit from the state of Ihram",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "После завершения прохождения между Сафой и Марвой паломник окончательно выходит из состояния ихрама. С него снимаются все ограничения для находящегося в ихраме, включая интимные отношения.",
-                        "arabic": "",
+                        "text": "After completing the walking between Safa and Marwa, the pilgrim finally exits the state of Ihram. All restrictions of Ihram are lifted, including the prohibition of intimate relations.",
+                        "arabic": "بعد الانتهاء من المشي بين الصفا والمروة، يخرج الحاج أخيرًا من حالة الإحرام. يتم رفع جميع القيود المتعلقة بالإحرام، ويحل له الجماع مع الزوجة.",
                         "translation": ".............",
                         "url": ""
                     },
                     {
                         "id": "2",
-                        "text": "Возвращение в долину Мина\nПосле завершения прохождения между Сафой и Марвой паломник окончательно выходит из состояния ихрама. С него снимаются все ограничения для находящегося в ихраме, включая интимные отношения.",
-                        "arabic": "",
+                        "text": "Return to the Mina Valley: After completing the walking between Safa and Marwa, the pilgrim finally exits the state of Ihram. All restrictions of Ihram are lifted, including the prohibition of intimate relations.",
+                        "arabic": "العودة إلى وادي منى: بعد الانتهاء من المشي بين الصفا والمروة، يخرج الحاج أخيرًا من حالة الإحرام. يتم رفع جميع القيود المتعلقة بالإحرام، بما في ذلك حظر العلاقات الجنسية مع الزوجة",
                         "translation": ".............",
                         "url": ""
                     },
                     {
                         "id": "3",
-                        "text": "11, 12 и 13-е зу-ль-хиджжа — дни ат-ташрик Пребывание в Мине\nВ течение трёх дней (йаум ат-ташрик) ночуйте в месте своего проживания в Мине",
-                        "arabic": "",
+                        "text": "The 11th, 12th, and 13th of Dhu al-Hijjah are the days of At-Tashriq. Stay at your accommodation in Mina during these three days (Yawm At-Tashriq)",
+                        "arabic": "اليوم الحادي عشر والثاني عشر والثالث عشر من ذي الحجة هي أيام التشريق. ابق في مكان إقامتك في منى خلال هذه الأيام الثلاثة (أيام التشريق).",
                         "translation": ".............",
                         "url": ""
                     }
@@ -1699,12 +1699,12 @@
             {
                 "id": 69,
                 "listimage": "https://stamp.static.cnn.io/hajj-pilgrimage/images/page09.jpg",
-                "name": "Бросание камешков в три столба",
+                "name": "Stoning the pillars in Mina",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "Время выполнения этого обряда наступает после полудня и длится до наступления ночи. Каждый день собирайте двадцать один камешек величиной чуть больше горошины для бросания в три столба (по семь на каждый столб). Пройдите для бросания камешков в первый столб, сохраняя спокойствие. Обратитесь лицом к Малому столбу и встаньте так, чтобы Мекка была слева, а Мина — справа. Бросайте камешки в Малый столб по одному. При каждом броске камешка произносите слова «Аллаху акбар» (‘Аллах превелик’). Закончив бросать камешки в первый столб, повернитесь лицом к кибле, поднимите руки и произнесите такую мольбу, которую пожелаете. Затем пройдите для бросания камешков во второй столб, сохраняя спокойствие. Обратитесь лицом к Среднему столбу и встаньте так, чтобы Мекка была слева, а Мина — справа. Бросайте камешки в Средний столб по одному. При каждом броске камешка произносите слова «Аллаху акбар» (‘Аллах превелик’). Закончив бросать камешки во второй столб, повернитесь лицом к кибле, поднимите руки и произнесите такую мольбу, которую пожелаете. Затем пройдите для бросания камешков в третий столб, сохраняя спокойствие. Обратитесь лицом к Большому столбу и встаньте так, чтобы Мекка была слева, а Мина — справа. Бросайте камешки в Большой столб по одному. При каждом броске камешка произносите слова «Аллаху акбар» (‘Аллах превелик’). Закончив бросать камешки в третий и последний столб, проходите дальше, не взывая к Аллаху с мольбами, как в первые два раза. Этот обряд совершается все три дня ат-ташрик. Завершив бросание камешков 13-го зу-льхиджжа, возвратитесь в Мекку",
-                        "arabic": "",
+                        "text": "The stoning of the pillars in Mina is performed from noon until sunset. Collect twenty-one small pebbles, slightly larger than a chickpea, every day to throw at the three pillars (seven pebbles for each pillar). Proceed to the first pillar calmly and face the Small Pillar, standing with Mecca to your left and Mina to your right. Throw the pebbles one by one at the Small Pillar, saying Allahu Akbar (Allah is the greatest) with each throw. After finishing the first pillar, turn towards the Kaaba, raise your hands, and make any supplications you wish. Then proceed calmly to the second pillar, facing the Middle Pillar and standing with Mecca to your left and Mina to your right. Throw the pebbles one by one at the Middle Pillar, saying Allahu Akbar with each throw. After finishing the second pillar, turn towards the Kaaba, raise your hands, and make any supplications you wish. Then proceed calmly to the third and final pillar, facing the Big Pillar and standing with Mecca to your left and Mina to your right. Throw the pebbles one by one at the Big Pillar, saying Allahu Akbar with each throw. After finishing the third pillar, continue walking without supplicating to Allah like the first two times. This ritual is performed for all three days of At-Tashriq. After completing the stoning on the 13th of Dhu al-Hijjah, return to Mecca",
+                        "arabic": "رمي الجمرات في منى يتم من الظهر حتى غروب الشمس. يتم جمع 21 حصاة صغيرة، أكبر من حبة الحمص بقليل، يوميًا لإلقائها على الأعمدة الثلاث في المنى (سبع حصى لكل عمود). ابدأ بالتوجه بشكل هادئ إلى العمود الأول وتوجه نحو العمود الصغير، وقف مع وجهك متجهاً إلى المكة على يسارك والمنى على يمينك. ألق الحصى واحدًا وراء الآخر على العمود الصغير، وقل الله أكبر مع كل رمية. بعد الانتهاء من العمود الأول، توجه نحو الكعبة، رفع يديك، وأدعِ لنفسك بأي دعاء تشاء. ثم انتقل بشكل هادئ إلى العمود الثاني، مواجهاً العمود الأوسط وموقفاً بوجه المكة إلى اليسار والمنى إلى اليمين. ألق الحصى واحدًا وراء الآخر على العمود الأوسط، وقل الله أكبر مع كل رمية. بعد الانتهاء من العمود الثاني، توجه نحو الكعبة، رفع يديك، وأدعِ لنفسك بأي دعاء تشاء. ثم انتقل بشكل هادئ إلى العمود الثالث والأخير، مواجهاً العمود الكبير وموقفاً بوجه المكة إلى اليسار والمنى إلى اليمين. ألق الحصى واحدًا وراء الآخر على العمود الكبير، وقل الله أكبر  مع كل رمية. بعد الانتهاء من العمود الثالث، استمر في المشي بدون الدعاء إلى الله مثل الأول والثاني. يجري هذا الطقوس لمدة ثلاثة أيام من أيام التشريق. بعد الانتهاء من رمي الجمرات في اليوم الثالث عشر من ذي الحجة، عد إلى مكة",
                         "translation": ".............",
                         "url": ""
                     }
@@ -1713,11 +1713,11 @@
             {
                 "id": 70,
                 "listimage": "https://static.toiimg.com/photo/77084304.cms",
-                "name": "Прощальный обход Каабы",
+                "name": "Farewell Tawaf of the Kaaba",
                 "texts": [
                     {
                         "id": "1",
-                        "text": "Перед тем как отправиться домой, следует совершить прощальный обход Каабы. Облачаться в одеяние ихрам не нужно. Войдя в Заповедную мечеть, совершите всё то же самое, что вы совершали во время ‘умры: мольба при вхождении в мечеть, семикратный обход Каабы (таваф), мольба при выходе из мечети.\nВнимание: этот обход Каабы совершается обычным шагом от начала до конца. Ритуальное прохождение между холмами Сафа и Марва не совершается. После прощального обхода Каабы паломник уезжает из Мекки домой.\nДа примет ваш хадж Всевышний Аллах!",
+                        "text": "Before leaving for home, it is necessary to perform the Farewell Tawaf of the Kaaba. It is not required to dress in the attire of Ihram. Upon entering the Sacred Mosque, perform all the same acts that you did during Umrah: supplication upon entering the mosque, seven circumambulations of the Kaaba (Tawaf), and supplication upon exiting the mosque. Note: This Tawaf is performed at a normal pace from beginning to end. The ritual passing between the hills of Safa and Marwa is not performed. After performing the Farewell Tawaf of the Kaaba, the pilgrim departs from Mecca for home.   May Allah Almighty accept your Hajj!",
                         "arabic": "من ترك طواف الوداع للحاج الجواب: قد صرح العلماء بأن الرجل إذا طاف آخر الليل كفاه عن طواف الوداع إذا أخر طواف الزيارة وطاف بعد فراغه من الرمي كله ثم سافر في الحال أجزأه ذلك، لعموم قول النبي ﷺ: لا ينفرن أحد منكم حتى يكون آخر عهده بالبيت رواه مسلم في الصحيح وللحديث الثاني: حديث ابن عباس الثاني قال: أمر الناس – يعني أمرهم النبي – أن يكون آخر عهدهم بالبيت، إلا أنه خفف عن المرأة الحائض، فإذا كان آخر عهده بالبيت فلا بأس. والحائض لا وداع عليها والنفساء كذلك لا وداع عليها، لكن هو إذا طاف أو طافت المرأة غير الحائض والنفساء طافت عند الخروج، طواف الخروج طواف الإفاضة طواف الحج، ولو كان معه السعي فإنه يجزئه ولا يحتاج إلى وداع ثاني، وإن طافت للوداع طواف آخر طواف الحج ثم الوداع كان أكمل وأفضل.",
                         "translation": ".............",
                         "url": "http://static.toislam.ws/files/audio/05_fiqh/026_hajj_i_umra/hajj_i_umra_21_tawaful_uadaa_poseshenie_masjeedun_nabaui.mp3?_=21"
@@ -1726,27 +1726,27 @@
             }
         ]
     },
-    {
-        "name": "Взаимоотношения",
+    {    "id": 7,
+        "name": "Relationships",
         "image": "images/shakinghands.png",
         "chapters": [
             {
                 "id": 71,
                 "listimage": "https://c.wallhere.com/photos/8f/18/man_bars_crying_desperate_tired_drama-980811.jpg!d",
-                "name": "Dua о помощи в деле уплаты долга",
+                "name": "Dua for help in repaying debt",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "Передают со слов ‘Али, да будет доволен им Аллах, что (как-то раз) к нему пришёл раб, заключивший со своим хозяином договор о самовыкупе, и сказал: «Я не могу (выполнить условия) моего договора, помоги же мне!» (‘Али, да будет доволен им Аллах,) сказал: «Так не научить ли тебя словам, которым научил меня Посланник Аллаха, да благословит его Аллах и приветствует? (Они таковы, что) будь на тебе долг, подобный горе, Аллах (и тогда) отдаст его за тебя! Говори:\n«Аллахумма,-кфи-ни би-халялика ‘ан харамика ва агъни-ни би-фадлика ‘амман сивака!»\nЭтот хадис передали Ахмад (1/153), аль-Хаким (1/721) и ат-Тирмизи (3563), который сказал: «Хороший хадис».",
+                        "text": "Allāhummak-finī biḥalālika `an ḥarāmik, wa 'aghninī bi faḍlika `amman siwāk",
                         "arabic": "عن عليّ رضي اللّه عنه أن مُكاتباً جاءه فقال‏:‏ إني عجزتُ عن كتابتي فأعنّي، قال‏:‏ ألا أُعلّمك كلماتٍ علمنيهن رسولُ اللّه صلى اللّه عليه وسلم، لو كان عليك مثل جبل صِيْرٍ ديناً أدّاه عنك‏؟‏ قل‏:‏ ‏»‏اللَّهُمَّ اكْفِني بِحَلالِكَ عَنْ حَرَامِكَ، وَأغْنِني بِفَضْلِكَ عَمَّنْ سِواكَ‏»‏ . قال الترمذي‏:‏ حديث حسن‏ .‏",
-                        "translation": "О Аллах, избавь меня от запрещённого Тобой посредством дозволенного Тобой и по милости Твоей избавь меня от необходимости в ком бы то ни было, кроме Тебя!»",
+                        "translation": "O Allah, suffice me with what You have allowed instead of what You have forbidde and make me independent of all others besides Yo (Referenc At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180)",
                         "url": "https://medinaschool.org/files/audio/e98c2a97f0c5e7f65a1dc6fda96057f7.mp3"
                     },
                     {
                         "id": "Dua 2",
-                        "text": "Однажды, как рассказывает в передаваемом им хадисе Абу Саид аль-Худри, Пророк Мухаммад ﷺ пришел в мечеть и встретил там человека по имени Абу Умама. Посланник Аллаха ﷺ спросил, почему он находится там не во время намаза, на что Абу Умама ответил, что его одолели долги. И тогда Пророк Мухаммад ﷺ предложил Абу Умаме научить его такому дуа, благодаря которому Всевышний смилостивится и избавит мусульманина от долгов. И повелел сразу после того, как проснется утром, и также перед сном произносить слова:\n«Аллахумма инни а’узу бика мина ль-хамми ва ль-хазани валь- ’аджзи ва ль-касали валь бухли ва ль-джубни ва дъаля'и ддайни ва гъалабати рриджал».",
+                        "text": "Abu Sa'id al-Khudri told of a man who said to God’s messenger that he was entangled in cares and debts. He replied, “Shall I not teach you words by which, when you say them, God will remove your care and settle your debt?” and when the man expressed a desire to hear them he told him to say morning and evening, Allahumma inni a'udhu bika min al-hammi wal-huzni, wa a'udhu bika min ghalabatid-dayni wa qahrir-rijal  He said that when he did that God removed his care and settled his debt",
                         "arabic": " في حديث أبي سعيد الخدري رضي الله عنه قال :  دخل رسول الله صلى الله عليه وسلم ذات يوم المسجد ، فإذا هو برجل من الأنصار يقال له أبو أمامة ، فقال : ( يَا أَبَا أُمَامَةَ مَا لِي أَرَاكَ جَالِسًا فِي الْمَسْجِدِ فِي غَيْرِ وَقْتِ الصَّلَاةِ ) ، قال : هموم لزمتني وديون يا رسول الله ، قال : ( أَفَلَا أُعَلِّمُكَ كَلَامًا ، إِذَا أَنْتَ قُلْتَهُ : أَذْهَبَ اللَّهُ عَزَّ وَجَلَّ هَمَّكَ وَقَضَى عَنْكَ دَيْنَكَ ؟ ) ، قال قلت : بلى يا رسول الله ، قال : ( قُلْ إِذَا أَصْبَحْتَ وَإِذَا أَمْسَيْتَ : اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْهَمِّ وَالْحَزَنِ ، وَأَعُوذُ بِكَ مِنْ الْعَجْزِ وَالْكَسَلِ ، وَأَعُوذُ بِكَ مِنْ الْجُبْنِ وَالْبُخْلِ ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ وَقَهْرِ الرِّجَالِ ) ، قال ففعلت ذلك ، فأذهب الله عز وجل همي وقضى عني ديني . رواه أبو داود (1555)، وضعفه الشيخ الألباني رحمه الله في صحيح وضعيف سنن أبي داود.",
-                        "translation": "О Аллах, я прощу Твоей защиты от забот и печали, прощу защиты у Тебя от немощности и лени, также прощу защиты у Тебя от скупости и жадности, от того, чтобы долги одолели меня, и от притеснения людей",
+                        "translation": "O God, I seek refuge in Thee from care and grief; I seek refuge in Thee from incapacity and slackness; I seek refuge in Thee from niggardliness and cowardice; I seek refuge in Thee from being overcome by debt and being put in subjection by men.” ",
                         "url": "https://medinaschool.org/files/audio/d8ac72ed455c4e2bebdedbcb6fc14114.mp3"
                     }
                 ]
@@ -1754,13 +1754,13 @@
             {
                 "id": 72,
                 "listimage": "https://astroarinashirokova.com/wp-content/uploads/2020/10/231454678798645.jpg",
-                "name": "Dua облегчающее трудности",
+                "name": "Dua for one whose affairs have become difficult",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "Передают со слов Анаса, да будет доволен им Аллах, что посланник Аллаха, да благословит его Аллах и приветствует, сказал:\n«Аллахумма, ля сахля илля ма джа‘альта-ху сахлян, ва Анта тадж‘алю-ль-хазна иза ши’та сахлян».\nЭтот хадис приводят Ибн ас-Сунни в «‘Амаль аль-йаум ва-л-лейля» 353, Ибн Хиббан в своем «Сахихе» 974,4/25, «Сильсиля ас-сахиха» 2886, «Сахих аль-муснад» 72,",
+                        "text": "Allāhumma lā saḥla illā ma ja`altahu saḥla wa anta taj`alu ‘l-ḥazna idhā shi'ta saḥla",
                         "arabic": "عن أنس رضي اللّه عنه؛أن رسول اللّه صلى اللّه عليه وسلم قال‏:‏ ‏»‏اللَّهُمَّ لا سَهْلَ إِلاَّ ما جَعَلْتَهُ سَهْلاً، وأنْتَ تَجْعَلُ الحَزْنَ إذَا شِئْتَ سَهْلاً‏»‏ .",
-                        "translation": "О Аллах, нет ничего лёгкого, за исключением того, что Ты сделал лёгким, и Ты сделаешь твёрдую землю мягкой, если пожелаешь",
+                        "translation": "O Allah, there is no ease other than what You make easy. If You please You ease sorrow. (Reference: Ibn Hibban in his Sahih (no. 2427), and Ibn As- Sunni (no. 351). Al-Hafidh (Ibn Hajar) said that this Hadith is authentic. It was also declared authentic by 'Abdul-Qadir Al-Arna'ut in his checking of An-Nawawi's Kitabul-Athkarp. 106)",
                         "url": "https://www.ashefaa.com/ruqia/Azkar/hisn-almuslim/ar_7esn_AlMoslem_by_Doors_044.mp3"
                     }
                 ]
@@ -1768,13 +1768,13 @@
             {
                 "id": 73,
                 "listimage": "https://media.istockphoto.com/photos/influenza-is-one-serious-business-picture-id941712400?b=1&k=20&m=941712400&s=170667a&w=0&h=unnT1S4guwNzatgXu4SimWtQ9X2yKdy0rxsvM76p9rE=",
-                "name": "Dua после чихания",
+                "name": "What to say when you sneeze",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "Передают со слов Абу Хурайры, да будет доволен им Аллах, что пророк, да благословит его Аллах и приветствует, сказал: «Поистине, Аллах любит чихание и не любит зевоту, и если кто—нибудь из вас чихнёт и воздаст хвалу Аллаху Всевышнему (сказав Альхамдулиллях), то каждый мусульманин, услышавший это, должен будет сказать (чихнувшему): “Да помилует тебя Аллах!”\n/Йархаму-кя-Ллаху!/.\nВ ответ чихнувшему следует сказать:\n«ЯхдикумулЛху, уа юслиху балякум»\nЧто же касается зевоты, то, поистине, она — от шайтана, и если кому-нибудь из вас захочется зевнуть, пусть он подавляет (зевоту), пока может, ибо когда любой из вас зевает, шайтан смеётся над ним».\nЭтот хадис передали Ахмад 2/428, аль-Бухари в своём «Сахихе» 6226 и «аль-Адабуль-муфрад» 919, 928, Абу Дауд 5028, ат-Тирмизи 2747, аль-Хаким 4/264. См. «Сахих аль-Джами’ ас-сагъир» 1884,",
+                        "text": "Abu Hurayra reported that the Prophet, may Allah bless him and grant him peace, said, When one of you sneezes, he should say, Alhamdulillah, and his brother or companion should say to him,Yarhamuka Allah. Then he should say,  Yahdīka Allah wa yuslih bālak.",
                         "arabic": "عن أَبي هريرة — رضي الله عنه — : أنَّ النبيَّ — صلى الله عليه وسلم — ، قَالَ : (( إنَّ الله يُحِبُّ العُطَاسَ ، وَيَكْرَهُ التَّثَاؤُبَ ، فَإذَا عَطَسَ أَحَدُكُمْ وَحَمِدَ الله تَعَالَى كَانَ حَقّاً عَلَى كُلِّ مُسْلِمٍ سَمِعَهُ أنْ يَقُولَ لَهُ : يَرْحَمُكَ اللهُ ، وَأَمَّا التَّثَاؤُبُ فَإنَّمَا هُوَ مِنَ الشَّيْطَانِ ، فَإذَا تَثَاءبَ أحَدُكُمْ فَلْيَرُدَّهُ مَا اسْتَطَاعَ ، فَإنَّ أحَدَكُمْ إِذَا تَثَاءبَ ضَحِكَ مِنْهُ الشَّيْطَانُ )) رواه البخاري .",
-                        "translation": "Да помилует тебя Аллах!\nДа направит вас Всевышний Аллах на путь истинный и да исправит Он вам ваши дела.",
+                        "translation": "All praise be to Allah, May Allah have mercy on you. May Allah guide you and put your affairs in order.",
                         "url": "https://ia802708.us.archive.org/8/items/Hesn_Al_Moslem_uP_bY_mUSLEm/Hesn_uP_bY_mUSLEm-078.mp3"
                     }
                 ]
@@ -1782,13 +1782,13 @@
             {
                 "id": 74,
                 "listimage": "https://health.mail.ru/pic/news/2020/06/29/46/0f/460f79151d3e3f676eaf15dbef4c3496.jpg",
-                "name": "Если чихнувший не мусульманин",
+                "name": "When a non muslim praises Allah after sneezing",
                 "texts": [
                     {
                         "id": "Dua 1",
-                        "text": "«ЯхдикумулЛху, уа юслиху балякум»\nАбу Дауд передал такие слова Абу Мусы Аль-Ашари, да будет доволен им Аллах: “Евреи чихали в присутствии Пророка, мир ему и благословение, а он [хотя и] мог призвать на них милость Аллаха, на их чихание отвечал словами: «ЯхдикумулЛху, уа юслиху балякум».",
+                        "text": "«Yahdīkumullāhu wa yuṣliḥu bālakum»",
                         "arabic": "يَهْدِيكُمُ اللَّهُ وَيُصْلِحُ بَالَكُمْ",
-                        "translation": "Да направит вас Всевышний Аллах на путь истинный и да исправит Он вам ваши дела.",
+                        "translation": "May Allah guide you and set your affairs in order. (Reference: At-Tirmidhi 5/82, Ahmad 4/400, Abu Dawud 4/ 308. See also Al-Albani, Sahih At-Tirmidhi 2/354)",
                         "url": "https://ia902708.us.archive.org/8/items/Hesn_Al_Moslem_uP_bY_mUSLEm/Hesn_uP_bY_mUSLEm-079.mp3"
                     }
                 ]
@@ -2040,7 +2040,7 @@
             }
         ]
     },
-    {
+    {   "id": 8,
         "name": "Природа",
         "image": "images/storm.png",
         "chapters": [
@@ -2207,7 +2207,7 @@
             }
         ]
     },
-    {
+    {    "id": 9,
         "name": "Болезнь и смерть",
         "image": "images/sick.png",
         "chapters": [
@@ -2458,7 +2458,7 @@
             }
         ]
     },
-    {
+    {    "id": 10,
         "name": "Рукъя от сихра и глаза",
         "image": "images/ruqya.png",
         "chapters": [
@@ -2926,7 +2926,7 @@
             }
         ]
     },
-    {
+    {    "id": 11,
         "name": "Семья и личная жизнь",
         "image": "images/family.png",
         "chapters": [
@@ -3226,7 +3226,7 @@
             }
         ]
     },
-    {
+    {    "id": 12,
         "name": "Аль-Удхия, и положения, связанные с ним",
         "image": "images/adha.png",
         "chapters": [

@@ -14,10 +14,11 @@ import 'generated/codegen_loader.g.dart';
 
 // ignore: constant_identifier_names
 const String FAVORITES_BOX = 'favorites_box';
-Future main() async {
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
   NotificationService().initNotification();
+  await EasyLocalization.ensureInitialized();
 
   await Hive.initFlutter();
   await Hive.openBox(FAVORITES_BOX);
@@ -28,6 +29,7 @@ Future main() async {
         assetLoader: const CodegenLoader(),
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
+        saveLocale: true,
         child: const MyApp()),
   );
 }

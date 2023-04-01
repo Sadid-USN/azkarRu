@@ -1,13 +1,11 @@
 import 'package:avrod/screens/booksScreen/selected_books.dart';
 import 'package:avrod/screens/favorite_chapter_screen.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../colors/colors.dart';
-import '../generated/locale_keys.g.dart';
 import '../screens/radioplyeer_screen.dart';
 import '../screens/search_screen.dart';
 import '../screens/сalendars/calendar_tabbar.dart';
@@ -88,11 +86,5 @@ class GlobalController extends ChangeNotifier {
       );
     }
     notifyListeners();
-  }
-
-  String setRussianLang(BuildContext context) {
-    var ruTitle = LocaleKeys.avrod.tr();
-    notifyListeners();
-    return ruTitle;
   }
 }

@@ -19,7 +19,7 @@ import 'package:sizer/sizer.dart';
 
 class TextScreen extends StatefulWidget {
   final List<Texts>? texts;
-  final Chapter? chapter;
+  final Chapters? chapter;
   final int? index;
 
   const TextScreen({Key? key, this.texts, this.chapter, this.index})

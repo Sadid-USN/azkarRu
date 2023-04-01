@@ -21,15 +21,17 @@ class BookFunctions {
   }
 }
 
-  //  context.setLocale(const Locale('ru'));
+//  context.setLocale(const Locale('ru'));
 
-  // static Future<List<Chapter>> getChaptersLocally(
-  //   BuildContext context,
-  //   int book,
-  // ) async {
-  //   final List<Book> books = await getBookLocally(context);
-  //   return books[book].chapters!;
-  // }
+Future<List<Chapters>> getChaptersLocally(
+  BuildContext context,
+  int book,
+) async {
+  final List<Book> books = await BookFunctions.getBookLocally(context);
+  return books[book].chapters!;
+}
+
+
 
   // static Future<List<Texts>> getTextsLocally(
   //   BuildContext context,

@@ -10,7 +10,7 @@ import 'package:share/share.dart';
 
 class MyAudioPlayer extends StatelessWidget {
   final List<Texts>? texts;
-  final Chapter? chapter;
+  final Chapters? chapter;
   const MyAudioPlayer({Key? key, this.texts, this.chapter}) : super(key: key);
 
   @override

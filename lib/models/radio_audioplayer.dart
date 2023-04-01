@@ -63,10 +63,10 @@ class AudiPlyerCard extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 2,
-                offset: const Offset(0, 3),
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: const Offset(0, 1),
               ),
             ],
             color: const Color(0xffF2DFC7),

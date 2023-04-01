@@ -2,6 +2,7 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_functions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hive/hive.dart';
 import 'package:avrod/data/book_map.dart';
@@ -56,7 +57,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
             )),
         elevation: 3.0,
         title: Text(
-          widget.title,
+          widget.title.tr(),
           style: TextStyle(
               fontSize: 14.sp, color: textColor, fontWeight: FontWeight.bold),
         ),
@@ -96,7 +97,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
           physics: const BouncingScrollPhysics(),
           itemCount: book.chapters?.length ?? 0,
           itemBuilder: (context, index) {
-            final List<Chapter> chapter = book.chapters;
+            final List<Chapters> chapter = book.chapters;
 
             return AnimationConfiguration.staggeredGrid(
               position: index,

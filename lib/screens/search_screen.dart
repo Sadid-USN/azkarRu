@@ -10,12 +10,10 @@ import 'package:sizer/sizer.dart';
 
 class SearcScreen extends StatefulWidget {
   final int? bookIndex;
-  final List<Book>? books;
 
   const SearcScreen({
     Key? key,
     this.bookIndex,
-    this.books,
   }) : super(key: key);
 
   @override
@@ -23,27 +21,8 @@ class SearcScreen extends StatefulWidget {
 }
 
 class _SearcScreenState extends State<SearcScreen> {
-  // var listSearch = [];
-  // Future getData() async {
-  //   var url = 'https://jsonplaceholder.typicode.com/users';
-  //   var response = await http.get(Uri.parse(url));
-  //   var responseBody = jsonDecode(response.body);
-  //   for (int i = 0; i < responseBody.length; i++) {
-  //     listSearch.add(responseBody[i]);
-  //   }
-
-  //   print(listSearch.toList());
-  // }
-
-  // @override
-  // void initState() {
-  //   getData();
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    final books = Provider.of<List<Book>>(context);
     return Scaffold(
       backgroundColor: const Color(0xffF3EEE2),
       appBar: AppBar(
@@ -64,15 +43,14 @@ class _SearcScreenState extends State<SearcScreen> {
       // ignore: avoid_unnecessary_containers
       body: Container(
         decoration: mainScreenGradient,
-        child: FutureBuilder<List<Book>>(
-          future: BookFunctions.getBookLocally(context),
-          builder: (contex, snapshot) {
-            final book = snapshot.data;
+        child: FutureBuilder<List<Chapters>>(
+          future: getChaptersLocally(context, widget.bookIndex ?? 0),
+          builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return buildBook(contex, book![widget.bookIndex ?? 0]);
+              return buildBook(context, snapshot.data!);
             } else if (snapshot.hasError) {
               return const Center(
-                child: Text('Some erro occured'),
+                child: Text('Some error occurred'),
               );
             } else {
               return const CircularProgressIndicator();
@@ -80,28 +58,60 @@ class _SearcScreenState extends State<SearcScreen> {
           },
         ),
       ),
-      // body:
-      // Container(
-      //   color: const Color(0xffF3EEE2),
-      // alignment: Alignment.center,
-      //   height: MediaQuery.of(context).size.height,
-      //   width: MediaQuery.of(context).size.width,
-      // child: IconButton(
-      //   onPressed: () {
-      //     showSearch(
-      //         context: context,
-      //         delegate: CoustomSearch(),
-      //         useRootNavigator: true);
-      //   },
-      //   icon: const Icon(
-      //     Icons.search,
-      //     color: iconColor,
-      //     size: 100,
-      //   ),
-      // ),
-      // ),
     );
   }
+}
+
+Widget buildBook(BuildContext context, List<Chapters> chapters) {
+  return AnimationLimiter(
+    child: ListView.separated(
+      separatorBuilder: (context, index) => Divider(
+        color: dividerColor,
+      ),
+      scrollDirection: Axis.vertical,
+      padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
+      physics: const BouncingScrollPhysics(),
+      itemCount: chapters.length,
+      itemBuilder: (context, index) {
+        final Chapters chapter = chapters[index];
+
+        return AnimationConfiguration.staggeredGrid(
+          position: index,
+          duration: const Duration(milliseconds: 500),
+          columnCount: chapters.length,
+          child: ScaleAnimation(
+            child: ListTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return TextScreen(
+                        texts: chapter.texts,
+                        chapter: chapter,
+                        index: index,
+                      );
+                    },
+                  ),
+                );
+              },
+              title: Text(
+                chapters[index].name ?? '0',
+                maxLines: 3,
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  overflow: TextOverflow.ellipsis,
+                  fontWeight: FontWeight.w600,
+                  color: textColor,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    ),
+  );
 }
 
 class CoustomSearch extends SearchDelegate {
@@ -130,7 +140,7 @@ class CoustomSearch extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final books = Provider.of<List<Book>>(context);
+    final books = Provider.of<List<Chapters>>(context);
     List<String> matchQuery = [];
     for (var item in books) {
       if (item.name!.toLowerCase().contains(
@@ -226,53 +236,4 @@ class CoustomSearch extends SearchDelegate {
           );
         });
   }
-}
-
-Widget buildBook(BuildContext context, Book book) {
-  final books = Provider.of<List<Book>>(context);
-  return AnimationLimiter(
-    child: ListView.separated(
-        separatorBuilder: (contex, index) => Divider(
-              color: dividerColor,
-            ),
-        scrollDirection: Axis.vertical,
-        padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
-        physics: const BouncingScrollPhysics(),
-        itemCount: books.length,
-        itemBuilder: (context, index) {
-          final Chapter chapter = book.chapters![index];
-
-          // ignore: sized_box_for_whitespace
-          return AnimationConfiguration.staggeredGrid(
-            position: index,
-            duration: const Duration(milliseconds: 500),
-            columnCount: books[index].chapters!.length,
-            child: ScaleAnimation(
-              child: ListTile(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return TextScreen(
-                        texts: chapter.texts,
-                        chapter: chapter,
-                        index: index,
-                      );
-                    },
-                  ));
-                },
-                title: Text(
-                  books[index].name!,
-                  maxLines: 3,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      overflow: TextOverflow.ellipsis,
-                      fontWeight: FontWeight.w600,
-                      color: textColor),
-                ),
-              ),
-            ),
-          );
-        }),
-  );
 }

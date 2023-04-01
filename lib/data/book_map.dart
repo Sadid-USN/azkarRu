@@ -1,84 +1,88 @@
 class Book {
-  String? name;
-  String? image;
-  List<Chapter>? chapters;
+  final int? id;
+  final String? name;
+  final String? image;
+  final List<Chapters>? chapters;
 
-  Book({this.name, this.image, this.chapters});
+  Book({
+    this.id,
+    this.name,
+    this.image,
+    this.chapters,
+  });
 
-  Book.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    image = json['image'];
-    if (json['chapters'] != null) {
-      chapters = [];
-      json['chapters'].forEach((v) {
-        chapters!.add(Chapter.fromJson(v));
-      });
-    }
-  }
+  Book.fromJson(Map<String, dynamic> json)
+      : id = json['id'] as int?,
+        name = json['name'] as String?,
+        image = json['image'] as String?,
+        chapters = (json['chapters'] as List?)
+            ?.map((dynamic e) => Chapters.fromJson(e as Map<String, dynamic>))
+            .toList();
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['image'] = image;
-    data['chapters'] = chapters!.map((v) => v.toJson()).toList();
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'image': image,
+        'chapters': chapters?.map((e) => e.toJson()).toList()
+      };
 }
 
-class Chapter {
-  int? id;
-  String? listimage;
-  String? name;
-  List<Texts>? texts;
+class Chapters {
+  final int? id;
+  final String? listimage;
+  final String? name;
+  final List<Texts>? texts;
 
-  Chapter({this.id, this.listimage, this.name, this.texts});
+  Chapters({
+    this.id,
+    this.listimage,
+    this.name,
+    this.texts,
+  });
 
-  Chapter.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    listimage = json['listimage'];
-    name = json['name'];
-    if (json['texts'] != null) {
-      texts = [];
-      json['texts'].forEach((v) {
-        texts!.add(Texts.fromJson(v));
-      });
-    }
-  }
+  Chapters.fromJson(Map<String, dynamic> json)
+      : id = json['id'] as int?,
+        listimage = json['listimage'] as String?,
+        name = json['name'] as String?,
+        texts = (json['texts'] as List?)
+            ?.map((dynamic e) => Texts.fromJson(e as Map<String, dynamic>))
+            .toList();
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['listimage'] = listimage;
-    data['name'] = name;
-    data['texts'] = texts!.map((v) => v.toJson()).toList();
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'listimage': listimage,
+        'name': name,
+        'texts': texts?.map((e) => e.toJson()).toList()
+      };
 }
 
 class Texts {
-  String? id;
-  String? text;
-  String? arabic;
-  String? translation;
-  String? url;
+  final String? id;
+  final String? text;
+  final String? arabic;
+  final String? translation;
+  final String? url;
 
-  Texts({this.id, this.text, this.arabic, this.translation, this.url});
+  Texts({
+    this.id,
+    this.text,
+    this.arabic,
+    this.translation,
+    this.url,
+  });
 
-  Texts.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    text = json['text'];
-    arabic = json['arabic'];
-    translation = json['translation'];
-    url = json['url'];
-  }
+  Texts.fromJson(Map<String, dynamic> json)
+      : id = json['id'] as String?,
+        text = json['text'] as String?,
+        arabic = json['arabic'] as String?,
+        translation = json['translation'] as String?,
+        url = json['url'] as String?;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['text'] = text;
-    data['arabic'] = arabic;
-    data['translation'] = translation;
-    data['url'] = url;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'text': text,
+        'arabic': arabic,
+        'translation': translation,
+        'url': url
+      };
 }
