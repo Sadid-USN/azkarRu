@@ -1,3 +1,4 @@
+import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -96,29 +97,29 @@ class NotificationService {
 }
 
 List<String> titleList = [
-  "Здоровое сердце!",
-  "Милосердие",
-  "Истинный мусульманин",
-  "Сияющее лицо",
-  "Родители!",
-  "Говори благое",
-  "Почитание соседа",
-  "Всевышний Аллах сказал",
-  "Всевышний Аллах сказал",
-  "Всевышний Аллах сказал",
-  "Защита в поминании",
+  LocaleKeys.titlenotifi1,
+  LocaleKeys.titlenotifi2,
+  LocaleKeys.titlenotifi3,
+  LocaleKeys.titlenotifi4,
+  LocaleKeys.titlenotifi5,
+  LocaleKeys.titlenotifi6,
+  LocaleKeys.titlenotifi7,
+  LocaleKeys.titlenotifi8,
+  LocaleKeys.titlenotifi9,
+  LocaleKeys.titlenotifi10,
+  LocaleKeys.titlenotifi11,
 ];
 
 List<String> bodyList = [
-  "О Аллах, поистине, я молю Тебя сделать моё сердце здравым!",
-  "Кто не милует, не будет помилован Аллахом. (Муслим)",
-  "Мусульманин – это тот, от чьих рук и языка находятся в безопасности другие мусульмане",
-  "Улыбка в лицо твоего брата есть садака",
-  "Довольство Аллаха в довольстве родителей. Гнев Аллаха в гневе родителей (Тирмизи)",
-  "Пусть тот, кто верует в Аллаха и в Последний день, говорит благое или молчит",
-  "Поминайте Меня, и Я буду помнить о вас. (Аль-Бакара:152)",
-  "О те, которые уверовали! Поминайте Аллаха многократно (Аль-Ахзаб:41).",
-  "и часто поминающих Аллаха мужчин и женщин, Аллах уготовил прощение и великую награду. (Аль-Ахзаб:35)",
-  "Разве не поминанием Аллаха утешаются сердца? (Ар-Раад:35)",
-  "Раб (Аллаха) защищён от того, что исходит от шайтана, пока поминает Всевышнего Аллаха",
+  LocaleKeys.bodynotifi1,
+  LocaleKeys.bodynotifi2,
+  LocaleKeys.bodynotifi3,
+  LocaleKeys.bodynotifi4,
+  LocaleKeys.bodynotifi5,
+  LocaleKeys.bodynotifi6,
+  LocaleKeys.bodynotifi7,
+  LocaleKeys.bodynotifi8,
+  LocaleKeys.bodynotifi9,
+  LocaleKeys.bodynotifi10,
+  LocaleKeys.bodynotifi11,
 ];

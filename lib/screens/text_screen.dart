@@ -6,10 +6,12 @@ import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/data/book_map.dart';
+import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/style/my_text_style.dart';
 import 'package:clay_containers/constants.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:clipboard/clipboard.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -227,7 +229,7 @@ class _TextScreenState extends State<TextScreen> {
               Center(
                 child: ExpandablePanel(
                   header: Text(
-                    "Перевод:",
+                    LocaleKeys.translation.tr(),
                     textAlign: TextAlign.start,
                     style: expandableTextStyle,
                   ),

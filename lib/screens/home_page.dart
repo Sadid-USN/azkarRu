@@ -46,8 +46,8 @@ class _HomePageState extends State<HomePage> {
     tz.initializeTimeZones();
 
     final randomIndex = random.nextInt(10) + 1;
-    final title = titleList[randomIndex];
-    final body = bodyList[randomIndex];
+    final title = titleList[randomIndex].tr();
+    final body = bodyList[randomIndex].tr();
 
     notificationService.dailyAtNotification(1, title, body, 1);
   }

@@ -12,7 +12,7 @@
     "title8": "Relationship",
     "title9": "Nature",
     "title10": "Illness and death",
-    "title11": "Ruqya from witchcraft and jinx",
+    "title11": "Ruqyah from Sihr (magic) and evil eye",
     "title12": "Family and life",
     "title13": "Ahkams of sacrifices",
     "title14": "Quran prayers",
@@ -27,5 +27,32 @@
     "favorite": "Favorite chapters",
     "hijri": "Hijri calendar",
     "calendar": "Calendar",
-    "learnMore": "Learn more"
+    "learnMore": "Learn more",
+    "translation": "Translation",
+
+    "titlenotifi1": "Healthy Heart!",
+    "titlenotifi2": "Mercy",
+    "titlenotifi3": "True Muslim",
+    "titlenotifi4": "Radiant Face",
+    "titlenotifi5": "Parents!",
+    "titlenotifi6": "Speak Good",
+    "titlenotifi7": "Respect for Neighbor",
+    "titlenotifi8": "Allah the Almighty said",
+    "titlenotifi9": "Allah the Almighty said",
+    "titlenotifi10": "Allah the Almighty said",
+    "titlenotifi11": "Protection in Remembrance",
+
+    "bodynotifi1": "O Allah, truly I ask You to make my heart healthy!",
+    "bodynotifi2": "Whoever does not show mercy will not be shown mercy by Allah. (Muslim)",
+    "bodynotifi3": "A Muslim is the one from whose tongue and hand others are safe.",
+    "bodynotifi4": "A smile to your brother's face is a charity.",
+    "bodynotifi5": "Allah's pleasure lies in the satisfaction of parents. Allah's displeasure lies in their anger. (Tirmidhi)",
+    "bodynotifi6": "Let him who believes in Allah and the Last Day either speak good or remain silent.",
+    "bodynotifi7": "Remember Me, and I will remember you. (Al-Baqarah: 152)",
+    "bodynotifi8": "O you who have believed, remember Allah with much remembrance (Al-Ahzab: 41).",
+    "bodynotifi9": "And for men and women who engage much in Allah's remembrance, Allah has prepared forgiveness and a great reward. (Al-Ahzab: 35)",
+    "bodynotifi10": "Verily, in the remembrance of Allah do hearts find rest. (Ar-Ra'd: 28)",
+    "bodynotifi11": "A servant (of Allah) is shielded from Satan when he remembers Allah."
+
+
 }
