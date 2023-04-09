@@ -2585,16 +2585,16 @@
                     },
                     {
                         "id": "3",
-                        "text": "",
+                        "text": "fa sayakfīkahumu Allāhu wa huwa as-samīu al-alīmu",
                         "arabic": "فَسَيَكْفِيكَهُمُ اللَّهُ وَهُوَ السَّمِيعُ الْعَلِيمُ",
                         "translation": "But Allah will spare you their evil. For He is the All-Hearing, All-Knowing. (Al-Baqarah: 137)",
                         "url": "https://www.everyayah.com/data/MaherAlMuaiqly128kbps/002137.mp3"
                     },
                     {
                         "id": "4",
-                        "text": "fa sayakfīkahumu Allāhu wa huwa as-samīu al-alīmu.",
+                        "text": "Inna fee khalqi alssamawati wa al-ardi wa ikhtilafi allayli wa alnnahari wa alfulki allatee tajree fee albahri bima yanfaAAu alnnasa wama anzala Allahu mina alssama-i min ma-in faahya bihi al-arda baAAda mawtiha wabaththa feeha min kulli dabbatin wa tasreefi alrriyahi wa alssahabi almusakhkhari bayna alssamai wa al-ardi la-ayatin liqawmin yaaqiloon.",
                         "arabic": "إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافِ اللَّيْلِ وَالنَّهَارِ وَالْفُلْكِ الَّتِي تَجْرِي فِي الْبَحْرِ بِمَا يَنْفَعُ النَّاسَ وَمَا أَنْزَلَ اللَّهُ مِنَ السَّمَاءِ مِنْ مَاءٍ فَأَحْيَا بِهِ الْأَرْضَ بَعْدَ مَوْتِهَا وَبَثَّ فِيهَا مِنْ كُلِّ دَابَّةٍ وَتَصْرِيفِ الرِّيَاحِ وَالسَّحَابِ الْمُسَخَّرِ بَيْنَ السَّمَاءِ وَالْأَرْضِ لَآيَاتٍ لِقَوْمٍ يَعْقِلُونَ",
-                        "translation": "Воистину, в сотворении небес и земли, в смене ночи и дня, в кораблях, которые плывут по морю с тем, что приносит пользу людям, в воде, которую Аллах ниспослал с неба и посредством которой Он оживил мертвую землю и расселил на ней всевозможных животных, в смене ветров, в облаке, подчиненном между небом и землей, заключены знамения для людей разумеющих. (Аль-Бакара: 164)",
+                        "translation": "Indeed, in the creation of the heavens and the earth; the alternation of the day and the night; the ships that sail the sea for the benefit of humanity; the rain sent down by Allah from the skies, reviving the earth after its death; the scattering of all kinds of creatures throughout; the shifting of the winds; and the clouds drifting between the heavens and the earth—˹in all of this˺ are surely signs for people of understanding. (Al-Baqarah: 164)",
                         "url": "https://www.everyayah.com/data/MaherAlMuaiqly128kbps/002164.mp3"
                     }
                 ]
@@ -2683,7 +2683,7 @@
                     },
                     {
                         "id": "At-Tawba",
-                        "text": "",
+                        "text": "Qatiluhum yuAAaththibhumu Allah bi-aydeekum wayukhzihim wayansurkum AAalayhim wayashfi sudoora qawmin mu'minin",
                         "arabic": "قَـٰتِلُوهُمْ يُعَذِّبْهُمُ ٱللَّهُ بِأَيْدِيكُمْ وَيُخْزِهِمْ وَيَنصُرْكُمْ عَلَيْهِمْ وَيَشْفِ صُدُورَ قَوْمٍۢ مُّؤْمِنِينَ",
                         "translation": "˹So˺ fight them and Allah will punish them at your hands, put them to shame, help you overcome them, and soothe the hearts of the believers",
                         "url": "https://www.everyayah.com/data/MaherAlMuaiqly128kbps/009014.mp3"
@@ -2692,7 +2692,7 @@
                         "id": "At-Tawba",
                         "text": "Qatiluhum yu'azzibhumu Allahu bi-aydeekum wa yukhzihim wa yansurkum 'alayhim wa yashfi sudoora qawmin mu'mineen.",
                         "arabic": " ثُمَّ أَنْزَلَ اللَّهُ سَكِينَتَهُ عَلَىٰ رَسُولِهِ وَعَلَى الْمُؤْمِنِينَ وَأَنْزَلَ جُنُودًا لَمْ تَرَوْهَا وَعَذَّبَ الَّذِينَ كَفَرُوا وَذَٰلِكَ جَزَاءُ الْكَافِرِينَ",
-                        "translation": "Потом Аллах ниспослал спокойствие Своему Посланнику и верующим, ниспослал воинов, которых вы не видите, и подверг мучениям тех, кто не верует. Таково возмездие неверующим!",
+                        "translation": "Then Allah sent down His reassurance1 upon His Messenger and the believers, and sent down forces2 you could not see, and punished those who disbelieved. Such was the reward of the disbelievers. (At-Tawbah:26)",
                         "url": "https://www.everyayah.com/data/MaherAlMuaiqly128kbps/009026.mp3"
                     },
                     {
@@ -2759,61 +2759,61 @@
                 "name": "Ayahs from different surahs against sihr-3",
                 "texts": [
                     {
-                        "id": "Сура Аш-Шуара",
-                        "text": "",
+                        "id": "Ash-Shu'ara",
+                        "text": "Wa-idha maridtu fahuwa yashfeeni.",
                         "arabic": "وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ",
-                        "translation": "Который исцеляет меня, когда я заболеваю",
+                        "translation": "And He ˹alone˺ heals me when I am sick. (Ash-Shu'ar:80)",
                         "url": "https://www.everyayah.com/data/Ibrahim_Akhdar_32kbps/026080.mp3"
                     },
                     {
-                        "id": "Сура Ас-Саффат",
-                        "text": "",
+                        "id": "As-Saffat",
+                        "text": "Wa alssaffati saffan, faalzzajirati zajran, faalttaliyati thikran, inna ilahakum lawahidun, rabbusamawati waalardi wama baynahuma warabbu almashariqi, inna zayyannaa alssamaa-a alddunya bizeenatin alkawakibi, waHifthan min kulli shayTaanin maridin, la yasmaAAoona ila almalaa-i alAAalaa wa yuqdhafoona min kulli janibin, duhooran walahum AAathabun waasibun, illa man khaTifa alkhafthata faatbaAAahu shihabun thaQib.",
                         "arabic": "وَالصَّافَّاتِ صَفًّا ﴿ ١ ﴾ فَالزَّاجِرَاتِ زَجْرًا ﴿ ٢ ﴾ فَالتَّالِيَاتِ ذِكْرًا ﴿ ٣ ﴾ إِنَّ إِلَٰهَكُمْ لَوَاحِدٌ ﴿ ٤ ﴾ رَبُّ السَّمَاوَاتِ وَالْأَرْضِ وَمَا بَيْنَهُمَا وَرَبُّ الْمَشَارِقِ ﴿ ٥ ﴾ إِنَّا زَيَّنَّا السَّمَاءَ الدُّنْيَا بِزِينَةٍ الْكَوَاكِبِ ﴿ ٦ ﴾ وَحِفْظًا مِنْ كُلِّ شَيْطَانٍ مَارِدٍ ﴿ ٧ ﴾ لَا يَسَّمَّعُونَ إِلَى الْمَلَإِ الْأَعْلَىٰ وَيُقْذَفُونَ مِنْ كُلِّ جَانِبٍ ﴿ ٨ ﴾ دُحُورًا وَلَهُمْ عَذَابٌ وَاصِبٌ ﴿ ٩ ﴾ إِلَّا مَنْ خَطِفَ الْخَطْفَةَ فَأَتْبَعَهُ شِهَابٌ ثَاقِبٌ",
-                        "translation": "Клянусь выстроившимися в ряды, онящими упорно, читающими напоминание! Воистину, ваш Бог — Единственный. Он — Господь небес, земли и того, что между ними, Господь восходов. Мы украсили ближайшее небо красотой звезд (или звездами) и оберегаем его от всякого мятежного дьявола. Они не могут прислушаться к высшему сонму, и их забрасывают со всех сторон, чтобы изгнать оттуда. Им уготованы вечные мучения.",
+                        "translation": "By those ˹angels˺ lined up in ranks, and those who diligently drive ˹the clouds˺,and those who recite the Reminder! Surely your God is One! ˹He is˺ the Lord of the heavens and the earth and everything in between, and the Lord of all points of sunrise. Indeed, We have adorned the lowest heaven with the stars for decoration and ˹for˺ protection from every rebellious devil. They cannot listen to the highest assembly ˹of angels˺ for they are pelted from every side, ˹fiercely˺ driven away. And they will suffer an everlasting torment. (As-Saffat:1,9)",
                         "url": "https://ia801200.us.archive.org/14/items/wadie_alyamni/037.mp3"
                     },
                     {
-                        "id": "Сура Аль-Фуссилят",
-                        "text": "  ",
+                        "id": "Fussilat",
+                        "text": "qul huwa lilladheena amanoo hudan was",
                         "arabic": "قُلْ هُوَ لِلَّذِينَ آمَنُوا هُدًى وَشِفَاءٌ",
-                        "translation": "Если бы Мы сделали его Кораном не на арабском языке, то они непременно сказали бы: «Почему его аяты не разъяснены? Неарабская речь и араб?». Скажи: «Он является верным руководством и исцелением для тех, которые уверовали. А уши неверующих поражены глухотой, и они слепы к нему. Это — те, к которым взывают издалека».",
+                        "translation": "Say, ˹O Prophet,˺ “It is a guide and a healing to the believers. (Fussilat:44)",
                         "url": "https://www.everyayah.com/data/Ghamadi_40kbps/041044.mp3"
                     },
                     {
-                        "id": "Сура Аль-Ахкаф",
-                        "text": "",
+                        "id": "Al-Ahqaf",
+                        "text": "Ya qawmana ajeeboo daAAiya Allahi wa aminoo bihi yaghfir lakum min thunoobikum wayujirkum min Aadhaabin aleem.",
                         "arabic": "يَا قَوْمَنَا أَجِيبُوا دَاعِيَ اللَّهِ وَآمِنُوا بِهِ يَغْفِرْ لَكُمْ مِنْ ذُنُوبِكُمْ وَيُجِرْكُمْ مِنْ عَذَابٍ أَلِيمٍ",
-                        "translation": "О народ наш! Ответьте проповеднику Аллаха и уверуйте в него, и тогда Он простит вам некоторые из ваших грехов и спасет вас от мучительных страданий».",
+                        "translation": "O  our fellow jinn! Respond to the caller of Allah and believe in him, He will forgive your sins and protect you from a painful punishment. (Al-Ahqaf:31)",
                         "url": "https://www.everyayah.com/data/Abdul_Basit_Murattal_192kbps/046031.mp3"
                     },
                     {
-                        "id": "Сура Аль-Фатх",
-                        "text": "",
+                        "id": "Al-Fath",
+                        "text": "Huwa alladhi anzala alssakeenata fee quloobi almumineena liyazdadu eemanan ma'a eemanihim.",
                         "arabic": "هُوَ الَّذِي أَنْزَلَ السَّكِينَةَ فِي قُلُوبِ الْمُؤْمِنِينَ لِيَزْدَادُوا إِيمَانًا مَعَ إِيمَانِهِمْ",
-                        "translation": "Он — Тот, Кто ниспослал покой в сердца верующих, чтобы их вера увеличилась. Аллаху принадлежит воинство небес и земли. Аллах — Знающий, Мудрый.",
+                        "translation": "He is the One Who sent down serenity upon the hearts of the believers so that they may increase even more in their faith. (Al-Fath:4)",
                         "url": "https://www.everyayah.com/data/Abdul_Basit_Murattal_192kbps/048004.mp3"
                     },
                     {
-                        "id": "Сура Аль-Фатх",
-                        "text": "",
+                        "id": "Al-Fath",
+                        "text": "Fa-anzala Allahu sakeenatahu Aala rasoolihi waAAala almu/mineena waalzamahum kalimata alttaqwa.",
                         "arabic": "فَأَنْزَلَ اللَّهُ سَكِينَتَهُ عَلَىٰ رَسُولِهِ وَعَلَى الْمُؤْمِنِينَ وَأَلْزَمَهُمْ كَلِمَةَ التَّقْوَىٰ",
-                        "translation": "Вот неверующие поместили в своих сердцах заносчивость — заносчивость времен невежества, а Аллах ниспослал Своему Посланнику и верующим покой и возложил на них (или сделал неразлучным с ними) слово богобоязненности (свидетельство о том, что нет божества, кроме Аллаха). Они заслуживали его более других и были достойны его. Аллах же знает о всякой вещи.",
+                        "translation": "then Allah sent down His serenity upon His Messenger and the believers, inspiring them to uphold the declaration of faith,2 for they were better entitled and more worthy of it. (Al-Fath:26)",
                         "url": "https://www.everyayah.com/data/Abdul_Basit_Murattal_192kbps/048026.mp3"
                     },
                     {
-                        "id": "Сура Ар-Рахман",
-                        "text": "",
+                        "id": "Ar-Rahman",
+                        "text": "sanafroghu lakum ayyuha althaqalani, fabi-ayyi alaa-i rabbikuma tukaththibani, ya maAAshara aljinni waalinsi ini istataAAtum an tanfuthoo min aqtari alssamawati wa-al-ardi fa-infuthoo la tanfuthoona illa bisultanin, fabi-ayyi alaa-i rabbikuma tukaththibani.",
                         "arabic": "سَنَفْرُغُ لَكُمْ أَيُّهَ الثَّقَلَانِ ﴿ ٣١ ﴾ فَبِأَيِّ آلَاءِ رَبِّكُمَا تُكَذِّبَانِ ﴿ ٣٢ ﴾ يَا مَعْشَرَ الْجِنِّ وَالْإِنْسِ إِنِ اسْتَطَعْتُمْ أَنْ تَنْفُذُوا مِنْ أَقْطَارِ السَّمَاوَاتِ وَالْأَرْضِ فَانْفُذُوا لَا تَنْفُذُونَ إِلَّا بِسُلْطَانٍ ﴿ ٣٣ ﴾ فَبِأَيِّ آلَاءِ رَبِّكُمَا تُكَذِّبَانِ",
-                        "translation": "Скоро Мы займемся только вами, о два весомых (или обремененных) рода! Какую же из милостей вашего Господа вы считаете ложью? О сонмище джиннов и людей! Если вы можете проникнуть за пределы небес и земли, то проникните. Но вы не проникните, не обладая властью (или ясным доводом)! Какую же из милостей вашего Господа вы считаете ложью?",
+                        "translation": "We will soon attend to you ˹for judgment˺, O  two multitudes ˹of jinn and humans˺! Then which of your Lord’s favours will you both deny? O  assembly of jinn and humans! If you can penetrate beyond the realms of the heavens and the earth, then do so. ˹But˺ you cannot do that without ˹Our˺ authority. Then which of your Lord’s favours will you both deny?",
                         "url": "https://ia801208.us.archive.org/33/items/Quran-Huzza-Al_Baloushi/055.mp3"
-                    },
-                    {
-                        "id": "Сура Аль-Хашр",
-                        "text": "",
-                        "arabic": "لَوْ أَنْزَلْنَا هَٰذَا الْقُرْآنَ عَلَىٰ جَبَلٍ لَرَأَيْتَهُ خَاشِعًا مُتَصَدِّعًا مِنْ خَشْيَةِ اللَّهِ وَتِلْكَ الْأَمْثَالُ نَضْرِبُهَا لِلنَّاسِ لَعَلَّهُمْ يَتَفَكَّرُونَ ﴿ ٢١ ﴾ هُوَ اللَّهُ الَّذِي لَا إِلَٰهَ إِلَّا هُوَ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ هُوَ الرَّحْمَٰنُ الرَّحِيمُ ﴿ ٢٢ ﴾ هُوَ اللَّهُ الَّذِي لَا إِلَٰهَ إِلَّا هُوَ الْمَلِكُ الْقُدُّوسُ السَّلَامُ الْمُؤْمِنُ الْمُهَيْمِنُ الْعَزِيزُ الْجَبَّارُ الْمُتَكَبِّرُ سُبْحَانَ اللَّهِ عَمَّا يُشْرِكُونَ ﴿ ٢٣ ﴾ هُوَ اللَّهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ لَهُ الْأَسْمَاءُ الْحُسْنَىٰ يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ وَالْأَرْضِ وَهُوَ الْعَزِيزُ الْحَكِيمُ",
-                        "translation": "Если бы Мы ниспослали этот Коран горе, то ты увидел бы, как она смиренно раскалывается от страха перед Аллахом. Такие притчи Мы приводим людям для того, чтобы они поразмыслили. Он — Аллах, и нет божества, кроме Него, Ведающего сокровенное и явное. Он — Милостивый, Милосердный. Он — Аллах, и нет божества, кроме Него, Властелина, Святого, Пречистого, Оберегающего, Хранителя, Могущественного, Могучего, Гордого. Пречист Аллах и далек от того, что они приобщают в сотоварищи. Он — Аллах, Творец, Создатель, Дарующий облик. У Него — самые прекрасные имена. Славит Его то, что на небесах и на земле. Он — Могущественный, Мудрый.",
-                        "url": "https://ia801200.us.archive.org/14/items/wadie_alyamni/059.mp3"
-                    }
+                        },
+                        {
+                            "id": "Al-Hashr",
+                            "text": "",
+                            "arabic": "لَوْ أَنْزَلْنَا هَٰذَا الْقُرْآنَ عَلَىٰ جَبَلٍ لَرَأَيْتَهُ خَاشِعًا مُتَصَدِّعًا مِنْ خَشْيَةِ اللَّهِ وَتِلْكَ الْأَمْثَالُ نَضْرِبُهَا لِلنَّاسِ لَعَلَّهُمْ يَتَفَكَّرُونَ ﴿ ٢١ ﴾ هُوَ اللَّهُ الَّذِي لَا إِلَٰهَ إِلَّا هُوَ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ هُوَ الرَّحْمَٰنُ الرَّحِيمُ ﴿ ٢٢ ﴾ هُوَ اللَّهُ الَّذِي لَا إِلَٰهَ إِلَّا هُوَ الْمَلِكُ الْقُدُّوسُ السَّلَامُ الْمُؤْمِنُ الْمُهَيْمِنُ الْعَزِيزُ الْجَبَّارُ الْمُتَكَبِّرُ سُبْحَانَ اللَّهِ عَمَّا يُشْرِكُونَ ﴿ ٢٣ ﴾ هُوَ اللَّهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ لَهُ الْأَسْمَاءُ الْحُسْنَىٰ يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ وَالْأَرْضِ وَهُوَ الْعَزِيزُ الْحَكِيمُ",
+                            "translation": "He is Allah—there is no god ˹worthy of worship˺ except Him: Knower of the seen and unseen. He is the Most Compassionate, Most Merciful. He is Allah—there is no god except Him: the King, the Most Holy, the All-Perfect, the Source of Serenity, the Watcher ˹of all˺, the Almighty, the Supreme in Might,1 the Majestic. Glorified is Allah far above what they associate with Him ˹in worship˺! He is Allah: the Creator, the Inventor, the Shaper. He ˹alone˺ has the Most Beautiful Names. Whatever is in the heavens and the earth ˹constantly˺ glorifies Him. And He is the Almighty, All-Wise. (Al-Hashr:22,24)",
+                            "url": "https://ia801200.us.archive.org/14/items/wadie_alyamni/059.mp3"
+                            }
                 ]
             },
             {
