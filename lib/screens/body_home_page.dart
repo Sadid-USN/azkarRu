@@ -184,19 +184,20 @@ const BodyHomePage({ Key? key }) : super(key: key);
                                  Positioned(
                                   bottom: 80,
                                   left: 40,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      showSearch(
-                                          context: context,
-                                          delegate: CoustomSearch(
-                                            index: index,
-                                          ));
-                                    },
-                                    icon: Icon(
-                                      FontAwesomeIcons.search,
-                                      color: textColor,
+                                  child:  IconButton(
+                                      onPressed: () {
+                                        showSearch(
+                                            context: context,
+                                            delegate: CoustomSearch(
+                                              index: index,
+                                            ));
+                                      },
+                                      icon: Icon(
+                                        FontAwesomeIcons.search,
+                                        color: textColor,
+                                      ),
                                     ),
-                                  ),
+                                  
                                 ),
                               ],
                             ),

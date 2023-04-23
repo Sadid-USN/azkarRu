@@ -26,16 +26,16 @@ Future<void> main() async {
 
   runApp(
     EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('ru')],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('ru'),
+        ],
         assetLoader: const CodegenLoader(),
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
         saveLocale: true,
         child: ChangeNotifierProvider(
-            create: (context) => AudioController(),
-          child: const MyApp())
-        
-        ),
+            create: (context) => AudioController(), child: const MyApp())),
   );
 }
 

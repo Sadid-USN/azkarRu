@@ -118,7 +118,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
                         }));
                       },
                       trailing: CircleAvatar(
-                        backgroundColor: const Color(0xffF2DFC7),
+                        backgroundColor: const Color(0xffF3EEE2),
                         child: LikeButton(
                           isLiked: isChapterLiked(chapter[index].id),
                           onTap: (isLiked) async {
