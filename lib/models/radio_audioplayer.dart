@@ -19,7 +19,7 @@ class RadioAudioPlayer extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       child: AnimationLimiter(
         child: ListView.builder(
-          padding: const EdgeInsets.only(bottom: 20),
+            padding: const EdgeInsets.only(bottom: 20),
             itemCount: listInfo.length,
             itemBuilder: (context, index) {
               return AnimationConfiguration.staggeredGrid(
@@ -28,11 +28,11 @@ class RadioAudioPlayer extends StatelessWidget {
                 columnCount: listInfo.length,
                 child: ScaleAnimation(
                   child: AudiPlyerCard(
-                    audioUrl: listInfo[index].audioUrl,
-                    image: listInfo[index].image,
-                    name: listInfo[index].name,
-                    subtitle: listInfo[index].subtitle,
-                  ),
+                  audioUrl: listInfo[index].audioUrl,
+                  image: listInfo[index].image,
+                  name: listInfo[index].name,
+                  subtitle: listInfo[index].subtitle,
+                    ),
                 ),
               );
             }),
@@ -70,25 +70,31 @@ class AudiPlyerCard extends StatelessWidget {
                 offset: const Offset(0, 1),
               ),
             ],
-            color: const Color(0xffF2DFC7),
+            color:  Colors.black38,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Stack(
             children: [
               ListTile(
-                title: Text(
-                  name,
-                  style: TextStyle(
-                      height: 1.5,
-                      fontSize: 14,
-                      color: textColor,
-                      fontWeight: FontWeight.w700),
+                title: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    name,
+                    style: const TextStyle(
+                        height: 1.5,
+                        fontSize: 14,
+                        color: titleTextColor,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
-                subtitle: Text(
-                  subtitle,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: textColor,
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    subtitle,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: titleTextColor,
+                    ),
                   ),
                 ),
                 trailing: CircleAvatar(
@@ -121,21 +127,33 @@ class AudiPlyerCard extends StatelessWidget {
                   ),
                 ),
               ),
-              // Positioned(
-              //   top: 10,
-              //   right: 80,
-              //   child: Consumer<AudioController>(
-              //     builder: (context, value, child) => IconButton(
-              //         onPressed: () {
-              //           value.skipTrack();
-              //         },
-              //         icon: const Icon(
-              //           Icons.skip_next,
-              //           color: Colors.white,
-              //           size: 40,
-              //         )),
-              //   ),
-              // ),
+              Positioned(
+                top: 5,
+                right: 80,
+                child: Consumer<AudioController>(
+                  builder: (context, audioController, child) => AnimateIcons(
+                    startIcon: Icons.stop,
+                    endIcon: Icons.stop,
+                    controller: audioController.buttonController,
+                    size: 45.0,
+                    onStartIconPress: () {
+                      if (audioController.url == audioUrl) {
+                        audioController.stopPlaying();
+                      }
+                      audioController.stopPlaying();
+                      return true;
+                    },
+                    onEndIconPress: () {
+                      audioController.stopPlaying();
+                      return true;
+                    },
+                    duration: const Duration(milliseconds: 250),
+                    startIconColor: Colors.white,
+                    endIconColor: Colors.white,
+                    clockwise: false,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

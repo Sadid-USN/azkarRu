@@ -1,5 +1,5 @@
 // @dart=2.9
-import 'package:avrod/controllers/global_controller.dart';
+import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/data/book_functions.dart';
 import 'package:avrod/screens/home_page.dart';
 import 'package:avrod/widgets/notification.dart';
@@ -31,7 +31,9 @@ Future<void> main() async {
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
         saveLocale: true,
-        child: const MyApp()
+        child: ChangeNotifierProvider(
+            create: (context) => AudioController(),
+          child: const MyApp())
         
         ),
   );
@@ -68,9 +70,7 @@ class MyApp extends StatelessWidget {
                               fontSize: 40, color: Colors.green),
                         )),
                       )
-                    : ChangeNotifierProvider(
-                      create: (context) => GlobalController(),
-                      child: const HomePage()),
+                    : const HomePage(),
               );
             },
           ),

@@ -303,7 +303,7 @@ class _TextScreenState extends State<TextScreen> {
                       size: 40.0,
                       onStartIconPress: () {
                         playSound(widget.texts![currentIndex].url!);
-                        print(widget.texts.toString());
+                        
 
                         return true;
                       },
