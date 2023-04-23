@@ -1,3 +1,5 @@
+import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -19,33 +21,9 @@ class RadioPlayerScreen extends StatelessWidget {
             value.stopPlaying();
             return true;
           },
-          child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: const Color(0xffF2DFC7),
-              leading: Consumer<AudioController>(
-                builder: (context, value, child) => IconButton(
-                  onPressed: () {
-                    value.stopPlaying();
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: iconColor,
-                  ),
-                ),
-              ),
-              elevation: 3.0,
-              title: Text(
-                "Radio Quran",
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: textColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              centerTitle: true,
-            ),
-            body: const RadioAudioPlayer(),
+          child: const Scaffold(
+           backgroundColor:  Color(0xffF3EEE2),
+            body: RadioAudioPlayer(),
           ),
         ),
       ),

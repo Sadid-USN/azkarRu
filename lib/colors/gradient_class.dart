@@ -6,7 +6,7 @@ BoxDecoration mainScreenGradient = const BoxDecoration(
   begin: Alignment.topLeft,
   end: Alignment.bottomLeft,
   colors: [
-    Color(0xffF2DFC7),
+    Color(0xffF3EEE2),
     Color(0xffF3EEE2),
   ],
 ));

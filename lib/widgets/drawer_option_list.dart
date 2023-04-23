@@ -1,9 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../generated/locale_keys.g.dart';
 
@@ -15,16 +13,16 @@ String _avrodAppLink =
 String _youTubeLink =
     'https://www.youtube.com/channel/UCR2bhAQKRXDmE4v_rDVNOrA';
 String _supportLink = 'https://taplink.cc/avrod';
-Future<void> _launchInBrowser(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url,
-        forceSafariVC: false,
-        forceWebView: false,
-        headers: <String, String>{'header_key': 'header_value'});
-  } else {
-    throw 'Пайванд кушода нашуд $url';
-  }
-}
+// Future<void> _launchInBrowser(String url) async {
+//   if (await canLaunch(url)) {
+//     await launch(url,
+//         forceSafariVC: false,
+//         forceWebView: false,
+//         headers: <String, String>{'header_key': 'header_value'});
+//   } else {
+//     throw 'Пайванд кушода нашуд $url';
+//   }
+// }
 
 class DrawerOption {
   Widget title;
@@ -49,10 +47,10 @@ class DrawerOption {
   }
 }
 
-final DrawerOption _option = DrawerOption(
-  title: Text(
-    LocaleKeys.share.tr(),
-    style: const TextStyle(fontSize: 14, color: Colors.white),
+final DrawerOption option = DrawerOption(
+  title: const Text(
+    LocaleKeys.share,
+    style: TextStyle(fontSize: 14, color: Colors.white),
   ),
   icon: Icon(
     Icons.share,
@@ -64,10 +62,10 @@ final DrawerOption _option = DrawerOption(
         'В Приложение Азкар собраны тоько достоверные молитвы из причистой сунны пророка (ﷺ).\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
   },
 );
-final DrawerOption _option_2 = _option.copyWith(
-  title: Text(
-    LocaleKeys.support.tr(),
-    style: const TextStyle(fontSize: 14, color: Colors.white),
+final DrawerOption option_2 = option.copyWith(
+  title: const Text(
+    LocaleKeys.support,
+    style: TextStyle(fontSize: 14, color: Colors.white),
   ),
   icon: Icon(
     FontAwesomeIcons.donate,
@@ -75,14 +73,14 @@ final DrawerOption _option_2 = _option.copyWith(
     size: 20.sp,
   ),
   onTap: () {
-    _launchInBrowser(_supportLink);
+    Share.share(_supportLink);
   },
 );
 
-final DrawerOption _option_3 = _option.copyWith(
-  title: Text(
-    LocaleKeys.email.tr(),
-    style: const TextStyle(fontSize: 14, color: Colors.white),
+final DrawerOption option_3 = option.copyWith(
+  title: const Text(
+    LocaleKeys.email,
+    style: TextStyle(fontSize: 14, color: Colors.white),
   ),
   icon: Icon(
     FontAwesomeIcons.envelope,
@@ -90,26 +88,26 @@ final DrawerOption _option_3 = _option.copyWith(
     size: 18.sp,
   ),
   onTap: () {
-    _launchInBrowser(_lounchUrlGmail);
+    Share.share(_lounchUrlGmail);
   },
 );
-final DrawerOption _option_4 = _option.copyWith(
-  title: Text(
-    LocaleKeys.allApps.tr(),
-    style: const TextStyle(fontSize: 14, color: Colors.white),
+final DrawerOption option_4 = option.copyWith(
+  title: const Text(
+    LocaleKeys.allApps,
+    style: TextStyle(fontSize: 14, color: Colors.white),
   ),
   icon: const CircleAvatar(
     radius: 15,
     backgroundImage: AssetImage('icons/apps.png'),
   ),
   onTap: () {
-    _launchInBrowser(_avrodAppLink);
+    Share.share(_avrodAppLink);
   },
 );
-final DrawerOption _option_5 = _option.copyWith(
-  title: Text(
-    LocaleKeys.instagram.tr(),
-    style: const TextStyle(fontSize: 16, color: Colors.white),
+final DrawerOption option_5 = option.copyWith(
+  title:  const Text(
+    LocaleKeys.instagram,
+    style: TextStyle(fontSize: 16, color: Colors.white),
   ),
   icon: Icon(
     FontAwesomeIcons.instagram,
@@ -117,11 +115,11 @@ final DrawerOption _option_5 = _option.copyWith(
     size: 21.sp,
   ),
   onTap: () {
-    _launchInBrowser(_linkInstagramm);
+    Share.share(_linkInstagramm);
   },
 );
-final DrawerOption _option_6 = _option.copyWith(
-  title: const Text(
+final DrawerOption option_6 = option.copyWith(
+  title:  const Text(
     'Darul-asar',
     style: TextStyle(fontSize: 14, color: Colors.white),
   ),
@@ -131,14 +129,22 @@ final DrawerOption _option_6 = _option.copyWith(
     size: 21.sp,
   ),
   onTap: () {
-    _launchInBrowser(_youTubeLink);
+    Share.share(_youTubeLink);
   },
 );
+final List<String> drawerTitles = [
+  LocaleKeys.share,
+  LocaleKeys.support,
+  LocaleKeys.email,
+  LocaleKeys.instagram,
+  'Darul-asar',
+];
+
 final List<DrawerOption> drawerOptionList = [
-  _option,
-  _option_2,
-  _option_3,
-  _option_4,
-  _option_5,
-  _option_6,
+  option,
+  option_2,
+  option_3,
+  option_4,
+  option_5,
+  option_6,
 ];

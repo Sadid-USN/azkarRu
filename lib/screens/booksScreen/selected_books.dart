@@ -1,5 +1,3 @@
-import 'package:avrod/colors/colors.dart';
-import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/screens/booksScreen/books_ditails.dart';
 import 'package:avrod/screens/booksScreen/pdf_api_class.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -17,27 +15,32 @@ class SelectedBooks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: iconColor,
-            )),
-        elevation: 0.0,
-        flexibleSpace: Container(
-          decoration: mainScreenGradient,
-        ),
-        title: Text('Книги',
-            style: TextStyle(fontSize: 18.sp, color: titleAbbBar)),
-        centerTitle: true,
-      ),
-      body: Container(
-        decoration: mainScreenGradient,
+      backgroundColor: const Color(0xffF3EEE2),
+      // appBar: 
+      // AppBar(
+      //   leading: IconButton(
+      //       onPressed: () {
+      //         Navigator.pop(context);
+      //       },
+      //       icon: const Icon(
+      //         Icons.arrow_back_ios,
+      //         color: iconColor,
+      //       )),
+      //   elevation: 3.0,
+      //   backgroundColor: const Color(0xffF6DEC4),
+      //   title: Text(LocaleKeys.library.tr(),
+      //       style: TextStyle(fontSize: 18.sp, color: titleAbbBar)),
+      //   centerTitle: true,
+      // ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 16),
         child: AnimationLimiter(
-          child: ListView.builder(
+          child: GridView.builder(
+            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 2 / 2.2,
+              mainAxisExtent: MediaQuery.of(context).size.height / 7
+            ),
             itemCount: booksRu.name!.length,
             itemBuilder: (context, index) {
               return AnimationConfiguration.staggeredList(
@@ -58,14 +61,25 @@ class SelectedBooks extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 5.0),
                           child: CachedNetworkImage(
-                            imageUrl: booksRu.urlImage![index],
+                            imageUrl:
+                                'https://i.pinimg.com/originals/f3/7d/c5/f37dc5e4ea716ad61962daf36a070c0d.jpg',
                             imageBuilder: (context, imageProvider) {
                               return Container(
                                 decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: 4.0,
+                                      offset: Offset(2.0, 2.0),
+                                    ),
+                                  ],
+                                  
                                   image: DecorationImage(
-                                      image: imageProvider, fit: BoxFit.cover),
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
                                   borderRadius: const BorderRadius.all(
-                                      Radius.circular(16.0)),
+                                      Radius.circular(12.0)),
                                 ),
                                 height: 12.h,
                                 child: Padding(
@@ -74,8 +88,8 @@ class SelectedBooks extends StatelessWidget {
                                     child: Text(
                                       booksRu.name![index],
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 14.sp,
+                                      style: const TextStyle(
+                                          fontSize: 10,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white),
                                     ),

@@ -1,5 +1,7 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
+import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -18,22 +20,8 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: const Color(0xffF2DFC7),
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: iconColor,
-            )),
-        elevation: 3.0,
-        title: Text('Календарь',
-            style: TextStyle(fontSize: 15.sp, color: titleAbbBar)),
-        centerTitle: true,
-      ),
+      backgroundColor: const Color(0xffF3EEE2),
+     
       body: Container(
         decoration: mainScreenGradient,
         child: TableCalendar(

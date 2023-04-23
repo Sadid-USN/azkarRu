@@ -265,8 +265,7 @@ class _TextScreenState extends State<TextScreen> {
     Texts text,
     int index,
   ) {
-    print(text.id);
-    print(index);
+   
     currentIndex = index;
     return ListView(
       physics: const BouncingScrollPhysics(),
@@ -361,7 +360,7 @@ class _TextScreenState extends State<TextScreen> {
                           size: 33.0,
                           onStartIconPress: () {
                             FlutterClipboard.copy(
-                                '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                                '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
 
                             return true;
                           },
@@ -376,7 +375,7 @@ class _TextScreenState extends State<TextScreen> {
                         IconButton(
                             onPressed: () {
                               Share.share(
-                                  '*${widget.chapter?.name}*\n${widget.texts![0].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![0].arabic!}\n${widget.texts![0].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                                  '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
                             },
                             icon: const Icon(Icons.share,
                                 size: 33.0, color: Colors.white)),

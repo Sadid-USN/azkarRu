@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MyFabCircularMenu extends StatefulWidget {
   const MyFabCircularMenu({Key? key}) : super(key: key);
@@ -16,16 +15,16 @@ const String _lounchUrlGmail =
     'https://accounts.google.com/signout/chrome/landing?continue=https://mail.google.com&oc=https://mail.google.com&hl=en';
 const String _linkInstagramm =
     'https://instagram.com/darul_asar?utm_medium=copy_link';
-Future<void> _launchInBrowser(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url,
-        forceSafariVC: false,
-        forceWebView: false,
-        headers: <String, String>{'header_key': 'header_value'});
-  } else {
-    throw 'Пайванд кушода нашуд $url';
-  }
-}
+// Future<void> _launchInBrowser(String url) async {
+//   if (await canLaunch(url)) {
+//     await launch(url,
+//         forceSafariVC: false,
+//         forceWebView: false,
+//         headers: <String, String>{'header_key': 'header_value'});
+//   } else {
+//     throw 'Пайванд кушода нашуд $url';
+//   }
+// }
 
 class _MyFabCircularMenuState extends State<MyFabCircularMenu> {
   @override
@@ -82,7 +81,7 @@ class _MyFabCircularMenuState extends State<MyFabCircularMenu> {
             )),
         IconButton(
             onPressed: () {
-              _launchInBrowser(_lounchUrlGmail);
+              Share.share(_lounchUrlGmail);
             },
             icon: Icon(
               FontAwesomeIcons.envelope,
@@ -91,7 +90,7 @@ class _MyFabCircularMenuState extends State<MyFabCircularMenu> {
             )),
         IconButton(
             onPressed: () {
-              _launchInBrowser(_linkInstagramm);
+              Share.share(_linkInstagramm);
             },
             icon: Icon(
               FontAwesomeIcons.instagram,

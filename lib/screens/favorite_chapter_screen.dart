@@ -25,26 +25,27 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
   Widget build(BuildContext context) {
     final books = Provider.of<List<Book>>(context);
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color(0xffF2DFC7),
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: iconColor,
-              )),
-          elevation: 3.0,
-          centerTitle: true,
-          title: Text(
-            'Избранные главы',
-            style: TextStyle(
-                fontSize: 14.sp, color: textColor, fontWeight: FontWeight.bold),
-          ),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: const Color(0xffF2DFC7),
+        //   leading: IconButton(
+        //       onPressed: () {
+        //         Navigator.pop(context);
+        //       },
+        //       icon: const Icon(
+        //         Icons.arrow_back_ios,
+        //         color: iconColor,
+        //       )),
+        //   elevation: 3.0,
+        //   centerTitle: true,
+        //   title: Text(
+        //     'Избранные главы',
+        //     style: TextStyle(
+        //         fontSize: 14.sp, color: textColor, fontWeight: FontWeight.bold),
+        //   ),
+        // ),
         // ignore: avoid_unnecessary_containers
         body: Container(
+     
           decoration: mainScreenGradient,
           child: ValueListenableBuilder(
             valueListenable: Hive.box(FAVORITES_BOX).listenable(),
@@ -63,6 +64,7 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
               // ignore: avoid_unnecessary_containers
               return AnimationLimiter(
                 child: ListView.separated(
+                  padding: const EdgeInsets.only(top: 25),
                   separatorBuilder: (context, index) => Divider(
                     color: dividerColor,
                   ),

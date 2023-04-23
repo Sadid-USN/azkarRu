@@ -1,5 +1,6 @@
 import 'package:avrod/widgets/drawer_option_list.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DrawerModel extends StatefulWidget {
   const DrawerModel({Key? key}) : super(key: key);
@@ -9,6 +10,8 @@ class DrawerModel extends StatefulWidget {
 }
 
 class _DrawerModelState extends State<DrawerModel> {
+
+  
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -19,16 +22,18 @@ class _DrawerModelState extends State<DrawerModel> {
           Container(
             padding: const EdgeInsets.only(top: 200),
             child: ListView.builder(
-              itemCount: drawerOptionList.length,
+              itemCount: drawerTitles.length,
               itemBuilder: (context, index) {
                 final optionList = drawerOptionList[index];
                 return Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: ListTile(
-                    title: optionList.title,
+                    title: Text(drawerTitles[index].tr(), style: const TextStyle(color: Colors.white),),
                     leading: optionList.icon,
                     onTap: () {
-                      optionList.onTap();
+                     
+                        optionList.onTap();
+                     
                     },
                   ),
                 );

@@ -17,6 +17,8 @@ class CodegenLoader extends AssetLoader{
   static const Map<String,dynamic> ru = {
   "avrod": "Азкар ежедневные молитвы",
   "lang": "Языки",
+  "search": "Поиск",
+  "radio": "Радио Коран",
   "title1": "Дуа начало дня",
   "title2": "Молитвы намаза",
   "title3": "Утренние и вечерние азкары",
@@ -70,6 +72,8 @@ class CodegenLoader extends AssetLoader{
 static const Map<String,dynamic> en = {
   "avrod": "Azkar Daily prayers",
   "lang": "Languages",
+  "search": "Search",
+  "radio": "Radio Quran",
   "title1": "Beginning of the day",
   "title2": "Salah prayers",
   "title3": "Morning and evening azkars",

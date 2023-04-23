@@ -1,4 +1,5 @@
 // @dart=2.9
+import 'package:avrod/controllers/global_controller.dart';
 import 'package:avrod/data/book_functions.dart';
 import 'package:avrod/screens/home_page.dart';
 import 'package:avrod/widgets/notification.dart';
@@ -30,32 +31,25 @@ Future<void> main() async {
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
         saveLocale: true,
-        child: const MyApp()),
+        child: const MyApp()
+        
+        ),
   );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({
-    Key key,
-  }) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return FutureBuilder<List<Book>>(
-          future: BookFunctions.getBookLocally(context),
-          builder: (context, snapshot) {
-            return Provider<List<Book>>(
-              create: (_) {
-                return snapshot.data;
-              },
-              child: MaterialApp(
+        return FutureProvider<List<Book>>(
+          create: (_) => BookFunctions.getBookLocally(context),
+          initialData: null,
+          child: Consumer<List<Book>>(
+            builder: (context, bookList, _) {
+              return MaterialApp(
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: context.localizationDelegates,
                 supportedLocales: context.supportedLocales,
@@ -65,7 +59,7 @@ class _MyAppState extends State<MyApp> {
                       Theme.of(context).textTheme),
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                 ),
-                home: snapshot.data == null
+                home: bookList == null
                     ? Scaffold(
                         body: Center(
                             child: JumpingText(
@@ -74,10 +68,12 @@ class _MyAppState extends State<MyApp> {
                               fontSize: 40, color: Colors.green),
                         )),
                       )
-                    : const HomePage(),
-              ),
-            );
-          },
+                    : ChangeNotifierProvider(
+                      create: (context) => GlobalController(),
+                      child: const HomePage()),
+              );
+            },
+          ),
         );
       },
     );

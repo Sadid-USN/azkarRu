@@ -3,6 +3,8 @@
 abstract class  LocaleKeys {
   static const avrod = 'avrod';
   static const lang = 'lang';
+  static const search = 'search';
+  static const radio = 'radio';
   static const title1 = 'title1';
   static const title2 = 'title2';
   static const title3 = 'title3';

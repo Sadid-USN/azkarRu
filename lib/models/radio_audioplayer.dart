@@ -19,6 +19,7 @@ class RadioAudioPlayer extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       child: AnimationLimiter(
         child: ListView.builder(
+          padding: const EdgeInsets.only(bottom: 20),
             itemCount: listInfo.length,
             itemBuilder: (context, index) {
               return AnimationConfiguration.staggeredGrid(

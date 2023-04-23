@@ -1,33 +1,33 @@
 [
     {
         "id": 0,
-        "name": "Beginning of the day",
+        "name": "Début de la journée",
         "image": "images/morning.png",
         "chapters": [
             {
                 "id": 0,
                 "listimage": "https://images.unsplash.com/photo-1574643156929-51fa098b0394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
-                "name": "Dua When waking up",
+                "name": "Dua lors du réveil",
                 "texts": [
                     {
                         "id": "Dua 1",
                         "text": "«Alhamdu lillāhil-ladhī 'ahyānā ba`da mā 'amātanā wa 'ilayhin-nushūr»",
                         "arabic": "الحَمْـدُ لِلّهِ الّذي أَحْـيانا بَعْـدَ ما أَماتَـنا وَإليه النُّـشور",
-                        "translation": "«Praise is to Allah Who gives us life after He has caused us to die and to Him is the return.».\n(Al-Bukhari, cf. Al-Asqalani, Fathul-Bari 11/113; Muslim 4/2083)",
+                        "translation": "«Louange à Allah qui nous a rendus à la vie après nous avoir fait mourir, et tout retourne à Lui.».\n(Al-Bukhari, cf. Al-Asqalani, Fathul-Bari 11/113; Muslim 4/2083)",
                         "url": "https://ia801300.us.archive.org/24/items/HisnulMuslimAudio_201510/n1.mp3"
                     },
                     {
                         "id": "Dua 2",
                         "text": "«Lā 'ilāha 'illallāhu wahdahu la sharīka lahu, lahul-mulku wa lahul-hamdu, wa huwa 'alā kulli shay'in qadīr Subhānallāhi, walhamdu lillāhi, wa lā 'ilāha 'illallāhu, wallāhu 'akbar, wa lā haula wa lā quwwata 'illā billāhil-`aliyyil-`azīm, rabbighfir lī.»",
                         "arabic": "لا إلهَ  إلاّ اللّهُ وَحْـدَهُ لا شَـریكَ لهُ، لهُ المُلـكُ ولهُ الحَمـد، وھوَ على كلّ شيءٍ قدیر، سُـبْحانَ االلهِ، والحمْـدُ الله ، ولا إلهَ إلاّ االلهُ واللهُ أكبَر، وَلا حَولَ وَلا قوّة إلاّ باللّهِ العليّ العظیم، رَبِّ اغْفرْ لي",
-                        "translation": "«There is none worthy of worship but Allah alone, Who has no partner, His is the dominion and to Him belongs all praise, and He is able to do all things. Glory is to Allah. Praise is to Allah. There is none worthy of worship but Allah. Allah is the Most Great. There is no might and no power except by Allah's leave, the Exalted, the Mighty. My Lord, forgive me.» (Whoever says this will be forgiven, and if he supplicates Allah, his prayer will be answered; if he performs ablution and prays, his prayer will be accepted. Al-Bukhari, cf. Al-Asqalani, Fathul-Bari 3/39, among others. The wording here is from Ibn Majah 2/335.)",
+                        "translation": "«Il n'y a de dieu qu'Allah seul, sans associé, à Lui appartient la souveraineté et à Lui revient toute louange, et Il est capable de toute chose. Gloire à Allah. Louange à Allah. Il n'y a de dieu qu'Allah. Allah est le Plus Grand. Il n'y a de force ni de puissance qu'en Allah, le Très Haut, le Tout-Puissant. Mon Seigneur, pardonne-moi.» (Celui qui dit cela sera pardonné, et s'il implore Allah, sa prière sera exaucée ; s'il fait ses ablutions et prie, sa prière sera acceptée. Al-Bukhari, cf. Al-Asqalani, Fathul-Bari 3/39, entre autres. La formulation ici vient d'Ibn Majah 2/335.)",
                         "url": "https://ia801300.us.archive.org/24/items/HisnulMuslimAudio_201510/n2.mp3"
                     },
                     {
                         "id": "Dua 3",
                         "text": "«Inna fī khalqi-ssamāwāti wal-'arđi wakhtilāfi-llayli wan-nahāri la'āyātin li'wlī-l-'albāb. Al-ladhīna yadhkurūna-allaha qiyāman wa qu`ūdan wa `alā junūbihim wa yatafakkarūna fī Khalqi-ssamāwāti wal-'arđi rabbanā mā khalaqta hādhā bāţilāan subĥānaka faqinā `adhāban-nār. Rabbanā 'innaka man tudkhili-nnāra faqad 'akhzaytahu wa mā li-žžālimīna min 'anşārin. Rabbanā 'innanā sami`nā munādīan yunādī lil'īmāni 'an 'āminū birabbikum fa 'āmannā. Rabbanā fāghfirlanā dhunūbanā wa kaffir `annā sayyi'ātinā wa tawaffanā ma`a al-'abrāri. Rabbanā wa 'ātinā mā wa`adtanā `alá rusulika wa lā tukhzinā yawmal-qiyāmati 'innaka lā tukhliful-mī`ād. Fāstajāba lahum rabbuhum 'annī lā 'uđī`u `amala `āmilin minkum min dhakarin 'aw 'unthá ba`đukum min ba`đin fa-lladhīna hājarū wa 'ukhrijū min diyārihim wa 'ūdhū fī sabīlī wa qātalū wa qutilū la'ukaffiranna `anhum sayyi'ātihim wa la'udkhilannahum jannātin tajrī min taĥtihāl-'anhāru thawāban min `indil-lahi wal-lāhu `indahu ĥusnuth-thawāb. Lā yaghurrannaka taqallubu 'l-ladhīna kafarū fī l-bilādi. Matā`un qalīlun thumma ma'wāhum jahannamu wa bi'sa 'l-mihād. Lakini 'l-ladhīna 'ttaqaw rabbahum lahum jannātun tajrī min taĥtihā 'l-'anhāru khālidīna fīhā nuzulan min `indi 'l-lahi wa mā `inda 'llahi khayrun li 'l-abrār. Wa 'inna min 'ahli 'l-kitābi laman yu'minu bil-lahi wa mā 'unzila 'ilaykum wa mā 'unzila 'ilayhim khāshi`īna lillahi lā yashtarūna bi'āyāti 'l-lahi thamanan qalīlāan 'ulā'ika lahum 'ajruhum `inda rabbihim 'inna 'l-laha sarī`u al-ĥisāb. Yā 'ayyuhā 'l-ladhīna 'āmanū-şbirū wa şābirū wa rābiţū wa 'ttaqu 'l-laha la`allakum tufliĥūn.»",
                         "arabic": "إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافِ اللَّيْلِ وَالنَّهَارِ لَآيَاتٍ لِأُولِي الْأَلْبَابِ ۝ الَّذِينَ يَذْكُرُونَ اللَّهَ قِيَامًا وَقُعُودًا وَعَلَى جُنُوبِهِمْ وَيَتَفَكَّرُونَ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ رَبَّنَا مَا خَلَقْتَ هَذَا بَاطِلًا سُبْحَانَكَ فَقِنَا عَذَابَ النَّارِ۝ رَبَّنَا إِنَّكَ مَنْ تُدْخِلِ النَّارَ فَقَدْ أَخْزَيْتَهُ وَمَا لِلظَّالِمِينَ مِنْ أَنْصَارٍ ۝ رَبَّنَا إِنَّنَا سَمِعْنَا مُنَادِيًا يُنَادِي لِلْإِيمَانِ أَنْ آمِنُوا بِرَبِّكُمْ فَآمَنَّا رَبَّنَا فَاغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا وَتَوَفَّنَا مَعَ الْأَبْرَارِ ۝ رَبَّنَا وَآتِنَا مَا وَعَدْتَنَا عَلَى رُسُلِكَ وَلَا تُخْزِنَا يَوْمَ الْقِيَامَةِ إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ",
-                        "translation": "Indeed, in the creation of the heavens and the earth and the alternation of the day and night there are signs for people of reason. ˹They are˺ those who remember Allah while standing, sitting, and lying on their sides, and reflect on the creation of the heavens and the earth ˹and pray˺, “Our Lord! You have not created ˹all of˺ this without purpose. Glory be to You! Protect us from the torment of the Fire. Our Lord! Indeed, those You commit to the Fire will be ˹completely˺ disgraced! And the wrongdoers will have no helpers. Our Lord! We have heard the caller to ˹true˺ belief, ˹proclaiming,˺ ‘Believe in your Lord ˹alone˺,’ so we believed. Our Lord! Forgive our sins, absolve us of our misdeeds, and allow us ˹each˺ to die as one of the virtuous. Our Lord! Grant us what You have promised us through Your messengers and do not put us to shame on Judgment Day—for certainly You never fail in Your promise.” So their Lord responded to them: “I will never deny any of you—male or female—the reward of your deeds. Both are equal in reward. Those who migrated or were expelled from their homes, and were persecuted for My sake and fought and ˹some˺ were martyred—I will certainly forgive their sins and admit them into Gardens under which rivers flow, as a reward from Allah. And with Allah is the finest reward!” Do not be deceived by the prosperity of the disbelievers throughout the land. It is only a brief enjoyment. Then Hell will be their home—what an evil place to rest! But those who are mindful of their Lord will be in Gardens under which rivers flow, to stay there forever—as an accommodation from Allah. And what is with Allah is best for the virtuous. Indeed, there are some among the People of the Book who truly believe in Allah and what has been revealed to you ˹believers˺ and what was revealed to them. They humble themselves before Allah—never trading Allah’s revelations for a fleeting gain. Their reward is with their Lord. Surely Allah is swift in reckoning. O believers! Patiently endure, persevere, stand on guard, and be mindful of Allah, so you may be successful.",
+                        "translation": "En effet, dans la création des cieux et de la terre, ainsi que dans l'alternance de la nuit et du jour, il y a des signes pour les personnes douées de raison. Ce sont ceux qui invoquent Allah debout, assis et couchés sur leur côté, et qui réfléchissent à la création des cieux et de la terre en disant : Notre Seigneur, Tu n'as pas créé tout cela en vain. Gloire à Toi ! Préserve-nous du châtiment de l'Enfer. Notre Seigneur, ceux que Tu fais entrer dans le Feu seront vraiment couverts de honte. Et les injustes n'auront aucun secours. Notre Seigneur, nous avons entendu l'appel de celui qui appelle à la foi, en disant : Croyez en votre Seigneur, et nous avons cru. Notre Seigneur, pardonne-nous nos péchés, efface nos méfaits et fais que notre mort soit celle des gens vertueux. Notre Seigneur, accorde-nous ce que Tu nous as promis par l'intermédiaire de Tes messagers, et ne nous couvre pas de honte le Jour du Jugement. Car Tu ne manques jamais à Tes promesses. Et leur Seigneur leur répondit : Je ne laisserai pas perdre l'œuvre de celui d'entre vous qui aura agi bien, qu'il soit homme ou femme. Vous êtes issus les uns des autres. Ceux donc qui émigrent, qui sont expulsés de leur maison, qui subissent des persécutions pour avoir pratiqué leur religion, qui combattent dans le sentier d'Allah, qui sont tués ou qui remportent la victoire, ceux-là, j'effacerai leurs méfaits et les ferai entrer dans des Jardins sous lesquels coulent les ruisseaux, comme récompense de la part d'Allah. Et auprès d'Allah se trouve la meilleure récompense. Ne te laisse pas tromper par la prospérité des mécréants sur terre, car leur jouissance n'est que temporaire. Puis leur destination finale sera l'Enfer, quelle mauvaise demeure ! Quant à ceux qui craignent leur Seigneur, ils auront des Jardins sous lesquels coulent les ruisseaux, où ils demeureront éternellement, un cadeau de la part d'Allah. Et la récompense d'Allah est la meilleure pour les vertueux. Certes, parmi les gens du Livre, il y en a qui croient en Allah, en ce qui t'a été révélé, ainsi qu'en ce qui leur a été révélé. Ils s'humilient devant Allah, et ils n'échangent jamais les paroles d'Allah contre un bénéfice éphémère. Leur récompense est auprès de leur Seigneur. Certes, Allah est prompt à régler les comptes. Ô croyants ! Soyez patients, persévérez, soyez vigilants et craignez Allah, afin que vous puissiez réussir.",
                         "url": "https://ia801300.us.archive.org/24/items/HisnulMuslimAudio_201510/n4.mp3"
                     }
                 ]
@@ -35,13 +35,13 @@
             {
                 "id": 1,
                 "listimage": "https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-                "name": "Dua when wearing a garment",
+                "name": "Dua lorsque l'on porte un vêtement",
                 "texts": [
                     {
                         "id": "Dua 1",
                         "text": "Alhamdu lillāhil-ladhī kasānī hādhā (aththawba) wa razaqanīhi min ghayri hawlim-minnī wa lā quwwah.",
                         "arabic": " الحمدُ للهِ الذي كساني هذا [ الثوبَ ] ورزقنِيهِ من غيرِ حولٍ مني ولا قوةٍ",
-                        "translation": "Praise is to Allah Who has clothed me with this (garment) and provided it for me, though I was powerless myself and incapable.\n(Al-Bukhari, Muslim, Abu Dawud, Ibn Majah, At-Tirmidhi. See also 'Irwa'ul-Ghalil 7/47.)",
+                        "translation": "Louange à Allah Qui m'a revêtu de ce vêtement et qui me l'a accordé alors que j'étais incapable de le faire moi-même.\n(Al-Bukhari, Muslim, Abu Dawud, Ibn Majah, At-Tirmidhi. Voir également 'Irwa'ul-Ghalil 7/47.)",
                         "url": "https://ia601300.us.archive.org/24/items/HisnulMuslimAudio_201510/n5.mp3"
                     }
                 ]
@@ -49,13 +49,13 @@
             {
                 "id": 2,
                 "listimage": "https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=564&q=80",
-                "name": "Dua when wearing a new garment",
+                "name": "Dua lorsqu'on porte un nouveau vêtement",
                 "texts": [
                     {
                         "id": "Dua 1",
                         "text": "«Allāhumma lakal-hamdu 'anta kasawtanīhi, 'as'aluka min khayrihi wa khayri mā suni`a lahu,  wa 'a`oothu bika min sharrihi wa sharri mā suni`a lahu.».",
                         "arabic": "اللَّهمَّ لك الحمدُ أنت كسوْتنِيهِ أسألُك من خيرِه وخيرِ ما صُنِعَ له ، وأعوذُ بك من شرِّهِ وشرِّ ما صُنِعَ له ",
-                        "translation": "O Allah, praise is to You. You have clothed me. I ask You for its goodness and the goodness of what it has been made for, and I seek Your protection from the evil of it and the evil of what it has been made for. (Abu Dawud and At-Tirmidhi. See also Al-Albani, Mukhtasar Shama'il At-Tirmidhi, p. 47.)",
+                        "translation": "Ô Allah, toutes les louanges te sont dues, c'est toi qui m'as habillé de ce vêtement. Je Te demande le bien de ce vêtement et le bien pour lequel il a été conçu. Et je me réfugie auprès de Toi contre le mal de ce vêtement et le mal pour lequel il a été conçu. (Abu Dawud and At-Tirmidhi. See also Al-Albani, Mukhtasar Shama'il At-Tirmidhi, p. 47.)",
                         "url": "https://ia801300.us.archive.org/24/items/HisnulMuslimAudio_201510/n6.mp3"
                     }
                 ]
@@ -938,7 +938,7 @@
             {
                 "id": 33,
                 "listimage": "https://images.unsplash.com/photo-1552858725-693709cc17c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80",
-                "name": "Prayers before bed",
+                "name": "Dua before sleeping",
                 "texts": [
                     {
                         "id": "Dua 1",
@@ -947,7 +947,6 @@
                         "translation": "With the Name of Allah, the Most Gracious, the Most Merciful. Say: He is Allah (the) One. The Self-Sufficient Master, Whom all creatures need, He begets not nor was He begotten, and there is none equal to Him.  With the Name of Allah, the Most Gracious, the Most Merciful. Say: I seek refuge with (Allah) the Lord of the daybreak, from the evil of what He has created, and from the evil of the darkening (night) as it comes with its darkness, and from the evil of those who practice witchcraft when they blow in the knots, and from the evil of the envier when he envies.  With the Name of Allah, the Most Gracious, the Most Merciful. Say: I seek refuge with (Allah) the Lord of mankind, the King of mankind, the God of mankind, from the evil of the whisperer who withdraws, who whispers in the breasts of mankind, of jinns and men. (Then pass your hands over as much of your body as you can reach, beginning with the head and the face, then the entire front of your body. Do this three times.) (Reference: Al-Bukhari, cf. Al-Asqalani, Fathul-Bari 9/62, and Muslim 4/ 1723)",
                         "url": "https://ia601300.us.archive.org/24/items/HisnulMuslimAudio_201510/n96.mp3"
                     },
-      
                     {
                         "id": "Dua 2",
                         "text": "Allāhu lā ilāha illā huwa ‘l-hayyul-Qayyūm, lā ta'khudhuhu sinatun wa lā nawm, lahu mā fis-samāwāti wa māfil-ardh, man dhal-ladhī yashfa`u `indahu illā bi'idhnih, ya`lamu mā bayna aydīhim wa mā khalfahum, wa lā yuhītūna bishay'im-min `ilmihi illā bimā shā', wasi`a kursiyyuhus-samāwāti wal-ardh, wa lā ya'ūduhu hifzuhumā, wa huwal-`Aliyyu‘l-`Azīm",

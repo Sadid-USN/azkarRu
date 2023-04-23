@@ -1,9 +1,7 @@
-import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:hijri_picker/hijri_picker.dart';
-import 'package:sizer/sizer.dart';
 
 class HijriPickerScreen extends StatefulWidget {
   const HijriPickerScreen({Key? key}) : super(key: key);
@@ -17,22 +15,22 @@ class _HijriPickerScreenState extends State<HijriPickerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white70,
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: iconColor,
-              )),
-          elevation: 3.0,
-          backgroundColor: const Color(0xffF2DFC7),
-          title: Text('Каленьдарь хиджри',
-              style: TextStyle(fontSize: 15.sp, color: titleAbbBar)),
-          centerTitle: true,
-        ),
+        backgroundColor: const Color(0xffF3EEE2),
+        // appBar: AppBar(
+        //   leading: IconButton(
+        //       onPressed: () {
+        //         Navigator.pop(context);
+        //       },
+        //       icon: const Icon(
+        //         Icons.arrow_back_ios,
+        //         color: iconColor,
+        //       )),
+        //   elevation: 3.0,
+        //   backgroundColor: const Color(0xffF2DFC7),
+        //   title: Text(LocaleKeys.hijri.tr(),
+        //       style: TextStyle(fontSize: 15.sp, color: titleAbbBar)),
+        //   centerTitle: true,
+        // ),
         // ignore: avoid_unnecessary_containers, sized_box_for_whitespace
         body: Container(
           height: double.infinity,

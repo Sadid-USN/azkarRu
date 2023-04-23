@@ -6,11 +6,13 @@ import 'book_map.dart';
 
 class BookFunctions {
   static Future<List<Book>> getBookLocally(BuildContext context) async {
-    String path = 'lib/data/book.json';
+    String path = '';
 
     // Check the current language and update the path accordingly
     if (context.locale.languageCode == 'en') {
       path = 'lib/data/bookEn.json';
+    }else{
+      path = 'lib/data/book.json';
     }
 
     // Load the file data from the updated path
@@ -25,10 +27,10 @@ class BookFunctions {
 
 Future<List<Chapters>> getChaptersLocally(
   BuildContext context,
-  int book,
+  int index,
 ) async {
   final List<Book> books = await BookFunctions.getBookLocally(context);
-  return books[book].chapters!;
+  return books[index].chapters!;
 }
 
 

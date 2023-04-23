@@ -1,7 +1,8 @@
 {
-
     "avrod": "Azkar Daily prayers",
     "lang": "Languages",
+    "search": "Search",
+    "radio": "Radio Quran",
     "title1": "Beginning of the day",
     "title2": "Salah prayers",
     "title3": "Morning and evening azkars",
@@ -29,7 +30,6 @@
     "calendar": "Calendar",
     "learnMore": "Learn more",
     "translation": "Translation",
-
     "titlenotifi1": "Healthy Heart!",
     "titlenotifi2": "Mercy",
     "titlenotifi3": "True Muslim",
@@ -41,7 +41,7 @@
     "titlenotifi9": "Allah the Almighty said",
     "titlenotifi10": "Allah the Almighty said",
     "titlenotifi11": "Protection in Remembrance",
-
+    
     "bodynotifi1": "O Allah, truly I ask You to make my heart healthy!",
     "bodynotifi2": "Whoever does not show mercy will not be shown mercy by Allah. (Muslim)",
     "bodynotifi3": "A Muslim is the one from whose tongue and hand others are safe.",
@@ -53,6 +53,4 @@
     "bodynotifi9": "And for men and women who engage much in Allah's remembrance, Allah has prepared forgiveness and a great reward. (Al-Ahzab: 35)",
     "bodynotifi10": "Verily, in the remembrance of Allah do hearts find rest. (Ar-Ra'd: 28)",
     "bodynotifi11": "A servant (of Allah) is shielded from Satan when he remembers Allah."
-
-
 }

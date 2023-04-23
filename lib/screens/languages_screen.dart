@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:avrod/colors/colors.dart';
@@ -15,81 +12,43 @@ class LangugesPage extends StatelessWidget {
   static String routName = '/langugesPage';
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        bool? result = await exitDialog(context);
-        result ??= false;
-        return result;
-      },
-      child: Scaffold(
-        backgroundColor: const Color(0xffF3EEE2),
-        appBar: AppBar(
-          elevation: 0.0,
-          automaticallyImplyLeading: false,
-          backgroundColor: const Color(0xffF2DFC7),
-          title: Text(
-            LocaleKeys.lang.tr(),
-            style: TextStyle(color: textColor),
-          ),
-          centerTitle: true,
+    return Scaffold(
+     
+      appBar: AppBar(
+        elevation: 3.0,
+         backgroundColor: const Color(0xffF6DEC4),
+        automaticallyImplyLeading: false,
+        title: Text(
+          LocaleKeys.lang.tr(),
+          style: TextStyle(color: textColor),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 40,
-            ),
-            LangButton(
-              title: "🇺🇸 English",
-              onPressed: () {
-                context.setLocale(const Locale('en'));
-                Navigator.of(context).pop();
-              },
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            LangButton(
-              title: '🇷🇺  Русский',
-              onPressed: () {
-                context.setLocale(const Locale('ru'));
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
+        centerTitle: true,
       ),
-    );
-  }
-
-  Future<bool?> exitDialog(BuildContext context) async {
-    return await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-          title: const Text(""),
-          content: const Text("dddd", style: TextStyle(fontSize: 16.0)),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text("Cancel",
-                  style: TextStyle(color: Colors.blueGrey)),
-            ),
-            TextButton(
-              onPressed: () {
-                if (Platform.isAndroid) {
-                  SystemNavigator.pop();
-                } else {}
-              },
-              child: const Text("textConfirm",
-                  style: TextStyle(color: Colors.blue)),
-            ),
-          ],
-          backgroundColor: Colors.white,
-        );
-      },
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 40,
+          ),
+          LangButton(
+            title: "🇺🇸 English",
+            onPressed: () {
+              context.setLocale(const Locale('en'));
+              Navigator.of(context).pop();
+            },
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          LangButton(
+            title: '🇷🇺  Русский',
+            onPressed: () {
+              context.setLocale(const Locale('ru'));
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
     );
   }
 }
