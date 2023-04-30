@@ -70,7 +70,7 @@ class AudiPlyerCard extends StatelessWidget {
                 offset: const Offset(0, 1),
               ),
             ],
-            color:  Colors.black38,
+            color:  const Color.fromARGB(255, 246, 236, 216),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Stack(
@@ -83,7 +83,7 @@ class AudiPlyerCard extends StatelessWidget {
                     style: const TextStyle(
                         height: 1.5,
                         fontSize: 14,
-                        color: titleTextColor,
+                        color: primaryTextColor,
                         fontWeight: FontWeight.w700),
                   ),
                 ),
@@ -93,7 +93,7 @@ class AudiPlyerCard extends StatelessWidget {
                     subtitle,
                     style: const TextStyle(
                       fontSize: 14,
-                      color: titleTextColor,
+                      color: primaryTextColor,
                     ),
                   ),
                 ),
@@ -121,39 +121,40 @@ class AudiPlyerCard extends StatelessWidget {
                       return true;
                     },
                     duration: const Duration(milliseconds: 250),
-                    startIconColor: Colors.white,
-                    endIconColor: Colors.white,
+                    startIconColor: primaryTextColor,
+                    endIconColor: primaryTextColor,
                     clockwise: false,
                   ),
                 ),
               ),
-              Positioned(
-                top: 5,
-                right: 80,
-                child: Consumer<AudioController>(
-                  builder: (context, audioController, child) => AnimateIcons(
-                    startIcon: Icons.stop,
-                    endIcon: Icons.stop,
-                    controller: audioController.buttonController,
-                    size: 45.0,
-                    onStartIconPress: () {
-                      if (audioController.url == audioUrl) {
-                        audioController.stopPlaying();
-                      }
-                      audioController.stopPlaying();
-                      return true;
-                    },
-                    onEndIconPress: () {
-                      audioController.stopPlaying();
-                      return true;
-                    },
-                    duration: const Duration(milliseconds: 250),
-                    startIconColor: Colors.white,
-                    endIconColor: Colors.white,
-                    clockwise: false,
-                  ),
-                ),
-              ),
+              // Positioned(
+              //   top: 5,
+              //   right: 80,
+              //   child: Consumer<AudioController>(
+              //     builder: (context, audioController, child) => AnimateIcons(
+              //       startIcon: Icons.stop,
+              //       endIcon: Icons.stop,
+              //       controller: audioController.buttonController,
+              //       size: 45.0,
+              //       onStartIconPress: () {
+              //         if (audioController.url == audioUrl) {
+              //           audioController.stopPlaying();
+              //         }
+              //         audioController.stopPlaying();
+              //         return true;
+              //       },
+              //       onEndIconPress: () {
+              //         audioController.stopPlaying();
+              //         return true;
+              //       },
+              //       duration: const Duration(milliseconds: 250),
+              //       startIconColor: primaryTextColor,
+              //       endIconColor: primaryTextColor,
+              //       clockwise: false,
+              //     ),
+              //   ),
+              // ),
+          
             ],
           ),
         ),

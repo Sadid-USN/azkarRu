@@ -19,12 +19,14 @@ class Book {
             ?.map((dynamic e) => Chapters.fromJson(e as Map<String, dynamic>))
             .toList();
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'image': image,
-        'chapters': chapters?.map((e) => e.toJson()).toList()
-      };
+ Map<String, dynamic> toJson() {
+  final Map<String, dynamic> data =  {};
+  data['id'] = id;
+  data['name'] = name;
+  data['image'] = image;
+  data['chapters'] = chapters?.map((chapter) => chapter.toJson()).toList();
+  return data;
+}
 }
 
 class Chapters {

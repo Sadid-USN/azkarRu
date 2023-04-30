@@ -11,11 +11,11 @@ class BookFunctions {
     // Check the current language and update the path accordingly
     if (context.locale.languageCode == 'en') {
       path = 'lib/data/bookEn.json';
-    }else{
+    }else if(context.locale.languageCode == "ru"){
       path = 'lib/data/book.json';
     }
 
-    // Load the file data from the updated path
+    await Future.delayed(const Duration(seconds: 2));
     final data = await rootBundle.loadString(path);
 
     final List<dynamic> body = json.decode(data);

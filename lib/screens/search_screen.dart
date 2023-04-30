@@ -6,10 +6,10 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-
 class CoustomSearch extends SearchDelegate {
   final int index;
-  CoustomSearch({required this.index});
+
+  CoustomSearch({required this.index, });
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -45,52 +45,65 @@ class CoustomSearch extends SearchDelegate {
       }
     }
 
-    return  AnimationLimiter(
-        child: ListView.separated(
-            separatorBuilder: (context, index) => Divider(
-                  color: textColor,
-                ),
-            scrollDirection: Axis.vertical,
-            padding:
-                const EdgeInsets.only(top: 16, left: 5, right: 5, bottom: 60),
-            physics: const BouncingScrollPhysics(),
-            itemCount: matchQuery.length,
-            itemBuilder: (context, index) {
-              var result = matchQuery[index];
-              return AnimationConfiguration.staggeredGrid(
-                position: index,
-                duration: const Duration(milliseconds: 500),
-                columnCount: matchQuery.length,
-                child: ScaleAnimation(
-                  child: ListTile(
-                    title: Text(
-                      result,
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: iconColor),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return TextScreen(
-                              texts: chapters[index].texts,
-                              chapter: chapters[index],
-                              index: index,
-                            );
-                          },
-                        ),
-                      );
-                    },
+    for (var chapter in chapters) {
+      if (chapter.name!.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(chapter.name!);
+      }
+    }
+
+    return AnimationLimiter(
+      child: ListView.separated(
+          separatorBuilder: (context, index) => Divider(
+                color: textColor,
+              ),
+          scrollDirection: Axis.vertical,
+          padding:
+              const EdgeInsets.only(top: 16, left: 5, right: 5, bottom: 60),
+          physics: const BouncingScrollPhysics(),
+          itemCount: matchQuery.length,
+          itemBuilder: (context, index) {
+            var result = matchQuery[index];
+            return AnimationConfiguration.staggeredGrid(
+              position: index,
+              duration: const Duration(milliseconds: 500),
+              columnCount: matchQuery.length,
+              child: ScaleAnimation(
+                child: ListTile(
+                  title: Text(
+                    result,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: iconColor),
                   ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (homecontext) {
+                          return TextScreen(
+                            texts: chapters
+                                .firstWhere(
+                                  (chapter) => chapter.name == result,
+                                )
+                                .texts,
+                            chapter: chapters.firstWhere(
+                              (chapter) => chapter.name == result,
+                            ),
+                            index: chapters.indexWhere(
+                              (chapter) => chapter.name == result,
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
-              );
-            }),
-      );
-       
+              ),
+            );
+          }),
+    );
   }
 
   @override

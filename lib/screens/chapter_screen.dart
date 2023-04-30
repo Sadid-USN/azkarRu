@@ -12,6 +12,7 @@ import 'package:like_button/like_button.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:sizer/sizer.dart';
 import '../main.dart';
+import '../utility/glowing_progress.dart';
 
 class ChapterScreen extends StatefulWidget {
   const ChapterScreen({
@@ -75,11 +76,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
                 child: buildBook(books[widget.bookIndex]),
               );
             }
-            return Center(
-                child: JumpingText(
-              '...',
-              style: const TextStyle(fontSize: 40, color: Colors.green),
-            ));
+            return const GlowingProgress();
           }),
     );
   }

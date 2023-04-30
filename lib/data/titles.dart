@@ -1,4 +1,4 @@
-import '../generated/locale_keys.g.dart';
+import 'package:avrod/generated/locale_keys.g.dart';
 
 final List<String> titles = [
   LocaleKeys.title1,

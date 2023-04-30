@@ -47,16 +47,15 @@ class _HomePageState extends State<HomePage> {
     notificationService.dailyAtNotification(1, title, body, 1);
   }
 
-  // final controller = PageController(viewportFraction: 12.0, keepPage: true);
 
-  final colorizeColors = [
-    textColor,
-    Colors.orange,
-    Colors.blue,
-    Colors.indigo,
-    Colors.blueGrey,
-    Colors.deepOrange,
-  ];
+  // final colorizeColors = [
+  //   textColor,
+  //   Colors.orange,
+  //   Colors.blue,
+  //   Colors.indigo,
+  //   Colors.blueGrey,
+  //   Colors.deepOrange,
+  // ];
 
   List<Widget> pages = [
     const BodyHomePage(),
@@ -74,6 +73,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+   
     return SafeArea(
       child: Scaffold(
         drawer: const DrawerModel(),
@@ -113,7 +113,8 @@ class _HomePageState extends State<HomePage> {
 
         bottomNavigationBar: Consumer<AudioController>(
           builder: (context, controller, child) => CurvedNavigationBar(
-              color: const Color(0xffF2DFC7),
+              animationDuration: const Duration(milliseconds: 500),
+              color: const Color(0xffF6DEC4),
               buttonBackgroundColor: const Color(0xffF2DFC7),
               // height: 7.h,
               index: controller.selectedIndex,

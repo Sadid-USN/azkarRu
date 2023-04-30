@@ -2,11 +2,11 @@
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/data/book_functions.dart';
 import 'package:avrod/screens/home_page.dart';
+import 'package:avrod/utility/glowing_progress.dart';
 import 'package:avrod/widgets/notification.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:progress_indicators/progress_indicators.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -26,16 +26,19 @@ Future<void> main() async {
 
   runApp(
     EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-          Locale('ru'),
-        ],
-        assetLoader: const CodegenLoader(),
-        path: 'assets/translations',
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        child: ChangeNotifierProvider(
-            create: (context) => AudioController(), child: const MyApp())),
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ru'),
+      ],
+      assetLoader: const CodegenLoader(),
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      saveLocale: true,
+      child: ChangeNotifierProvider(
+        create: (context) => AudioController(),
+        child: const MyApp(),
+      ),
+    ),
   );
 }
 
@@ -62,14 +65,7 @@ class MyApp extends StatelessWidget {
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                 ),
                 home: bookList == null
-                    ? Scaffold(
-                        body: Center(
-                            child: JumpingText(
-                          '...',
-                          style: const TextStyle(
-                              fontSize: 40, color: Colors.green),
-                        )),
-                      )
+                    ? const GlowingProgress()
                     : const HomePage(),
               );
             },

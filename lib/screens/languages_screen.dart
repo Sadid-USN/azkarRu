@@ -13,10 +13,9 @@ class LangugesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       appBar: AppBar(
         elevation: 3.0,
-         backgroundColor: const Color(0xffF6DEC4),
+        backgroundColor: const Color(0xffF6DEC4),
         automaticallyImplyLeading: false,
         title: Text(
           LocaleKeys.lang.tr(),
@@ -44,6 +43,7 @@ class LangugesPage extends StatelessWidget {
             title: '🇷🇺  Русский',
             onPressed: () {
               context.setLocale(const Locale('ru'));
+
               Navigator.of(context).pop();
             },
           ),
