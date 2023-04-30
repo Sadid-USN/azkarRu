@@ -1,5 +1,6 @@
 import 'package:animate_icons/animate_icons.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flip_card/flip_card.dart';
@@ -74,7 +75,8 @@ class SupportScreen extends StatelessWidget {
                   text: TextSpan(children: [
                 TextSpan(
                   text:
-                      'Ваша поддержка помогает нам улучшить и расширить приложение. Мы ценим любую форму поддержки, которая способствует оживлению сунны пророка (ﷺ). Будь то финансовая помощь, или распространение информации о нашем приложении, мы признательны за любую помощь. Сказал Всевышний Аллах в Своей священной книге: \n',
+                  
+                      '${LocaleKeys.supportText1.tr()}\n',
                   style: GoogleFonts.ptSerif(
                       color: const Color.fromARGB(255, 75, 65, 65),
                       fontSize: 18,
@@ -82,7 +84,7 @@ class SupportScreen extends StatelessWidget {
                 ),
                 TextSpan(
                   text:
-                      '«Стремитесь к прощению вашего Господа и Раю, ширина которого равна небесам и земле, уготованному для богобоязненных, которые делают пожертвования в радости и в горе, сдерживают гнев и прощают людей. Воистину, Аллах любит творящих добро.».\n',
+                      '${LocaleKeys.supportText2.tr()}\n',
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
@@ -90,7 +92,7 @@ class SupportScreen extends StatelessWidget {
                 ),
                 TextSpan(
                   text:
-                      '(Оли Имрон 133)\n От Абухурайры передается, что Пророк Аллах (ﷺ) сказал:\n',
+                      '${LocaleKeys.supportText3.tr()}\n',
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
@@ -98,14 +100,14 @@ class SupportScreen extends StatelessWidget {
                 ),
                 TextSpan(
                   text:
-                      '«Когда человек умирает, (все) его дела прекращаются (прекращает получать награду) за исключением трёх: непрерывной милостыни, знания, которым могут пользоваться (другие люди), или праведного ребёнка, который станет обращаться к Аллаху с мольбами за него”». Этот хадис передал Муслим (1631).\n',
+                      '${LocaleKeys.supportText4.tr()}\n',
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
-                  text: 'С дозволения Всевышнего мы будем продолжать работать над улучшением приложения. Вся хвала Всевышнему Аллаху, Господу миров!',
+                  text: LocaleKeys.supportText5.tr(),
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,

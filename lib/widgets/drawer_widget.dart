@@ -25,6 +25,7 @@ class _DrawerModelState extends State<DrawerModel> {
               child: Column(
                 children: [
                   _BuildListTile(
+                    index: 0,
                     title: drawerTitles[0].tr(),
                     icon: icons[0],
                     onTap: () {
@@ -34,6 +35,7 @@ class _DrawerModelState extends State<DrawerModel> {
                     },
                   ),
                   _BuildListTile(
+                    index: 1,
                     title: drawerTitles[1].tr(),
                     icon: icons[1],
                     onTap: () {
@@ -44,6 +46,7 @@ class _DrawerModelState extends State<DrawerModel> {
                     },
                   ),
                   _BuildListTile(
+                    index: 2,
                     title: drawerTitles[2].tr(),
                     icon: icons[2],
                     onTap: () {
@@ -53,6 +56,7 @@ class _DrawerModelState extends State<DrawerModel> {
                     },
                   ),
                   _BuildListTile(
+                    index: 3,
                     title: drawerTitles[3].tr(),
                     icon: icons[3],
                     onTap: () {
@@ -62,6 +66,7 @@ class _DrawerModelState extends State<DrawerModel> {
                     },
                   ),
                   _BuildListTile(
+                    index: 3,
                     title: drawerTitles[4].tr(),
                     icon: icons[4],
                     onTap: () {
@@ -81,10 +86,12 @@ class _DrawerModelState extends State<DrawerModel> {
 class _BuildListTile extends StatelessWidget {
   final String title;
   final IconData icon;
+  final int index;
   final void Function()? onTap;
   const _BuildListTile({
     required this.title,
     required this.icon,
+    required this.index,
     // ignore: unused_element
     this.onTap,
   });
@@ -99,8 +106,8 @@ class _BuildListTile extends StatelessWidget {
         ),
         leading: Icon(
           icon,
-          color: Colors.white,
-          size: 20.sp,
+          color: index == 2 ? Colors.red: Colors.white,
+          size: 18.sp,
         ),
         onTap: onTap,
       ),

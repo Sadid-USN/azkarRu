@@ -54,5 +54,10 @@ abstract class  LocaleKeys {
   static const bodynotifi9 = 'bodynotifi9';
   static const bodynotifi10 = 'bodynotifi10';
   static const bodynotifi11 = 'bodynotifi11';
+  static const supportText1 = 'supportText1';
+  static const supportText2 = 'supportText2';
+  static const supportText3 = 'supportText3';
+  static const supportText4 = 'supportText4';
+  static const supportText5 = 'supportText5';
 
 }

@@ -67,7 +67,12 @@ class CodegenLoader extends AssetLoader{
   "bodynotifi8": "О те, которые уверовали! Поминайте Аллаха многократно (Аль-Ахзаб:41).",
   "bodynotifi9": "и часто поминающих Аллаха мужчин и женщин, Аллах уготовил прощение и великую награду. (Аль-Ахзаб:35)",
   "bodynotifi10": "Разве не поминанием Аллаха утешаются сердца? (Ар-Раад:35)",
-  "bodynotifi11": "Раб (Аллаха) защищён от того, что исходит от шайтана, пока поминает Всевышнего Аллаха"
+  "bodynotifi11": "Раб (Аллаха) защищён от того, что исходит от шайтана, пока поминает Всевышнего Аллаха",
+  "supportText1": "Ваша поддержка помогает нам улучшить и расширить приложение. Мы ценим любую форму поддержки, которая способствует оживлению сунны пророка (ﷺ). Будь то финансовая помощь, или распространение информации о нашем приложении, мы признательны за любую помощь. Сказал Всевышний Аллах в Своей священной книге:",
+  "supportText2": "«Стремитесь к прощению вашего Господа и Раю, ширина которого равна небесам и земле, уготованному для богобоязненных, которые делают пожертвования в радости и в горе, сдерживают гнев и прощают людей. Воистину, Аллах любит творящих добро.»",
+  "supportText3": "(Аль-Имран 133)\n От Абухурайры передается, что Пророк Аллах (ﷺ) сказал:",
+  "supportText4": "«Когда человек умирает, (все) его дела прекращаются (прекращает получать награду) за исключением трёх: непрерывной милостыни, знания, которым могут пользоваться (другие люди), или праведного ребёнка, который станет обращаться к Аллаху с мольбами за него”». Этот хадис передал Муслим (1631).",
+  "supportText5": "С дозволения Всевышнего мы будем продолжать работать над улучшением приложения. Вся хвала Всевышнему Аллаху, Господу миров!"
 };
 static const Map<String,dynamic> en = {
   "avrod": "Azkar Daily prayers",
@@ -122,7 +127,12 @@ static const Map<String,dynamic> en = {
   "bodynotifi8": "O you who have believed, remember Allah with much remembrance (Al-Ahzab: 41).",
   "bodynotifi9": "And for men and women who engage much in Allah's remembrance, Allah has prepared forgiveness and a great reward. (Al-Ahzab: 35)",
   "bodynotifi10": "Verily, in the remembrance of Allah do hearts find rest. (Ar-Ra'd: 28)",
-  "bodynotifi11": "A servant (of Allah) is shielded from Satan when he remembers Allah."
+  "bodynotifi11": "A servant (of Allah) is shielded from Satan when he remembers Allah.",
+  "supportText1": "Your support helps us improve and expand the application. We value any form of support that promotes the revival of the Sunnah of the Prophet (ﷺ), whether it be financial assistance or spreading information about our application. We are grateful for any help. As Allah the Almighty said in His Holy Book:",
+  "supportText2": "And hasten towards forgiveness from your Lord and a Paradise as vast as the heavens and the earth, prepared for those mindful ˹of Allah. They are˺ those who donate in prosperity and adversity, control their anger, and pardon others. And Allah loves the good-doers",
+  "supportText3": "(Surah Ali 'Imran 133) It is narrated from Abu Hurairah that the Prophet of Allah (ﷺ) said:",
+  "supportText4": "When a man dies, his deeds come to an end except for three things: Sadaqah Jariyah (ceaseless charity); a knowledge which is beneficial, or a virtuous descendant who prays for him (for the deceased). (Muslim:1631)",
+  "supportText5": "With the permission of the Most High, we will continue to work on improving the application. All praise is due to Allah, the Lord of the worlds!"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "en": en};
 }
