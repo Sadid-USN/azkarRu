@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:animate_icons/animate_icons.dart';
-import 'package:avrod/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +18,7 @@ class RadioAudioPlayer extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       child: AnimationLimiter(
         child: ListView.builder(
+            // separatorBuilder: (context, index) => const Divider(thickness: 1,),
             padding: const EdgeInsets.only(bottom: 20),
             itemCount: listInfo.length,
             itemBuilder: (context, index) {
@@ -28,11 +28,11 @@ class RadioAudioPlayer extends StatelessWidget {
                 columnCount: listInfo.length,
                 child: ScaleAnimation(
                   child: AudiPlyerCard(
-                  audioUrl: listInfo[index].audioUrl,
-                  image: listInfo[index].image,
-                  name: listInfo[index].name,
-                  subtitle: listInfo[index].subtitle,
-                    ),
+                    audioUrl: listInfo[index].audioUrl,
+                    image: listInfo[index].image,
+                    name: listInfo[index].name,
+                    subtitle: listInfo[index].subtitle,
+                  ),
                 ),
               );
             }),
@@ -62,15 +62,22 @@ class AudiPlyerCard extends StatelessWidget {
           margin: const EdgeInsets.only(top: 16, right: 10, left: 10),
           padding: const EdgeInsets.symmetric(vertical: 14),
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: const Offset(0, 1),
-              ),
-            ],
-            color:  const Color.fromARGB(255, 246, 236, 216),
+            
+            // gradient: LinearGradient(
+            //   begin: Alignment.center,
+            //   end: const Alignment(-0.2, -0.5),
+            //   stops: const [-1.0, 0.1, 0.1, 0.2],
+            //   colors: [
+            //     Colors.grey.shade800,
+            //     Colors.grey.shade800,
+            //     Colors.grey.shade500,
+            //     Colors.grey.shade500,
+            //   ],
+            //   tileMode: TileMode.clamp,
+            // ),
+
+           
+            color: const Color.fromARGB(255, 150, 141, 119),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Stack(
@@ -83,7 +90,7 @@ class AudiPlyerCard extends StatelessWidget {
                     style: const TextStyle(
                         height: 1.5,
                         fontSize: 14,
-                        color: primaryTextColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.w700),
                   ),
                 ),
@@ -93,13 +100,22 @@ class AudiPlyerCard extends StatelessWidget {
                     subtitle,
                     style: const TextStyle(
                       fontSize: 14,
-                      color: primaryTextColor,
+                      color: Colors.white,
                     ),
                   ),
                 ),
-                trailing: CircleAvatar(
-                  radius: 25,
-                  backgroundImage: NetworkImage(image),
+                trailing: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2.0,
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    radius: 25,
+                    backgroundImage: NetworkImage(image),
+                  ),
                 ),
                 leading: Consumer<AudioController>(
                   builder: (context, audioController, child) => AnimateIcons(
@@ -121,8 +137,8 @@ class AudiPlyerCard extends StatelessWidget {
                       return true;
                     },
                     duration: const Duration(milliseconds: 250),
-                    startIconColor: primaryTextColor,
-                    endIconColor: primaryTextColor,
+                    startIconColor: Colors.white,
+                    endIconColor: Colors.white,
                     clockwise: false,
                   ),
                 ),
@@ -154,7 +170,6 @@ class AudiPlyerCard extends StatelessWidget {
               //     ),
               //   ),
               // ),
-          
             ],
           ),
         ),
@@ -179,6 +194,12 @@ class InfoData {
 }
 
 List<InfoData> listInfo = [
+  InfoData(
+      audioUrl: 'https://s5.radio.co/sdaff9bd16/listen',
+      image:
+          'https://i.pinimg.com/564x/39/aa/2b/39aa2b0f6647ae3b098820c0285271f2.jpg',
+      name: 'furqan-radio',
+      subtitle: '24/7'),
   InfoData(
       audioUrl:
           'https://download.quranicaudio.com/qdc/siddiq_minshawi/murattal/${Random().nextInt(114) + 1}.mp3',
