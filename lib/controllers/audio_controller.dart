@@ -1,87 +1,87 @@
-import 'dart:math';
-
 import 'package:animate_icons/animate_icons.dart';
-import 'package:audioplayers/audioplayers.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:sizer/sizer.dart';
 
 import '../colors/colors.dart';
-import '../models/radio_audioplayer.dart';
+import '../screens/text_screen.dart';
 
 class AudioController extends ChangeNotifier {
   int selectedIndex = 0;
 
-  AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.MEDIA_PLAYER);
+  // AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.MEDIA_PLAYER);
   final AnimateIconController copyController = AnimateIconController();
   final AnimateIconController controller = AnimateIconController();
   final AnimateIconController buttonController = AnimateIconController();
-  Duration duration = const Duration();
-  Duration position = const Duration();
-  bool isPlaying = false;
-  String? url;
+
+  late final List<AudioPlayer> _audioPlayers;
+  
+  getAudioPlayers(int trackCount) {
+    _audioPlayers = List.generate(trackCount, (_) => AudioPlayer());
+  }
 
   
+  bool isPlaying = false;
+  String? currentUrl;
 
-  void playSound(String url) async {
-    if (this.url != url) {
-      await stopPlaying();
-    }
+  late final AudioPlayer _audioPlayer = AudioPlayer();
 
-    if (!isPlaying) {
-      var result = await audioPlayer.play(url);
-      if (result == 1) {
-        isPlaying = true;
-        this.url = url;
-      }
-    }
+  AudioPlayer get audioPlayer => _audioPlayer;
 
-    audioPlayer.onDurationChanged.listen((event) {
-      duration = event;
-    });
 
-    audioPlayer.onAudioPositionChanged.listen((event) {
-      position = event;
-    });
+
+  List<AudioPlayer> get audioPlayers => _audioPlayers;
+
+ 
+  
+  
+
+
+  
+  
+
+  Stream<PositioneData> get positioneDataStream =>
+      Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
+          _audioPlayer.positionStream,
+          _audioPlayer.bufferedPositionStream,
+          _audioPlayer.durationStream,
+          (positione, bufferedPosition, duration) => PositioneData(
+                positione,
+                bufferedPosition,
+                duration ?? Duration.zero,
+              ));
+
+  void playAudio({
+    required String url,
+    required String id,
+    required String album,
+    required String title,
+    required imgUrl,
+  }) {
+    _audioPlayer.setAudioSource(
+      AudioSource.uri(
+        Uri.parse(url),
+        tag: MediaItem(
+          id: id,
+          album: album,
+          title: title,
+          artUri: Uri.parse(imgUrl),
+        ),
+      ),
+    );
+    _audioPlayer.play();
+
     notifyListeners();
   }
 
-  Future<void> stopPlaying() async {
-    if (isPlaying) {
-      var result = await audioPlayer.stop();
-      if (result == 1) {
-        isPlaying = false;
-        url = null;
-      }
-    }
-    notifyListeners();
-  }
-
-  void seekAudio(Duration durationToSeek) {
-    audioPlayer.seek(durationToSeek);
-    notifyListeners();
-  }
-
-  void pauseSound() async {
-    if (isPlaying) {
-      var result = await audioPlayer.pause();
-
-      if (result == 1) {
-        isPlaying = false;
-      }
-    }
-    notifyListeners();
-  }
-
-  void skipTrack() {
-    final randomIndex = Random().nextInt(listInfo.length);
-
-    // Get the audio URL for the new track
-    var audioUrl = listInfo[randomIndex].audioUrl;
-
-    // Stop the currently playing track and start the new one
-    stopPlaying();
-    playSound(audioUrl);
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
   }
 
   final navItems = [
@@ -98,8 +98,8 @@ class AudioController extends ChangeNotifier {
 
   void onTapBar(int index) {
     selectedIndex = index;
-   
-    stopPlaying();
+    _audioPlayer.stop();
+
     notifyListeners();
   }
 }

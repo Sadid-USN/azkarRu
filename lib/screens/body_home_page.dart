@@ -2,7 +2,8 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:avrod/screens/search_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_swiper_view/flutter_swiper_view.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -34,26 +35,17 @@ class BodyHomePage extends StatelessWidget {
                   width: currentWidth,
                   repeat: true,
                   reverse: true),
+              const SizedBox(height: 50,),
               Container(
-                padding: const EdgeInsets.only(left: 32, top: 60),
-                height: 70.h,
+                padding: const EdgeInsets.only(left: 60, top: 50, right: 60),
+                height: 60.h,
                 child: Swiper(
-                  duration: 200,
-                  curve: Curves.linearToEaseOut,
-                  scrollDirection: Axis.horizontal,
-                  autoplayDisableOnInteraction: false,
+                  indicatorLayout: PageIndicatorLayout.SCALE,
+                  curve: Curves.bounceIn,
                   itemCount: books.length,
-                  itemWidth: 67.w,
-                  layout: SwiperLayout.STACK,
-                  pagination: const SwiperPagination(
-                    margin: EdgeInsets.only(top: 20),
-                    builder: DotSwiperPaginationBuilder(
-                        activeColor: Colors.deepOrange,
-                        activeSize: 14,
-                        space: 5),
-                  ),
-                  itemBuilder: (context, index) {
-                    return InkWell(
+                itemBuilder: (context, index) {
+                  
+                  return    InkWell(
                       onTap: () {
                         Navigator.push(
                           context,
@@ -145,6 +137,7 @@ class BodyHomePage extends StatelessWidget {
                               shape: BoxShape.circle,
                               glowColor: Colors.green,
                               endRadius: 90.sp,
+                              
                               duration: const Duration(milliseconds: 1500),
                               repeat: true,
                               showTwoGlows: true,
@@ -152,13 +145,13 @@ class BodyHomePage extends StatelessWidget {
                                   const Duration(milliseconds: 1000),
                               child: Image.asset(
                                 books[index].image ?? '',
-                                height: 35.h,
-                                width: 80.w,
+                               
+                                width: 45.w,
                               ),
                             ),
                           ),
                           Positioned(
-                            bottom: 75,
+                            bottom: 45,
                             right: 20,
                             child: IconButton(
                               onPressed: () {
@@ -175,7 +168,7 @@ class BodyHomePage extends StatelessWidget {
                             ),
                           ),
                           Positioned(
-                            bottom: 80,
+                            bottom: 50,
                             left: 40,
                             child: Text(
                               "${books[index].id! + 1}",
@@ -189,8 +182,10 @@ class BodyHomePage extends StatelessWidget {
                         ],
                       ),
                     );
-                  },
-                ),
+                
+                },
+                
+                )
               ),
               // SizedBox(
               //   height: MediaQuery.of(context).size.height,

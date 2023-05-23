@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_functions.dart';
@@ -9,19 +9,18 @@ import 'package:avrod/data/book_map.dart';
 import 'package:avrod/screens/text_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
-import 'package:progress_indicators/progress_indicators.dart';
 import 'package:sizer/sizer.dart';
 import '../main.dart';
 import '../utility/glowing_progress.dart';
 
 class ChapterScreen extends StatefulWidget {
   const ChapterScreen({
-    Key key,
+    Key ? key,
     this.bookIndex,
     this.title,
   }) : super(key: key);
-  final int bookIndex;
-  final String title;
+  final int? bookIndex;
+  final String? title;
 
   //final List<Book> books;
 
@@ -30,7 +29,7 @@ class ChapterScreen extends StatefulWidget {
 }
 
 class _ChapterScreenState extends State<ChapterScreen> {
-  Box likesBox;
+  Box ? likesBox;
 
   @override
   void initState() {
@@ -58,7 +57,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
             )),
         elevation: 3.0,
         title: Text(
-          widget.title.tr(),
+          widget.title!.tr(),
           style: TextStyle(
               fontSize: 14.sp, color: textColor, fontWeight: FontWeight.bold),
         ),
@@ -73,7 +72,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
             if (snapshot.hasData) {
               return Container(
                 decoration: mainScreenGradient,
-                child: buildBook(books[widget.bookIndex]),
+                child: buildBook(books![widget.bookIndex!]),
               );
             }
             return const GlowingProgress();
@@ -94,12 +93,12 @@ class _ChapterScreenState extends State<ChapterScreen> {
           physics: const BouncingScrollPhysics(),
           itemCount: book.chapters?.length ?? 0,
           itemBuilder: (context, index) {
-            final List<Chapters> chapter = book.chapters;
+            final List<Chapters> chapter = book.chapters!;
 
             return AnimationConfiguration.staggeredGrid(
               position: index,
               duration: const Duration(milliseconds: 500),
-              columnCount: chapter[index].listimage.length ?? 0,
+              columnCount: chapter[index].listimage!.length,
               child: ScaleAnimation(
                 child: Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -117,7 +116,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
                       trailing: CircleAvatar(
                         backgroundColor: const Color(0xffF3EEE2),
                         child: LikeButton(
-                          isLiked: isChapterLiked(chapter[index].id),
+                          isLiked: isChapterLiked(chapter[index].id!),
                           onTap: (isLiked) async {
                             return setLike(chapter[index].id ?? 0, isLiked);
                           },
@@ -131,7 +130,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
                         ),
                       ),
                       leading: Text(
-                        "${chapter[index].id + 1}",
+                        "${chapter[index].id! + 1}",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontSize: 10.sp,
@@ -163,16 +162,16 @@ class _ChapterScreenState extends State<ChapterScreen> {
 
   Future<bool> setLike(int chapterID, bool isLiked) async {
     if (!isLiked) {
-      await likesBox.put(chapterID, (false).toString());
+      await likesBox!.put(chapterID, (false).toString());
     } else {
-      await likesBox.delete(chapterID);
+      await likesBox!.delete(chapterID);
     }
 
     return !isLiked;
   }
 
   bool isChapterLiked(int chapterID) {
-    bool isLiked = likesBox?.containsKey(chapterID) ?? 0;
+    bool isLiked = likesBox!.containsKey(chapterID);
     return isLiked;
   }
 }

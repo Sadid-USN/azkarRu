@@ -3,7 +3,6 @@ import 'package:avrod/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
-import 'calendar_hijri.dart';
 import 'gregorian_calendar.dart';
 
 class CalendarTabBarView extends StatefulWidget {
@@ -16,7 +15,7 @@ class CalendarTabBarView extends StatefulWidget {
 class _CalendarTabBarViewState extends State<CalendarTabBarView> {
   final pages = [
     // ignore: avoid_unnecessary_containers
-    Container(color: Colors.green.shade400, child: const HijriPickerScreen()),
+
     Container(color: Colors.blue.shade400, child: const GregorianCalendar()),
   ];
   LiquidController? liquidController;

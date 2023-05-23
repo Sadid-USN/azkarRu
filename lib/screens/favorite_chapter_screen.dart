@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_map.dart';
@@ -12,15 +12,15 @@ import 'package:sizer/sizer.dart';
 import 'text_screen.dart';
 
 class FavoriteChaptersSceen extends StatefulWidget {
-  const FavoriteChaptersSceen({Key key, this.chapter}) : super(key: key);
-  final Chapters chapter;
+  const FavoriteChaptersSceen({Key? key, this.chapter}) : super(key: key);
+  final Chapters? chapter;
 
   @override
   State<FavoriteChaptersSceen> createState() => _FavoriteChaptersSceenState();
 }
 
 class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
-  Book book;
+  Book ? book;
   @override
   Widget build(BuildContext context) {
     final books = Provider.of<List<Book>>(context);
@@ -52,7 +52,7 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
             builder: (context, Box box, child) {
               List<Chapters> chapters = [];
               for (Book book in books) {
-                chapters.addAll(book.chapters);
+                chapters.addAll(book.chapters!);
               }
               final List<dynamic> likedChapterIds = box.keys.toList();
 
@@ -88,10 +88,10 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen> {
                           leading: CircleAvatar(
                             maxRadius: 25,
                             backgroundImage:
-                                NetworkImage(likedChapters[position].listimage),
+                                NetworkImage(likedChapters[position].listimage!),
                           ),
                           title: Text(
-                            likedChapters[position].name,
+                            likedChapters[position].name!,
                             maxLines: 2,
                             textAlign: TextAlign.start,
                             style: TextStyle(

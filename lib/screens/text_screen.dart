@@ -1,21 +1,23 @@
 import 'dart:ui';
 
 import 'package:animate_icons/animate_icons.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/style/my_text_style.dart';
-import 'package:clay_containers/constants.dart';
-import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:provider/provider.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
 
@@ -33,59 +35,41 @@ class TextScreen extends StatefulWidget {
 
 class _TextScreenState extends State<TextScreen> {
   int currentIndex = 0;
-  AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.MEDIA_PLAYER);
-
+  late final AudioPlayer _audioPlayer = AudioPlayer();
   bool isPlaying = false;
 
-  void stopPlaying() async {
+  Stream<PositioneData> get positioneDataStream =>
+      Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
+          _audioPlayer.positionStream,
+          _audioPlayer.bufferedPositionStream,
+          _audioPlayer.durationStream,
+          (positione, bufferedPosition, duration) => PositioneData(
+                positione,
+                bufferedPosition,
+                duration ?? Duration.zero,
+              ));
+void playAudio(String url) {
+  _audioPlayer.setAudioSource(
+    AudioSource.uri(
+      Uri.parse(url),
+      tag: MediaItem(
+        id: widget.texts![currentIndex].id.toString(),
+        album: widget.chapter!.name,
+        title:  widget.chapter!.name!,
+        artUri: Uri.parse(widget.chapter!.listimage!),
+      ),
+    ),
+  );
+  _audioPlayer.play();
+}
+
+  void pauseAudio() {
     if (isPlaying) {
-      var reslult = await audioPlayer.stop();
-      if (reslult == 1) {
-        setState(() {
-          isPlaying = false;
-        });
-      }
-    }
-  }
-
-  void seekAudio(Duration durationToSeek) {
-    audioPlayer.seek(durationToSeek);
-  }
-
-  void pauseSound() async {
-    if (isPlaying) {
-      var result = await audioPlayer.pause();
-
-      if (result == 1) {
-        setState(() {
-          isPlaying = false;
-        });
-      }
-    }
-  }
-
-  Duration duration = const Duration();
-  Duration position = const Duration();
-  void playSound(String url) async {
-    // ignore: unrelated_type_equality_checks
-    if (!isPlaying) {
-      var result = await audioPlayer.play(url);
-      if (result == 1) {
-        setState(() {
-          isPlaying = true;
-        });
-      }
-    }
-    audioPlayer.onDurationChanged.listen((event) {
       setState(() {
-        duration = event;
+        _audioPlayer.pause();
+        isPlaying = false;
       });
-    });
-    audioPlayer.onAudioPositionChanged.listen((event) {
-      setState(() {
-        position = event;
-      });
-    });
+    }
   }
 
   double _fontSize = 14.sp;
@@ -95,17 +79,14 @@ class _TextScreenState extends State<TextScreen> {
 
   @override
   void dispose() {
-    audioPlayer.dispose();
-    audioPlayer.onAudioPositionChanged;
-    audioPlayer.onDurationChanged;
+    _audioPlayer.dispose();
     _buttonController;
     super.dispose();
   }
 
   @override
   void initState() {
-    audioPlayer = AudioPlayer();
-
+    _audioPlayer;
     _copyController = AnimateIconController();
 
     super.initState();
@@ -157,7 +138,7 @@ class _TextScreenState extends State<TextScreen> {
                   maxLines: 1,
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 14,
+                      fontSize: _fontSize,
                       color: textColor,
                       overflow: TextOverflow.fade),
                 ),
@@ -246,7 +227,7 @@ class _TextScreenState extends State<TextScreen> {
                     maxLines: 1,
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 14,
+                        fontSize: _fontSize,
                         color: textColor),
                   ),
                 ),
@@ -265,7 +246,6 @@ class _TextScreenState extends State<TextScreen> {
     Texts text,
     int index,
   ) {
-   
     currentIndex = index;
     return ListView(
       physics: const BouncingScrollPhysics(),
@@ -285,16 +265,17 @@ class _TextScreenState extends State<TextScreen> {
       child: ChangeNotifierProvider(
         create: (context) => AudioController(),
         child: Scaffold(
-          bottomSheet: ClayContainer(
-            spread: 0.0,
-            curveType: CurveType.none,
-            height: 7.4.h,
-            depth: 10,
-            color: const Color.fromARGB(23, 151, 79, 8),
+          bottomSheet: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            height: 8.4.h,
+            color: const Color.fromARGB(255, 55, 100, 4),
             child: Column(
               children: [
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AnimateIcons(
                       startIcon: Icons.play_circle,
@@ -302,13 +283,13 @@ class _TextScreenState extends State<TextScreen> {
                       controller: _buttonController,
                       size: 40.0,
                       onStartIconPress: () {
-                        playSound(widget.texts![currentIndex].url!);
-                        
+                        playAudio(widget.texts![currentIndex].url!);
 
                         return true;
                       },
                       onEndIconPress: () {
-                        pauseSound();
+                        pauseAudio();
+
                         return true;
                       },
                       duration: const Duration(milliseconds: 250),
@@ -316,37 +297,41 @@ class _TextScreenState extends State<TextScreen> {
                       endIconColor: Colors.white,
                       clockwise: false,
                     ),
-                    // IconButton(
-                    //     onPressed: () {},
-                    //     icon: const Icon(
-                    //       Icons.stop,
-                    //       size: 40,
-                    //       color: Colors.white,
-                    //     )),
-                    Expanded(
+                    
+                  
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12),
                       child: Row(
                         children: [
-                          Slider(
-                              onChangeEnd: ((value) {
-                                seekAudio(Duration(seconds: value.toInt()));
+                          StreamBuilder<PositioneData>(
+                              stream: positioneDataStream,
+                              builder: (context, snapshot) {
+                                final positionData = snapshot.data;
+
+                                return SizedBox(
+                                  width: 180,
+                                  child: ProgressBar(
+                                    barHeight: 4,
+                                    baseBarColor: Colors.grey.shade400,
+                                    bufferedBarColor: Colors.white,
+                                    progressBarColor: Colors.cyanAccent,
+                                    thumbColor: Colors.cyanAccent,
+                                    thumbRadius: 6,
+                                    timeLabelTextStyle: const TextStyle(
+                                        height: 1.2,
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                    progress: positionData?.positione ??
+                                        Duration.zero,
+                                    buffered: positionData?.bufferedPosition ??
+                                        Duration.zero,
+                                    total:
+                                        positionData?.duration ?? Duration.zero,
+                                    onSeek: _audioPlayer.seek,
+                                  ),
+                                );
                               }),
-                              activeColor: Colors.white,
-                              inactiveColor: Colors.grey[800],
-                              min: 0.0,
-                              max: duration.inSeconds.toDouble(),
-                              value: position.inSeconds.toDouble(),
-                              onChanged: (double newPosition) {
-                                setState(() {
-                                  newPosition = position.inSeconds.toDouble();
-                                  newPosition = duration.inSeconds.toDouble();
-                                });
-                              }),
-                          Expanded(
-                              child: Text(
-                            position.toString().split('.').first,
-                            style: const TextStyle(
-                                fontSize: 10, color: Colors.white),
-                          )),
                         ],
                       ),
                     ),
@@ -386,6 +371,8 @@ class _TextScreenState extends State<TextScreen> {
                     )
                   ],
                 ),
+            
+            
               ],
             ),
           ),
@@ -393,7 +380,7 @@ class _TextScreenState extends State<TextScreen> {
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
-                stopPlaying();
+                _audioPlayer.stop();
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -438,4 +425,15 @@ class _TextScreenState extends State<TextScreen> {
       ),
     );
   }
+}
+
+class PositioneData {
+  final Duration positione;
+  final Duration bufferedPosition;
+  final Duration duration;
+  PositioneData(
+    this.positione,
+    this.bufferedPosition,
+    this.duration,
+  );
 }
