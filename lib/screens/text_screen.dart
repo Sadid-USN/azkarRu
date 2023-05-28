@@ -391,7 +391,7 @@ void playAudio(String url) {
             title: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Text(
-                '${widget.chapter?.name}',
+                widget.chapter?.name ?? "",
                 style: TextStyle(
                     color: textColor,
                     fontSize: 14.sp,

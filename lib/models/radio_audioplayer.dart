@@ -19,40 +19,34 @@ class RadioAudioPlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final PageController pageController = PageController();
     return AnimationLimiter(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height /2 * 0.5,
-            child: PageView.builder(
-            
-              controller: pageController,
-              itemCount: listInfo.length,
-              itemBuilder: (context, index) {
-                return AnimationConfiguration.staggeredGrid(
-                  position: index,
-                  duration: const Duration(milliseconds: 400),
-                  columnCount: listInfo.length,
-                  child: ScaleAnimation(
-                    child: AudiPlyerCard(
-                      index: index,
-                      audioUrl: listInfo[index].audioUrl,
-                      image: listInfo[index].image,
-                      name: listInfo[index].name,
-                      subtitle: listInfo[index].id,
-                      pageController: pageController,
-                    ),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: Consumer<AudioController>(
+          builder: (context, audioController, child) => PageView.builder(
+            controller: pageController,
+            itemCount: listInfo.length,
+            onPageChanged: (value) {
+              audioController.audioPlayer.stop();
+            },
+            itemBuilder: (context, index) {
+              return AnimationConfiguration.staggeredGrid(
+                position: index,
+                duration: const Duration(milliseconds: 400),
+                columnCount: listInfo.length,
+                child: ScaleAnimation(
+                  child: AudiPlyerCard(
+                    index: index,
+                    audioUrl: listInfo[index].audioUrl,
+                    image: listInfo[index].image,
+                    name: listInfo[index].name,
+                    subtitle: listInfo[index].subtitle,
+                    pageController: pageController,
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
-
-          const SizedBox(height: 50,)
-      
-          
-       
-        ],
+        ),
       ),
     );
   }
@@ -77,94 +71,116 @@ class AudiPlyerCard extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-    height: 150,
-      margin: const EdgeInsets.only(top: 16, right: 10, left: 10),
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.center,
-          end: Alignment(-0.2, -0.5),
-          stops: [-1.0, 0.1, 0.1, 0.2],
-          colors: [
-            Color.fromARGB(255, 92, 109, 110),
-            Color.fromARGB(255, 92, 109, 110),
-            Color.fromARGB(255, 66, 50, 65),
-            Color.fromARGB(255, 66, 50, 65),
-          ],
-          tileMode: TileMode.clamp,
-        ),
-        color: const Color.fromARGB(255, 92, 109, 110),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        children: [
-          ListTile(
-            title: Padding(
-              padding: const EdgeInsets.only(bottom: 3),
-              child: Text(
-                name,
-                style:  const TextStyle(
-                    height: 1.5,
-                    fontSize: 14,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            subtitle: index == 0 ? const SizedBox():
-            Consumer<AudioController>(
-              builder: (context, value, child) {
-                return StreamBuilder<PositioneData>(
-                    stream: value.positioneDataStream,
-                    builder: (context, snapshot) {
-                      final positionData = snapshot.data;
-    
-                      return 
-                       ProgressBar(
-                        barHeight: 4,
-                        baseBarColor: Colors.grey.shade400,
-                        bufferedBarColor: Colors.white,
-                        progressBarColor: Colors.cyanAccent,
-                        thumbColor: Colors.cyanAccent,
-                        thumbRadius: 6,
-                        timeLabelTextStyle: const TextStyle(
-                            height: 1.2,
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold),
-                        progress:
-                            positionData?.positione ?? Duration.zero,
-                        buffered: positionData?.bufferedPosition ??
-                            Duration.zero,
-                        total: positionData?.duration ?? Duration.zero,
-                        onSeek: value.audioPlayer.seek,
-                      );
-                    });
-              },
-            ),
-            trailing: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2.0,
-                ),
-              ),
-              child: CircleAvatar(
-                radius: 25,
-                backgroundImage: NetworkImage(image),
-              ),
-            ),
-         
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 200),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(listInfo[index].image), fit: BoxFit.cover),
+            borderRadius: BorderRadius.circular(8),
           ),
-    
-           NextPreviousButton(pageController: pageController, index: index,),
-        ],
-      ),
+        ),
+        Expanded(
+        
+          child: Container(
+            height: 200,
+            margin: const EdgeInsets.only(top: 16, ),
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.center,
+                end: Alignment(-0.2, -0.5),
+                stops: [-1.0, 0.1, 0.1, 0.2],
+                colors: [
+                  Color.fromARGB(255, 92, 109, 110),
+                  Color.fromARGB(255, 92, 109, 110),
+                  Color.fromARGB(255, 66, 50, 65),
+                  Color.fromARGB(255, 66, 50, 65),
+                ],
+                tileMode: TileMode.clamp,
+              ),
+              color: Color.fromARGB(255, 92, 109, 110),
+                   borderRadius: BorderRadius.only(topLeft:Radius.circular(30), topRight: Radius.circular(30)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ListTile(
+                  title: Padding(
+                    padding: const EdgeInsets.only(bottom: 8,),
+                    child: Text(
+                      "$name  $subtitle",
+                      style: const TextStyle(
+                          height: 1.5,
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  subtitle: index == 0
+                      ? const SizedBox()
+                      : Consumer<AudioController>(
+                          builder: (context, value, child) {
+                            return StreamBuilder<PositioneData>(
+                                stream: value.positioneDataStream,
+                                builder: (context, snapshot) {
+                                  final positionData = snapshot.data;
+        
+                                  return ProgressBar(
+                                    barHeight: 4,
+                                    baseBarColor: Colors.grey.shade400,
+                                    bufferedBarColor: Colors.white,
+                                    progressBarColor: Colors.cyanAccent,
+                                    thumbColor: Colors.cyanAccent,
+                                    thumbRadius: 6,
+                                    timeLabelTextStyle: const TextStyle(
+                                        height: 1.2,
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                    progress:
+                                        positionData?.positione ?? Duration.zero,
+                                    buffered: positionData?.bufferedPosition ??
+                                        Duration.zero,
+                                    total:
+                                        positionData?.duration ?? Duration.zero,
+                                    onSeek: value.audioPlayer.seek,
+                                  );
+                                });
+                          },
+                        ),
+                  // trailing: Container(
+                  //   decoration: BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     border: Border.all(
+                  //       color: Colors.white,
+                  //       width: 2.0,
+                  //     ),
+                  //   ),
+                  //   child: CircleAvatar(
+                  //     radius: 25,
+                  //     backgroundImage: NetworkImage(image),
+                  //   ),
+                  // ),
+                ),
+                NextPreviousButton(
+                  pageController: pageController,
+                  index: index,
+                ),
+              ],
+            ),
+          ),
+        ),
+        // const SizedBox(
+        //   height: 25,
+        // ),
+      ],
     );
   }
 }
-
 
 class NextPreviousButton extends StatelessWidget {
   final PageController pageController;
@@ -179,10 +195,8 @@ class NextPreviousButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AudioController>(
-      builder: (context, value, child) =>  
-      Row(
+      builder: (context, value, child) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    
         children: [
           IconButton(
             onPressed: () {
@@ -192,47 +206,49 @@ class NextPreviousButton extends StatelessWidget {
                   curve: Curves.easeInOut,
                 );
               } else {
-                pageController.jumpToPage((pageController.page!.toInt() - 1) % listInfo.length);
+                pageController.jumpToPage(
+                    (pageController.page!.toInt() - 1) % listInfo.length);
               }
               value.audioPlayer.stop();
             },
-            icon: const Icon(Icons.skip_previous, size: 40, color: Colors.white,),
+            icon: const Icon(
+              Icons.skip_previous,
+              size: 40,
+              color: Colors.white,
+            ),
           ),
-
           Consumer<AudioController>(
-                builder: (context, audioController, child) => AnimateIcons(
-                  startIcon:
-                      listInfo[index].audioUrl != listInfo[index].audioUrl
-                          ? Icons.pause_circle
-                          : Icons.play_circle,
-                  endIcon:
-                      listInfo[index].audioUrl != listInfo[index].audioUrl
-                          ? Icons.play_circle
-                          : Icons.pause_circle,
-                  controller: audioController.buttonController,
-                  size: 45.0,
-                  onStartIconPress: () {
-                    audioController.playAudio(
-                      url: listInfo[index].audioUrl,
-                      album: listInfo[index].name,
-                      id: listInfo[index].id,
-                      title: listInfo[index].subtitle,
-                      imgUrl: listInfo[index].image,
-                    );
-    
-                    return true;
-                  },
-                  onEndIconPress: () {
-                    audioController.audioPlayer.pause();
-    
-                    return true;
-                  },
-                  duration: const Duration(milliseconds: 250),
-                  startIconColor: Colors.white,
-                  endIconColor: Colors.white,
-                  clockwise: false,
-                ),
-              ),
+            builder: (context, audioController, child) => AnimateIcons(
+              startIcon: listInfo[index].audioUrl != listInfo[index].audioUrl
+                  ? Icons.pause_circle
+                  : Icons.play_circle,
+              endIcon: listInfo[index].audioUrl != listInfo[index].audioUrl
+                  ? Icons.play_circle
+                  : Icons.pause_circle,
+              controller: audioController.buttonController,
+              size: 45.0,
+              onStartIconPress: () {
+                audioController.playAudio(
+                  url: listInfo[index].audioUrl,
+                  album: listInfo[index].name,
+                  id: listInfo[index].id,
+                  title: listInfo[index].subtitle,
+                  imgUrl: listInfo[index].image,
+                );
+
+                return true;
+              },
+              onEndIconPress: () {
+                audioController.audioPlayer.pause();
+
+                return true;
+              },
+              duration: const Duration(milliseconds: 250),
+              startIconColor: Colors.white,
+              endIconColor: Colors.white,
+              clockwise: false,
+            ),
+          ),
           IconButton(
             onPressed: () {
               if (pageController.page != listInfo.length - 1) {
@@ -241,12 +257,17 @@ class NextPreviousButton extends StatelessWidget {
                   curve: Curves.easeInOut,
                 );
               } else {
-                pageController.jumpToPage((pageController.page!.toInt() + 1) % listInfo.length);
+                pageController.jumpToPage(
+                    (pageController.page!.toInt() + 1) % listInfo.length);
               }
 
-                value.audioPlayer.stop();
+              value.audioPlayer.stop();
             },
-            icon: const Icon(Icons.skip_next, size: 40, color: Colors.white,),
+            icon: const Icon(
+              Icons.skip_next,
+              size: 40,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
@@ -313,7 +334,7 @@ List<InfoData> listInfo = [
       audioUrl:
           'https://download.quranicaudio.com/qdc/abu_bakr_shatri/murattal/${Random().nextInt(114) + 1}.mp3',
       image:
-          'https://static.qurancdn.com/images/reciters/3/abu-bakr-al-shatri-pofile.jpeg?v=1',
+          'https://2.bp.blogspot.com/-zbRVES0XunQ/TgRDKGBDG6I/AAAAAAAABuA/2hFmIkeQTqE/s1600/abu-bakr-al-shatri.jpg',
       name: 'Abu Bakr',
       subtitle: 'al-Shatri'),
   InfoData(

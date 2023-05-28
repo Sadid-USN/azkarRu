@@ -280,7 +280,7 @@
             {
                 "id": 16,
                 "listimage": "https://images.unsplash.com/photo-1609770231080-e321deccc34c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=701&q=80",
-                "name": "Дуа перед началом молитвы\n(дуау-ль-истифтах)",
+                "name": "Дуа перед началом молитвы (дуау-ль-истифтах)",
                 "texts": [
                     {
                         "id": "Дуа 1",
@@ -329,7 +329,7 @@
             {
                 "id": 17,
                 "listimage": "https://p.scooper.news/v2-EagleNews/Eagle-NewsImage/detail/20201220/ab59e18b560268cf7f557d69e5b49715.webp",
-                "name": "Дуа во время совершения поясного поклона\n(дуау-р-руку')",
+                "name": "Дуа во время совершения поясного поклона (дуау-р-руку')",
                 "texts": [
                     {
                         "id": "Дуа 1",
@@ -392,7 +392,7 @@
             {
                 "id": 19,
                 "listimage": "https://img.freepik.com/free-photo/muslim-boy-praying-in-sujud-posture_53876-77604.jpg?size=626&ext=jpg",
-                "name": "Дуа во время совершения земного поклона\n(суджуд)",
+                "name": "Дуа во время совершения земного поклона (суджуд)",
                 "texts": [
                     {
                         "id": "Дуа 1",
@@ -469,7 +469,7 @@
             {
                 "id": 21,
                 "listimage": "https://img.freepik.com/free-photo/muslim-praying-in-sujud-posture_53876-25222.jpg?size=626&ext=jpg",
-                "name": "Дуа при совершении земного поклона во время чтения Корана\n(суджуду-т-тиляуа)",
+                "name": "Дуа при совершении земного поклона во время чтения Корана(суджуду-т-тиляуа)",
                 "texts": [
                     {
                         "id": "Дуа 1",
@@ -518,7 +518,7 @@
             {
                 "id": 23,
                 "listimage": "https://islam-today.ru/files/news/part_10/105792/449482-INNERRESIZED600-600-prophet-1815557_960_720.jpg",
-                "name": "Чтение салават за пророка (ﷺ)\nпосле ташаххуда",
+                "name": "Чтение салават за пророка (ﷺ) после ташаххуда",
                 "texts": [
                     {
                         "id": "Вариант 1",
@@ -798,7 +798,7 @@
             {
                 "id": 29,
                 "listimage": "http://1.bp.blogspot.com/-an4Wa87OfOY/UAnlYvGo6JI/AAAAAAAAGpE/Oa21LkU2fg4/s1600/4f722a474808c.jpg",
-                "name": "Дуа Аль-Истихара\n(Испрашивания помощи)",
+                "name": "Дуа Аль-Истихара (Испрашивания помощи)",
                 "texts": [
                     {
                         "id": "Дуа 1",
@@ -917,7 +917,7 @@
             {
                 "id": 32,
                 "listimage": "https://images.firstpost.com/wp-content/uploads/2019/08/ramadan-3461512_1024.jpg",
-                "name": "Дуа о прощении\n(Сайидуль истигфар)",
+                "name": "Дуа о прощении (Сайидуль истигфар)",
                 "texts": [
                     {
                         "id": "Дуа 1",

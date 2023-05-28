@@ -43,12 +43,10 @@ class _HomePageState extends State<HomePage> {
     final title = titleList[randomIndex].tr();
     final body = bodyList[randomIndex].tr();
 
-    LocalNotificationSV.showTextNotification(
-      id: randomIndex,
+    LocalNotificationSV().scheduleNotification(
       title: title,
       body: body,
-      flnp: flutterLocalNotificationsPlugin,
-    );
+      scheduledNotificationDateTime: DateTime.now().add(const Duration(days: 1)).subtract(Duration(minutes: DateTime.now().minute)));
   }
 
   // final colorizeColors = [

@@ -14,7 +14,7 @@ import 'package:sizer/sizer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'data/book_map.dart';
 import 'generated/codegen_loader.g.dart';
-
+import 'package:timezone/data/latest.dart' as tz;
 // ignore: constant_identifier_names
 const String FAVORITES_BOX = 'favorites_box';
 
@@ -22,14 +22,15 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =FlutterLo
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocalNotificationSV.initialize(flutterLocalNotificationsPlugin);
+   await LocalNotificationSV().initNotification();
+  
   await EasyLocalization.ensureInitialized();
     await JustAudioBackground.init(
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
     androidNotificationChannelName: 'Audio playback',
     androidNotificationOngoing: true,
   );
-
+   tz.initializeTimeZones();
   await Hive.initFlutter();
   await Hive.openBox(FAVORITES_BOX);
 
