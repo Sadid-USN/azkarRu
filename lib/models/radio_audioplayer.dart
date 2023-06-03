@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:animate_icons/animate_icons.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +22,7 @@ class RadioAudioPlayer extends StatelessWidget {
         child: Consumer<AudioController>(
           builder: (context, audioController, child) => PageView.builder(
             controller: pageController,
-            itemCount: listInfo.length,
+            itemCount: audioController.listInfo.length,
             onPageChanged: (value) {
               audioController.audioPlayer.stop();
             },
@@ -32,14 +30,14 @@ class RadioAudioPlayer extends StatelessWidget {
               return AnimationConfiguration.staggeredGrid(
                 position: index,
                 duration: const Duration(milliseconds: 400),
-                columnCount: listInfo.length,
+                columnCount: audioController.listInfo.length,
                 child: ScaleAnimation(
                   child: AudiPlyerCard(
                     index: index,
-                    audioUrl: listInfo[index].audioUrl,
-                    image: listInfo[index].image,
-                    name: listInfo[index].name,
-                    subtitle: listInfo[index].subtitle,
+                    audioUrl: audioController.listInfo[index].audioUrl,
+                    image: audioController.listInfo[index].image,
+                    name: audioController.listInfo[index].name,
+                    subtitle: audioController.listInfo[index].subtitle,
                     pageController: pageController,
                   ),
                 ),
@@ -74,20 +72,24 @@ class AudiPlyerCard extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 200),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage(listInfo[index].image), fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(8),
+        Consumer<AudioController>(
+          builder: (context, value, child) => Container(
+            margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 200),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(value.listInfo[index].image),
+                  fit: BoxFit.cover),
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
         ),
         Expanded(
-        
           child: Container(
             height: 200,
-            margin: const EdgeInsets.only(top: 16, ),
+            margin: const EdgeInsets.only(
+              top: 16,
+            ),
             padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -95,81 +97,90 @@ class AudiPlyerCard extends StatelessWidget {
                 end: Alignment(-0.2, -0.5),
                 stops: [-1.0, 0.1, 0.1, 0.2],
                 colors: [
-                  Color.fromARGB(255, 92, 109, 110),
-                  Color.fromARGB(255, 92, 109, 110),
-                  Color.fromARGB(255, 66, 50, 65),
-                  Color.fromARGB(255, 66, 50, 65),
+                  Color.fromARGB(255, 72, 69, 66),
+                  Color.fromARGB(255, 72, 69, 66),
+                  Color.fromARGB(255, 72, 69, 66),
+                  Color.fromARGB(255, 72, 69, 66),
                 ],
                 tileMode: TileMode.clamp,
               ),
               color: Color.fromARGB(255, 92, 109, 110),
-                   borderRadius: BorderRadius.only(topLeft:Radius.circular(30), topRight: Radius.circular(30)),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30), topRight: Radius.circular(30)),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Stack(
               children: [
-                ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.only(bottom: 8,),
-                    child: Text(
-                      "$name  $subtitle",
-                      style: const TextStyle(
-                          height: 1.5,
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                  subtitle: index == 0
-                      ? const SizedBox()
-                      : Consumer<AudioController>(
-                          builder: (context, value, child) {
-                            return StreamBuilder<PositioneData>(
-                                stream: value.positioneDataStream,
-                                builder: (context, snapshot) {
-                                  final positionData = snapshot.data;
-        
-                                  return ProgressBar(
-                                    barHeight: 4,
-                                    baseBarColor: Colors.grey.shade400,
-                                    bufferedBarColor: Colors.white,
-                                    progressBarColor: Colors.cyanAccent,
-                                    thumbColor: Colors.cyanAccent,
-                                    thumbRadius: 6,
-                                    timeLabelTextStyle: const TextStyle(
-                                        height: 1.2,
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold),
-                                    progress:
-                                        positionData?.positione ?? Duration.zero,
-                                    buffered: positionData?.bufferedPosition ??
-                                        Duration.zero,
-                                    total:
-                                        positionData?.duration ?? Duration.zero,
-                                    onSeek: value.audioPlayer.seek,
-                                  );
-                                });
-                          },
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 8,
                         ),
-                  // trailing: Container(
-                  //   decoration: BoxDecoration(
-                  //     shape: BoxShape.circle,
-                  //     border: Border.all(
-                  //       color: Colors.white,
-                  //       width: 2.0,
-                  //     ),
-                  //   ),
-                  //   child: CircleAvatar(
-                  //     radius: 25,
-                  //     backgroundImage: NetworkImage(image),
-                  //   ),
-                  // ),
+                        child: Text(
+                          "$name  $subtitle",
+                          style: const TextStyle(
+                              height: 1.5,
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      subtitle: index == 0
+                          ? const SizedBox()
+                          : Consumer<AudioController>(
+                              builder: (context, value, child) {
+                                return StreamBuilder<PositioneData>(
+                                    stream: value.positioneDataStream,
+                                    builder: (context, snapshot) {
+                                      final positionData = snapshot.data;
+
+                                      return ProgressBar(
+                                        barHeight: 4,
+                                        baseBarColor: Colors.grey.shade400,
+                                        bufferedBarColor: Colors.white,
+                                        progressBarColor: Colors.blueGrey,
+                                        thumbColor: Colors.blueGrey,
+                                        thumbRadius: 6,
+                                        timeLabelTextStyle: const TextStyle(
+                                            height: 1.2,
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                        progress: positionData?.positione ??
+                                            Duration.zero,
+                                        buffered:
+                                            positionData?.bufferedPosition ??
+                                                Duration.zero,
+                                        total: positionData?.duration ??
+                                            Duration.zero,
+                                        onSeek: value.audioPlayer.seek,
+                                      );
+                                    });
+                              },
+                            ),
+                      // trailing: Container(
+                      //   decoration: BoxDecoration(
+                      //     shape: BoxShape.circle,
+                      //     border: Border.all(
+                      //       color: Colors.white,
+                      //       width: 2.0,
+                      //     ),
+                      //   ),
+                      //   child: CircleAvatar(
+                      //     radius: 25,
+                      //     backgroundImage: NetworkImage(image),
+                      //   ),
+                      // ),
+                    ),
+                    NextPreviousButton(
+                      pageController: pageController,
+                      index: index,
+                    ),
+                  ],
                 ),
-                NextPreviousButton(
-                  pageController: pageController,
-                  index: index,
-                ),
+                index == 0 ? const SizedBox() : const RefreshButton(),
               ],
             ),
           ),
@@ -178,6 +189,40 @@ class AudiPlyerCard extends StatelessWidget {
         //   height: 25,
         // ),
       ],
+    );
+  }
+}
+
+class RefreshButton extends StatelessWidget {
+  const RefreshButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      right: 0,
+      child: Consumer<AudioController>(
+        builder: (context, value, child) {
+          return AnimateIcons(
+              duration: const Duration(milliseconds: 250),
+              startIconColor: Colors.white,
+              endIconColor: Colors.white,
+              size: 30,
+              startIcon: Icons.refresh,
+              endIcon: Icons.refresh,
+              onStartIconPress: () {
+                value.refreshAudioUrls();
+                value.audioPlayer.stop();
+
+                return true;
+              },
+              onEndIconPress: () {
+                value.refreshAudioUrls();
+                value.audioPlayer.stop();
+                return true;
+              },
+              controller: value.refreshController);
+        },
+      ),
     );
   }
 }
@@ -196,7 +241,7 @@ class NextPreviousButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AudioController>(
       builder: (context, value, child) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
             onPressed: () {
@@ -207,7 +252,7 @@ class NextPreviousButton extends StatelessWidget {
                 );
               } else {
                 pageController.jumpToPage(
-                    (pageController.page!.toInt() - 1) % listInfo.length);
+                    (pageController.page!.toInt() - 1) % value.listInfo.length);
               }
               value.audioPlayer.stop();
             },
@@ -219,27 +264,29 @@ class NextPreviousButton extends StatelessWidget {
           ),
           Consumer<AudioController>(
             builder: (context, audioController, child) => AnimateIcons(
-              startIcon: listInfo[index].audioUrl != listInfo[index].audioUrl
+              startIcon: audioController.listInfo[index].audioUrl !=
+                      audioController.listInfo[index].audioUrl
                   ? Icons.pause_circle
                   : Icons.play_circle,
-              endIcon: listInfo[index].audioUrl != listInfo[index].audioUrl
+              endIcon: audioController.listInfo[index].audioUrl !=
+                      audioController.listInfo[index].audioUrl
                   ? Icons.play_circle
                   : Icons.pause_circle,
               controller: audioController.buttonController,
-              size: 45.0,
+              size: 65.0,
               onStartIconPress: () {
                 audioController.playAudio(
-                  url: listInfo[index].audioUrl,
-                  album: listInfo[index].name,
-                  id: listInfo[index].id,
-                  title: listInfo[index].subtitle,
-                  imgUrl: listInfo[index].image,
+                  url: audioController.listInfo[index].audioUrl,
+                  album: audioController.listInfo[index].name,
+                  id: audioController.listInfo[index].id,
+                  title: audioController.listInfo[index].subtitle,
+                  imgUrl: audioController.listInfo[index].image,
                 );
 
                 return true;
               },
               onEndIconPress: () {
-                audioController.audioPlayer.pause();
+                audioController.audioPlayer.stop();
 
                 return true;
               },
@@ -249,24 +296,26 @@ class NextPreviousButton extends StatelessWidget {
               clockwise: false,
             ),
           ),
-          IconButton(
-            onPressed: () {
-              if (pageController.page != listInfo.length - 1) {
-                pageController.nextPage(
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.easeInOut,
-                );
-              } else {
-                pageController.jumpToPage(
-                    (pageController.page!.toInt() + 1) % listInfo.length);
-              }
+          Consumer<AudioController>(
+            builder: (context, value, child) => IconButton(
+              onPressed: () {
+                if (pageController.page != value.listInfo.length - 1) {
+                  pageController.nextPage(
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOut,
+                  );
+                } else {
+                  pageController.jumpToPage((pageController.page!.toInt() + 1) %
+                      value.listInfo.length);
+                }
 
-              value.audioPlayer.stop();
-            },
-            icon: const Icon(
-              Icons.skip_next,
-              size: 40,
-              color: Colors.white,
+                value.audioPlayer.stop();
+              },
+              icon: const Icon(
+                Icons.skip_next,
+                size: 40,
+                color: Colors.white,
+              ),
             ),
           ),
         ],
@@ -288,69 +337,3 @@ class InfoData {
       required this.subtitle,
       required this.audioUrl});
 }
-
-List<InfoData> listInfo = [
-  InfoData(
-      id: "1",
-      audioUrl: 'https://s5.radio.co/sdaff9bd16/listen',
-      image:
-          'https://i.pinimg.com/564x/39/aa/2b/39aa2b0f6647ae3b098820c0285271f2.jpg',
-      name: 'furqan-radio',
-      subtitle: '24/7'),
-  InfoData(
-      id: "2",
-      audioUrl:
-          'https://download.quranicaudio.com/qdc/siddiq_minshawi/murattal/${Random().nextInt(114) + 1}.mp3',
-      image:
-          'https://static.qurancdn.com/images/reciters/7/mohamed-siddiq-el-minshawi-profile.jpeg?v=1',
-      name: 'Mohamed Siddiq',
-      subtitle: 'al-Minshawi'),
-  InfoData(
-      id: "3",
-      audioUrl:
-          'https://download.quranicaudio.com/qdc/khalil_al_husary/murattal/${Random().nextInt(114) + 1}.mp3',
-      image:
-          'https://static.qurancdn.com/images/reciters/5/mahmoud-khalil-al-hussary-profile.png?v=1',
-      name: 'Mahmoud Khalil',
-      subtitle: 'Al-Husary'),
-  InfoData(
-      id: "4",
-      audioUrl:
-          'https://download.quranicaudio.com/qdc/abdul_baset/murattal/${Random().nextInt(114) + 1}.mp3',
-      image:
-          'https://static.qurancdn.com/images/reciters/1/abdelbasset-profile.jpeg?v=1',
-      name: 'AbdulBaset',
-      subtitle: 'AbdulSamad'),
-  InfoData(
-      id: "5",
-      audioUrl:
-          'https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/${Random().nextInt(114) + 1}.mp3',
-      image:
-          'https://static.qurancdn.com/images/reciters/6/mishary-rashid-alafasy-profile.jpeg?v=1',
-      name: 'Mishari Rashid',
-      subtitle: 'al-`Afasy'),
-  InfoData(
-      id: "6",
-      audioUrl:
-          'https://download.quranicaudio.com/qdc/abu_bakr_shatri/murattal/${Random().nextInt(114) + 1}.mp3',
-      image:
-          'https://2.bp.blogspot.com/-zbRVES0XunQ/TgRDKGBDG6I/AAAAAAAABuA/2hFmIkeQTqE/s1600/abu-bakr-al-shatri.jpg',
-      name: 'Abu Bakr',
-      subtitle: 'al-Shatri'),
-  InfoData(
-      id: "7",
-      audioUrl:
-          'https://download.quranicaudio.com/qdc/khalifah_taniji/murattal/${Random().nextInt(114) + 1}.mp3',
-      image:
-          'https://static.qurancdn.com/images/reciters/11/khalifa-al-tunaiji-profile.jpeg?v=1',
-      name: ' Khalifa Musabah',
-      subtitle: 'Al-Tunaiji'),
-  InfoData(
-      id: "8",
-      audioUrl:
-          'https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/${Random().nextInt(114) + 1}.mp3',
-      image:
-          'https://static.qurancdn.com/images/reciters/4/hani-ar-rifai-profile.jpeg?v=1',
-      name: 'Sheikh Hani',
-      subtitle: 'ar-Rifai'),
-];
