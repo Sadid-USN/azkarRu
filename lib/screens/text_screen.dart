@@ -348,7 +348,7 @@ class _TextScreenState extends State<TextScreen> {
                             return true;
                           },
                           onEndIconPress: () {
-                            return false;
+                            return true;
                           },
                           duration: const Duration(milliseconds: 250),
                           startIconColor: Colors.white,
@@ -450,14 +450,14 @@ class PopupMenuButtonWidget extends StatelessWidget {
   final Function(double) onSpeedSelected;
 
   const PopupMenuButtonWidget(
-      {Key? key, required this.speedStream, required this.onSpeedSelected}) : super(key: key);
+      {Key? key, required this.speedStream, required this.onSpeedSelected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<double>(
       elevation: 3,
       surfaceTintColor: const Color(0xff376404),
-    
       itemBuilder: (context) {
         return <PopupMenuEntry<double>>[
           PopupMenuItem<double>(
