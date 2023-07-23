@@ -18,7 +18,6 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
 
 class TextScreen extends StatefulWidget {
@@ -48,20 +47,21 @@ class _TextScreenState extends State<TextScreen> {
                 bufferedPosition,
                 duration ?? Duration.zero,
               ));
-void playAudio(String url) {
-  _audioPlayer.setAudioSource(
-    AudioSource.uri(
-      Uri.parse(url),
-      tag: MediaItem(
-        id: widget.texts![currentIndex].id.toString(),
-        album: widget.chapter!.name,
-        title:  widget.chapter!.name!,
-        artUri: Uri.parse(widget.chapter!.listimage!),
+
+  void playAudio(String url) {
+    _audioPlayer.setAudioSource(
+      AudioSource.uri(
+        Uri.parse(url),
+        tag: MediaItem(
+          id: widget.texts![currentIndex].id.toString(),
+          album: widget.chapter!.name,
+          title: widget.chapter!.name!,
+          artUri: Uri.parse(widget.chapter!.listimage!),
+        ),
       ),
-    ),
-  );
-  _audioPlayer.play();
-}
+    );
+    _audioPlayer.play();
+  }
 
   void pauseAudio() {
     if (isPlaying) {
@@ -80,7 +80,7 @@ void playAudio(String url) {
   @override
   void dispose() {
     _audioPlayer.dispose();
-    _buttonController;
+
     super.dispose();
   }
 
@@ -267,7 +267,7 @@ void playAudio(String url) {
         child: Scaffold(
           bottomSheet: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            height: 8.4.h,
+            height: 10.4.h,
             color: const Color.fromARGB(255, 55, 100, 4),
             child: Column(
               children: [
@@ -288,7 +288,7 @@ void playAudio(String url) {
                         return true;
                       },
                       onEndIconPress: () {
-                        pauseAudio();
+                        _audioPlayer.pause();
 
                         return true;
                       },
@@ -297,8 +297,6 @@ void playAudio(String url) {
                       endIconColor: Colors.white,
                       clockwise: false,
                     ),
-                    
-                  
                     Padding(
                       padding: const EdgeInsets.only(top: 12),
                       child: Row(
@@ -357,13 +355,24 @@ void playAudio(String url) {
                           endIconColor: Colors.white,
                           clockwise: false,
                         ),
-                        IconButton(
-                            onPressed: () {
-                              Share.share(
-                                  '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                        StreamBuilder<double>(
+                          stream: _audioPlayer.speedStream,
+                          builder: (context, snapshot) => PopupMenuButtonWidget(
+                            speedStream: _audioPlayer.speedStream,
+                            onSpeedSelected: (double newValue) {
+                              _audioPlayer.setSpeed(newValue);
                             },
-                            icon: const Icon(Icons.share,
-                                size: 33.0, color: Colors.white)),
+                          ),
+                        ),
+
+                        // IconButton(
+                        //   onPressed: () {
+                        //     Share.share(
+                        //         '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                        //   },
+                        //   icon: const Icon(Icons.speed,
+                        //       size: 33.0, color: Colors.white),
+                        // ),
                         const SizedBox(
                           width: 5,
                         )
@@ -371,8 +380,6 @@ void playAudio(String url) {
                     )
                   ],
                 ),
-            
-            
               ],
             ),
           ),
@@ -437,3 +444,198 @@ class PositioneData {
     this.duration,
   );
 }
+
+class PopupMenuButtonWidget extends StatelessWidget {
+  final Stream<double> speedStream;
+  final Function(double) onSpeedSelected;
+
+  const PopupMenuButtonWidget(
+      {Key? key, required this.speedStream, required this.onSpeedSelected}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<double>(
+      elevation: 3,
+      surfaceTintColor: const Color(0xff376404),
+    
+      itemBuilder: (context) {
+        return <PopupMenuEntry<double>>[
+          PopupMenuItem<double>(
+            value: 0.25,
+            child: Text("0.25",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
+          ),
+          PopupMenuItem<double>(
+            value: 0.5,
+            child: Text("0.5",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
+          ),
+          PopupMenuItem<double>(
+            value: 0.75,
+            child: Text("0.75",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
+          ),
+          PopupMenuItem<double>(
+            value: 1.0,
+            child: Text("Normal",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
+          ),
+          const PopupMenuItem<double>(
+            value: 1.25,
+            child: Text("1.25x",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+          ),
+          const PopupMenuItem<double>(
+            value: 1.5,
+            child: Text("1.5x",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+          ),
+          const PopupMenuItem<double>(
+            value: 1.75,
+            child: Text("1.75x",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+          ),
+          const PopupMenuItem<double>(
+            value: 2.0,
+            child: Text("2.0x",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+          ),
+        ];
+      },
+      onSelected: onSpeedSelected,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.black12,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: StreamBuilder<double>(
+          stream: speedStream,
+          builder: (context, snapshot) {
+            return Text(
+              "${snapshot.data?.toStringAsFixed(1)}x",
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+
+// class AudioSpeedSliderDialog extends StatefulWidget {
+//   final double min;
+//   final double max;
+//   final double value;
+//   final ValueChanged<double> onChanged;
+
+//   const AudioSpeedSliderDialog({
+//     Key? key,
+//     required this.min,
+//     required this.max,
+//     required this.value,
+//     required this.onChanged,
+//   }) : super(key: key);
+
+//   @override
+//   _AudioSpeedSliderDialogState createState() => _AudioSpeedSliderDialogState();
+// }
+
+// class _AudioSpeedSliderDialogState extends State<AudioSpeedSliderDialog> {
+//   late double _currentValue;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _currentValue = widget.value;
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return AlertDialog(
+//       title: Center(
+//         child: Text(
+//           "${_currentValue.toStringAsFixed(1)}x",
+//           style:
+//               const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+//         ),
+//       ),
+//       // alignment: Alignment.,
+//       content: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Row(
+//             mainAxisSize: MainAxisSize.min,
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               IconButton(
+//                 icon: const Icon(Icons.remove),
+//                 onPressed: () {
+//                   // setState(() {
+//                   //   _currentValue -= 0.1;
+//                   //   _currentValue = _currentValue.clamp(widget.min, widget.max);
+//                   // });
+//                 },
+//               ),
+//               Slider(
+//                 activeColor: audioPlayerColor,
+//                 value: _currentValue,
+//                 min: widget.min,
+//                 max: widget.max,
+//                 divisions: 10,
+//                 onChanged: (value) {
+//                   setState(() {
+//                     _currentValue = value;
+//                   });
+//                 },
+//                 onChangeEnd: (value) {
+//                   widget.onChanged(_currentValue);
+//                 },
+//               ),
+//               IconButton(
+//                 icon: const Icon(Icons.add),
+//                 onPressed: () {
+//                   // setState(() {
+//                   //   _currentValue += 0.1;
+//                   //   _currentValue = _currentValue.clamp(widget.min, widget.max);
+//                   // });
+//                 },
+//               ),
+//             ],
+//           ),
+//         ],
+//       ),
+//       // actions: [
+//       //   ElevatedButton(
+//       //     style: ElevatedButton.styleFrom(
+//       //       backgroundColor:
+//       //           audioPlayerColor, // Replace Colors.blue with the desired background color
+//       //     ),
+//       //     onPressed: () => Navigator.pop(context),
+//       //     child: const Text("Илғо"),
+//       //   ),
+//       //   ElevatedButton(
+//       //     style: ElevatedButton.styleFrom(
+//       //       backgroundColor:
+//       //           audioPlayerColor, // Replace Colors.blue with the desired background color
+//       //     ),
+//       //     onPressed: () {
+//       //       widget.onChanged(_currentValue);
+//       //       Navigator.pop(context);
+//       //     },
+//       //     child: const Text("Ok"),
+//       //   ),
+//       // ],
+//     );
+//   }
+// }

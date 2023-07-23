@@ -38,7 +38,7 @@ class BodyHomePage extends StatelessWidget {
               const SizedBox(height: 50,),
               Container(
                 padding: const EdgeInsets.only(left: 60, top: 50, right: 60),
-                height: 60.h,
+                height: 65.h ,
                 child: Swiper(
                   indicatorLayout: PageIndicatorLayout.SCALE,
                   curve: Curves.bounceIn,
