@@ -59,5 +59,6 @@ abstract class  LocaleKeys {
   static const supportText3 = 'supportText3';
   static const supportText4 = 'supportText4';
   static const supportText5 = 'supportText5';
+  static const supportText6 = 'supportText6';
 
 }
