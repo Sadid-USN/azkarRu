@@ -1,7 +1,7 @@
 [
     {
         "id": 0,
-        "name": "Дуа\nначала дня",
+        "name": "Начало дня",
         "image": "images/morning.png",
         "chapters": [
             {
@@ -239,7 +239,7 @@
     },
     {
         "id": 1,
-        "name": "Дуа и азкары намаза",
+        "name": "Азкары намаза",
         "image": "images/duasalah.png",
         "chapters": [
             {
@@ -813,7 +813,7 @@
     },
     {
         "id": 2,
-        "name": "Утренние и вечерные азкары",
+        "name": "Утро и вечер",
         "image": "images/silhouette.png",
         "chapters": [
             {
@@ -932,7 +932,7 @@
     },
     {
         "id": 3,
-        "name": "Поминания Аллаха перед сном",
+        "name": "Азкары перед сном",
         "image": "images/sleep.png",
         "chapters": [
             {
@@ -1415,7 +1415,7 @@
     },
     {
         "id": 6,
-        "name": "Памятка по умре и хаджу",
+        "name": "Хадж",
         "image": "images/hajj.png",
         "chapters": [
             {
@@ -3242,7 +3242,7 @@
     },
     {
         "id": 12,
-        "name": "Аль-Удхия, и положения, связанные с ним",
+        "name": "Аль-Удхия",
         "image": "images/adha.png",
         "chapters": [
             {

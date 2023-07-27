@@ -34,17 +34,17 @@ class _DrawerModelState extends State<DrawerModel> {
                       );
                     },
                   ),
-                  _BuildListTile(
-                    index: 1,
-                    title: drawerTitles[1].tr(),
-                    icon: icons[1],
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const SupportScreen();
-                      }));
-                    },
-                  ),
+                  // _BuildListTile(
+                  //   index: 1,
+                  //   title: drawerTitles[1].tr(),
+                  //   icon: icons[1],
+                  //   onTap: () {
+                  //     Navigator.push(context,
+                  //         MaterialPageRoute(builder: (context) {
+                  //       return const SupportScreen();
+                  //     }));
+                  //   },
+                  // ),
                   _BuildListTile(
                     index: 2,
                     title: drawerTitles[2].tr(),
@@ -122,8 +122,8 @@ Widget _header(BuildContext context) {
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.only(
           top: 20 + MediaQuery.of(context).padding.top, bottom: 25),
-      child: Column(
-        children: const [
+      child: const Column(
+        children: [
           ClipRRect(
             borderRadius: BorderRadius.all(
               Radius.circular(23.0),

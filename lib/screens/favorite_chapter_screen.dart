@@ -2,6 +2,7 @@ import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/main.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -9,6 +10,8 @@ import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../controllers/audio_controller.dart';
+import '../generated/locale_keys.g.dart';
 import 'text_screen.dart';
 
 class FavoriteChaptersSceen extends StatefulWidget {
@@ -52,92 +55,115 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
   Widget build(BuildContext context) {
     final books = Provider.of<List<Book>>(context);
     return Scaffold(
-      body: Container(
-        // Your container decoration
-        decoration: mainScreenGradient,
-        child: ValueListenableBuilder(
-          valueListenable: Hive.box(FAVORITES_BOX).listenable(),
-          builder: (context, Box box, child) {
-            List<Chapters> chapters = [];
-            for (Book book in books) {
-              chapters.addAll(book.chapters!);
-            }
-            final List<dynamic> likedChapterIds = box.keys.toList();
+        body: Consumer<AudioController>(
+          builder: (context, value, child) => RefreshIndicator(
+            onRefresh: () async {
+              if (value.selectedIndex == 2) {
+                setState(() {
 
-            final likedChapters = chapters
-                .where(
-                    (Chapters chapter) => likedChapterIds.contains(chapter.id))
-                .toList();
-
-            return likedChapters.isNotEmpty
-                ? AnimationLimiter(
-                    child: ListView.separated(
-                      padding: const EdgeInsets.only(top: 25),
-                      separatorBuilder: (context, index) => Divider(
-                        color: dividerColor,
-                      ),
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: likedChapters.length,
-                      itemBuilder: (context, position) {
-                        return AnimationConfiguration.staggeredList(
-                          position: position,
-                          duration: const Duration(milliseconds: 500),
-                          child: ScaleAnimation(
-                            child: ListTile(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return TextScreen(
-                                    texts: likedChapters[position].texts,
-                                    chapter: likedChapters[position],
-                                  );
-                                }));
-                              },
-                              leading: CircleAvatar(
-                                maxRadius: 25,
-                                backgroundImage: NetworkImage(
-                                    likedChapters[position].listimage!),
-                              ),
-                              title: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      likedChapters[position].name!,
-                                      maxLines: 2,
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: titleAbbBar,
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
+                  print("REFRESHING");
+                });
+              }
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    width: MediaQuery.sizeOf(context).width,
+                    height: MediaQuery.sizeOf(context).height,
+                    // Your container decoration
+                    decoration: mainScreenGradient,
+                    child: ValueListenableBuilder(
+                      valueListenable: Hive.box(FAVORITES_BOX).listenable(),
+                      builder: (context, Box box, child) {
+                        List<Chapters> chapters = [];
+                        for (Book book in books) {
+                          chapters.addAll(book.chapters!);
+                        }
+                        final List<dynamic> likedChapterIds = box.keys.toList();
+            
+                        final likedChapters = chapters
+                            .where((Chapters chapter) =>
+                                likedChapterIds.contains(chapter.id))
+                            .toList();
+            
+                        return likedChapters.isNotEmpty
+                            ? AnimationLimiter(
+                                child: ListView.separated(
+                                  padding: const EdgeInsets.only(top: 25),
+                                  separatorBuilder: (context, index) => Divider(
+                                    color: dividerColor,
                                   ),
-                                  LikeButton(
-                                    isLiked: _isChapterLiked(
-                                        likedChapters[position]),
-                                    onTap: (isLiked) async {
-                                      return _onLikeButtonTap(
-                                          isLiked, likedChapters[position]);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: likedChapters.length,
+                                  itemBuilder: (context, position) {
+                                    return AnimationConfiguration.staggeredList(
+                                      position: position,
+                                      duration: const Duration(milliseconds: 500),
+                                      child: ScaleAnimation(
+                                        child: ListTile(
+                                          onTap: () {
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return TextScreen(
+                                                texts:
+                                                    likedChapters[position].texts,
+                                                chapter: likedChapters[position],
+                                              );
+                                            }));
+                                          },
+                                          leading: CircleAvatar(
+                                            maxRadius: 25,
+                                            backgroundImage: NetworkImage(
+                                                likedChapters[position].listimage!),
+                                          ),
+                                          title: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  likedChapters[position].name!,
+                                                  maxLines: 2,
+                                                  textAlign: TextAlign.start,
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: titleAbbBar,
+                                                      overflow:
+                                                          TextOverflow.ellipsis),
+                                                ),
+                                              ),
+                                              LikeButton(
+                                                isLiked: _isChapterLiked(
+                                                    likedChapters[position]),
+                                                onTap: (isLiked) async {
+                                                  return _onLikeButtonTap(isLiked,
+                                                      likedChapters[position]);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              )
+                            : _HeartAnimation(
+                                slideAnimationController: _slideAnimationController,
+                                rotationAnimationController:
+                                    _rotationAnimationController,
+                              );
                       },
                     ),
-                  )
-                : _HeartAnimation(
-                    slideAnimationController: _slideAnimationController,
-                    rotationAnimationController: _rotationAnimationController,
-                  );
-          },
-        ),
-      ),
-    );
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 
   bool _isChapterLiked(Chapters? chapter) {
@@ -168,22 +194,30 @@ class _HeartAnimation extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SlideTransition(
-        position: Tween<Offset>(
-          begin: const Offset(0, -1),
-          end: const Offset(1, 0),
-        ).animate(slideAnimationController),
-        child: RotationTransition(
-          turns: Tween<double>(
-            begin: 1.0,
-            end: 2.0,
-          ).animate(rotationAnimationController),
-          child: const Text(
-            "❤️",
-            style: TextStyle(fontSize: 80),
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+                LocaleKeys.favoriteText.tr(),
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18, height: 1.6),
+            ),
           ),
-        ),
+          ScaleTransition(
+            scale: Tween<double>(
+              begin: 0.8, // Zoom out scale factor
+              end: 0.5, // Zoom in scale factor
+            ).animate(slideAnimationController),
+            child: const Text(
+              "❤️",
+              style: TextStyle(fontSize: 80),
+            ),
+          ),
+        ],
       ),
     );
   }

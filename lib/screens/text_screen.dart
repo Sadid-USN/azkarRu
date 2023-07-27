@@ -9,7 +9,6 @@ import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/style/my_text_style.dart';
-import 'package:clipboard/clipboard.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
 
 class TextScreen extends StatefulWidget {
@@ -32,10 +32,50 @@ class TextScreen extends StatefulWidget {
   _TextScreenState createState() => _TextScreenState();
 }
 
-class _TextScreenState extends State<TextScreen> {
+class _TextScreenState extends State<TextScreen>
+    with SingleTickerProviderStateMixin {
   int currentIndex = 0;
   late final AudioPlayer _audioPlayer = AudioPlayer();
   bool isPlaying = false;
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _tabController = TabController(length: widget.texts!.length, vsync: this);
+    _tabController.addListener(() { 
+      if(_tabController.indexIsChanging){
+        playAudioForTab(_tabController.index);
+      }
+    });
+    playAudio(); // Play audio for the initial tab
+  }
+
+  void playAudioForTab(int index) {
+    if (currentIndex != index) {
+      currentIndex = index;
+      _audioPlayer.pause(); // Pause the audio when switching tabs
+      playAudio();
+    }
+  }
+
+  void goToNextTab() {
+  final nextIndex = _tabController.index + 1;
+  if (nextIndex < widget.texts!.length) {
+    _tabController.animateTo(nextIndex);
+    playAudioForTab(nextIndex);
+
+  }
+}
+
+void goToPreviousTab() {
+  final previousIndex = _tabController.index - 1;
+  if (previousIndex >= 0) {
+    _tabController.animateTo(previousIndex);
+    playAudioForTab(previousIndex);
+  }
+}
 
   Stream<PositioneData> get positioneDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
@@ -48,48 +88,41 @@ class _TextScreenState extends State<TextScreen> {
                 duration ?? Duration.zero,
               ));
 
-  void playAudio(String url) {
-    _audioPlayer.setAudioSource(
-      AudioSource.uri(
-        Uri.parse(url),
-        tag: MediaItem(
-          id: widget.texts![currentIndex].id.toString(),
-          album: widget.chapter!.name,
-          title: widget.chapter!.name!,
-          artUri: Uri.parse(widget.chapter!.listimage!),
-        ),
-      ),
-    );
-    _audioPlayer.play();
+  void _onPlayerCompletion(PlayerState playerState) {
+    if (playerState.processingState == ProcessingState.completed) {
+      _audioPlayer.seek(Duration.zero); // Reset to the beginning of the audio
+      _audioPlayer.pause(); // Pause the audio when it completes
+    }
   }
 
-  void pauseAudio() {
-    if (isPlaying) {
-      setState(() {
-        _audioPlayer.pause();
-        isPlaying = false;
-      });
-    }
+  void playAudio() {
+    final audioSource = AudioSource.uri(
+      Uri.parse(widget.texts![currentIndex].url ??
+          "https://zvukitop.com/wp-content/uploads/2021/08/error-error-error.mp3"),
+      tag: MediaItem(
+        id: widget.texts![currentIndex].id.toString(),
+        album: widget.chapter!.name,
+        title: widget.chapter!.name!,
+        artUri: Uri.parse(widget.chapter!.listimage!),
+      ),
+    );
+
+    _audioPlayer.setAudioSource(audioSource);
+    _audioPlayer.playerStateStream.listen((playerState) {
+      _onPlayerCompletion(playerState);
+    });
   }
 
   double _fontSize = 14.sp;
 
-  AnimateIconController _copyController = AnimateIconController();
+  final AnimateIconController _copyController = AnimateIconController();
   final AnimateIconController _buttonController = AnimateIconController();
 
   @override
   void dispose() {
     _audioPlayer.dispose();
-
+   _tabController.dispose();
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    _audioPlayer;
-    _copyController = AnimateIconController();
-
-    super.initState();
   }
 
   Widget _contenAllTexts(
@@ -200,6 +233,7 @@ class _TextScreenState extends State<TextScreen> {
                   ),
                 ),
               ),
+             
             ],
           ),
         ),
@@ -232,11 +266,13 @@ class _TextScreenState extends State<TextScreen> {
                   ),
                 ),
               ),
+
+             
             ],
           ),
         ),
         const SizedBox(
-          height: 80,
+          height: 120,
         )
       ],
     );
@@ -267,119 +303,161 @@ class _TextScreenState extends State<TextScreen> {
         child: Scaffold(
           bottomSheet: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            height: 10.4.h,
+            height: 13.5.h,
             color: const Color.fromARGB(255, 55, 100, 4),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Share.share(
+                            '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                      },
+                      icon: const Icon(Icons.share,
+                          size: 30.0, color: Colors.white),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        goToPreviousTab();
+                      
+                      },
+                      icon: const Icon(
+                        Icons.skip_previous,
+                        color: Colors.white,
+                      ),
+                    ),
+                    StreamBuilder<PlayerState>(
+                      stream: _audioPlayer.playerStateStream,
+                      builder: (context, snapshot) {
+                        final playerState = snapshot.data;
+                        final processingState = playerState?.processingState;
+                        final playing = playerState?.playing;
+                        final completed =
+                            processingState == ProcessingState.completed;
+
+                        if (processingState == ProcessingState.loading ||
+                            processingState == ProcessingState.buffering) {
+                          return IconButton(
+                            icon: const CircularProgressIndicator(
+                              strokeWidth: 3.0,
+                              color: Colors.grey,
+                            ),
+                            iconSize: 35,
+                            onPressed: _audioPlayer.stop,
+                          );
+                        } else if (playing != true || completed) {
+                          return IconButton(
+                            color: Colors.white,
+                            disabledColor: Colors.grey,
+                            icon: const Icon(Icons.play_circle_outline),
+                            iconSize: 35,
+                            onPressed: _audioPlayer.play,
+                          );
+                        } else {
+                          return IconButton(
+                            color: Colors.white,
+                            disabledColor: Colors.grey,
+                            icon: const Icon(Icons.pause_circle_outline),
+                            iconSize: 35,
+                            onPressed: _audioPlayer.pause,
+                          );
+                        }
+                      },
+                    ),
+                    IconButton(
+                      onPressed: () {
+                         goToNextTab();
+                      },
+                      icon: const Icon(
+                        Icons.skip_next,
+                        color: Colors.white,
+                      ),
+                    ),
+                    StreamBuilder<double>(
+                      stream: _audioPlayer.speedStream,
+                      builder: (context, snapshot) => PopupMenuButtonWidget(
+                        speedStream: _audioPlayer.speedStream,
+                        onSpeedSelected: (double newValue) {
+                          _audioPlayer.setSpeed(newValue);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AnimateIcons(
-                      startIcon: Icons.play_circle,
-                      endIcon: Icons.pause,
-                      controller: _buttonController,
-                      size: 40.0,
-                      onStartIconPress: () {
-                        playAudio(widget.texts![currentIndex].url!);
+                StreamBuilder<PositioneData>(
+                    stream: positioneDataStream,
+                    builder: (context, snapshot) {
+                      final positionData = snapshot.data;
 
-                        return true;
-                      },
-                      onEndIconPress: () {
-                        _audioPlayer.pause();
-
-                        return true;
-                      },
-                      duration: const Duration(milliseconds: 250),
-                      startIconColor: Colors.white,
-                      endIconColor: Colors.white,
-                      clockwise: false,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 12),
-                      child: Row(
-                        children: [
-                          StreamBuilder<PositioneData>(
-                              stream: positioneDataStream,
-                              builder: (context, snapshot) {
-                                final positionData = snapshot.data;
-
-                                return SizedBox(
-                                  width: 180,
-                                  child: ProgressBar(
-                                    barHeight: 4,
-                                    baseBarColor: Colors.grey.shade400,
-                                    bufferedBarColor: Colors.white,
-                                    progressBarColor: Colors.cyanAccent,
-                                    thumbColor: Colors.cyanAccent,
-                                    thumbRadius: 6,
-                                    timeLabelTextStyle: const TextStyle(
-                                        height: 1.2,
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold),
-                                    progress: positionData?.positione ??
-                                        Duration.zero,
-                                    buffered: positionData?.bufferedPosition ??
-                                        Duration.zero,
-                                    total:
-                                        positionData?.duration ?? Duration.zero,
-                                    onSeek: _audioPlayer.seek,
-                                  ),
-                                );
-                              }),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        AnimateIcons(
-                          startIcon: Icons.copy,
-                          endIcon: Icons.check_circle_outline,
-                          controller: _copyController,
-                          size: 33.0,
-                          onStartIconPress: () {
-                            FlutterClipboard.copy(
-                                '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
-
-                            return true;
-                          },
-                          onEndIconPress: () {
-                            return true;
-                          },
-                          duration: const Duration(milliseconds: 250),
-                          startIconColor: Colors.white,
-                          endIconColor: Colors.white,
-                          clockwise: false,
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 70),
+                        child: ProgressBar(
+                          barHeight: 4,
+                          baseBarColor: Colors.grey.shade400,
+                          bufferedBarColor: Colors.white,
+                          progressBarColor: Colors.cyanAccent,
+                          thumbColor: Colors.cyanAccent,
+                          thumbRadius: 6,
+                          timeLabelTextStyle: const TextStyle(
+                              height: 1.2,
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold),
+                          progress: positionData?.positione ?? Duration.zero,
+                          buffered:
+                              positionData?.bufferedPosition ?? Duration.zero,
+                          total: positionData?.duration ?? Duration.zero,
+                          onSeek: _audioPlayer.seek,
                         ),
-                        StreamBuilder<double>(
-                          stream: _audioPlayer.speedStream,
-                          builder: (context, snapshot) => PopupMenuButtonWidget(
-                            speedStream: _audioPlayer.speedStream,
-                            onSpeedSelected: (double newValue) {
-                              _audioPlayer.setSpeed(newValue);
-                            },
-                          ),
-                        ),
+                      );
+                    }),
 
-                        // IconButton(
-                        //   onPressed: () {
-                        //     Share.share(
-                        //         '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
-                        //   },
-                        //   icon: const Icon(Icons.speed,
-                        //       size: 33.0, color: Colors.white),
-                        // ),
-                        const SizedBox(
-                          width: 5,
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                // AnimateIcons(
+                //   startIcon: Icons.copy,
+                //   endIcon: Icons.check_circle_outline,
+                //   controller: _copyController,
+                //   size: 33.0,
+                //   onStartIconPress: () {
+                //     FlutterClipboard.copy(
+                //         '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+
+                //     return true;
+                //   },
+                //   onEndIconPress: () {
+                //     return true;
+                //   },
+                //   duration: const Duration(milliseconds: 250),
+                //   startIconColor: Colors.white,
+                //   endIconColor: Colors.white,
+                //   clockwise: false,
+                // ),
+
+                // AnimateIcons(
+                //   startIcon: Icons.play_circle,
+                //   endIcon: Icons.pause,
+                //   controller: _buttonController,
+                //   size: 40.0,
+                //   onStartIconPress: () {
+                //     playAudio();
+
+                //     return true;
+                //   },
+                //   onEndIconPress: () {
+                //     _audioPlayer.stop();
+
+                //     return true;
+                //   },
+                //   duration: const Duration(milliseconds: 250),
+                //   startIconColor: Colors.white,
+                //   endIconColor: Colors.white,
+                //   clockwise: false,
+                // ),
               ],
             ),
           ),
@@ -410,6 +488,9 @@ class _TextScreenState extends State<TextScreen> {
               decoration: mainScreenGradient,
             ),
             bottom: TabBar(
+              
+              controller: _tabController,
+              onTap: playAudioForTab,
               labelColor: titleAbbBar,
               indicatorColor: titleAbbBar,
               isScrollable: true,
@@ -417,6 +498,7 @@ class _TextScreenState extends State<TextScreen> {
             ),
           ),
           body: TabBarView(
+            controller: _tabController,
             children: widget.texts!
                 .map(
                   (e) => Container(
@@ -531,7 +613,6 @@ class PopupMenuButtonWidget extends StatelessWidget {
     );
   }
 }
-
 
 // class AudioSpeedSliderDialog extends StatefulWidget {
 //   final double min;

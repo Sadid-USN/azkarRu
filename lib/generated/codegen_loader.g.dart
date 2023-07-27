@@ -73,7 +73,8 @@ class CodegenLoader extends AssetLoader{
   "supportText3": "(Аль-Имран 133)\n От Абухурайры передается, что Пророк Аллах (ﷺ) сказал:",
   "supportText4": "«Когда человек умирает, (все) его дела прекращаются (прекращает получать награду) за исключением трёх: непрерывной милостыни, знания, которым могут пользоваться (другие люди), или праведного ребёнка, который станет обращаться к Аллаху с мольбами за него”». Этот хадис передал Муслим (1631).",
   "supportText5": "С дозволения Всевышнего мы будем продолжать работать над улучшением приложения. Вся хвала Всевышнему Аллаху, Господу миров!",
-  "supportText6": "Если вы хотите финансово поддержать наш проект, пожалуйста, свяжитесь с нами по электронной почте по адресу ulamuyaman@gmail.com"
+  "supportText6": "Если вы хотите финансово поддержать наш проект, пожалуйста, свяжитесь с нами по электронной почте по адресу ulamuyaman@gmail.com",
+  "favoriteText": "Здесь будут отображаться ваши избранные главы"
 };
 static const Map<String,dynamic> en = {
   "avrod": "Azkar Daily prayers",
@@ -134,7 +135,8 @@ static const Map<String,dynamic> en = {
   "supportText3": "(Surah Ali 'Imran 133) It is narrated from Abu Hurairah that the Prophet of Allah (ﷺ) said:",
   "supportText4": "When a man dies, his deeds come to an end except for three things: Sadaqah Jariyah (ceaseless charity); a knowledge which is beneficial, or a virtuous descendant who prays for him (for the deceased). (Muslim:1631)",
   "supportText5": "With the permission of the Most High, we will continue to work on improving the application. All praise is due to Allah, the Lord of the worlds!",
-  "supportText6": "If you want to financially support our project, please contact us via email at ulamuyaman@gmail.com"
+  "supportText6": "If you want to financially support our project, please contact us via email at ulamuyaman@gmail.com",
+  "favoriteText": "Your favorite chapters will be displayed here"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "en": en};
 }

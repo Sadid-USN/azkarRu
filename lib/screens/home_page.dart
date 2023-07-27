@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
-                      return const LangugesPage();
+                      return const LangugesScreen();
                     }));
                   },
                   icon: Icon(
@@ -107,7 +107,9 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: const Color(0xffF6DEC4),
         ),
 
-        body: Consumer<AudioController>(
+        body: 
+        
+        Consumer<AudioController>(
             builder: (context, controller, child) =>
                 pages[controller.selectedIndex]),
 

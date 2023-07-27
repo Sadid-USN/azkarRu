@@ -1,8 +1,6 @@
-
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/data/book_functions.dart';
-import 'package:avrod/screens/home_page.dart';
-import 'package:avrod/utility/glowing_progress.dart';
+import 'package:avrod/routes.dart';
 import 'package:avrod/widgets/notification.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -15,24 +13,29 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'data/book_map.dart';
 import 'generated/codegen_loader.g.dart';
 import 'package:timezone/data/latest.dart' as tz;
+
 // ignore: constant_identifier_names
 const String FAVORITES_BOX = 'favorites_box';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   await LocalNotificationSV().initNotification();
-  
+  await LocalNotificationSV().initNotification();
+
   await EasyLocalization.ensureInitialized();
-    await JustAudioBackground.init(
+  await JustAudioBackground.init(
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
     androidNotificationChannelName: 'Audio playback',
     androidNotificationOngoing: true,
   );
-   tz.initializeTimeZones();
+  tz.initializeTimeZones();
   await Hive.initFlutter();
   await Hive.openBox(FAVORITES_BOX);
+
+  Locale? startLocale = await getSavedLocale();
+  startLocale ??= WidgetsBinding.instance.platformDispatcher.locale;
 
   runApp(
     EasyLocalization(
@@ -42,7 +45,8 @@ Future<void> main() async {
       ],
       assetLoader: const CodegenLoader(),
       path: 'assets/translations',
-      fallbackLocale: const Locale('en'),
+      startLocale: const Locale('en'),
+      fallbackLocale: const Locale('ru'),
       saveLocale: true,
       child: ChangeNotifierProvider(
         create: (context) {
@@ -55,7 +59,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key ? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +71,7 @@ class MyApp extends StatelessWidget {
           child: Consumer<List<Book>>(
             builder: (context, bookList, _) {
               return MaterialApp(
+                routes: appRoutes,
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: context.localizationDelegates,
                 supportedLocales: context.supportedLocales,
@@ -76,9 +81,9 @@ class MyApp extends StatelessWidget {
                       Theme.of(context).textTheme),
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                 ),
-                home: bookList.isEmpty
-                    ? const GlowingProgress()
-                    : const HomePage(),
+                // home: bookList.isEmpty
+                //     ? const GlowingProgress()
+                //     : const HomePage(),
               );
             },
           ),
@@ -86,4 +91,10 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+Future<Locale?> getSavedLocale() async {
+  final box = await Hive.openBox("app_locale");
+  final savedLocale = box.get('app_locale');
+  return savedLocale != null ? Locale(savedLocale) : null;
 }

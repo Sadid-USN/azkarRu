@@ -6,8 +6,8 @@ import 'package:avrod/colors/colors.dart';
 
 import '../generated/locale_keys.g.dart';
 
-class LangugesPage extends StatelessWidget {
-  const LangugesPage({Key? key}) : super(key: key);
+class LangugesScreen extends StatelessWidget {
+  const LangugesScreen({Key? key}) : super(key: key);
 
   static String routName = '/langugesPage';
   @override
@@ -33,7 +33,7 @@ class LangugesPage extends StatelessWidget {
             title: "🇺🇸 English",
             onPressed: () {
               context.setLocale(const Locale('en'));
-              Navigator.of(context).pop();
+            Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
             },
           ),
           const SizedBox(
@@ -44,7 +44,7 @@ class LangugesPage extends StatelessWidget {
             onPressed: () {
               context.setLocale(const Locale('ru'));
 
-              Navigator.of(context).pop();
+                   Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
             },
           ),
         ],
@@ -66,12 +66,7 @@ class LangButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20),
       child: ElevatedButton(
-        onPressed: onPressed, //This prop for beautiful expressions
-        child: Text(
-          title,
-          style: GoogleFonts.ptSerif(
-              fontSize: 18, fontWeight: FontWeight.w500, color: textColor),
-        ), // This child can be everything. I want to choose a beautiful Text Widget
+        onPressed: onPressed, // This child can be everything. I want to choose a beautiful Text Widget
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color.fromARGB(255, 243, 225, 183),
           textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -87,6 +82,11 @@ class LangButton extends StatelessWidget {
                 12), //change border radius of this beautiful button thanks to BorderRadius.circular function
           ),
           tapTargetSize: MaterialTapTargetSize.padded,
+        ), //This prop for beautiful expressions
+        child: Text(
+          title,
+          style: GoogleFonts.ptSerif(
+              fontSize: 18, fontWeight: FontWeight.w500, color: textColor),
         ),
       ),
     );

@@ -813,7 +813,7 @@
     },
     {
         "id": 2,
-        "name": "Morning and evening azkars",
+        "name": "Morning and evening",
         "image": "images/silhouette.png",
         "chapters": [
             {
@@ -2445,7 +2445,7 @@
     },
     {
         "id": 10,
-        "name": "Ruqyah from Sihr (magic) and evil eye",
+        "name": "Ruqyah from Sihr (magic)",
         "image": "images/ruqya.png",
         "chapters": [
             {
@@ -3215,7 +3215,7 @@
     },
     {
         "id": 12,
-        "name": "Al-Udhiyah and the regulations related to it",
+        "name": "Al-Udhiyah",
         "image": "images/adha.png",
         "chapters": [
             {
