@@ -74,6 +74,7 @@ class AudiPlyerCard extends StatelessWidget {
       children: [
         Consumer<AudioController>(
           builder: (context, value, child) => Container(
+            height: MediaQuery.sizeOf(context).height /3 *1.2 ,
             margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 200),
             decoration: BoxDecoration(
@@ -84,105 +85,103 @@ class AudiPlyerCard extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: Container(
-            height: 200,
-            margin: const EdgeInsets.only(
-              top: 16,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.center,
-                end: Alignment(-0.2, -0.5),
-                stops: [-1.0, 0.1, 0.1, 0.2],
-                colors: [
-                  Color.fromARGB(255, 72, 69, 66),
-                  Color.fromARGB(255, 72, 69, 66),
-                  Color.fromARGB(255, 72, 69, 66),
-                  Color.fromARGB(255, 72, 69, 66),
-                ],
-                tileMode: TileMode.clamp,
-              ),
-              color: Color.fromARGB(255, 92, 109, 110),
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-            ),
-            child: Stack(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ListTile(
-                      title: Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: 8,
-                        ),
-                        child: Text(
-                          "$name  $subtitle",
-                          style: const TextStyle(
-                              height: 1.5,
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      subtitle: index == 0
-                          ? const SizedBox()
-                          : Consumer<AudioController>(
-                              builder: (context, value, child) {
-                                return StreamBuilder<PositioneData>(
-                                    stream: value.positioneDataStream,
-                                    builder: (context, snapshot) {
-                                      final positionData = snapshot.data;
-
-                                      return ProgressBar(
-                                        barHeight: 4,
-                                        baseBarColor: Colors.grey.shade400,
-                                        bufferedBarColor: Colors.white,
-                                        progressBarColor: Colors.blueGrey,
-                                        thumbColor: Colors.blueGrey,
-                                        thumbRadius: 6,
-                                        timeLabelTextStyle: const TextStyle(
-                                            height: 1.2,
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                        progress: positionData?.positione ??
-                                            Duration.zero,
-                                        buffered:
-                                            positionData?.bufferedPosition ??
-                                                Duration.zero,
-                                        total: positionData?.duration ??
-                                            Duration.zero,
-                                        onSeek: value.audioPlayer.seek,
-                                      );
-                                    });
-                              },
-                            ),
-                      // trailing: Container(
-                      //   decoration: BoxDecoration(
-                      //     shape: BoxShape.circle,
-                      //     border: Border.all(
-                      //       color: Colors.white,
-                      //       width: 2.0,
-                      //     ),
-                      //   ),
-                      //   child: CircleAvatar(
-                      //     radius: 25,
-                      //     backgroundImage: NetworkImage(image),
-                      //   ),
-                      // ),
-                    ),
-                    NextPreviousButton(
-                      pageController: pageController,
-                      index: index,
-                    ),
-                  ],
-                ),
-                index == 0 ? const SizedBox() : const RefreshButton(),
+        Container(
+          height: 200,
+          // margin: const EdgeInsets.only(
+          //   top: 10,
+          // ),
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.center,
+              end: Alignment(-0.2, -0.5),
+              stops: [-1.0, 0.1, 0.1, 0.2],
+              colors: [
+                Color.fromARGB(255, 72, 69, 66),
+                Color.fromARGB(255, 72, 69, 66),
+                Color.fromARGB(255, 72, 69, 66),
+                Color.fromARGB(255, 72, 69, 66),
               ],
+              tileMode: TileMode.clamp,
             ),
+            color: Color.fromARGB(255, 92, 109, 110),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+          ),
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ListTile(
+                    title: Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 16,
+                      ),
+                      child: Text(
+                        "$name  $subtitle",
+                        style: const TextStyle(
+                            height: 1.5,
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    subtitle: index == 0
+                        ? const SizedBox()
+                        : Consumer<AudioController>(
+                            builder: (context, value, child) {
+                              return StreamBuilder<PositioneData>(
+                                  stream: value.positioneDataStream,
+                                  builder: (context, snapshot) {
+                                    final positionData = snapshot.data;
+
+                                    return ProgressBar(
+                                      barHeight: 4,
+                                      baseBarColor: Colors.grey.shade400,
+                                      bufferedBarColor: Colors.white,
+                                      progressBarColor: Colors.blueGrey,
+                                      thumbColor: Colors.blueGrey,
+                                      thumbRadius: 6,
+                                      timeLabelTextStyle: const TextStyle(
+                                          height: 1.2,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                      progress: positionData?.positione ??
+                                          Duration.zero,
+                                      buffered:
+                                          positionData?.bufferedPosition ??
+                                              Duration.zero,
+                                      total: positionData?.duration ??
+                                          Duration.zero,
+                                      onSeek: value.audioPlayer.seek,
+                                    );
+                                  });
+                            },
+                          ),
+                    // trailing: Container(
+                    //   decoration: BoxDecoration(
+                    //     shape: BoxShape.circle,
+                    //     border: Border.all(
+                    //       color: Colors.white,
+                    //       width: 2.0,
+                    //     ),
+                    //   ),
+                    //   child: CircleAvatar(
+                    //     radius: 25,
+                    //     backgroundImage: NetworkImage(image),
+                    //   ),
+                    // ),
+                  ),
+                  NextPreviousButton(
+                    pageController: pageController,
+                    index: index,
+                  ),
+                ],
+              ),
+              index == 0 ? const SizedBox() : const RefreshButton(),
+            ],
           ),
         ),
         // const SizedBox(
@@ -273,7 +272,7 @@ class NextPreviousButton extends StatelessWidget {
                   ? Icons.play_circle
                   : Icons.pause_circle,
               controller: audioController.buttonController,
-              size: 65.0,
+              size: 50.0,
               onStartIconPress: () {
                 audioController.playAudio(
                   url: audioController.listInfo[index].audioUrl,
