@@ -44,11 +44,11 @@ class _TextScreenState extends State<TextScreen>
     super.initState();
 
     _tabController = TabController(length: widget.texts!.length, vsync: this);
-    _tabController.addListener(() { 
-      if(_tabController.indexIsChanging){
-        playAudioForTab(_tabController.index);
-      }
-    });
+    // _tabController.addListener(() { 
+    //   if(_tabController.indexIsChanging){
+    //     playAudioForTab(_tabController.index);
+    //   }
+    // });
     playAudio(); // Play audio for the initial tab
   }
 
@@ -98,7 +98,7 @@ void goToPreviousTab() {
   void playAudio() {
     final audioSource = AudioSource.uri(
       Uri.parse(widget.texts![currentIndex].url ??
-          "https://zvukitop.com/wp-content/uploads/2021/08/error-error-error.mp3"),
+          ""),
       tag: MediaItem(
         id: widget.texts![currentIndex].id.toString(),
         album: widget.chapter!.name,
