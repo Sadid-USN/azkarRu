@@ -116,6 +116,14 @@ class _ChapterScreenState extends State<ChapterScreen> {
                       trailing: CircleAvatar(
                         backgroundColor: const Color(0xffF3EEE2),
                         child: LikeButton(
+                           likeBuilder: (isLiked) {
+                                return Icon(
+                                  isLiked
+                                      ? Icons.favorite
+                                      : Icons.favorite_outline,
+                                  color: isLiked ? Colors.red : Colors.grey,
+                                );
+                              },
                           isLiked: isChapterLiked(chapter[index].id!),
                           onTap: (isLiked) async {
                             return setLike(chapter[index].id ?? 0, isLiked);

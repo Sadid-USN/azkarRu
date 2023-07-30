@@ -23,7 +23,7 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 class HomePage extends StatefulWidget {
-  static const HOME = '/';
+  static const HOME = '/home';
   const HomePage({Key? key}) : super(key: key);
 
   @override

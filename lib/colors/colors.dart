@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const Color primaryTextColor = Color(0xFF414C6B);
 const Color audioPlayerColor = Color(0xFF376404);
-const Color bgColor =  Color(0xffF6DEC4);
+const Color bgColor =  Color(0xffF2DFC7);
 const Color secondaryTextColor = Color(0xFFd6791b);
 const Color titleTextColor = Colors.white;
 const Color contentTextColor = Color(0xffcfbc5c);

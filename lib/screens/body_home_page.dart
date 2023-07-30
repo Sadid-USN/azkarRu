@@ -57,125 +57,22 @@ class BodyHomePage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Stack(
+                    child: Column(
                       children: [
-                        const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // SizedBox(
-                            //   height: 40.h,
-                            //   width: 40.h,
-                            //   child: Card(
-                            //     elevation: 8,
-                            //     shape: RoundedRectangleBorder(
-                            //       borderRadius: BorderRadius.circular(25),
-                            //     ),
-                            //     child: Padding(
-                            //       padding: const EdgeInsets.all(25.0),
-                            //       child: Column(
-                            //         mainAxisSize: MainAxisSize.min,
-                            //         mainAxisAlignment: MainAxisAlignment.center,
-                            //         children: [
-                            //           Center(
-                            //             child: Text(
-                            //               titles[index].tr(),
-                            //               textAlign: TextAlign.center,
-                            //               style: TextStyle(
-                            //                 fontSize: 14.sp,
-                            //                 color: textColor,
-                            //                 fontWeight: FontWeight.w900,
-                            //               ),
-                            //             ),
-                            //           ),
-                            //           Column(
-                            //             children: [
-                            //               const SizedBox(
-                            //                 height: 30,
-                            //               ),
-                            //               Row(
-                            //                 mainAxisAlignment: MainAxisAlignment.center,
-                            //                 children: [
-                            //                   Text(
-                            //                     LocaleKeys.learnMore.tr(),
-                            //                     style: TextStyle(
-                            //                       color: primaryTextColor,
-                            //                       fontSize: 10.sp,
-                            //                       fontWeight: FontWeight.w500,
-                            //                     ),
-                            //                   ),
-                            //                   SizedBox(
-                            //                     width: 2.w,
-                            //                   ),
-                            //                   // ignore: sized_box_for_whitespace
-                            //                   Icon(
-                            //                     FontAwesomeIcons.handPointer,
-                            //                     size: 14.sp,
-                            //                     color: Colors.blueGrey,
-                            //                   ),
-                            //                 ],
-                            //               ),
-                            //             ],
-                            //           ),
-                            //         ],
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
+                        Image.asset(
+                          books[index].image ?? "",
+                        //  width: 30.w,
+                           height: 100,
                         ),
-
-                        Column(
-                          children: [
-                            Image.asset(
-                              books[index].image ?? "",
-                            //  width: 30.w,
-                               height: 100,
-                            ),
-                            SelectableText(
-                              books[index].name ?? "",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 8,
-                                color: textColor,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
+                        SelectableText(
+                          books[index].name ?? "",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 8,
+                            color: textColor,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-
-                        // Positioned(
-                        //   bottom: 15,
-                        //   right: 20,
-                        //   child: IconButton(
-                        //     onPressed: () {
-                        //       showSearch(
-                        //         context: context,
-                        //         delegate: CoustomSearch(
-                        //           index: index,
-                        //         ),
-                        //       );
-                        //     },
-                        //     icon: Icon(
-                        //       FontAwesomeIcons.search,
-                        //       color: textColor,
-                        //     ),
-                        //   ),
-                        // ),
-                        // Positioned(
-                        //   bottom: 20,
-                        //   left: 10,
-                        //   child:
-                        // Text(
-                        //     books[index].name ??"",
-                        //     textAlign: TextAlign.center,
-                        //     style: TextStyle(
-                        //       fontSize: 8,
-                        //       color: textColor,
-                        //       fontWeight: FontWeight.w700,
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                   );

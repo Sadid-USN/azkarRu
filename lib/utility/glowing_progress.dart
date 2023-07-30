@@ -8,14 +8,13 @@ class GlowingProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const  Color(0xffF3EEE2),
+      backgroundColor: const Color(0xffF3EEE2),
       body: Center(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: GlowingProgressIndicator(
           child: SvgPicture.asset(
             'assets/Svg/basmala.svg',
-            color: Colors.black,
           ),
         ),
       )),

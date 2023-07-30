@@ -56,114 +56,119 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
     final books = Provider.of<List<Book>>(context);
     return Scaffold(
         body: Consumer<AudioController>(
-          builder: (context, value, child) => RefreshIndicator(
-            onRefresh: () async {
-              if (value.selectedIndex == 2) {
-                setState(() {
+      builder: (context, value, child) => RefreshIndicator(
+        onRefresh: () async {
+          if (value.selectedIndex == 2) {
+            setState(() {
+              print("REFRESHING");
+            });
+          }
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
+                // Your container decoration
+                decoration: mainScreenGradient,
+                child: ValueListenableBuilder(
+                  valueListenable: Hive.box(FAVORITES_BOX).listenable(),
+                  builder: (context, Box box, child) {
+                    List<Chapters> chapters = [];
+                    for (Book book in books) {
+                      chapters.addAll(book.chapters!);
+                    }
+                    final List<dynamic> likedChapterIds = box.keys.toList();
 
-                  print("REFRESHING");
-                });
-              }
-            },
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    height: MediaQuery.sizeOf(context).height,
-                    // Your container decoration
-                    decoration: mainScreenGradient,
-                    child: ValueListenableBuilder(
-                      valueListenable: Hive.box(FAVORITES_BOX).listenable(),
-                      builder: (context, Box box, child) {
-                        List<Chapters> chapters = [];
-                        for (Book book in books) {
-                          chapters.addAll(book.chapters!);
-                        }
-                        final List<dynamic> likedChapterIds = box.keys.toList();
-            
-                        final likedChapters = chapters
-                            .where((Chapters chapter) =>
-                                likedChapterIds.contains(chapter.id))
-                            .toList();
-            
-                        return likedChapters.isNotEmpty
-                            ? AnimationLimiter(
-                                child: ListView.separated(
-                                  padding: const EdgeInsets.only(top: 25),
-                                  separatorBuilder: (context, index) => Divider(
-                                    color: dividerColor,
-                                  ),
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: likedChapters.length,
-                                  itemBuilder: (context, position) {
-                                    return AnimationConfiguration.staggeredList(
-                                      position: position,
-                                      duration: const Duration(milliseconds: 500),
-                                      child: ScaleAnimation(
-                                        child: ListTile(
-                                          onTap: () {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                              return TextScreen(
-                                                texts:
-                                                    likedChapters[position].texts,
-                                                chapter: likedChapters[position],
-                                              );
-                                            }));
-                                          },
-                                          leading: CircleAvatar(
-                                            maxRadius: 25,
-                                            backgroundImage: NetworkImage(
-                                                likedChapters[position].listimage!),
+                    final likedChapters = chapters
+                        .where((Chapters chapter) =>
+                            likedChapterIds.contains(chapter.id))
+                        .toList();
+
+                    return likedChapters.isNotEmpty
+                        ? AnimationLimiter(
+                            child: ListView.separated(
+                              padding: const EdgeInsets.only(top: 25),
+                              separatorBuilder: (context, index) => Divider(
+                                color: dividerColor,
+                              ),
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: likedChapters.length,
+                              itemBuilder: (context, position) {
+                                return AnimationConfiguration.staggeredList(
+                                  position: position,
+                                  duration: const Duration(milliseconds: 500),
+                                  child: ScaleAnimation(
+                                    child: ListTile(
+                                      onTap: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return TextScreen(
+                                            texts:
+                                                likedChapters[position].texts,
+                                            chapter: likedChapters[position],
+                                          );
+                                        }));
+                                      },
+                                      leading: Text(
+                                              "${likedChapters[position].id! +1}",
+                                              maxLines: 2,
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: titleAbbBar,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
+                                            ),
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              likedChapters[position].name!,
+                                              maxLines: 2,
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: titleAbbBar,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
+                                            ),
                                           ),
-                                          title: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                child: Text(
-                                                  likedChapters[position].name!,
-                                                  maxLines: 2,
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(
-                                                      fontSize: 12.sp,
-                                                      fontWeight: FontWeight.w600,
-                                                      color: titleAbbBar,
-                                                      overflow:
-                                                          TextOverflow.ellipsis),
-                                                ),
-                                              ),
-                                              LikeButton(
-                                                isLiked: _isChapterLiked(
-                                                    likedChapters[position]),
-                                                onTap: (isLiked) async {
-                                                  return _onLikeButtonTap(isLiked,
-                                                      likedChapters[position]);
-                                                },
-                                              ),
-                                            ],
+                                          LikeButton(
+                                            isLiked: _isChapterLiked(
+                                                likedChapters[position]),
+                                            onTap: (isLiked) async {
+                                              return _onLikeButtonTap(isLiked,
+                                                  likedChapters[position]);
+                                            },
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    );
-                                  },
-                                ),
-                              )
-                            : _HeartAnimation(
-                                slideAnimationController: _slideAnimationController,
-                                rotationAnimationController:
-                                    _rotationAnimationController,
-                              );
-                      },
-                    ),
-                  ),
-                ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                        : _HeartAnimation(
+                            slideAnimationController: _slideAnimationController,
+                            rotationAnimationController:
+                                _rotationAnimationController,
+                          );
+                  },
+                ),
               ),
-            ),
+            ],
           ),
-        ));
+        ),
+      ),
+    ));
   }
 
   bool _isChapterLiked(Chapters? chapter) {
@@ -199,10 +204,10 @@ class _HeartAnimation extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-           Padding(
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text(
-                LocaleKeys.favoriteText.tr(),
+              LocaleKeys.favoriteText.tr(),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 18, height: 1.6),
             ),
