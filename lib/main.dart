@@ -5,11 +5,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'colors/theme.dart';
 import 'generated/codegen_loader.g.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -41,11 +41,12 @@ Future<void> main() async {
       supportedLocales: const [
         Locale('en'),
         Locale('ru'),
+        Locale('fr'),
       ],
       assetLoader: const CodegenLoader(),
       path: 'assets/translations',
       startLocale: const Locale('en'),
-      fallbackLocale: const Locale('ru'),
+      fallbackLocale: const Locale('en'),
       saveLocale: true,
       child: ChangeNotifierProvider(
         create: (context) {
@@ -70,14 +71,8 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
-          theme: ThemeData(
-            textTheme: GoogleFonts.ptSerifCaptionTextTheme(
-                Theme.of(context).textTheme),
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          // home: bookList.isEmpty
-          //     ? const GlowingProgress()
-          //     : const HomePage(),
+          theme: appTheme,
+          
         );
       },
     );

@@ -51,7 +51,8 @@ class BodyHomePage extends StatelessWidget {
                           pageBuilder: (context, a, b) {
                             return ChapterScreen(
                               bookIndex: index,
-                              title: titles[index],
+                              title: books[index].name,
+                              
                             );
                           },
                         ),

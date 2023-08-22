@@ -4,6 +4,7 @@ import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_functions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/screens/text_screen.dart';
@@ -56,10 +57,11 @@ class _ChapterScreenState extends State<ChapterScreen> {
               color: iconColor,
             )),
         elevation: 3.0,
-        title: Text(
+        title: SelectableText(
           widget.title!.tr(),
-          style: TextStyle(
-              fontSize: 14.sp, color: textColor, fontWeight: FontWeight.bold),
+          style: GoogleFonts.ptSerif(
+             fontSize: 14.sp, color: textColor, fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
       ),
@@ -140,9 +142,10 @@ class _ChapterScreenState extends State<ChapterScreen> {
                       leading: Text(
                         "${chapter[index].id! + 1}",
                         textAlign: TextAlign.start,
-                        style: TextStyle(
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.ptSerif(
                             fontSize: 10.sp,
-                            overflow: TextOverflow.ellipsis,
+                            
                             fontWeight: FontWeight.w600,
                             color: textColor),
                       ),
@@ -154,10 +157,11 @@ class _ChapterScreenState extends State<ChapterScreen> {
                       title: Text(
                         chapter[index].name ?? '',
                         maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.start,
-                        style: TextStyle(
+                        style:  GoogleFonts.ptSerif(
                             fontSize: 10.sp,
-                            overflow: TextOverflow.ellipsis,
+                            
                             fontWeight: FontWeight.w600,
                             color: textColor),
                       ),

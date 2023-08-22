@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
               const Spacer(),
               Text(
                 LocaleKeys.avrod.tr(),
-                style: colorizeTextStyle,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               const Spacer(),
               IconButton(
@@ -96,15 +96,16 @@ class _HomePageState extends State<HomePage> {
                       return const LangugesScreen();
                     }));
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.language,
-                    color: textColor,
+                
+                    
                   )),
             ],
           ),
           centerTitle: true,
           elevation: 3.0,
-          backgroundColor: const Color(0xffF6DEC4),
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         ),
 
         body: 

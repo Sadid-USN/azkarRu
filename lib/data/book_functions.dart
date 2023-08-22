@@ -13,6 +13,8 @@ class BookFunctions {
       path = 'lib/data/bookEn.json';
     }else if(context.locale.languageCode == "ru"){
       path = 'lib/data/book.json';
+    }else if(context.locale.languageCode == "fr"){
+      path = 'lib/data/bookTj.json';
     }
 
     await Future.delayed(const Duration(seconds: 2));

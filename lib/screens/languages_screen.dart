@@ -33,7 +33,8 @@ class LangugesScreen extends StatelessWidget {
             title: "🇺🇸 English",
             onPressed: () {
               context.setLocale(const Locale('en'));
-            Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/', (route) => false);
             },
           ),
           const SizedBox(
@@ -44,7 +45,20 @@ class LangugesScreen extends StatelessWidget {
             onPressed: () {
               context.setLocale(const Locale('ru'));
 
-                   Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/', (route) => false);
+            },
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          LangButton(
+            title: '🇹🇯  Тоҷики',
+            onPressed: () {
+              context.setLocale(const Locale('fr'));
+
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/', (route) => false);
             },
           ),
         ],
@@ -66,7 +80,8 @@ class LangButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20),
       child: ElevatedButton(
-        onPressed: onPressed, // This child can be everything. I want to choose a beautiful Text Widget
+        onPressed:
+            onPressed, // This child can be everything. I want to choose a beautiful Text Widget
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color.fromARGB(255, 243, 225, 183),
           textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
