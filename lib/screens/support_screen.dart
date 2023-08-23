@@ -25,9 +25,9 @@ class SupportScreen extends StatelessWidget {
                 bottomLeft: Radius.circular(12),
                 bottomRight: Radius.circular(12))),
         backgroundColor: const Color.fromARGB(255, 201, 177, 150),
-        title:  Text(
+        title: Text(
           'support'.tr(),
-          style:  TextStyle(
+          style: TextStyle(
             fontSize: 18,
             color: Colors.grey[800],
           ),
@@ -37,7 +37,7 @@ class SupportScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon:  Icon(
+          icon: Icon(
             Icons.arrow_back_ios,
             color: Colors.grey[800],
           ),
@@ -51,90 +51,78 @@ class SupportScreen extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            // SafeArea(
-            //   child: SizedBox(
-            //     height: MediaQuery.of(context).size.height / 2 * 0.6,
-            //     child: ListView.builder(
-            //         physics: const BouncingScrollPhysics(),
-            //         shrinkWrap: true,
-            //         scrollDirection: Axis.horizontal,
-            //         itemCount: listCard.length,
-            //         itemBuilder: (context, index) {
-            //           return SupportCard(
-            //             initials: listCard[index].initials,
-            //             cardNumbers: listCard[index].cardNumbers,
-            //             icon: listCard[index].icon,
-            //             gradient: listCard[index].gradient,
-            //           );
-            //         }),
-            //   ),
-            // ),
             SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: RichText(
-                    text: TextSpan(children: [
-                  TextSpan(
-                    text:
-                    
-                        '${LocaleKeys.supportText1.tr()}\n',
-                    style: GoogleFonts.ptSerif(
-                        color: const Color.fromARGB(255, 75, 65, 65),
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal),
-                  ),
-                  TextSpan(
-                    text:
-                        '${LocaleKeys.supportText2.tr()}\n',
-                    style: GoogleFonts.ptSerif(
-                        color: Colors.grey[800],
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  TextSpan(
-                    text:
-                        '${LocaleKeys.supportText3.tr()}\n',
-                    style: GoogleFonts.ptSerif(
-                        color: Colors.grey[800],
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal),
-                  ),
-                  TextSpan(
-                    text:
-                        '${LocaleKeys.supportText4.tr()}\n',
-                    style: GoogleFonts.ptSerif(
-                        color: Colors.grey[800],
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(
-                    text: LocaleKeys.supportText5.tr(),
-                    style: GoogleFonts.ptSerif(
-                        color: Colors.grey[800],
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal),
-                  ),
-                  TextSpan(
-                    text: LocaleKeys.supportText6.tr(),
-                    style: GoogleFonts.ptSerif(
-                        color: Colors.grey[800],
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ])),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height / 2 * 0.6,
+                child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: listCard.length,
+                    itemBuilder: (context, index) {
+                      return SupportCard(
+                        initials: listCard[index].initials,
+                        cardNumbers: listCard[index].cardNumbers,
+                        icon: listCard[index].icon,
+                        gradient: listCard[index].gradient,
+                      );
+                    }),
               ),
             ),
-             Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-               child: SelectableText(
-                     LocaleKeys.supportText6.tr(),
-                      style: GoogleFonts.ptSerif(
-                          color: Colors.blueGrey[700],
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700),
-                    ),
-             ),
-      
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                  text: '${LocaleKeys.supportText1.tr()}\n',
+                  style: GoogleFonts.ptSerif(
+                      color: const Color.fromARGB(255, 75, 65, 65),
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal),
+                ),
+                TextSpan(
+                  text: '${LocaleKeys.supportText2.tr()}\n',
+                  style: GoogleFonts.ptSerif(
+                      color: Colors.grey[800],
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+                TextSpan(
+                  text: '${LocaleKeys.supportText3.tr()}\n',
+                  style: GoogleFonts.ptSerif(
+                      color: Colors.grey[800],
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal),
+                ),
+                TextSpan(
+                  text: '${LocaleKeys.supportText4.tr()}\n',
+                  style: GoogleFonts.ptSerif(
+                      color: Colors.grey[800],
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: LocaleKeys.supportText5.tr(),
+                  style: GoogleFonts.ptSerif(
+                      color: Colors.grey[800],
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal),
+                ),
+              ])),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: SelectableText(
+                LocaleKeys.supportText6.tr(),
+                style: GoogleFonts.ptSerif(
+                    color: Colors.blueGrey[700],
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            const SizedBox(
+              height: 35,
+            ),
           ],
         ),
       ),
@@ -345,7 +333,6 @@ List<SupportCard> listCard = [
       Colors.cyan.shade600,
     ], begin: Alignment.topLeft, end: Alignment.bottomRight),
   ),
-  
   SupportCard(
     cardNumbers: '4274   3200   7851   2616',
     initials: 'Sadid Idibekov',

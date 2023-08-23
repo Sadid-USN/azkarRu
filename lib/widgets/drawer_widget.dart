@@ -2,6 +2,7 @@ import 'package:avrod/screens/support_screen.dart';
 import 'package:avrod/widgets/drawer_option_list.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
 
@@ -34,17 +35,17 @@ class _DrawerModelState extends State<DrawerModel> {
                       );
                     },
                   ),
-                  // _BuildListTile(
-                  //   index: 1,
-                  //   title: drawerTitles[1].tr(),
-                  //   icon: icons[1],
-                  //   onTap: () {
-                  //     Navigator.push(context,
-                  //         MaterialPageRoute(builder: (context) {
-                  //       return const SupportScreen();
-                  //     }));
-                  //   },
-                  // ),
+                  _BuildListTile(
+                    index: 1,
+                    title: drawerTitles[1].tr(),
+                    icon: icons[1],
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const SupportScreen();
+                      }));
+                    },
+                  ),
                   _BuildListTile(
                     index: 2,
                     title: drawerTitles[2].tr(),
@@ -102,7 +103,7 @@ class _BuildListTile extends StatelessWidget {
       child: ListTile(
         title: Text(
           title,
-          style: const TextStyle(color: Colors.white),
+          style: GoogleFonts.ptSerif(color: Colors.white, fontSize: 16),
         ),
         leading: Icon(
           icon,
