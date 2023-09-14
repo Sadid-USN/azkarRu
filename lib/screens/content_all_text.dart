@@ -1,4 +1,4 @@
-import 'package:avrod/generated/l10n.dart';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -152,7 +152,7 @@ class AllTextsContent extends StatelessWidget {
                 Center(
                   child: ExpandablePanel(
                     header: Text(
-                      S.of(context).translation,
+                      LocaleKeys.translation.tr(),
                       textAlign: TextAlign.start,
                       style: expandableTextStyle,
                     ),
