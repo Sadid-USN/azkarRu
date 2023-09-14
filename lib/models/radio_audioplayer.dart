@@ -22,7 +22,7 @@ class RadioAudioPlayer extends StatelessWidget {
         child: Consumer<AudioController>(
           builder: (context, audioController, child) => PageView.builder(
             controller: pageController,
-            itemCount: audioController.listInfo.length,
+            itemCount: listInfo.length,
             onPageChanged: (value) {
               audioController.audioPlayer.stop();
             },
@@ -30,14 +30,14 @@ class RadioAudioPlayer extends StatelessWidget {
               return AnimationConfiguration.staggeredGrid(
                 position: index,
                 duration: const Duration(milliseconds: 400),
-                columnCount: audioController.listInfo.length,
+                columnCount: listInfo.length,
                 child: ScaleAnimation(
                   child: AudiPlyerCard(
                     index: index,
-                    audioUrl: audioController.listInfo[index].audioUrl,
-                    image: audioController.listInfo[index].image,
-                    name: audioController.listInfo[index].name,
-                    subtitle: audioController.listInfo[index].subtitle,
+                    audioUrl: listInfo[index].audioUrl,
+                    image: listInfo[index].image,
+                    name: listInfo[index].name,
+                    subtitle:listInfo[index].subtitle,
                     pageController: pageController,
                   ),
                 ),
@@ -79,7 +79,7 @@ class AudiPlyerCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 200),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage(value.listInfo[index].image),
+                  image: NetworkImage(listInfo[index].image),
                   fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -251,7 +251,7 @@ class NextPreviousButton extends StatelessWidget {
                 );
               } else {
                 pageController.jumpToPage(
-                    (pageController.page!.toInt() - 1) % value.listInfo.length);
+                    (pageController.page!.toInt() - 1) % listInfo.length);
               }
               value.audioPlayer.stop();
             },
@@ -263,23 +263,23 @@ class NextPreviousButton extends StatelessWidget {
           ),
           Consumer<AudioController>(
             builder: (context, audioController, child) => AnimateIcons(
-              startIcon: audioController.listInfo[index].audioUrl !=
-                      audioController.listInfo[index].audioUrl
+              startIcon: listInfo[index].audioUrl !=
+                     listInfo[index].audioUrl
                   ? Icons.pause_circle
                   : Icons.play_circle,
-              endIcon: audioController.listInfo[index].audioUrl !=
-                      audioController.listInfo[index].audioUrl
+              endIcon: listInfo[index].audioUrl !=
+                      listInfo[index].audioUrl
                   ? Icons.play_circle
                   : Icons.pause_circle,
               controller: audioController.buttonController,
               size: 50.0,
               onStartIconPress: () {
                 audioController.playAudio(
-                  url: audioController.listInfo[index].audioUrl,
-                  album: audioController.listInfo[index].name,
-                  id: audioController.listInfo[index].id,
-                  title: audioController.listInfo[index].subtitle,
-                  imgUrl: audioController.listInfo[index].image,
+                  url: listInfo[index].audioUrl,
+                  album: listInfo[index].name,
+                  id: listInfo[index].id,
+                  title: listInfo[index].subtitle,
+                  imgUrl: listInfo[index].image,
                 );
 
                 return true;
@@ -298,14 +298,14 @@ class NextPreviousButton extends StatelessWidget {
           Consumer<AudioController>(
             builder: (context, value, child) => IconButton(
               onPressed: () {
-                if (pageController.page != value.listInfo.length - 1) {
+                if (pageController.page != listInfo.length - 1) {
                   pageController.nextPage(
                     duration: const Duration(milliseconds: 400),
                     curve: Curves.easeInOut,
                   );
                 } else {
                   pageController.jumpToPage((pageController.page!.toInt() + 1) %
-                      value.listInfo.length);
+                     listInfo.length);
                 }
 
                 value.audioPlayer.stop();

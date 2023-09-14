@@ -49,6 +49,7 @@ Future<void> main() async {
       fallbackLocale: const Locale('en'),
       saveLocale: true,
       child: ChangeNotifierProvider(
+        lazy: true,
         create: (context) {
           return AudioController();
         },

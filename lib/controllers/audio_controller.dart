@@ -16,6 +16,7 @@ import '../screens/text_screen.dart';
 
 class AudioController extends ChangeNotifier {
   int selectedIndex = 0;
+  bool onRefresh = false;
 
   // AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.MEDIA_PLAYER);
   final AnimateIconController copyController = AnimateIconController();
@@ -124,6 +125,32 @@ class AudioController extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  void refreshAudioUrls() {
+    for (int i = 0; i < listInfo.length; i++) {
+      if (i != 0) {
+        listInfo[i].audioUrl =
+            'https://download.quranicaudio.com/qdc/siddiq_minshawi/murattal/${Random().nextInt(114) + 1}.mp3';
+      }
+    }
+
+    onRefresh = true;
+    notifyListeners();
+  }
+
+
+
+   double _progress = 0.0;
+
+  double get progress => _progress;
+
+  void updateProgress(double value) {
+    _progress = value;
+    notifyListeners();
+  }
+}
+
+
   List<InfoData> listInfo = [
     InfoData(
       id: "1",
@@ -190,16 +217,4 @@ class AudioController extends ChangeNotifier {
         name: 'Sheikh Hani',
         subtitle: 'ar-Rifai'),
   ];
-  bool onRefresh = false;
-  void refreshAudioUrls() {
-    for (int i = 0; i < listInfo.length; i++) {
-      if (i != 0) {
-        listInfo[i].audioUrl =
-            'https://download.quranicaudio.com/qdc/siddiq_minshawi/murattal/${Random().nextInt(114) + 1}.mp3';
-      }
-    }
-
-    onRefresh = true;
-    notifyListeners();
-  }
-}
+  

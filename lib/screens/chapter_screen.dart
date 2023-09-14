@@ -1,6 +1,8 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/data/book_functions.dart';
+import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -254,10 +256,13 @@ class _SearchBarState extends State<_SearchBar> {
           border: const OutlineInputBorder(
             borderSide: BorderSide.none,
           ),
-          hintText: 'Поиск...',
+          hintText: LocaleKeys.search.tr(),
           hintStyle: TextStyle(fontSize: 16, color: Colors.grey.shade500),
         ),
       ),
     );
   }
+}
+
+class LocalKeys {
 }
