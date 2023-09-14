@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../data/book_functions.dart';
 import '../data/book_map.dart';
-import '../utility/glowing_progress.dart';
+import '../core/glowing_progress.dart';
 import 'home_page.dart';
 class OnBoardingScreen extends StatelessWidget {
  const OnBoardingScreen({Key? key}) : super(key: key);

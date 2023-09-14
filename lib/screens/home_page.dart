@@ -49,14 +49,7 @@ class _HomePageState extends State<HomePage> {
       scheduledNotificationDateTime: DateTime.now().add(const Duration(days: 1)).subtract(Duration(minutes: DateTime.now().minute)));
   }
 
-  // final colorizeColors = [
-  //   textColor,
-  //   Colors.orange,
-  //   Colors.blue,
-  //   Colors.indigo,
-  //   Colors.blueGrey,
-  //   Colors.deepOrange,
-  // ];
+ 
 
   List<Widget> pages = [
     const BodyHomePage(),
@@ -84,9 +77,11 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-              Text(
-                LocaleKeys.avrod.tr(),
-                style: Theme.of(context).textTheme.titleMedium,
+              Consumer<AudioController>(
+                builder: (context, value, child) => Text(
+                  value.getTitle(),
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               ),
               const Spacer(),
               IconButton(

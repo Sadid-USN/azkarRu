@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../colors/colors.dart';
 import '../data/book_map.dart';
-import '../data/titles.dart';
+
 import 'chapter_screen.dart';
 
 class BodyHomePage extends StatelessWidget {
@@ -52,7 +52,6 @@ class BodyHomePage extends StatelessWidget {
                             return ChapterScreen(
                               bookIndex: index,
                               title: books[index].name,
-                              
                             );
                           },
                         ),
@@ -62,8 +61,8 @@ class BodyHomePage extends StatelessWidget {
                       children: [
                         Image.asset(
                           books[index].image ?? "",
-                        //  width: 30.w,
-                           height: 100,
+                          //  width: 30.w,
+                          height: 100,
                         ),
                         SelectableText(
                           books[index].name ?? "",

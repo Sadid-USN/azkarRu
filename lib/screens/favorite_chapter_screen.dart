@@ -5,6 +5,7 @@ import 'package:avrod/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
@@ -113,16 +114,15 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
                                         }));
                                       },
                                       leading: Text(
-                                              "${likedChapters[position].id! +1}",
-                                              maxLines: 2,
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: titleAbbBar,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
-                                            ),
+                                        "${likedChapters[position].id! + 1}",
+                                        maxLines: 2,
+                                        textAlign: TextAlign.start,
+                                        style: GoogleFonts.ptSerif(
+                                          fontSize: 10.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: titleAbbBar,
+                                        ),
+                                      ),
                                       title: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -131,13 +131,13 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
                                             child: Text(
                                               likedChapters[position].name!,
                                               maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 10.sp,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: titleAbbBar,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
+                                              style: GoogleFonts.ptSerif(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: titleAbbBar,
+                                              ),
                                             ),
                                           ),
                                           LikeButton(

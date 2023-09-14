@@ -1,8 +1,9 @@
 import 'package:animate_icons/animate_icons.dart';
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:avrod/generated/l10n.dart';
+
 import 'package:clipboard/clipboard.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class SupportScreen extends StatelessWidget {
                 bottomRight: Radius.circular(12))),
         backgroundColor: const Color.fromARGB(255, 201, 177, 150),
         title: Text(
-          'support'.tr(),
+          S.of(context).support,
           style: TextStyle(
             fontSize: 18,
             color: Colors.grey[800],
@@ -74,35 +75,35 @@ class SupportScreen extends StatelessWidget {
               child: RichText(
                   text: TextSpan(children: [
                 TextSpan(
-                  text: '${LocaleKeys.supportText1.tr()}\n',
+                  text: '${S.of(context).supportText1}\n',
                   style: GoogleFonts.ptSerif(
                       color: const Color.fromARGB(255, 75, 65, 65),
                       fontSize: 18,
                       fontWeight: FontWeight.normal),
                 ),
                 TextSpan(
-                  text: '${LocaleKeys.supportText2.tr()}\n',
+                  text: '${S.of(context).supportText2}\n',
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
                       fontWeight: FontWeight.w600),
                 ),
                 TextSpan(
-                  text: '${LocaleKeys.supportText3.tr()}\n',
+                  text: '${S.of(context).supportText3}\n',
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
                       fontWeight: FontWeight.normal),
                 ),
                 TextSpan(
-                  text: '${LocaleKeys.supportText4.tr()}\n',
+                  text: '${S.of(context).supportText4}\n',
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
-                  text: LocaleKeys.supportText5.tr(),
+                  text: S.of(context).supportText5,
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
@@ -113,7 +114,7 @@ class SupportScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: SelectableText(
-                LocaleKeys.supportText6.tr(),
+                S.of(context).supportText6,
                 style: GoogleFonts.ptSerif(
                     color: Colors.blueGrey[700],
                     fontSize: 18,

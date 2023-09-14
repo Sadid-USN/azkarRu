@@ -378,29 +378,29 @@ class PopupMenuButtonWidget extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
           ),
-          const PopupMenuItem<double>(
+           PopupMenuItem<double>(
             value: 1.25,
             child: Text("1.25x",
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
           ),
-          const PopupMenuItem<double>(
+           PopupMenuItem<double>(
             value: 1.5,
             child: Text("1.5x",
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
           ),
-          const PopupMenuItem<double>(
+           PopupMenuItem<double>(
             value: 1.75,
             child: Text("1.75x",
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
           ),
-          const PopupMenuItem<double>(
+           PopupMenuItem<double>(
             value: 2.0,
             child: Text("2.0x",
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+                    TextStyle(fontWeight: FontWeight.bold, color:  Colors.grey.shade700)),
           ),
         ];
       },

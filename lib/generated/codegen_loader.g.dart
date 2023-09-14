@@ -15,7 +15,7 @@ class CodegenLoader extends AssetLoader{
   }
 
   static const Map<String,dynamic> ru = {
-  "avrod": "Азкар ежедневные молитвы",
+  "avrod": "Азкары",
   "lang": "Языки",
   "search": "Поиск",
   "radio": "Радио Коран",
