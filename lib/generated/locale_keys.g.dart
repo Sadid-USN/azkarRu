@@ -32,6 +32,7 @@ abstract class  LocaleKeys {
   static const calendar = 'calendar';
   static const learnMore = 'learnMore';
   static const translation = 'translation';
+  static const noInternetConnection = 'noInternetConnection';
   static const titlenotifi1 = 'titlenotifi1';
   static const titlenotifi2 = 'titlenotifi2';
   static const titlenotifi3 = 'titlenotifi3';

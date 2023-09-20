@@ -48,8 +48,8 @@ dependencies:
   expandable: ^5.0.1
   fab_circular_menu: ^1.0.2
   #file_picker: ^5.3.0
-  firebase_core: ^2.13.0
-  firebase_storage: ^11.2.1
+  firebase_core: ^2.15.1
+  firebase_storage: ^11.2.6
   flip_card: ^0.7.0
   flutter:
     sdk: flutter
@@ -89,6 +89,9 @@ dependencies:
   timezone: ^0.9.2
   shimmer: ^3.0.0
   flutter_launcher_icons: ^0.13.1
+  cloud_firestore: ^4.9.1
+  connectivity_plus: ^4.0.2
+  logger: ^2.0.2
  
 flutter_native_splash:
   color: '#ffffff'
@@ -138,6 +141,7 @@ flutter:
     - lib/data/
     - images/
     - icons/
+    - assets/DB/
 
   # - lib/android/app/src/raw
   # An image asset can refer to one or more resolution-specific "variants", see

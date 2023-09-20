@@ -3,7 +3,9 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/controllers/audio_controller.dart';
+import 'package:avrod/controllers/internet_chacker.dart';
 import 'package:avrod/data/book_map.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
@@ -34,20 +36,20 @@ class _TextScreenState extends State<TextScreen>
   late final AudioPlayer _audioPlayer = AudioPlayer();
   bool isPlaying = false;
   late TabController _tabController;
-  final GlobalController _globalController = GlobalController();
+
   double _fontSize = 18.sp;
+  InternetConnectionController? internetConnectionController;
+
   @override
   void initState() {
     super.initState();
+    internetConnectionController = InternetConnectionController(Connectivity());
+    internetConnectionController!.listenTonetworkChacges(context);
     _fontSize = textStorage.read('fontSize') ?? 18.0;
-    _globalController.intFontSize();
+
     _tabController = TabController(length: widget.texts!.length, vsync: this);
-    // _tabController.addListener(() {
-    //   if(_tabController.indexIsChanging){
-    //     playAudioForTab(_tabController.index);
-    //   }
-    // });
-    playAudio(); // Play audio for the initial tab
+
+    playAudio();
   }
 
   void increaseSize() {
@@ -378,29 +380,29 @@ class PopupMenuButtonWidget extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
           ),
-           PopupMenuItem<double>(
+          PopupMenuItem<double>(
             value: 1.25,
             child: Text("1.25x",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
           ),
-           PopupMenuItem<double>(
+          PopupMenuItem<double>(
             value: 1.5,
             child: Text("1.5x",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
           ),
-           PopupMenuItem<double>(
+          PopupMenuItem<double>(
             value: 1.75,
             child: Text("1.75x",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
           ),
-           PopupMenuItem<double>(
+          PopupMenuItem<double>(
             value: 2.0,
             child: Text("2.0x",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color:  Colors.grey.shade700)),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
           ),
         ];
       },
