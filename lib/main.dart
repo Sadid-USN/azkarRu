@@ -1,7 +1,11 @@
 import 'package:avrod/controllers/audio_controller.dart';
+
+import 'package:avrod/controllers/internet_chacker.dart';
 import 'package:avrod/routes.dart';
 import 'package:avrod/widgets/notification.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_storage/get_storage.dart';
@@ -23,6 +27,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalNotificationSV().initNotification();
   await GetStorage.init();
+  await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   await JustAudioBackground.init(
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
@@ -35,7 +40,7 @@ Future<void> main() async {
 
   Locale? startLocale = await getSavedLocale();
   startLocale ??= WidgetsBinding.instance.platformDispatcher.locale;
-
+   final Connectivity connectivity = Connectivity();
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -48,11 +53,18 @@ Future<void> main() async {
       startLocale: const Locale('en'),
       fallbackLocale: const Locale('en'),
       saveLocale: true,
-      child: ChangeNotifierProvider(
-        lazy: true,
-        create: (context) {
-          return AudioController();
-        },
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<AudioController>(
+            lazy: true,
+            create: (context) => AudioController(),
+          ),
+          ChangeNotifierProvider<InternetConnectionController>(
+            lazy: true,
+            create: (context) => InternetConnectionController(connectivity),
+          ),
+          // Add other providers here
+        ],
         child: const MyApp(),
       ),
     ),
@@ -67,6 +79,7 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
+         // home: const DataUploadedScreen(),
           routes: appRoutes,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: context.localizationDelegates,
