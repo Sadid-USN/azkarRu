@@ -1,7 +1,9 @@
 import 'package:animate_icons/animate_icons.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:avrod/core/addbunner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
 import 'package:avrod/controllers/audio_controller.dart';
@@ -37,7 +39,7 @@ class RadioAudioPlayer extends StatelessWidget {
                     audioUrl: listInfo[index].audioUrl,
                     image: listInfo[index].image,
                     name: listInfo[index].name,
-                    subtitle:listInfo[index].subtitle,
+                    subtitle: listInfo[index].subtitle,
                     pageController: pageController,
                   ),
                 ),
@@ -50,7 +52,7 @@ class RadioAudioPlayer extends StatelessWidget {
   }
 }
 
-class AudiPlyerCard extends StatelessWidget {
+class AudiPlyerCard extends StatefulWidget {
   final String audioUrl;
   final String image;
   final String name;
@@ -67,6 +69,34 @@ class AudiPlyerCard extends StatelessWidget {
     required this.pageController,
     required this.index,
   }) : super(key: key);
+
+  @override
+  State<AudiPlyerCard> createState() => _AudiPlyerCardState();
+}
+
+class _AudiPlyerCardState extends State<AudiPlyerCard> {
+  late BannerAdHelper bannerAdHelper;
+
+  @override
+  void initState() {
+    super.initState();
+    bannerAdHelper = BannerAdHelper();
+
+    bannerAdHelper.initializeAdMob(
+      onAdLoaded: (ad) {
+        setState(() {
+          bannerAdHelper.isBannerAd = true;
+        });
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    bannerAdHelper.bannerAd.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -74,17 +104,24 @@ class AudiPlyerCard extends StatelessWidget {
       children: [
         Consumer<AudioController>(
           builder: (context, value, child) => Container(
-            height: MediaQuery.sizeOf(context).height /3 *1.2 ,
+            height: MediaQuery.sizeOf(context).height / 4 * 1.2,
             margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 200),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage(listInfo[index].image),
+                  image: NetworkImage(listInfo[widget.index].image),
                   fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(8),
             ),
           ),
         ),
+        bannerAdHelper.isBannerAd
+            ? SizedBox(
+                height: bannerAdHelper.bannerAd.size.height.toDouble(),
+                width: bannerAdHelper.bannerAd.size.width.toDouble(),
+                child: AdWidget(ad: bannerAdHelper.bannerAd),
+              )
+            : const SizedBox(),
         Container(
           height: 200,
           // margin: const EdgeInsets.only(
@@ -119,7 +156,7 @@ class AudiPlyerCard extends StatelessWidget {
                         bottom: 16,
                       ),
                       child: Text(
-                        "$name  $subtitle",
+                        "${widget.name}  ${widget.subtitle}",
                         style: const TextStyle(
                             height: 1.5,
                             fontSize: 16,
@@ -127,7 +164,7 @@ class AudiPlyerCard extends StatelessWidget {
                             fontWeight: FontWeight.w700),
                       ),
                     ),
-                    subtitle: index == 0
+                    subtitle: widget.index == 0
                         ? const SizedBox()
                         : Consumer<AudioController>(
                             builder: (context, value, child) {
@@ -175,12 +212,12 @@ class AudiPlyerCard extends StatelessWidget {
                     // ),
                   ),
                   NextPreviousButton(
-                    pageController: pageController,
-                    index: index,
+                    pageController: widget.pageController,
+                    index: widget.index,
                   ),
                 ],
               ),
-              index == 0 ? const SizedBox() : const RefreshButton(),
+              widget.index == 0 ? const SizedBox() : const RefreshButton(),
             ],
           ),
         ),
@@ -263,12 +300,10 @@ class NextPreviousButton extends StatelessWidget {
           ),
           Consumer<AudioController>(
             builder: (context, audioController, child) => AnimateIcons(
-              startIcon: listInfo[index].audioUrl !=
-                     listInfo[index].audioUrl
+              startIcon: listInfo[index].audioUrl != listInfo[index].audioUrl
                   ? Icons.pause_circle
                   : Icons.play_circle,
-              endIcon: listInfo[index].audioUrl !=
-                      listInfo[index].audioUrl
+              endIcon: listInfo[index].audioUrl != listInfo[index].audioUrl
                   ? Icons.play_circle
                   : Icons.pause_circle,
               controller: audioController.buttonController,
@@ -304,8 +339,8 @@ class NextPreviousButton extends StatelessWidget {
                     curve: Curves.easeInOut,
                   );
                 } else {
-                  pageController.jumpToPage((pageController.page!.toInt() + 1) %
-                     listInfo.length);
+                  pageController.jumpToPage(
+                      (pageController.page!.toInt() + 1) % listInfo.length);
                 }
 
                 value.audioPlayer.stop();

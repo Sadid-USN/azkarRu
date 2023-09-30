@@ -40,7 +40,7 @@ class LocalNotificationSV {
         id, title, body, await notificationDetails());
   }
 
-  Future scheduleNotification({
+ Future scheduleNotification({
   int id = 0,
   String? title,
   String? body,
@@ -61,11 +61,12 @@ class LocalNotificationSV {
     body,
     tz.TZDateTime.from(notificationTime, tz.local),
     await notificationDetails(),
-    androidAllowWhileIdle: true,
+    androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
     uiLocalNotificationDateInterpretation:
         UILocalNotificationDateInterpretation.absoluteTime,
   );
 }
+
 
 }
 

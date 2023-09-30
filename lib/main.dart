@@ -1,3 +1,4 @@
+import 'package:avrod/controllers/addmob_controller.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 
 import 'package:avrod/controllers/internet_chacker.dart';
@@ -9,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -25,6 +27,8 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  RequestConfiguration requestConfiguration =RequestConfiguration();
+  await MobileAds.instance.initialize();
   await LocalNotificationSV().initNotification();
   await GetStorage.init();
   await Firebase.initializeApp();
@@ -58,6 +62,10 @@ Future<void> main() async {
           ChangeNotifierProvider<AudioController>(
             lazy: true,
             create: (context) => AudioController(),
+          ),
+          ChangeNotifierProvider<AddMobController>(
+            lazy: true,
+            create: (context) => AddMobController(),
           ),
           ChangeNotifierProvider<InternetConnectionController>(
             lazy: true,

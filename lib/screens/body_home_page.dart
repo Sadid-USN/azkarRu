@@ -1,4 +1,8 @@
+import 'package:avrod/controllers/addmob_controller.dart';
+import 'package:avrod/core/addbunner.dart';
+import 'package:avrod/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:provider/provider.dart';
 
@@ -7,28 +11,53 @@ import '../data/book_map.dart';
 
 import 'chapter_screen.dart';
 
-class BodyHomePage extends StatelessWidget {
+class BodyHomePage extends StatefulWidget {
   const BodyHomePage({Key? key}) : super(key: key);
 
   @override
+  State<BodyHomePage> createState() => _BodyHomePageState();
+}
+
+class _BodyHomePageState extends State<BodyHomePage> {
+  late BannerAdHelper bannerAdHelper;
+
+  @override
+  void initState() {
+    super.initState();
+    bannerAdHelper = BannerAdHelper();
+
+    bannerAdHelper.initializeAdMob(
+      onAdLoaded: (ad) {
+        setState(() {
+          bannerAdHelper.isBannerAd = true;
+        });
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    bannerAdHelper.bannerAd.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final currentWidth = MediaQuery.of(context).size.width;
-    final currentHeight = MediaQuery.of(context).size.height;
     final books = Provider.of<List<Book>>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xffF3EEE2),
       body: ListView(
         children: [
           Column(
             children: [
-              // Lottie.asset(
-              //   'assets/lotties/stars.json',
-              //   fit: BoxFit.cover,
-              //   height: 10,
-              //   width: currentWidth,
-              //   repeat: true,
-              //   reverse: true,
-              // ),
+              bannerAdHelper.isBannerAd
+                  ? SizedBox(
+                      height: bannerAdHelper.bannerAd.size.height.toDouble(),
+                      width: bannerAdHelper.bannerAd.size.width.toDouble(),
+                      child: AdWidget(ad: bannerAdHelper.bannerAd),
+                    )
+                  : const SizedBox(),
               const SizedBox(height: 20),
               GridView.builder(
                 physics: const BouncingScrollPhysics(),
@@ -68,7 +97,7 @@ class BodyHomePage extends StatelessWidget {
                           books[index].name ?? "",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 8,
+                            fontSize: 9,
                             color: textColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -78,7 +107,6 @@ class BodyHomePage extends StatelessWidget {
                   );
                 },
               ),
-           
             ],
           ),
         ],

@@ -24,13 +24,8 @@
     </queries>
 
     <application
-       
         android:icon="@mipmap/ic_launcher"
-        android:label="Azkar"
-        
-        >
-        
-
+        android:label="Azkar">
          <activity
             android:name="com.ryanheise.audioservice.AudioServiceActivity"
             android:launchMode="singleTop"
@@ -63,8 +58,15 @@
             </intent-filter>
         </receiver> 
 
+ 
+
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+    <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+    <meta-data
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-7613540986721565~2600317067"/>
+        
     </application>
 </manifest>
