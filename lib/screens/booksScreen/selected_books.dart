@@ -1,4 +1,4 @@
-import 'package:avrod/core/addbunner.dart';
+import 'package:avrod/core/addbunner_helper.dart';
 import 'package:avrod/screens/booksScreen/books_ditails.dart';
 import 'package:avrod/screens/booksScreen/pdf_api_class.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,7 +19,26 @@ class SelectedBooks extends StatefulWidget {
 }
 
 class _SelectedBooksState extends State<SelectedBooks> {
- 
+  late BannerAdHelper bannerAdHelper = BannerAdHelper();
+
+  @override
+  void initState() {
+    super.initState();
+
+    bannerAdHelper.initializeAdMob(
+      onAdLoaded: (ad) {
+        setState(() {
+          bannerAdHelper.isBannerAd = true;
+        });
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    bannerAdHelper.bannerAd.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +47,13 @@ class _SelectedBooksState extends State<SelectedBooks> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // bannerAdHelper.isBannerAd
-            //     ? SizedBox(
-            //         height: bannerAdHelper.bannerAd.size.height.toDouble(),
-            //         width: bannerAdHelper.bannerAd.size.width.toDouble(),
-            //         child: AdWidget(ad: bannerAdHelper.bannerAd),
-            //       )
-            //     : const SizedBox(),
+            bannerAdHelper.isBannerAd
+                ? SizedBox(
+                    height: bannerAdHelper.bannerAd.size.height.toDouble(),
+                    width: bannerAdHelper.bannerAd.size.width.toDouble(),
+                    child: AdWidget(ad: bannerAdHelper.bannerAd),
+                  )
+                : const SizedBox(),
             AnimationLimiter(
               child: SizedBox(
                 height: MediaQuery.sizeOf(context).height,

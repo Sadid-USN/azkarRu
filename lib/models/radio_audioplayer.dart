@@ -1,6 +1,6 @@
 import 'package:animate_icons/animate_icons.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-import 'package:avrod/core/addbunner.dart';
+import 'package:avrod/core/addbunner_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -75,12 +75,11 @@ class AudiPlyerCard extends StatefulWidget {
 }
 
 class _AudiPlyerCardState extends State<AudiPlyerCard> {
-  late BannerAdHelper bannerAdHelper;
+  late BannerAdHelper bannerAdHelper = BannerAdHelper();
 
   @override
   void initState() {
     super.initState();
-    bannerAdHelper = BannerAdHelper();
 
     bannerAdHelper.initializeAdMob(
       onAdLoaded: (ad) {

@@ -1,6 +1,5 @@
-import 'package:avrod/controllers/addmob_controller.dart';
-import 'package:avrod/core/addbunner.dart';
-import 'package:avrod/generated/l10n.dart';
+import 'package:avrod/core/addbunner_helper.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -19,12 +18,12 @@ class BodyHomePage extends StatefulWidget {
 }
 
 class _BodyHomePageState extends State<BodyHomePage> {
-  late BannerAdHelper bannerAdHelper;
+   BannerAdHelper bannerAdHelper = BannerAdHelper();
 
   @override
   void initState() {
     super.initState();
-    bannerAdHelper = BannerAdHelper();
+    
 
     bannerAdHelper.initializeAdMob(
       onAdLoaded: (ad) {

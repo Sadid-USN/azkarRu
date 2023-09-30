@@ -27,7 +27,7 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  RequestConfiguration requestConfiguration =RequestConfiguration();
+ 
   await MobileAds.instance.initialize();
   await LocalNotificationSV().initNotification();
   await GetStorage.init();
