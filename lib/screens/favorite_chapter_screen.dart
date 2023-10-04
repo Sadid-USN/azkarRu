@@ -36,6 +36,7 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
   @override
   void initState() {
     super.initState();
+    
       bannerAdHelper.initializeAdMob(
       onAdLoaded: (ad) {
         setState(() {

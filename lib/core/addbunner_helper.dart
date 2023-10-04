@@ -25,6 +25,11 @@ class BannerAdHelper {
       ),
       request: const AdRequest(),
     );
-    bannerAd.load();
+
+      
+       bannerAd.load();
+     
+   
+    
   }
 }

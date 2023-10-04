@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
         drawer: const DrawerModel(),
         // extendBodyBehindAppBar: true,
         appBar: AppBar(
+          
           iconTheme: Theme.of(context).iconTheme,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> {
           ),
           centerTitle: true,
           elevation: 3.0,
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          backgroundColor: const Color(0xffF8E4CF),
         ),
 
         body: Consumer<AudioController>(

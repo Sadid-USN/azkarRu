@@ -32,6 +32,18 @@
     "learnMore": "Узнать больше",
     "translation": "Перевод",
     "noInternetConnection": "Нет соединения с интернетом",
+    "checkConnection": "Проверьте подключение к Интернету",
+    "today":"Сегодня",
+    "tryAgain": "Попробуйте еще раз",
+    "fajr" : "Фаджр",
+    "duhr" : "Зухр",
+    "asr": "Аср",
+    "maghrib": "Магриб",
+    "isha": "Иша",
+    "chooseYourCountry": "Выберите вашу страну",
+    "fast": "Пост",
+   
+    "Lastthird": "Последняя треть",
 
     "titlenotifi1": "Здоровое сердце!",
     "titlenotifi2": "Милосердие",

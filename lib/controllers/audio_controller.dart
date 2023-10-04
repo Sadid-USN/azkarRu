@@ -107,15 +107,11 @@ class AudioController extends ChangeNotifier {
   }
 
   final navItems = [
-    Icon(FontAwesomeIcons.home, color: textColor, size: 17.sp),
-    Icon(
-      FontAwesomeIcons.book,
-      color: textColor,
-      size: 17.sp,
-    ),
+    Image.asset("icons/house.png", height: 30,),
+      Image.asset("icons/book.png", height: 30,),
     Icon(Icons.favorite, color: Colors.red, size: 17.sp),
-    Icon(FontAwesomeIcons.calendarAlt, color: textColor, size: 17.sp),
-    Icon(Icons.radio, color: textColor, size: 17.sp),
+     Image.asset("icons/masque.png", height: 30,),
+  Image.asset("icons/radio.png", height: 27,),
   ];
 
   void onTapBar(int index) {

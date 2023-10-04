@@ -31,6 +31,21 @@
     "learnMore": "Маълумоти бештар",
     "translation": "Тарҷума",
     "noInternetConnection": "Интернет пайваст нест",
+    "fast": "Рузадори",
+    
+    "Lastthird": "Сеяги охир",
+
+
+    "checkConnection": "Лутфан иттисоли интернетро барраси кунед",
+    "today":"Имруз",
+    "tryAgain": "Аз нав борбари кунед",
+    "fajr" : "Бомдод",
+    "duhr" : "Пешин",
+    "asr": "Аср",
+    "maghrib": "Шом",
+    "isha": "Хуфтан",
+    "chooseYourCountry": "Кишваратонро интихоб кунед",
+    
 
     "titlenotifi1": "Дили солим!",
     "titlenotifi2": "Раҳмат",
