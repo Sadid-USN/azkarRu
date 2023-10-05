@@ -1,11 +1,13 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
+import 'package:avrod/core/addbunner_helper.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +28,7 @@ class FavoriteChaptersSceen extends StatefulWidget {
 class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
     with TickerProviderStateMixin {
   Book? book;
+     BannerAdHelper bannerAdHelper = BannerAdHelper();
 
   late AnimationController _slideAnimationController;
   late AnimationController _rotationAnimationController;
@@ -33,6 +36,14 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
   @override
   void initState() {
     super.initState();
+    
+      bannerAdHelper.initializeAdMob(
+      onAdLoaded: (ad) {
+        setState(() {
+          bannerAdHelper.isBannerAd = true;
+        });
+      },
+    );
 
     _slideAnimationController = AnimationController(
       vsync: this,
@@ -45,10 +56,12 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
     )..repeat(reverse: true);
   }
 
+ 
   @override
   void dispose() {
     _slideAnimationController.dispose();
     _rotationAnimationController.dispose();
+     bannerAdHelper.bannerAd.dispose();
     super.dispose();
   }
 
@@ -56,6 +69,7 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
   Widget build(BuildContext context) {
     final books = Provider.of<List<Book>>(context);
     return Scaffold(
+      backgroundColor: const Color(0xffF3EEE2),
         body: Consumer<AudioController>(
       builder: (context, value, child) => RefreshIndicator(
         onRefresh: () async {
@@ -68,6 +82,14 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
         child: SingleChildScrollView(
           child: Column(
             children: [
+                bannerAdHelper.isBannerAd
+                  ? SizedBox(
+
+                      height: bannerAdHelper.bannerAd.size.height.toDouble(),
+                      width: bannerAdHelper.bannerAd.size.width.toDouble(),
+                      child: AdWidget(ad: bannerAdHelper.bannerAd),
+                    )
+                  : const SizedBox(),
               Container(
                 width: MediaQuery.sizeOf(context).width,
                 height: MediaQuery.sizeOf(context).height,

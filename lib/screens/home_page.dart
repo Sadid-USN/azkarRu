@@ -1,21 +1,19 @@
 import 'dart:math';
-
+import 'package:animate_do/animate_do.dart';
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/audio_controller.dart';
-import 'package:avrod/controllers/internet_chacker.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/screens/%D1%81alendars/gregorian_calendar.dart';
 import 'package:avrod/screens/body_home_page.dart';
 import 'package:avrod/screens/favorite_chapter_screen.dart';
 import 'package:avrod/screens/radioplyeer_screen.dart';
 import 'package:avrod/widgets/notification.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import '../generated/locale_keys.g.dart';
 import '../widgets/drawer_widget.dart';
 
 import 'booksScreen/selected_books.dart';
@@ -35,13 +33,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Chapters? chapter;
 
-
+ 
+ 
   Random random = Random();
   @override
   void initState() {
     super.initState();
-
-
 
     final randomIndex = random.nextInt(10) + 1;
     final title = titleList[randomIndex].tr();
@@ -56,7 +53,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Widget> pages = [
-    const BodyHomePage(),
+     const BodyHomePage(),
     const SelectedBooks(),
     const FavoriteChaptersSceen(),
     const GregorianCalendar(),
@@ -76,15 +73,19 @@ class _HomePageState extends State<HomePage> {
         drawer: const DrawerModel(),
         // extendBodyBehindAppBar: true,
         appBar: AppBar(
+          
           iconTheme: Theme.of(context).iconTheme,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
               Consumer<AudioController>(
-                builder: (context, value, child) => Text(
-                  value.getTitle(),
-                  style: Theme.of(context).textTheme.titleMedium,
+                builder: (context, value, child) => FadeInLeft(
+                  duration: const Duration(milliseconds: 1000),
+                  child: Text(
+                    value.getTitle(),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
               ),
               const Spacer(),
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> {
           ),
           centerTitle: true,
           elevation: 3.0,
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          backgroundColor: const Color(0xffF8E4CF),
         ),
 
         body: Consumer<AudioController>(

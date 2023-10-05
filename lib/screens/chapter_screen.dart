@@ -241,6 +241,7 @@ class _SearchBarState extends State<_SearchBar> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
+        
         style: GoogleFonts.alice(
           fontSize: 18, 
           fontWeight: FontWeight.normal
@@ -251,13 +252,16 @@ class _SearchBarState extends State<_SearchBar> {
         decoration: InputDecoration(
           
           focusedBorder: const OutlineInputBorder(
+            
             borderSide: BorderSide.none,
           ),
           border: const OutlineInputBorder(
+            
             borderSide: BorderSide.none,
           ),
           hintText: LocaleKeys.search.tr(),
           hintStyle: TextStyle(fontSize: 16, color: Colors.grey.shade500),
+          prefixIcon:  Icon(Icons.search, color: Colors.blueGrey.shade600)
         ),
       ),
     );

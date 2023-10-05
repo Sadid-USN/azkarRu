@@ -4,9 +4,11 @@ import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/controllers/internet_chacker.dart';
+import 'package:avrod/core/addbunner_helper.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:provider/provider.dart';
@@ -39,10 +41,18 @@ class _TextScreenState extends State<TextScreen>
 
   double _fontSize = 18.sp;
   InternetConnectionController? internetConnectionController;
-
+   BannerAdHelper bannerAdHelper = BannerAdHelper();
   @override
   void initState() {
     super.initState();
+
+      setState(() {
+      bannerAdHelper.initializeAdMob(
+        onAdLoaded: (ad) {
+          bannerAdHelper.isBannerAd = true;
+        },
+      );
+    });
     internetConnectionController = InternetConnectionController(Connectivity());
     internetConnectionController!.listenTonetworkChacges(context);
     _fontSize = textStorage.read('fontSize') ?? 18.0;
@@ -50,6 +60,8 @@ class _TextScreenState extends State<TextScreen>
     _tabController = TabController(length: widget.texts!.length, vsync: this);
 
     playAudio();
+
+   
   }
 
   void increaseSize() {
@@ -142,7 +154,7 @@ class _TextScreenState extends State<TextScreen>
       child: ChangeNotifierProvider(
         create: (context) => AudioController(),
         child: Scaffold(
-          backgroundColor: bgColor,
+          backgroundColor: const Color(0xffF6F1E8),
           bottomSheet: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             height: 13.5.h,
@@ -296,33 +308,47 @@ class _TextScreenState extends State<TextScreen>
               tabs: widget.texts!.map((Texts e) => Tab(text: e.id)).toList(),
             ),
           ),
-          body: TabBarView(
-            controller: _tabController,
-            children: widget.texts!
-                .map(
-                  (texts) => Container(
-                    decoration: mainScreenGradient,
-                    child: Builder(builder: (context) {
-                      return AllTextsContent(
-                        text: texts.text!,
-                        arabic: texts.arabic!,
-                        translation: texts.translation!,
-                        fontSize: _fontSize,
-                        increaseSize: () {
-                          setState(() {
-                            increaseSize();
-                          });
-                        },
-                        decreaseSize: () {
-                          setState(() {
-                            decreaseSize();
-                          });
-                        },
-                      );
-                    }),
-                  ),
+          body: Column(
+            children: [
+                bannerAdHelper.isBannerAd
+              ? SizedBox(
+                  height: bannerAdHelper.bannerAd.size.height.toDouble(),
+                  width: bannerAdHelper.bannerAd.size.width.toDouble(),
+                  child: AdWidget(ad: bannerAdHelper.bannerAd),
                 )
-                .toList(),
+              : const SizedBox(),
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height / 2 * 1.5,
+                child: TabBarView(
+                  controller: _tabController,
+                  children: widget.texts!
+                      .map(
+                        (texts) => Container(
+                          decoration: mainScreenGradient,
+                          child: Builder(builder: (context) {
+                            return AllTextsContent(
+                              text: texts.text!,
+                              arabic: texts.arabic!,
+                              translation: texts.translation!,
+                              fontSize: _fontSize,
+                              increaseSize: () {
+                                setState(() {
+                                  increaseSize();
+                                });
+                              },
+                              decreaseSize: () {
+                                setState(() {
+                                  decreaseSize();
+                                });
+                              },
+                            );
+                          }),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
           ),
         ),
       ),
