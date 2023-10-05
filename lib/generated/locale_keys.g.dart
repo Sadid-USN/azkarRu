@@ -4,6 +4,7 @@ abstract class  LocaleKeys {
   static const avrod = 'avrod';
   static const lang = 'lang';
   static const search = 'search';
+  static const startSearch = 'startSearch';
   static const radio = 'radio';
   static const title1 = 'title1';
   static const title2 = 'title2';
@@ -29,7 +30,7 @@ abstract class  LocaleKeys {
   static const library = 'library';
   static const favorite = 'favorite';
   static const hijri = 'hijri';
-  static const calendar = 'calendar';
+  static const prayerTimes = 'prayerTimes';
   static const learnMore = 'learnMore';
   static const translation = 'translation';
   static const noInternetConnection = 'noInternetConnection';

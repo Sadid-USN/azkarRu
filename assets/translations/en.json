@@ -2,6 +2,7 @@
     "avrod": "Azkar Daily prayers",
     "lang": "Languages",
     "search": "Search...",
+    "startSearch": "Start typing to search",
     "radio": "Radio Quran",
     "title1": "Beginning of the day",
     "title2": "Salah prayers",
@@ -27,7 +28,7 @@
     "library": "Library",
     "favorite": "Favorite chapters",
     "hijri": "Hijri calendar",
-    "calendar": "Calendar",
+    "prayerTimes": "Prayer times",
     "learnMore": "Learn more",
     "noInternetConnection": "No internet connection",
     "checkConnection": "Check internet connection",
@@ -41,9 +42,6 @@
     "chooseYourCountry": "Choose your Country",
     "fast": "Fasting",
     "Lastthird": "Last third",
-    
-
-    
     "translation": "Translation",
     "titlenotifi1": "Healthy Heart!",
     "titlenotifi2": "Mercy",

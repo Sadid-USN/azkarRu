@@ -57,7 +57,7 @@ class AudioController extends ChangeNotifier {
     case 2:
       return LocaleKeys.favorite.tr();
     case 3:
-      return LocaleKeys.calendar.tr();
+      return LocaleKeys.prayerTimes.tr();
     case 4:
       return LocaleKeys.radio.tr();
     default:

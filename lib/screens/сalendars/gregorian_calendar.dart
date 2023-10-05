@@ -22,7 +22,7 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
   // String city = "Bishkek";
   String country = "Kyrgyzstan";
   DateTime dateForfam = DateTime.now();
-  BannerAdHelper bannerAdHelper = BannerAdHelper();
+  //BannerAdHelper bannerAdHelper = BannerAdHelper();
 
   @override
   void initState() {
@@ -31,22 +31,22 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
     _fetchData();
     _loadSavedCountry();
 
-    bannerAdHelper.initializeAdMob(
-      onAdLoaded: (ad) {
-        setState(() {
-          bannerAdHelper.isBannerAd = true;
-        });
-      },
-    );
+    // bannerAdHelper.initializeAdMob(
+    //   onAdLoaded: (ad) {
+    //     setState(() {
+    //       bannerAdHelper.isBannerAd = true;
+    //     });
+    //   },
+    // );
 
     // Start fetching data when the widget is initialized
   }
 
-  @override
-  void dispose() {
-    bannerAdHelper.bannerAd.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   bannerAdHelper.bannerAd.dispose();
+  //   super.dispose();
+  // }
 
   Future<void> _fetchData() async {
     setState(() {
@@ -70,11 +70,16 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
           topRight: Radius.circular(20.0),
         ),
         inputDecoration: InputDecoration(
-          labelText: 'Search',
-          hintText: 'Start typing to search',
+          labelText: LocaleKeys.search.tr(),
+          hintText: LocaleKeys.startSearch.tr(),
+          labelStyle: const TextStyle(fontSize: 14),
+          hintStyle: const TextStyle(fontSize: 14),
           prefixIcon: const Icon(Icons.search),
           border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
+              
+              width: 0.5,
               color: const Color(0xFF8C98A8).withOpacity(0.2),
             ),
           ),
@@ -82,13 +87,12 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
       ),
       onSelect: (Country selectedCountry) {
         setState(() {
-          //  city = selectedCountry.name; // Set the selected city
-          country = selectedCountry.name; // Set the selected country
+          country = selectedCountry.name;
         });
         _fetchData();
 
         final storage = GetStorage();
-        //  storage.write('city', city);
+
         storage.write('country', country);
       },
     );

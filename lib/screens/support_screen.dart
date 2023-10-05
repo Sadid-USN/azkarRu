@@ -77,28 +77,28 @@ class SupportScreen extends StatelessWidget {
               child: RichText(
                   text: TextSpan(children: [
                 TextSpan(
-                  text: '${LocaleKeys.supportText1}\n',
+                  text: '${LocaleKeys.supportText1.tr()}\n',
                   style: GoogleFonts.ptSerif(
                       color: const Color.fromARGB(255, 75, 65, 65),
                       fontSize: 18,
                       fontWeight: FontWeight.normal),
                 ),
                 TextSpan(
-                  text: '${LocaleKeys.supportText2}\n',
+                  text: '${LocaleKeys.supportText2.tr()}\n',
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
                       fontWeight: FontWeight.w600),
                 ),
                 TextSpan(
-                  text: '${LocaleKeys.supportText3}\n',
+                  text: '${LocaleKeys.supportText3.tr()}\n',
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
                       fontWeight: FontWeight.normal),
                 ),
                 TextSpan(
-                  text: '${LocaleKeys.supportText4}\n',
+                  text: '${LocaleKeys.supportText4.tr()}\n',
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
@@ -116,9 +116,9 @@ class SupportScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: SelectableText(
-                LocaleKeys.supportText6,
+                LocaleKeys.supportText6.tr(),
                 style: GoogleFonts.ptSerif(
-                    color: Colors.blueGrey[700],
+                    color: Colors.blue[900],
                     fontSize: 18,
                     fontWeight: FontWeight.w700),
               ),
