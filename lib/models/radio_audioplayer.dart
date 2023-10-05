@@ -102,16 +102,9 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Consumer<AudioController>(
-          builder: (context, value, child) => Container(
-            height: MediaQuery.sizeOf(context).height / 4 * 1.2,
-            margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 200),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(listInfo[widget.index].image),
-                  fit: BoxFit.cover),
-              borderRadius: BorderRadius.circular(8),
-            ),
+          builder: (context, value, child) => CircleAvatar(
+            backgroundImage: NetworkImage(listInfo[widget.index].image),
+            radius: 140,
           ),
         ),
         bannerAdHelper.isBannerAd

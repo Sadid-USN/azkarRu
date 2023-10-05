@@ -1,14 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/prayers_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class PrayersApi {
-  Future<PrayersModel> getData({required BuildContext context, required String country}) async {
+  Future<PrayersModel> getData(
+      {required BuildContext context, required String country}) async {
     try {
-      final response = await http.get(Uri.parse("https://api.aladhan.com/v1/timingsByCity/03-10-2023?city=$country&country=$country&method=8"));
+      final response = await http.get(Uri.parse(
+          "https://api.aladhan.com/v1/timingsByCity/03-10-2023?city=$country&country=$country&method=8"));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final prayersModel = PrayersModel.fromJson(data);
@@ -20,12 +24,11 @@ class PrayersApi {
         throw Exception("Failed to fetch data");
       }
     } catch (e) {
-      // Show a Snackbar for network errors
       if (context.mounted) {
-        showNetworkSnackbar(context, "No internet connection");
+        showNetworkSnackbar(context, LocaleKeys.checkConnection.tr());
       }
-      // Rethrow the exception so that it's propagated up the call stack
-      throw "";
+
+      throw "Error";
     }
   }
 

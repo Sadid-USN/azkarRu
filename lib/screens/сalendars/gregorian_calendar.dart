@@ -1,12 +1,12 @@
+import 'package:avrod/core/try_again_button.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart';
-
 import 'package:avrod/API/prayers_api.dart';
-import 'package:avrod/core/addbunner_helper.dart';
+
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/prayers_model.dart';
 
@@ -20,7 +20,7 @@ class GregorianCalendar extends StatefulWidget {
 class _GregorianCalendarState extends State<GregorianCalendar> {
   Future<PrayersModel>? _futureData;
   // String city = "Bishkek";
-  String country = "Kyrgyzstan";
+  String country = "North Korea";
   DateTime dateForfam = DateTime.now();
   //BannerAdHelper bannerAdHelper = BannerAdHelper();
 
@@ -30,23 +30,7 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
 
     _fetchData();
     _loadSavedCountry();
-
-    // bannerAdHelper.initializeAdMob(
-    //   onAdLoaded: (ad) {
-    //     setState(() {
-    //       bannerAdHelper.isBannerAd = true;
-    //     });
-    //   },
-    // );
-
-    // Start fetching data when the widget is initialized
   }
-
-  // @override
-  // void dispose() {
-  //   bannerAdHelper.bannerAd.dispose();
-  //   super.dispose();
-  // }
 
   Future<void> _fetchData() async {
     setState(() {
@@ -78,7 +62,6 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
-              
               width: 0.5,
               color: const Color(0xFF8C98A8).withOpacity(0.2),
             ),
@@ -130,33 +113,12 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
         future: _futureData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // While the data is loading
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            // If there's an error
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('${LocaleKeys.checkConnection.tr()} ${snapshot.error}'),
-                TextButton(
-                    onPressed: () {
-                      _fetchData();
-                    },
-                    child: Text(
-                      LocaleKeys.tryAgain.tr(),
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          shadows: [
-                            const Shadow(
-                              offset: Offset(0.5, 0.4),
-                              blurRadius: 1.0,
-                              color: Colors.blue,
-                            ),
-                          ],
-                          fontSize: 18,
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold),
-                    ))
-              ],
+            return Center(
+              child: TryAgainButton(onPressed: () {
+                _fetchData();
+              }),
             );
           } else if (snapshot.hasData) {
             final data = snapshot.data!.data;
@@ -218,7 +180,7 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
                           ],
                         ),
                         _CountrySelectionButton(
-                          title: country.isEmpty
+                          title: country.isEmpty || country == "North Korea"
                               ? LocaleKeys.chooseYourCountry.tr()
                               : country,
                           onTap: () {
@@ -329,25 +291,42 @@ class _CountrySelectionButton extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
-      decoration: BoxDecoration(
-          color: const Color(0xffF8E4CF),
-          borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        onTap: onTap,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 50),
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 14),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xffF8E4CF),
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          foregroundColor: Colors.blueGrey.shade800,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
-        leading: Icon(
-          Icons.location_on,
-          color: Colors.blueGrey.shade800,
+        child: Row(
+          children: [
+            const Spacer(),
+            Icon(
+              Icons.location_on,
+              color: Colors.blue.shade700,
+            ),
+            const Spacer(
+              flex: 3,
+            ),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 14),
+            ),
+            const Spacer(
+              flex: 3,
+            ),
+            const SizedBox(
+              width: 14,
+            ),
+            Icon(Icons.arrow_drop_down, color: Colors.blueGrey.shade800),
+            const Spacer(),
+          ],
         ),
-        trailing: Icon(Icons.arrow_drop_down, color: Colors.blueGrey.shade800),
       ),
     );
   }
