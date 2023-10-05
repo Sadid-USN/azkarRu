@@ -113,7 +113,7 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                 width: bannerAdHelper.bannerAd.size.width.toDouble(),
                 child: AdWidget(ad: bannerAdHelper.bannerAd),
               )
-            : const SizedBox(),
+            : const SizedBox(height: 40,),
         Container(
           height: 200,
           // margin: const EdgeInsets.only(

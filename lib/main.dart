@@ -64,10 +64,10 @@ Future<void> main() async {
             lazy: true,
             create: (context) => AudioController(),
           ),
-          ChangeNotifierProvider<AddMobController>(
-            lazy: true,
-            create: (context) => AddMobController(),
-          ),
+          // ChangeNotifierProvider<AddMobController>(
+          //   lazy: false,
+          //   create: (context) => AddMobController(),
+          // ),
           ChangeNotifierProvider<InternetConnectionController>(
             lazy: true,
             create: (context) => InternetConnectionController(connectivity),
