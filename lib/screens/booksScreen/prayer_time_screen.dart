@@ -22,35 +22,35 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   // String city = "Bishkek";
   String country = "North Korea";
   DateTime dateForfam = DateTime.now();
+  final prayStorage = GetStorage();
+  final countryStorage = GetStorage();
   //BannerAdHelper bannerAdHelper = BannerAdHelper();
 
   @override
   void initState() {
     super.initState();
 
-    _fetchAndCacheData();
     _loadSavedCountry();
+    _fetchAndCacheData();
   }
 
   Future<void> _fetchAndCacheData() async {
-    final storage = GetStorage();
-
-    final cachedData = storage.read('prayer_data');
+    final cachedData = prayStorage.read('prayer_data');
 
     if (cachedData != null) {
       setState(() {
         _futureData = Future.value(PrayersModel.fromJson(cachedData));
       });
-    } else {
-      final newData =
-          await PrayersApi().getData(context: context, country: country);
-
-      storage.write('prayer_data', newData.toJson());
-
-      setState(() {
-        _futureData = Future.value(newData);
-      });
     }
+
+    final PrayersModel newData =
+        await PrayersApi().getData(context: context, country: country);
+
+    prayStorage.write('prayer_data', newData.toJson());
+
+    setState(() {
+      _futureData = Future.value(newData);
+    });
   }
 
   // Function to show the country picker
@@ -85,19 +85,19 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
         setState(() {
           country = selectedCountry.name;
         });
-        _fetchAndCacheData();
 
         final storage = GetStorage();
 
         storage.write('country', country);
+
+        _fetchAndCacheData(); // Refresh data when the country changes
       },
     );
   }
 
   Future<void> _loadSavedCountry() async {
-    final storage = GetStorage();
     // final savedCity = storage.read('city');
-    final savedCountry = storage.read('country');
+    final savedCountry = countryStorage.read('country');
 
     if (savedCountry != null) {
       setState(() {
@@ -286,7 +286,11 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
               ),
             );
           } else {
-            return const Center(child: Text('No Data Available'));
+            return Center(
+              child: TryAgainButton(onPressed: () {
+                _fetchAndCacheData();
+              }),
+            );
           }
         },
       ),
