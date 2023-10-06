@@ -105,7 +105,7 @@ class SupportScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
-                  text: LocaleKeys.supportText5,
+                  text: LocaleKeys.supportText5.tr(),
                   style: GoogleFonts.ptSerif(
                       color: Colors.grey[800],
                       fontSize: 18,
