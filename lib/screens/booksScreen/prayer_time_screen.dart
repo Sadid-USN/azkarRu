@@ -35,6 +35,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   }
 
   Future<void> _fetchAndCacheData() async {
+    await Future.delayed(const Duration(milliseconds: 300));
     final cachedData = prayStorage.read('prayer_data');
 
     if (cachedData != null) {
@@ -43,14 +44,15 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
       });
     }
 
-    final PrayersModel newData =
-        await PrayersApi().getData(context: context, country: country);
+    if (context.mounted) {
+      final PrayersModel newData =
+          await PrayersApi().getData(context: context, country: country);
+      prayStorage.write('prayer_data', newData.toJson());
 
-    prayStorage.write('prayer_data', newData.toJson());
-
-    setState(() {
-      _futureData = Future.value(newData);
-    });
+      setState(() {
+        _futureData = Future.value(newData);
+      });
+    }
   }
 
   // Function to show the country picker
@@ -90,7 +92,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
 
         storage.write('country', country);
 
-        _fetchAndCacheData(); // Refresh data when the country changes
+        _fetchAndCacheData();
       },
     );
   }
@@ -286,11 +288,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
               ),
             );
           } else {
-            return Center(
-              child: TryAgainButton(onPressed: () {
-                _fetchAndCacheData();
-              }),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

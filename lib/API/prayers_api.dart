@@ -25,7 +25,7 @@ class PrayersApi {
       }
     } catch (e) {
       if (context.mounted) {
-        showNetworkSnackbar(context, LocaleKeys.checkConnection.tr());
+      //  showNetworkSnackbar(context, LocaleKeys.checkConnection.tr());
       }
 
       throw "Error";
