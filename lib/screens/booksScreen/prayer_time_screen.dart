@@ -22,6 +22,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   // String city = "Bishkek";
   String country = "North Korea";
   DateTime dateForfam = DateTime.now();
+  final prayStorage = GetStorage();
   //BannerAdHelper bannerAdHelper = BannerAdHelper();
 
   @override
@@ -33,19 +34,19 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   }
 
   Future<void> _fetchAndCacheData() async {
-    final storage = GetStorage();
+    
 
-    final cachedData = storage.read('prayer_data');
+    final cachedData = prayStorage.read('prayer_data');
 
     if (cachedData != null) {
       setState(() {
         _futureData = Future.value(PrayersModel.fromJson(cachedData));
       });
     } else {
-      final newData =
+      final PrayersModel newData =
           await PrayersApi().getData(context: context, country: country);
 
-      storage.write('prayer_data', newData.toJson());
+      prayStorage.write('prayer_data', newData.toJson());
 
       setState(() {
         _futureData = Future.value(newData);
@@ -286,7 +287,11 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
               ),
             );
           } else {
-            return const Center(child: Text('No Data Available'));
+            return Center(
+              child: TryAgainButton(onPressed: () {
+                _fetchAndCacheData();
+              }),
+            );
           }
         },
       ),
