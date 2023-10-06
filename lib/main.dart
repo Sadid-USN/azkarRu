@@ -29,8 +29,8 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
- // CoordinatesInit().initCoordinates();
-  await LikeDBHelper.initDB();
+  // CoordinatesInit().initCoordinates();
+
   await MobileAds.instance.initialize();
   await LocalNotificationSV().initNotification();
   await GetStorage.init();
@@ -47,7 +47,7 @@ Future<void> main() async {
 
   Locale? startLocale = await getSavedLocale();
   startLocale ??= WidgetsBinding.instance.platformDispatcher.locale;
-   final Connectivity connectivity = Connectivity();
+  final Connectivity connectivity = Connectivity();
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -90,14 +90,13 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
-         // home: const DataUploadedScreen(),
+          // home: const DataUploadedScreen(),
           routes: appRoutes,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           theme: appTheme,
-          
         );
       },
     );
