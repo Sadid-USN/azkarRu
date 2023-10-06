@@ -3,7 +3,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/data/book_map.dart';
-import 'package:avrod/screens/%D1%81alendars/gregorian_calendar.dart';
+import 'package:avrod/screens/booksScreen/prayer_time_screen.dart';
 import 'package:avrod/screens/body_home_page.dart';
 import 'package:avrod/screens/favorite_chapter_screen.dart';
 import 'package:avrod/screens/radioplyeer_screen.dart';
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
      const BodyHomePage(),
     const SelectedBooks(),
     const FavoriteChaptersSceen(),
-    const GregorianCalendar(),
+    const PrayerTimeScreen(),
     const RadioPlayerScreen()
   ];
 

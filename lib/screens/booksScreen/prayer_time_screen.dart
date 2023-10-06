@@ -10,14 +10,14 @@ import 'package:avrod/API/prayers_api.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/prayers_model.dart';
 
-class GregorianCalendar extends StatefulWidget {
-  const GregorianCalendar({Key? key}) : super(key: key);
+class PrayerTimeScreen extends StatefulWidget {
+  const PrayerTimeScreen({Key? key}) : super(key: key);
 
   @override
-  _GregorianCalendarState createState() => _GregorianCalendarState();
+  _PrayerTimeScreenState createState() => _PrayerTimeScreenState();
 }
 
-class _GregorianCalendarState extends State<GregorianCalendar> {
+class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   Future<PrayersModel>? _futureData;
   // String city = "Bishkek";
   String country = "North Korea";
@@ -28,16 +28,29 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
   void initState() {
     super.initState();
 
-    _fetchData();
+    _fetchAndCacheData();
     _loadSavedCountry();
   }
 
-  Future<void> _fetchData() async {
-    setState(() {
-      _futureData = PrayersApi().getData(context: context, country: country);
+  Future<void> _fetchAndCacheData() async {
+    final storage = GetStorage();
 
-      print(country);
-    });
+    final cachedData = storage.read('prayer_data');
+
+    if (cachedData != null) {
+      setState(() {
+        _futureData = Future.value(PrayersModel.fromJson(cachedData));
+      });
+    } else {
+      final newData =
+          await PrayersApi().getData(context: context, country: country);
+
+      storage.write('prayer_data', newData.toJson());
+
+      setState(() {
+        _futureData = Future.value(newData);
+      });
+    }
   }
 
   // Function to show the country picker
@@ -72,7 +85,7 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
         setState(() {
           country = selectedCountry.name;
         });
-        _fetchData();
+        _fetchAndCacheData();
 
         final storage = GetStorage();
 
@@ -117,7 +130,7 @@ class _GregorianCalendarState extends State<GregorianCalendar> {
           } else if (snapshot.hasError) {
             return Center(
               child: TryAgainButton(onPressed: () {
-                _fetchData();
+                _fetchAndCacheData();
               }),
             );
           } else if (snapshot.hasData) {
