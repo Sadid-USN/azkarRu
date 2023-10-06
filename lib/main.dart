@@ -2,6 +2,7 @@ import 'package:avrod/controllers/addmob_controller.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 
 import 'package:avrod/controllers/internet_chacker.dart';
+import 'package:avrod/core/db_helper.dart';
 
 import 'package:avrod/routes.dart';
 import 'package:avrod/widgets/notification.dart';
@@ -29,6 +30,7 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
  // CoordinatesInit().initCoordinates();
+  await LikeDBHelper.initDB();
   await MobileAds.instance.initialize();
   await LocalNotificationSV().initNotification();
   await GetStorage.init();

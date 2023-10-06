@@ -1,5 +1,6 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
+import 'package:avrod/core/db_helper.dart';
 import 'package:avrod/data/book_functions.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -33,6 +34,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
   bool isSearchBarVisible = false;
   List<Chapters> _filteredChapters = [];
   String _searchQuery = "";
+  final likeDBHelper = LikeDBHelper();
 
   @override
   void initState() {
@@ -153,7 +155,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
                       },
                       isLiked: isChapterLiked(chapter.id!),
                       onTap: (isLiked) async {
-                        return setLike(chapter.id ?? 0, isLiked);
+                        return saveLike(chapter.id ?? 0, isLiked);
                       },
                       size: 20.sp,
                       circleColor: const CircleColor(
@@ -196,7 +198,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
     );
   }
 
-  Future<bool> setLike(int chapterID, bool isLiked) async {
+  Future<bool> saveLike(int chapterID, bool isLiked) async {
     if (!isLiked) {
       await likesBox!.put(chapterID, (false).toString());
     } else {
@@ -224,7 +226,7 @@ class _SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<_SearchBar> {
   final TextEditingController _searchController = TextEditingController();
- void _searchItems() {
+  void _searchItems() {
     final query = _searchController.text;
     widget.onSearchTextChanged(query);
   }
@@ -235,38 +237,27 @@ class _SearchBarState extends State<_SearchBar> {
     _searchController.addListener(_searchItems);
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
-        
-        style: GoogleFonts.alice(
-          fontSize: 18, 
-          fontWeight: FontWeight.normal
-        
-        ),
+        style: GoogleFonts.alice(fontSize: 18, fontWeight: FontWeight.normal),
         controller: _searchController,
         cursorHeight: 25,
         decoration: InputDecoration(
-          
-          focusedBorder: const OutlineInputBorder(
-            
-            borderSide: BorderSide.none,
-          ),
-          border: const OutlineInputBorder(
-            
-            borderSide: BorderSide.none,
-          ),
-          hintText: LocaleKeys.search.tr(),
-          hintStyle: TextStyle(fontSize: 16, color: Colors.grey.shade500),
-          prefixIcon:  Icon(Icons.search, color: Colors.blueGrey.shade600)
-        ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide.none,
+            ),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide.none,
+            ),
+            hintText: LocaleKeys.search.tr(),
+            hintStyle: TextStyle(fontSize: 16, color: Colors.grey.shade500),
+            prefixIcon: Icon(Icons.search, color: Colors.blueGrey.shade600)),
       ),
     );
   }
 }
 
-class LocalKeys {
-}
+class LocalKeys {}

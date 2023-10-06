@@ -96,9 +96,7 @@ class _HomePageState extends State<HomePage> {
                       return const LangugesScreen();
                     }));
                   },
-                  icon: const Icon(
-                    Icons.language,
-                  )),
+                  icon: Image.asset("icons/language.png", height: 20,)),
             ],
           ),
           centerTitle: true,
