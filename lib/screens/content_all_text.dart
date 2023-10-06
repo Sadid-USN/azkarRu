@@ -1,3 +1,4 @@
+import 'package:arabic_font/arabic_font.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import '../style/my_text_style.dart';
 
 class AllTextsContent extends StatelessWidget {
   final double fontSize;
+  final double arabicFontSize;
   final void Function()? increaseSize;
   final void Function()? decreaseSize;
   final String text;
@@ -19,6 +21,7 @@ class AllTextsContent extends StatelessWidget {
   const AllTextsContent({
     Key? key,
     required this.fontSize,
+    required this.arabicFontSize,
     required this.increaseSize,
     required this.decreaseSize,
     required this.text,
@@ -98,8 +101,13 @@ class AllTextsContent extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                           color: Colors.grey,
-                          offset: Offset(1.0, 1.0),
-                          blurRadius: 2.0)
+                          offset: Offset(1.0, 3.1),
+                          blurRadius: 1.0),
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(-1.0, 0.0), // Shadow to the left
+                        blurRadius: 1.0,
+                      ),
                     ],
                     gradient: LinearGradient(
                       colors: [bgColor, bgColor],
@@ -116,30 +124,24 @@ class AllTextsContent extends StatelessWidget {
                     collapsed: SelectableText(
                       arabic,
                       textAlign: TextAlign.justify,
-                      style: GoogleFonts.notoSansArabic(
-                        
-                        
-                     fontStyle: FontStyle.normal,
-                        
-                        wordSpacing: 1.0,
+                      style: ArabicTextStyle(
+                        arabicFont: ArabicFont.scheherazade,
                         color: textColor,
-                        fontSize: fontSize,
-                        fontWeight: FontWeight.w600,
+                        fontSize: arabicFontSize,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     expanded: SelectableText(
                       arabic,
                       maxLines: 1,
                       textAlign: TextAlign.justify,
-                      style: TextStyle(
-                        fontFamily:
-                            'JannaLT', // Use the custom font family name
-                        textBaseline: TextBaseline.alphabetic,
-                        wordSpacing: 1.5,
+                      style: ArabicTextStyle(
+                        arabicFont: ArabicFont.scheherazade,
+             
                         color: textColor,
-                        fontSize: fontSize,
-                        fontWeight: FontWeight.bold,
-                      ),
+                        fontSize: 18,
+                         fontWeight: FontWeight.w400,
+                      )
                     ),
                   ),
                 ),

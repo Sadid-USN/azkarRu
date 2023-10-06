@@ -40,6 +40,7 @@ class _TextScreenState extends State<TextScreen>
   late TabController _tabController;
 
   double _fontSize = 18.sp;
+  final double _arabicFontSize = 24.sp;
   InternetConnectionController? internetConnectionController;
    BannerAdHelper bannerAdHelper = BannerAdHelper();
   @override
@@ -56,6 +57,8 @@ class _TextScreenState extends State<TextScreen>
     internetConnectionController = InternetConnectionController(Connectivity());
     internetConnectionController!.listenTonetworkChacges(context);
     _fontSize = textStorage.read('fontSize') ?? 18.0;
+
+ 
 
     _tabController = TabController(length: widget.texts!.length, vsync: this);
 
@@ -327,6 +330,7 @@ class _TextScreenState extends State<TextScreen>
                           decoration: mainScreenGradient,
                           child: Builder(builder: (context) {
                             return AllTextsContent(
+                              arabicFontSize: _arabicFontSize,
                               text: texts.text!,
                               arabic: texts.arabic!,
                               translation: texts.translation!,
