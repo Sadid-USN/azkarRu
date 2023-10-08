@@ -1,9 +1,9 @@
 import 'package:avrod/core/try_again_button.dart';
+import 'package:avrod/data/counties_and_capitals.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:avrod/API/prayers_api.dart';
 
@@ -18,12 +18,14 @@ class PrayerTimeScreen extends StatefulWidget {
 }
 
 class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
-  Future<PrayersModel>? _futureData;
+  Future<PrayersModel>? _prayerModel;
   // String city = "Bishkek";
   String country = "North Korea";
+  String capital = "Pyongyang";
   DateTime dateForfam = DateTime.now();
   final prayStorage = GetStorage();
   final countryStorage = GetStorage();
+  final capitalStorage = GetStorage();
   //BannerAdHelper bannerAdHelper = BannerAdHelper();
 
   @override
@@ -40,17 +42,20 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
 
     if (cachedData != null) {
       setState(() {
-        _futureData = Future.value(PrayersModel.fromJson(cachedData));
+        _prayerModel = Future.value(PrayersModel.fromJson(cachedData));
       });
     }
 
     if (context.mounted) {
-      final PrayersModel newData =
-          await PrayersApi().getData(context: context, country: country);
+      final PrayersModel newData = await PrayersApi().getData(
+          context: context,
+          capital: capital,
+          country: country,
+          date: DateFormat('dd-MM-yyyy').format(dateForfam));
       prayStorage.write('prayer_data', newData.toJson());
 
       setState(() {
-        _futureData = Future.value(newData);
+        _prayerModel = Future.value(newData);
       });
     }
   }
@@ -86,11 +91,14 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
       onSelect: (Country selectedCountry) {
         setState(() {
           country = selectedCountry.name;
+
+          capital = countriesAndCapitals[country] ?? 'Pyongyang';
         });
 
         final storage = GetStorage();
 
         storage.write('country', country);
+        capitalStorage.write('capital', capital);
 
         _fetchAndCacheData();
       },
@@ -100,11 +108,13 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   Future<void> _loadSavedCountry() async {
     // final savedCity = storage.read('city');
     final savedCountry = countryStorage.read('country');
+    final savedCapital = capitalStorage.read('capital');
 
     if (savedCountry != null) {
       setState(() {
         // city = savedCity;
         country = savedCountry;
+        capital = savedCapital;
 
         print(country);
       });
@@ -125,7 +135,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xffF3EEE2),
       body: FutureBuilder<PrayersModel>(
-        future: _futureData,
+        future: _prayerModel,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

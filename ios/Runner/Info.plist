@@ -35,7 +35,8 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		
+	<key>FLTEnableImpeller</key>
+    <false/>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen.storyboard</string>
