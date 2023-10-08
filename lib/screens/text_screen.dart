@@ -6,7 +6,9 @@ import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/controllers/internet_chacker.dart';
 import 'package:avrod/core/addbunner_helper.dart';
 import 'package:avrod/data/book_map.dart';
+import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:just_audio/just_audio.dart';
@@ -42,12 +44,12 @@ class _TextScreenState extends State<TextScreen>
   double _fontSize = 18.sp;
   final double _arabicFontSize = 24.sp;
   InternetConnectionController? internetConnectionController;
-   BannerAdHelper bannerAdHelper = BannerAdHelper();
+  BannerAdHelper bannerAdHelper = BannerAdHelper();
   @override
   void initState() {
     super.initState();
 
-      setState(() {
+    setState(() {
       bannerAdHelper.initializeAdMob(
         onAdLoaded: (ad) {
           bannerAdHelper.isBannerAd = true;
@@ -58,13 +60,9 @@ class _TextScreenState extends State<TextScreen>
     internetConnectionController!.listenTonetworkChacges(context);
     _fontSize = textStorage.read('fontSize') ?? 18.0;
 
- 
-
     _tabController = TabController(length: widget.texts!.length, vsync: this);
 
     playAudio();
-
-   
   }
 
   void increaseSize() {
@@ -171,7 +169,7 @@ class _TextScreenState extends State<TextScreen>
                     IconButton(
                       onPressed: () {
                         Share.share(
-                            '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\nСкачать приложкние *Azkar* в Playsore\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                            '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${LocaleKeys.downloadText.tr()}\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
                       },
                       icon: const Icon(Icons.share,
                           size: 30.0, color: Colors.white),
@@ -313,13 +311,13 @@ class _TextScreenState extends State<TextScreen>
           ),
           body: Column(
             children: [
-                bannerAdHelper.isBannerAd
-              ? SizedBox(
-                  height: bannerAdHelper.bannerAd.size.height.toDouble(),
-                  width: bannerAdHelper.bannerAd.size.width.toDouble(),
-                  child: AdWidget(ad: bannerAdHelper.bannerAd),
-                )
-              : const SizedBox(),
+              bannerAdHelper.isBannerAd
+                  ? SizedBox(
+                      height: bannerAdHelper.bannerAd.size.height.toDouble(),
+                      width: bannerAdHelper.bannerAd.size.width.toDouble(),
+                      child: AdWidget(ad: bannerAdHelper.bannerAd),
+                    )
+                  : const SizedBox(),
               SizedBox(
                 height: MediaQuery.sizeOf(context).height / 2 * 1.5,
                 child: TabBarView(

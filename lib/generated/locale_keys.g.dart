@@ -45,6 +45,7 @@ abstract class  LocaleKeys {
   static const chooseYourCountry = 'chooseYourCountry';
   static const fast = 'fast';
   static const Lastthird = 'Lastthird';
+  static const downloadText = 'downloadText';
   static const titlenotifi1 = 'titlenotifi1';
   static const titlenotifi2 = 'titlenotifi2';
   static const titlenotifi3 = 'titlenotifi3';

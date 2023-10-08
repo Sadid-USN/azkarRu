@@ -59,6 +59,7 @@ class CodegenLoader extends AssetLoader{
   "chooseYourCountry": "Выберите вашу страну",
   "fast": "Пост",
   "Lastthird": "Последняя треть",
+  "downloadText": "Скачать приложение *Azkar* в Play Store",
   "titlenotifi1": "Здоровое сердце!",
   "titlenotifi2": "Милосердие",
   "titlenotifi3": "Истинный мусульманин",
@@ -133,6 +134,7 @@ static const Map<String,dynamic> en = {
   "chooseYourCountry": "Choose your Country",
   "fast": "Fasting",
   "Lastthird": "Last third",
+  "downloadText": "Download the *Azkar* application in the Play Store",
   "translation": "Translation",
   "titlenotifi1": "Healthy Heart!",
   "titlenotifi2": "Mercy",
@@ -200,6 +202,7 @@ static const Map<String,dynamic> fr = {
   "noInternetConnection": "Интернет пайваст нест",
   "fast": "Рузадори",
   "Lastthird": "Сеяги охир",
+  "downloadText": "Барномаи Azkar-ро аз Play Store таҳмил кунед",
   "checkConnection": "Лутфан иттисоли интернетро барраси кунед",
   "today": "Имруз",
   "tryAgain": "Аз нав борбари кунед",
@@ -237,7 +240,7 @@ static const Map<String,dynamic> fr = {
   "supportText3": "Инчунин Аз Абуҳурайра ривоят аст, ки Расули Аллоҳ (ﷺ) фармуд:",
   "supportText4": "«Чун инсон мемирад, (ҳама) аъмоли ӯ қатъ мегардад ба ҷуз се чиз: садақаи ҷория, донише, ки (дигарон) аз он истифода мекунанд ё фарзандони солеҳе, ки ба сӯи Аллоҳ рӯй оварда дар ҳақи ӯ дуо мекунанд. Муслим (1631).",
   "supportText5": "Ҳамеша аз дастгирии шумо самимона миннатдорем!",
-  "supportText6": "Агар муфассалтар оиди кума хохед маълумот пайдо кунед, пас бо мо тавассути почтаи электронии ulamuyaman@gmail.com тамос гиред"
+  "supportText6": "Агар муфассалтар оиди кумак хохед маълумот пайдо кунед, пас бо мо тавассути почтаи электронии ulamuyaman@gmail.com тамос гиред"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "en": en, "fr": fr};
 }
