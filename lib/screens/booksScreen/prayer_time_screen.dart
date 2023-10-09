@@ -1,3 +1,4 @@
+import 'package:avrod/core/notify_helper.dart';
 import 'package:avrod/core/try_again_button.dart';
 import 'package:avrod/data/counties_and_capitals.dart';
 import 'package:country_picker/country_picker.dart';
@@ -9,6 +10,9 @@ import 'package:avrod/API/prayers_api.dart';
 
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/prayers_model.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class PrayerTimeScreen extends StatefulWidget {
   const PrayerTimeScreen({Key? key}) : super(key: key);
@@ -26,7 +30,9 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   final prayStorage = GetStorage();
   final countryStorage = GetStorage();
   final capitalStorage = GetStorage();
-  //BannerAdHelper bannerAdHelper = BannerAdHelper();
+  final player = AudioPlayer();
+  bool isAudioPlaying = false;
+  final NotificationHelper _notificationHelper = NotificationHelper();
 
   @override
   void initState() {
@@ -34,6 +40,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
 
     _loadSavedCountry();
     _fetchAndCacheData();
+    _notificationHelper.initNotification();
   }
 
   Future<void> _fetchAndCacheData() async {
@@ -57,6 +64,48 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
       setState(() {
         _prayerModel = Future.value(newData);
       });
+      final Timings prayerTimings =
+          newData.data!.timings!; // Assuming `timings` is of type Timings
+      _schedulePrayerNotifications(prayerTimings);
+    }
+  }
+
+  Future<void> _schedulePrayerNotifications(Timings prayerTimings) async {
+    final now = DateTime.now();
+    final tz.TZDateTime nowTz = tz.TZDateTime.now(tz.local);
+
+    final Map<String, String> timingsMap = {
+      'Fajr': "22:45",
+      'Dhuhr': "22:47",
+      'Asr': "22:49",
+      'Maghrib': "23:00",
+      'Isha':  "23:02",
+      // Add other prayer times here
+    };
+
+    for (var prayerName in timingsMap.keys) {
+      final prayerTime = timingsMap[prayerName]!.split(':');
+      final hour = int.parse(prayerTime[0]);
+      final minutes = int.parse(prayerTime[1]);
+
+      final prayerDateTime = tz.TZDateTime(
+        tz.local,
+        now.year,
+        now.month,
+        now.day,
+        hour,
+        minutes,
+      );
+
+      if (prayerDateTime.isAfter(nowTz)) {
+        // Schedule the notification for this prayer time
+        await _notificationHelper.scheduleNotification(
+          hour: hour,
+          minutes: minutes,
+          parayName: prayerName,
+          body: 'It\'s time for $prayerName prayer.',
+        );
+      }
     }
   }
 
