@@ -3,9 +3,10 @@ import 'package:avrod/controllers/audio_controller.dart';
 
 import 'package:avrod/controllers/internet_chacker.dart';
 import 'package:avrod/core/db_helper.dart';
+import 'package:avrod/core/notify_helper.dart';
 
 import 'package:avrod/routes.dart';
-import 'package:avrod/widgets/notification.dart';
+import 'package:avrod/core/notification.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,9 +31,9 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // CoordinatesInit().initCoordinates();
-
+  await NotificationHelper().initNotification();
   await MobileAds.instance.initialize();
-  await LocalNotificationSV().initNotification();
+ // await LocalNotificationSV().initNotification();
   await GetStorage.init();
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
