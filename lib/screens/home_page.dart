@@ -4,19 +4,15 @@ import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/core/notify_helper.dart';
 import 'package:avrod/data/book_map.dart';
-import 'package:avrod/screens/booksScreen/prayer_time_screen.dart';
+import 'package:avrod/screens/prayer_time_screen.dart';
 import 'package:avrod/screens/body_home_page.dart';
 import 'package:avrod/screens/favorite_chapter_screen.dart';
 import 'package:avrod/screens/radioplyeer_screen.dart';
-import 'package:avrod/core/notification.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import '../widgets/drawer_widget.dart';
-
 import 'booksScreen/selected_books.dart';
 import 'languages_screen.dart';
 
@@ -33,19 +29,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Chapters? chapter;
-  final NotificationHelper _notificationHelper = NotificationHelper();
 
   Random random = Random();
   @override
   void initState() {
     super.initState();
-
-    _notificationHelper.initNotification();
   }
 
   List<Widget> pages = [
     const BodyHomePage(),
-    const SelectedBooks(),
+    const LibraryScreen(),
     const FavoriteChaptersSceen(),
     const PrayerTimeScreen(),
     const RadioPlayerScreen()

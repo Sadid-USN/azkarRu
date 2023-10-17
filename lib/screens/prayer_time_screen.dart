@@ -1,3 +1,4 @@
+import 'package:avrod/core/extention_capitalize.dart';
 import 'package:avrod/core/notify_helper.dart';
 import 'package:avrod/core/try_again_button.dart';
 import 'package:avrod/data/counties_and_capitals.dart';
@@ -11,8 +12,6 @@ import 'package:avrod/API/prayers_api.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/prayers_model.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
-import 'package:timezone/timezone.dart' as tz;
 
 class PrayerTimeScreen extends StatefulWidget {
   const PrayerTimeScreen({Key? key}) : super(key: key);
@@ -31,7 +30,8 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   final countryStorage = GetStorage();
   final capitalStorage = GetStorage();
   final player = AudioPlayer();
-  bool isAudioPlaying = false;
+  int notificationId = 0;
+  bool isSoundEnabled = true;
   final NotificationHelper _notificationHelper = NotificationHelper();
 
   @override
@@ -64,23 +64,34 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
       setState(() {
         _prayerModel = Future.value(newData);
       });
-      final Timings prayerTimings =
-          newData.data!.timings!; // Assuming `timings` is of type Timings
-      _schedulePrayerNotifications(prayerTimings);
+      final Timings prayerTimings = newData.data!.timings!;
+
+      _schedulePrayerNotifications(
+        prayerTimings,
+        DateFormat('dd-MM-yyyy').format(dateForfam),
+      );
     }
   }
 
-  Future<void> _schedulePrayerNotifications(Timings prayerTimings) async {
-    final now = DateTime.now();
-    final tz.TZDateTime nowTz = tz.TZDateTime.now(tz.local);
+  Future<void> _schedulePrayerNotifications(
+      Timings prayerTimings, String currentDate) async {
+    if (currentDate != DateFormat('dd-MM-yyyy').format(dateForfam)) {
+      // Если данные о времени молитвы не актуальны для текущей даты, перезагрузагружаем
+      final PrayersModel newData = await PrayersApi().getData(
+          context: context,
+          capital: capital,
+          country: country,
+          date: formattedDate);
+      prayStorage.write('prayer_data', newData.toJson());
+      prayerTimings = newData.data!.timings!;
+    }
 
     final Map<String, String> timingsMap = {
-      'Fajr': "22:45",
-      'Dhuhr': "22:47",
-      'Asr': "22:49",
-      'Maghrib': "23:00",
-      'Isha':  "23:02",
-      // Add other prayer times here
+      LocaleKeys.fajr.tr().capitalize(): prayerTimings.fajr ?? "_",
+      LocaleKeys.duhr.tr().capitalize(): prayerTimings.dhuhr  ?? "_",
+      LocaleKeys.asr.tr().capitalize():  prayerTimings.asr ?? "_",
+      LocaleKeys.maghrib.tr().capitalize(): prayerTimings.maghrib ?? "_",
+      LocaleKeys.isha.tr().capitalize(): prayerTimings.isha ?? "_",
     };
 
     for (var prayerName in timingsMap.keys) {
@@ -88,24 +99,15 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
       final hour = int.parse(prayerTime[0]);
       final minutes = int.parse(prayerTime[1]);
 
-      final prayerDateTime = tz.TZDateTime(
-        tz.local,
-        now.year,
-        now.month,
-        now.day,
-        hour,
-        minutes,
+      _notificationHelper.scheduleNotification(
+        isSoundEnabled: isSoundEnabled,
+        id: notificationId++,
+        hour: hour,
+        minutes: minutes,
+        parayName: prayerName,
+        body:
+            '${LocaleKeys.itsTimeFor.tr().capitalize()} ${prayerName.capitalize()}',
       );
-
-      if (prayerDateTime.isAfter(nowTz)) {
-        // Schedule the notification for this prayer time
-        await _notificationHelper.scheduleNotification(
-          hour: hour,
-          minutes: minutes,
-          parayName: prayerName,
-          body: 'It\'s time for $prayerName prayer.',
-        );
-      }
     }
   }
 
@@ -161,7 +163,6 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
 
     if (savedCountry != null) {
       setState(() {
-        // city = savedCity;
         country = savedCountry;
         capital = savedCapital;
 
@@ -220,7 +221,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.grey,
-                          offset: Offset(0.0, 1.0), //(x,y)
+                          offset: Offset(0.0, 1.0),
                           blurRadius: 4.0,
                         ),
                       ],
@@ -251,6 +252,20 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
                                 ),
                               ],
                             ),
+
+                            // InkWell(
+                            //   onTap: () {
+                            //     setState(() {
+                            //       isSoundEnabled = !isSoundEnabled;
+                            //     });
+                            //   },
+                            //   child: Image.asset(
+                            //     isSoundEnabled
+                            //         ? "icons/volume.png"
+                            //         : "icons/volumeOff.png",
+                            //     height: 30,
+                            //   ),
+                            // ),
                           ],
                         ),
                         _CountrySelectionButton(
@@ -268,28 +283,19 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
                           sunrise: data?.timings?.sunrise ?? "null",
                           sunset: data?.timings?.sunset ?? "null",
                         ),
-
                         const SizedBox(
                           height: 10,
                         ),
                         _SalahCard(
-                          lable: prayerTimings[0],
+                          label: prayerTimings[0],
                           time: data?.timings!.fajr ?? "null",
                           icon: Image.asset(
                             "icons/timesalah.png",
                             height: 30,
                           ),
                         ),
-                        // SalahCard(
-                        //   lable: "Sunrise",
-                        //   time: data?.timings!.fajr ?? "null",
-                        //   icon: Image.asset(
-                        //       "icons/sunrise.png",
-                        //       height: 30,
-                        //     ),
-                        // ),
                         _SalahCard(
-                          lable: prayerTimings[1],
+                          label: prayerTimings[1],
                           time: data?.timings!.dhuhr ?? "null",
                           icon: Image.asset(
                             "icons/timesalah.png",
@@ -297,7 +303,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
                           ),
                         ),
                         _SalahCard(
-                          lable: prayerTimings[2],
+                          label: prayerTimings[2],
                           time: data?.timings!.asr ?? "null",
                           icon: Image.asset(
                             "icons/timesalah.png",
@@ -305,7 +311,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
                           ),
                         ),
                         _SalahCard(
-                          lable: prayerTimings[3],
+                          label: prayerTimings[3],
                           time: data?.timings!.maghrib ?? "null",
                           icon: Image.asset(
                             "icons/timesalah.png",
@@ -313,19 +319,18 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
                           ),
                         ),
                         _SalahCard(
-                          lable: prayerTimings[4],
+                          label: prayerTimings[4],
                           time: data?.timings!.isha ?? "null",
                           icon: Image.asset(
                             "icons/timesalah.png",
                             height: 30,
                           ),
                         ),
-
                         const SizedBox(
                           height: 20,
                         ),
                         _SalahCard(
-                          lable: prayerTimings[5],
+                          label: prayerTimings[5],
                           time: data?.timings!.imsak ?? "null",
                           icon: Image.asset(
                             "icons/fasting.png",
@@ -333,7 +338,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
                           ),
                         ),
                         _SalahCard(
-                          lable: prayerTimings[6],
+                          label: prayerTimings[6],
                           time: data?.timings!.lastthird ?? "null",
                           icon: Image.asset(
                             "icons/praying.png",
@@ -406,19 +411,14 @@ class _CountrySelectionButton extends StatelessWidget {
   }
 }
 
-enum Side {
-  left,
-  right,
-}
-
 class _SalahCard extends StatelessWidget {
-  final String lable;
+  final String label;
   final String time;
   final Widget icon;
 
   const _SalahCard({
     Key? key,
-    required this.lable,
+    required this.label,
     required this.time,
     required this.icon,
   }) : super(key: key);
@@ -430,21 +430,17 @@ class _SalahCard extends StatelessWidget {
       height: 45,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        // borderRadius: const BorderRadius.only(
-        //   topRight: Radius.circular(12),
-        //   bottomRight: Radius.circular(12),
-        // ),
         color: Colors.blue.withOpacity(0.1),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            lable,
+            label,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            width: MediaQuery.sizeOf(context).width / 2 / 1.2,
+            width: MediaQuery.of(context).size.width / 2 / 1.2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -452,11 +448,10 @@ class _SalahCard extends StatelessWidget {
                   time,
                   style: const TextStyle(fontSize: 16),
                 ),
-                // const SizedBox(width: 50,),
                 icon,
               ],
             ),
-          )
+          ),
         ],
       ),
     );

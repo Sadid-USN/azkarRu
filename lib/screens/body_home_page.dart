@@ -2,6 +2,7 @@ import 'package:avrod/core/addbunner_helper.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:logger/logger.dart';
 
 import 'package:provider/provider.dart';
 
@@ -18,12 +19,17 @@ class BodyHomePage extends StatefulWidget {
 }
 
 class _BodyHomePageState extends State<BodyHomePage> {
-   BannerAdHelper bannerAdHelper = BannerAdHelper();
-
+  BannerAdHelper bannerAdHelper = BannerAdHelper();
+  final Logger logger = Logger(
+    printer: PrettyPrinter(
+      methodCount: 0,
+      errorMethodCount: 3,
+      lineLength: 50,
+    ),
+  );
   @override
   void initState() {
     super.initState();
-    
 
     bannerAdHelper.initializeAdMob(
       onAdLoaded: (ad) {
@@ -77,6 +83,7 @@ class _BodyHomePageState extends State<BodyHomePage> {
                         context,
                         PageRouteBuilder(
                           pageBuilder: (context, a, b) {
+                            logger.i("Chapter Screen");
                             return ChapterScreen(
                               bookIndex: index,
                               title: books[index].name,

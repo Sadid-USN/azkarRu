@@ -42,6 +42,7 @@ abstract class  LocaleKeys {
   static const asr = 'asr';
   static const maghrib = 'maghrib';
   static const isha = 'isha';
+  static const itsTimeFor = 'itsTimeFor';
   static const chooseYourCountry = 'chooseYourCountry';
   static const fast = 'fast';
   static const Lastthird = 'Lastthird';
