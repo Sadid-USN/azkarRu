@@ -1,50 +1,66 @@
-class PrayersModel {
+import 'package:equatable/equatable.dart';
+
+class PrayersModel extends Equatable {
   final int? code;
   final String? status;
   final Data? data;
 
-  PrayersModel({
+  const PrayersModel({
     this.code,
     this.status,
     this.data,
   });
 
+  @override
+  List<Object?> get props => [code, status, data];
+
   PrayersModel.fromJson(Map<String, dynamic> json)
-    : code = json['code'] as int?,
-      status = json['status'] as String?,
-      data = (json['data'] as Map<String,dynamic>?) != null ? Data.fromJson(json['data'] as Map<String,dynamic>) : null;
+      : code = json['code'] as int?,
+        status = json['status'] as String?,
+        data = (json['data'] as Map<String, dynamic>?) != null
+            ? Data.fromJson(json['data'] as Map<String, dynamic>)
+            : null;
 
   Map<String, dynamic> toJson() => {
-    'code' : code,
-    'status' : status,
-    'data' : data?.toJson()
-  };
+        'code': code,
+        'status': status,
+        'data': data?.toJson(),
+      };
 }
 
-class Data {
+class Data extends Equatable {
   final Timings? timings;
   final Date? date;
   final Meta? meta;
 
-  Data({
+  const Data({
     this.timings,
     this.date,
     this.meta,
   });
 
+  @override
+  List<Object?> get props => [timings, date, meta];
+
   Data.fromJson(Map<String, dynamic> json)
-    : timings = (json['timings'] as Map<String,dynamic>?) != null ? Timings.fromJson(json['timings'] as Map<String,dynamic>) : null,
-      date = (json['date'] as Map<String,dynamic>?) != null ? Date.fromJson(json['date'] as Map<String,dynamic>) : null,
-      meta = (json['meta'] as Map<String,dynamic>?) != null ? Meta.fromJson(json['meta'] as Map<String,dynamic>) : null;
+      : timings = (json['timings'] as Map<String, dynamic>?) != null
+            ? Timings.fromJson(json['timings'] as Map<String, dynamic>)
+            : null,
+        date = (json['date'] as Map<String, dynamic>?) != null
+            ? Date.fromJson(json['date'] as Map<String, dynamic>)
+            : null,
+        meta = (json['meta'] as Map<String, dynamic>?) != null
+            ? Meta.fromJson(json['meta'] as Map<String, dynamic>)
+            : null;
 
   Map<String, dynamic> toJson() => {
-    'timings' : timings?.toJson(),
-    'date' : date?.toJson(),
-    'meta' : meta?.toJson()
-  };
+        'timings': timings?.toJson(),
+        'date': date?.toJson(),
+        'meta': meta?.toJson(),
+      };
 }
 
-class Timings {
+class Timings extends Equatable {
   final String? fajr;
   final String? sunrise;
   final String? dhuhr;
@@ -57,7 +73,7 @@ class Timings {
   final String? firstthird;
   final String? lastthird;
 
-  Timings({
+  const Timings({
     this.fajr,
     this.sunrise,
     this.dhuhr,
@@ -71,32 +87,47 @@ class Timings {
     this.lastthird,
   });
 
+  @override
+  List<Object?> get props => [
+        fajr,
+        sunrise,
+        dhuhr,
+        asr,
+        sunset,
+        maghrib,
+        isha,
+        imsak,
+        midnight,
+        firstthird,
+        lastthird,
+      ];
+
   Timings.fromJson(Map<String, dynamic> json)
-    : fajr = json['Fajr'] as String?,
-      sunrise = json['Sunrise'] as String?,
-      dhuhr = json['Dhuhr'] as String?,
-      asr = json['Asr'] as String?,
-      sunset = json['Sunset'] as String?,
-      maghrib = json['Maghrib'] as String?,
-      isha = json['Isha'] as String?,
-      imsak = json['Imsak'] as String?,
-      midnight = json['Midnight'] as String?,
-      firstthird = json['Firstthird'] as String?,
-      lastthird = json['Lastthird'] as String?;
+      : fajr = json['Fajr'] as String?,
+        sunrise = json['Sunrise'] as String?,
+        dhuhr = json['Dhuhr'] as String?,
+        asr = json['Asr'] as String?,
+        sunset = json['Sunset'] as String?,
+        maghrib = json['Maghrib'] as String?,
+        isha = json['Isha'] as String?,
+        imsak = json['Imsak'] as String?,
+        midnight = json['Midnight'] as String?,
+        firstthird = json['Firstthird'] as String?,
+        lastthird = json['Lastthird'] as String?;
 
   Map<String, dynamic> toJson() => {
-    'Fajr' : fajr,
-    'Sunrise' : sunrise,
-    'Dhuhr' : dhuhr,
-    'Asr' : asr,
-    'Sunset' : sunset,
-    'Maghrib' : maghrib,
-    'Isha' : isha,
-    'Imsak' : imsak,
-    'Midnight' : midnight,
-    'Firstthird' : firstthird,
-    'Lastthird' : lastthird
-  };
+        'Fajr': fajr,
+        'Sunrise': sunrise,
+        'Dhuhr': dhuhr,
+        'Asr': asr,
+        'Sunset': sunset,
+        'Maghrib': maghrib,
+        'Isha': isha,
+        'Imsak': imsak,
+        'Midnight': midnight,
+        'Firstthird': firstthird,
+        'Lastthird': lastthird,
+      };
 }
 
 class Date {
@@ -113,17 +144,21 @@ class Date {
   });
 
   Date.fromJson(Map<String, dynamic> json)
-    : readable = json['readable'] as String?,
-      timestamp = json['timestamp'] as String?,
-      hijri = (json['hijri'] as Map<String,dynamic>?) != null ? Hijri.fromJson(json['hijri'] as Map<String,dynamic>) : null,
-      gregorian = (json['gregorian'] as Map<String,dynamic>?) != null ? Gregorian.fromJson(json['gregorian'] as Map<String,dynamic>) : null;
+      : readable = json['readable'] as String?,
+        timestamp = json['timestamp'] as String?,
+        hijri = (json['hijri'] as Map<String, dynamic>?) != null
+            ? Hijri.fromJson(json['hijri'] as Map<String, dynamic>)
+            : null,
+        gregorian = (json['gregorian'] as Map<String, dynamic>?) != null
+            ? Gregorian.fromJson(json['gregorian'] as Map<String, dynamic>)
+            : null;
 
   Map<String, dynamic> toJson() => {
-    'readable' : readable,
-    'timestamp' : timestamp,
-    'hijri' : hijri?.toJson(),
-    'gregorian' : gregorian?.toJson()
-  };
+        'readable': readable,
+        'timestamp': timestamp,
+        'hijri': hijri?.toJson(),
+        'gregorian': gregorian?.toJson()
+      };
 }
 
 class Hijri {
@@ -148,25 +183,32 @@ class Hijri {
   });
 
   Hijri.fromJson(Map<String, dynamic> json)
-    : date = json['date'] as String?,
-      format = json['format'] as String?,
-      day = json['day'] as String?,
-      weekday = (json['weekday'] as Map<String,dynamic>?) != null ? WeekdayArabic.fromJson(json['weekday'] as Map<String,dynamic>) : null,
-      month = (json['month'] as Map<String,dynamic>?) != null ? MonthArabic.fromJson(json['month'] as Map<String,dynamic>) : null,
-      year = json['year'] as String?,
-      designation = (json['designation'] as Map<String,dynamic>?) != null ? DesignationExpanded.fromJson(json['designation'] as Map<String,dynamic>) : null,
-      holidays = json['holidays'] as List?;
+      : date = json['date'] as String?,
+        format = json['format'] as String?,
+        day = json['day'] as String?,
+        weekday = (json['weekday'] as Map<String, dynamic>?) != null
+            ? WeekdayArabic.fromJson(json['weekday'] as Map<String, dynamic>)
+            : null,
+        month = (json['month'] as Map<String, dynamic>?) != null
+            ? MonthArabic.fromJson(json['month'] as Map<String, dynamic>)
+            : null,
+        year = json['year'] as String?,
+        designation = (json['designation'] as Map<String, dynamic>?) != null
+            ? DesignationExpanded.fromJson(
+                json['designation'] as Map<String, dynamic>)
+            : null,
+        holidays = json['holidays'] as List?;
 
   Map<String, dynamic> toJson() => {
-    'date' : date,
-    'format' : format,
-    'day' : day,
-    'weekday' : weekday?.toJson(),
-    'month' : month?.toJson(),
-    'year' : year,
-    'designation' : designation?.toJson(),
-    'holidays' : holidays
-  };
+        'date': date,
+        'format': format,
+        'day': day,
+        'weekday': weekday?.toJson(),
+        'month': month?.toJson(),
+        'year': year,
+        'designation': designation?.toJson(),
+        'holidays': holidays
+      };
 }
 
 class WeekdayArabic {
@@ -179,13 +221,10 @@ class WeekdayArabic {
   });
 
   WeekdayArabic.fromJson(Map<String, dynamic> json)
-    : en = json['en'] as String?,
-      ar = json['ar'] as String?;
+      : en = json['en'] as String?,
+        ar = json['ar'] as String?;
 
-  Map<String, dynamic> toJson() => {
-    'en' : en,
-    'ar' : ar
-  };
+  Map<String, dynamic> toJson() => {'en': en, 'ar': ar};
 }
 
 class MonthArabic {
@@ -200,15 +239,11 @@ class MonthArabic {
   });
 
   MonthArabic.fromJson(Map<String, dynamic> json)
-    : number = json['number'] as int?,
-      en = json['en'] as String?,
-      ar = json['ar'] as String?;
+      : number = json['number'] as int?,
+        en = json['en'] as String?,
+        ar = json['ar'] as String?;
 
-  Map<String, dynamic> toJson() => {
-    'number' : number,
-    'en' : en,
-    'ar' : ar
-  };
+  Map<String, dynamic> toJson() => {'number': number, 'en': en, 'ar': ar};
 }
 
 class DesignationExpanded {
@@ -221,13 +256,11 @@ class DesignationExpanded {
   });
 
   DesignationExpanded.fromJson(Map<String, dynamic> json)
-    : abbreviated = json['abbreviated'] as String?,
-      expanded = json['expanded'] as String?;
+      : abbreviated = json['abbreviated'] as String?,
+        expanded = json['expanded'] as String?;
 
-  Map<String, dynamic> toJson() => {
-    'abbreviated' : abbreviated,
-    'expanded' : expanded
-  };
+  Map<String, dynamic> toJson() =>
+      {'abbreviated': abbreviated, 'expanded': expanded};
 }
 
 class Gregorian {
@@ -250,23 +283,30 @@ class Gregorian {
   });
 
   Gregorian.fromJson(Map<String, dynamic> json)
-    : date = json['date'] as String?,
-      format = json['format'] as String?,
-      day = json['day'] as String?,
-      weekday = (json['weekday'] as Map<String,dynamic>?) != null ? WeekdayArabic.fromJson(json['weekday'] as Map<String,dynamic>) : null,
-      month = (json['month'] as Map<String,dynamic>?) != null ? MonthArabic.fromJson(json['month'] as Map<String,dynamic>) : null,
-      year = json['year'] as String?,
-      designation = (json['designation'] as Map<String,dynamic>?) != null ? DesignationExpanded.fromJson(json['designation'] as Map<String,dynamic>) : null;
+      : date = json['date'] as String?,
+        format = json['format'] as String?,
+        day = json['day'] as String?,
+        weekday = (json['weekday'] as Map<String, dynamic>?) != null
+            ? WeekdayArabic.fromJson(json['weekday'] as Map<String, dynamic>)
+            : null,
+        month = (json['month'] as Map<String, dynamic>?) != null
+            ? MonthArabic.fromJson(json['month'] as Map<String, dynamic>)
+            : null,
+        year = json['year'] as String?,
+        designation = (json['designation'] as Map<String, dynamic>?) != null
+            ? DesignationExpanded.fromJson(
+                json['designation'] as Map<String, dynamic>)
+            : null;
 
   Map<String, dynamic> toJson() => {
-    'date' : date,
-    'format' : format,
-    'day' : day,
-    'weekday' : weekday?.toJson(),
-    'month' : month?.toJson(),
-    'year' : year,
-    'designation' : designation?.toJson()
-  };
+        'date': date,
+        'format': format,
+        'day': day,
+        'weekday': weekday?.toJson(),
+        'month': month?.toJson(),
+        'year': year,
+        'designation': designation?.toJson()
+      };
 }
 
 class Weekday {
@@ -276,12 +316,9 @@ class Weekday {
     this.en,
   });
 
-  Weekday.fromJson(Map<String, dynamic> json)
-    : en = json['en'] as String?;
+  Weekday.fromJson(Map<String, dynamic> json) : en = json['en'] as String?;
 
-  Map<String, dynamic> toJson() => {
-    'en' : en
-  };
+  Map<String, dynamic> toJson() => {'en': en};
 }
 
 class Month {
@@ -294,13 +331,10 @@ class Month {
   });
 
   Month.fromJson(Map<String, dynamic> json)
-    : number = json['number'] as int?,
-      en = json['en'] as String?;
+      : number = json['number'] as int?,
+        en = json['en'] as String?;
 
-  Map<String, dynamic> toJson() => {
-    'number' : number,
-    'en' : en
-  };
+  Map<String, dynamic> toJson() => {'number': number, 'en': en};
 }
 
 class Designation {
@@ -313,13 +347,11 @@ class Designation {
   });
 
   Designation.fromJson(Map<String, dynamic> json)
-    : abbreviated = json['abbreviated'] as String?,
-      expanded = json['expanded'] as String?;
+      : abbreviated = json['abbreviated'] as String?,
+        expanded = json['expanded'] as String?;
 
-  Map<String, dynamic> toJson() => {
-    'abbreviated' : abbreviated,
-    'expanded' : expanded
-  };
+  Map<String, dynamic> toJson() =>
+      {'abbreviated': abbreviated, 'expanded': expanded};
 }
 
 class Meta {
@@ -344,25 +376,29 @@ class Meta {
   });
 
   Meta.fromJson(Map<String, dynamic> json)
-    : latitude = json['latitude'] as double?,
-      longitude = json['longitude'] as double?,
-      timezone = json['timezone'] as String?,
-      method = (json['method'] as Map<String,dynamic>?) != null ? Method.fromJson(json['method'] as Map<String,dynamic>) : null,
-      latitudeAdjustmentMethod = json['latitudeAdjustmentMethod'] as String?,
-      midnightMode = json['midnightMode'] as String?,
-      school = json['school'] as String?,
-      offset = (json['offset'] as Map<String,dynamic>?) != null ? Offsets.fromJson(json['offset'] as Map<String,dynamic>) : null;
+      : latitude = json['latitude'] as double?,
+        longitude = json['longitude'] as double?,
+        timezone = json['timezone'] as String?,
+        method = (json['method'] as Map<String, dynamic>?) != null
+            ? Method.fromJson(json['method'] as Map<String, dynamic>)
+            : null,
+        latitudeAdjustmentMethod = json['latitudeAdjustmentMethod'] as String?,
+        midnightMode = json['midnightMode'] as String?,
+        school = json['school'] as String?,
+        offset = (json['offset'] as Map<String, dynamic>?) != null
+            ? Offsets.fromJson(json['offset'] as Map<String, dynamic>)
+            : null;
 
   Map<String, dynamic> toJson() => {
-    'latitude' : latitude,
-    'longitude' : longitude,
-    'timezone' : timezone,
-    'method' : method?.toJson(),
-    'latitudeAdjustmentMethod' : latitudeAdjustmentMethod,
-    'midnightMode' : midnightMode,
-    'school' : school,
-    'offset' : offset?.toJson()
-  };
+        'latitude': latitude,
+        'longitude': longitude,
+        'timezone': timezone,
+        'method': method?.toJson(),
+        'latitudeAdjustmentMethod': latitudeAdjustmentMethod,
+        'midnightMode': midnightMode,
+        'school': school,
+        'offset': offset?.toJson()
+      };
 }
 
 class Method {
@@ -379,17 +415,21 @@ class Method {
   });
 
   Method.fromJson(Map<String, dynamic> json)
-    : id = json['id'] as int?,
-      name = json['name'] as String?,
-      params = (json['params'] as Map<String,dynamic>?) != null ? Params.fromJson(json['params'] as Map<String,dynamic>) : null,
-      location = (json['location'] as Map<String,dynamic>?) != null ? Location.fromJson(json['location'] as Map<String,dynamic>) : null;
+      : id = json['id'] as int?,
+        name = json['name'] as String?,
+        params = (json['params'] as Map<String, dynamic>?) != null
+            ? Params.fromJson(json['params'] as Map<String, dynamic>)
+            : null,
+        location = (json['location'] as Map<String, dynamic>?) != null
+            ? Location.fromJson(json['location'] as Map<String, dynamic>)
+            : null;
 
   Map<String, dynamic> toJson() => {
-    'id' : id,
-    'name' : name,
-    'params' : params?.toJson(),
-    'location' : location?.toJson()
-  };
+        'id': id,
+        'name': name,
+        'params': params?.toJson(),
+        'location': location?.toJson()
+      };
 }
 
 class Params {
@@ -402,13 +442,10 @@ class Params {
   });
 
   Params.fromJson(Map<String, dynamic> json)
-    : fajr = json['Fajr'] as double?,
-      isha = json['Isha'] as String?;
+      : fajr = json['Fajr'] as double?,
+        isha = json['Isha'] as String?;
 
-  Map<String, dynamic> toJson() => {
-    'Fajr' : fajr,
-    'Isha' : isha
-  };
+  Map<String, dynamic> toJson() => {'Fajr': fajr, 'Isha': isha};
 }
 
 class Location {
@@ -421,13 +458,11 @@ class Location {
   });
 
   Location.fromJson(Map<String, dynamic> json)
-    : latitude = json['latitude'] as double?,
-      longitude = json['longitude'] as double?;
+      : latitude = json['latitude'] as double?,
+        longitude = json['longitude'] as double?;
 
-  Map<String, dynamic> toJson() => {
-    'latitude' : latitude,
-    'longitude' : longitude
-  };
+  Map<String, dynamic> toJson() =>
+      {'latitude': latitude, 'longitude': longitude};
 }
 
 class Offsets {
@@ -454,25 +489,25 @@ class Offsets {
   });
 
   Offsets.fromJson(Map<String, dynamic> json)
-    : imsak = json['Imsak'] as int?,
-      fajr = json['Fajr'] as int?,
-      sunrise = json['Sunrise'] as int?,
-      dhuhr = json['Dhuhr'] as int?,
-      asr = json['Asr'] as int?,
-      maghrib = json['Maghrib'] as int?,
-      sunset = json['Sunset'] as int?,
-      isha = json['Isha'] as int?,
-      midnight = json['Midnight'] as int?;
+      : imsak = json['Imsak'] as int?,
+        fajr = json['Fajr'] as int?,
+        sunrise = json['Sunrise'] as int?,
+        dhuhr = json['Dhuhr'] as int?,
+        asr = json['Asr'] as int?,
+        maghrib = json['Maghrib'] as int?,
+        sunset = json['Sunset'] as int?,
+        isha = json['Isha'] as int?,
+        midnight = json['Midnight'] as int?;
 
   Map<String, dynamic> toJson() => {
-    'Imsak' : imsak,
-    'Fajr' : fajr,
-    'Sunrise' : sunrise,
-    'Dhuhr' : dhuhr,
-    'Asr' : asr,
-    'Maghrib' : maghrib,
-    'Sunset' : sunset,
-    'Isha' : isha,
-    'Midnight' : midnight
-  };
+        'Imsak': imsak,
+        'Fajr': fajr,
+        'Sunrise': sunrise,
+        'Dhuhr': dhuhr,
+        'Asr': asr,
+        'Maghrib': maghrib,
+        'Sunset': sunset,
+        'Isha': isha,
+        'Midnight': midnight
+      };
 }

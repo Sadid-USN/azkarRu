@@ -1,138 +1,124 @@
+import 'package:avrod/colors/colors.dart';
+import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/core/addbunner_helper.dart';
+import 'package:avrod/core/scelton.dart';
 import 'package:avrod/screens/booksScreen/books_ditails.dart';
 import 'package:avrod/screens/booksScreen/pdf_api_class.dart';
+import 'package:avrod/screens/booksScreen/reading_books_labrary_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:sizer/sizer.dart';
+import 'package:provider/provider.dart';
 
-import 'list_of_all_books.dart';
-
-class SelectedBooks extends StatefulWidget {
-  const SelectedBooks({
+class LibraryScreen extends StatelessWidget {
+  const LibraryScreen({
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<SelectedBooks> createState() => _SelectedBooksState();
-}
-
-class _SelectedBooksState extends State<SelectedBooks> {
-  late BannerAdHelper bannerAdHelper = BannerAdHelper();
-
-  @override
-  void initState() {
-    super.initState();
-
-    bannerAdHelper.initializeAdMob(
-      onAdLoaded: (ad) {
-        setState(() {
-          bannerAdHelper.isBannerAd = true;
-        });
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    bannerAdHelper.bannerAd.dispose();
-    super.dispose();
-  }
+  static String routName = '/libraryScreen';
 
   @override
   Widget build(BuildContext context) {
+    var controller = Provider.of<AudioController>(context);
+
     return Scaffold(
-      backgroundColor: const Color(0xffF3EEE2),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            bannerAdHelper.isBannerAd
-                ? SizedBox(
-                    height: bannerAdHelper.bannerAd.size.height.toDouble(),
-                    width: bannerAdHelper.bannerAd.size.width.toDouble(),
-                    child: AdWidget(ad: bannerAdHelper.bannerAd),
-                  )
-                : const SizedBox(),
-            AnimationLimiter(
-              child: SizedBox(
-                height: MediaQuery.sizeOf(context).height,
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 2 / 2.2,
-                      mainAxisExtent: MediaQuery.of(context).size.height / 7),
-                  itemCount: booksRu.name!.length,
-                  itemBuilder: (context, index) {
-                    return AnimationConfiguration.staggeredList(
-                      position: index,
-                      duration: const Duration(milliseconds: 500),
-                      child: ScaleAnimation(
-                        child: InkWell(
-                          onTap: () async {
-                            final file =
-                                await PDFApi.loadNetwork(booksRu.path![index]);
-                            if (context.mounted) {
-                              openPDF(context, file);
-                            }
-                          },
-                          child: ListTile(
-                            // ignore: avoid_unnecessary_containers
-                            title: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 5.0),
-                                  child: CachedNetworkImage(
-                                    imageUrl:
-                                        'https://i.pinimg.com/originals/f3/7d/c5/f37dc5e4ea716ad61962daf36a070c0d.jpg',
-                                    imageBuilder: (context, imageProvider) {
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          boxShadow: const [
-                                            BoxShadow(
-                                              color: Colors.black12,
-                                              blurRadius: 4.0,
-                                              offset: Offset(2.0, 2.0),
-                                            ),
-                                          ],
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(12.0)),
-                                        ),
-                                        height: 12.h,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Center(
-                                            child: Text(
-                                              booksRu.name![index],
-                                              textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.white),
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+      backgroundColor: const Color(0xffF6F1E8),
+      extendBodyBehindAppBar: true,
+      body: StreamBuilder<QuerySnapshot>(
+        stream: controller.books,
+        builder:
+            ((BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return const Center(child: Text('Somthing went wrong'));
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return GridView.builder(
+                itemCount: 4,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 2 / 2.7,
                 ),
+                itemBuilder: ((context, index) {
+                  return const Skelton();
+                }));
+          }
+          
+          final data = snapshot.requireData;
+          return GridView.builder(
+              itemCount: data.size,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 2 / 2.8,
               ),
-            ),
-          ],
-        ),
+              itemBuilder: ((context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) {
+                        return BookReading(
+                       
+                          title: data.docs[index]['title'],
+                        
+                          image: data.docs[index]['image'], 
+                          chapters: data.docs[index]['chapters'],
+
+                          //source: data.docs[index]['source'],
+                        );
+                      })));
+                    },
+                    child: Container(
+                      margin:
+                          const EdgeInsets.only(left: 16, top: 10, right: 10),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(data.docs[index]['image']),
+                            fit: BoxFit.cover),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(16.0),
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 6.0)
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }));
+        }),
       ),
     );
   }
 }
+
+
+  //  Padding(
+  //         padding: EdgeInsets.symmetric(horizontal: 20),
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: [
+  //             Text(
+  //               "Библиотека находится в процессе обработки и скоро будет доступна для пользователей. Благодарим за терпение.",
+  //               style: TextStyle(fontSize: 18),
+  //             ),
+  //             SizedBox(
+  //               height: 16,
+  //             ),
+  //             Text(
+  //               "Китобхона дар ҳоли таҳия аст ва ба зудӣ дастраси шумо хоҳад шуд. Ташаккур зиёд барои сабратон.",
+  //               style: TextStyle(fontSize: 18),
+  //             ),
+  //             SizedBox(
+  //               height: 16,
+  //             ),
+  //             Text(
+  //               "The library is under development and will be available to users soon. Thank you for your patience.",
+  //               style: TextStyle(fontSize: 18),
+  //             ),
+  //           ],
+  //         ),
+  //       )
