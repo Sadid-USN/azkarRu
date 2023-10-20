@@ -1,22 +1,24 @@
 import 'package:animate_icons/animate_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import 'package:avrod/colors/colors.dart';
-
+import 'package:avrod/models/lib_book_model.dart';
 
 class BookReading extends StatefulWidget {
- final List<dynamic> chapters;
- final String title;
- final String image;
-  // final String? source;
-const  BookReading({
+  final List<LibChapters> chapters;
+  final String title;
+  final String image;
+  final String bookId;
+  const BookReading({
     Key? key,
     // this.source,
     required this.chapters,
     required this.title,
     required this.image,
+    required this.bookId,
   }) : super(
           key: key,
         );
@@ -36,17 +38,16 @@ class _BookReadingState extends State<BookReading> {
   }
 
   bool isOntap = false;
-
+  ScrollController scrollController = ScrollController();
   AnimateIconController controller = AnimateIconController();
   @override
   void initState() {
     initHive();
 
     int? lastReadedPage = savePageBox.get(
-      'content',
+      widget.bookId,
     );
     if (lastReadedPage != null) {
-      // print(lastReadedPage);
       currentPage = lastReadedPage;
       pageController = PageController(initialPage: lastReadedPage);
     } else {
@@ -61,7 +62,7 @@ class _BookReadingState extends State<BookReading> {
   @override
   void dispose() {
     controller;
-    savePageBox.put('content', currentPage);
+
     super.dispose();
   }
 
@@ -76,12 +77,19 @@ class _BookReadingState extends State<BookReading> {
 
   onPageChanged(index) {
     currentPage = index;
+    savePageBox.put(widget.bookId, currentPage);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Text(
@@ -99,25 +107,6 @@ class _BookReadingState extends State<BookReading> {
             bottomRight: Radius.circular(12),
           ),
         ),
-        // actions: [
-        //   AnimateIcons(
-        //     startIcon: Icons.book_outlined,
-        //     endIcon: Icons.book,
-        //     controller: controller,
-        //     size: 25.0,
-        //     onStartIconPress: () {
-        //       setState(() {});
-        //       return true;
-        //     },
-        //     onEndIconPress: () {
-        //       return true;
-        //     },
-        //     duration: const Duration(milliseconds: 250),
-        //     startIconColor: Colors.black45,
-        //     endIconColor: Colors.blueGrey,
-        //     clockwise: false,
-        //   ),
-        // ],
       ),
       backgroundColor: bgColor,
       extendBodyBehindAppBar: true,
@@ -133,12 +122,11 @@ class _BookReadingState extends State<BookReading> {
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BookInfo(
-                    border: Border.all(),
-                    subtitle: widget.chapters[index]["subtitle"],
-                    title: widget.chapters[index]["title"],
-                    sources: widget.chapters[index]["sources"],
-                    text: widget.chapters[index]["text"],
+                  BookContent(
+                    image: widget.image,
+                    scrollController: scrollController,
+                    page: index + 1,
+                    chapters: widget.chapters[index],
                   ),
                 ],
               ),
@@ -150,118 +138,23 @@ class _BookReadingState extends State<BookReading> {
   }
 }
 
-class AuthorInfo extends StatelessWidget {
-  final String? image;
-  const AuthorInfo({
+class BookContent extends StatelessWidget {
+  final ScrollController scrollController;
+  final int page;
+  final LibChapters chapters;
+  final String image;
+  const BookContent({
     Key? key,
-    this.image,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 215, 198, 176),
-      body: Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height / 2 * 1,
-          width: MediaQuery.of(context).size.width / 2 * 1.5,
-          decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(
-                  color: Colors.black26,
-                  offset: Offset(1.0, 1.0),
-                  blurRadius: 6.0)
-            ],
-            borderRadius: BorderRadius.circular(12.0),
-            image: DecorationImage(
-                colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.6), BlendMode.dstATop),
-                image: NetworkImage(image ?? ''),
-                fit: BoxFit.cover),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // SelectableText(
-                //   title ?? '',
-                //   textAlign: TextAlign.center,
-                //   style: const TextStyle(
-                //     letterSpacing: 1.5,
-                //     color: Colors.white,
-                //     fontSize: 18.0,
-                //     fontWeight: FontWeight.bold,
-                //     shadows: [
-                //       Shadow(
-                //         offset: Offset(2.0, 2.0),
-                //         blurRadius: 3.0,
-                //         color: Colors.black,
-                //       ),
-                //       Shadow(
-                //         offset: Offset(2.0, 2.0),
-                //         blurRadius: 8.0,
-                //         color: Colors.black,
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 10.0,
-                // ),
-                // SelectableText(
-                //   author ?? '',
-                //   textAlign: TextAlign.center,
-                //   style: const TextStyle(
-                //     shadows: [
-                //       Shadow(
-                //         offset: Offset(2.0, 2.0),
-                //         blurRadius: 3.0,
-                //         color: Colors.black,
-                //       ),
-                //       Shadow(
-                //         offset: Offset(2.0, 2.0),
-                //         blurRadius: 8.0,
-                //         color: Colors.white,
-                //       ),
-                //     ],
-                //     letterSpacing: 1.0,
-                //     color: Colors.white,
-                //     fontSize: 13.0,
-                //   ),
-                // )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class BookInfo extends StatelessWidget {
-  final String? title;
-  final String? subtitle;
-  final String? text;
-
-  final List<dynamic>? sources;
-
-  final Border? border;
-  final double? height;
-
-  const BookInfo({
-    Key? key,
-    this.title,
-    this.border,
-    this.height,
-    this.subtitle,
-    this.text,
-    this.sources,
+    required this.scrollController,
+    required this.page,
+    required this.chapters,
+    required this.image,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     String sourceText =
-        sources?.map((source) => source['source']).toString() ?? 'null';
+        chapters.sources!.map((source) => source.source).join('\n');
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -272,32 +165,36 @@ class BookInfo extends StatelessWidget {
             Center(
               child: Image.asset(
                 "icons/pattern.png",
-                height: 70,
+                height: 60,
               ),
             ),
             const SizedBox(
-              height: 14,
+              height: 20,
             ),
-            SelectableText(
-              subtitle ?? '',
-              textAlign: TextAlign.start,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5,
-                  fontSize: 18.0),
+            MarkdownBody(
+              selectable: true,
+              data: chapters.subtitle ?? "_",
+              styleSheet: MarkdownStyleSheet(
+                p: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5,
+                    fontSize: 18.0),
+              ),
             ),
             const SizedBox(
               height: 8.0,
             ),
-            SelectableText(
-              text ?? '',
-              textAlign: TextAlign.start,
-              style: GoogleFonts.ptSerif(
-                  height: 1.6,
-                  letterSpacing: 0.7,
-                  color: Colors.blueGrey[900],
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16),
+            MarkdownBody(
+              selectable: true,
+              data: chapters.text ?? "_",
+              styleSheet: MarkdownStyleSheet(
+                p: GoogleFonts.ptSerif(
+                    height: 1.6,
+                    letterSpacing: 0.7,
+                    color: Colors.blueGrey[900],
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16),
+              ),
             ),
             const SizedBox(
               height: 12.0,
@@ -317,6 +214,15 @@ class BookInfo extends StatelessWidget {
                 "icons/pattern.png",
                 height: 70,
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Center(
+                  child: Text(
+                page.toString(),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              )),
             ),
             const SizedBox(
               height: 14,

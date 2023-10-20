@@ -11,12 +11,20 @@ enum LoadingStatus { loading, completed, error }
 
 class DataUploaderController extends ChangeNotifier {
   LoadingStatus loadingStatus = LoadingStatus.loading;
-  
-   DataUploaderController(BuildContext context) {
+  List<LibBookModel> bookModels = [];
+  DataUploaderController(BuildContext context) {
     uploadData(context);
   }
 
-  Future<void> uploadData( context) async {
+  void setMessage(BuildContext context, String msg) {
+    ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+        content: Text(msg),
+      ),
+    );
+  }
+
+  Future<void> uploadData(context) async {
     try {
       loadingStatus = LoadingStatus.loading;
 
@@ -29,8 +37,6 @@ class DataUploaderController extends ChangeNotifier {
           .where(
               (path) => path.startsWith('assets/DB/') && path.contains('.json'))
           .toList();
-
-      List<LibBookModel> bookModels = [];
 
       for (var bookPath in booksInAssets) {
         String stringBookContent = await rootBundle.loadString(bookPath);
@@ -55,8 +61,7 @@ class DataUploaderController extends ChangeNotifier {
     } catch (error) {
       print('Error uploading data: $error');
       loadingStatus = LoadingStatus.error;
-       notifyListeners();
-    
+      notifyListeners();
     }
   }
 }
