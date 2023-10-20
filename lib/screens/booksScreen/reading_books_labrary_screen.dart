@@ -3,22 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
-
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/models/lib_book_model.dart';
 
 class BookReading extends StatefulWidget {
-  final List<LibChapters> chapters;
-  final String title;
-  final String image;
-  final String bookId;
+  final LibBookModel book;
+
   const BookReading({
     Key? key,
     // this.source,
-    required this.chapters,
-    required this.title,
-    required this.image,
-    required this.bookId,
+    required this.book,
   }) : super(
           key: key,
         );
@@ -45,7 +39,7 @@ class _BookReadingState extends State<BookReading> {
     initHive();
 
     int? lastReadedPage = savePageBox.get(
-      widget.bookId,
+      widget.book.id,
     );
     if (lastReadedPage != null) {
       currentPage = lastReadedPage;
@@ -68,7 +62,7 @@ class _BookReadingState extends State<BookReading> {
 
   nextPage() {
     currentPage++;
-    if (currentPage > widget.chapters.length) {
+    if (currentPage > widget.book.chapters!.length) {
     } else {
       pageController.animateToPage(currentPage,
           duration: const Duration(milliseconds: 300), curve: Curves.ease);
@@ -77,7 +71,7 @@ class _BookReadingState extends State<BookReading> {
 
   onPageChanged(index) {
     currentPage = index;
-    savePageBox.put(widget.bookId, currentPage);
+    savePageBox.put(widget.book.id, currentPage);
   }
 
   @override
@@ -93,7 +87,7 @@ class _BookReadingState extends State<BookReading> {
         title: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Text(
-            widget.title,
+            widget.book.title ?? "_",
             style: TextStyle(color: Colors.grey.shade800, fontSize: 16.0),
           ),
         ),
@@ -115,7 +109,7 @@ class _BookReadingState extends State<BookReading> {
         onPageChanged: (index) {
           onPageChanged(index);
         },
-        itemCount: widget.chapters.length,
+        itemCount: widget.book.chapters!.length,
         itemBuilder: (context, index) {
           return SafeArea(
             child: SingleChildScrollView(
@@ -123,10 +117,10 @@ class _BookReadingState extends State<BookReading> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BookContent(
-                    image: widget.image,
+                    image: widget.book.image ?? "_",
                     scrollController: scrollController,
                     page: index + 1,
-                    chapters: widget.chapters[index],
+                    chapters: widget.book.chapters![index],
                   ),
                 ],
               ),
