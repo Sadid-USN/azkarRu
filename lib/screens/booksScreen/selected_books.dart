@@ -6,6 +6,8 @@ import 'package:avrod/models/lib_book_model.dart';
 import 'package:avrod/screens/booksScreen/books_ditails.dart';
 import 'package:avrod/screens/booksScreen/pdf_api_class.dart';
 import 'package:avrod/screens/booksScreen/reading_books_labrary_screen.dart';
+import 'package:avrod/screens/introduction_page.dart';
+import 'package:avrod/screens/onboarding_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,8 @@ class LibraryScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: StreamBuilder<QuerySnapshot>(
         stream: controller.books,
-        builder: ((BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        builder:
+            ((BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return const Center(child: Text('Something went wrong'));
           }
@@ -43,15 +46,14 @@ class LibraryScreen extends StatelessWidget {
 
           final data = snapshot.requireData;
 
-          
           List<LibBookModel> booksList = data.docs.map((DocumentSnapshot doc) {
             Map<String, dynamic> bookData = doc.data() as Map<String, dynamic>;
-            bookData['id'] = doc.id; 
+            bookData['id'] = doc.id;
             return LibBookModel.fromJson(bookData);
           }).toList();
 
           return GridView.builder(
-            padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.all(4.0),
               itemCount: booksList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -61,31 +63,41 @@ class LibraryScreen extends StatelessWidget {
               itemBuilder: ((context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                      return BookReading(
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) {
+                      return IntroductionPage(
+                        book: booksList[index],
                         title: booksList[index].title ?? "null",
                         image: booksList[index].image ?? "null",
-                        chapters: booksList[index].chapters ?? [],
-                         bookId: booksList[index].id ?? ""
                       );
+
+                      // BookReading(
+                      //   title: booksList[index].title ?? "null",
+                      //   image: booksList[index].image ?? "null",
+                      //   chapters: booksList[index].chapters ?? [],
+                      //    bookId: booksList[index].id ?? ""
+                      // );
                     })));
                   },
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0, bottom: 12.0),
-                
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(booksList[index].image ?? "_"),
-                          fit: BoxFit.cover),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12.0),
+                  child: Hero(
+                    tag: booksList[index].image!,
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                          top: 12.0, left: 12.0, right: 12.0, bottom: 12.0),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(booksList[index].image ?? "_"),
+                            fit: BoxFit.cover),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12.0),
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 6.0)
+                        ],
                       ),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.black26,
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 6.0)
-                      ],
                     ),
                   ),
                 );
