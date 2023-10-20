@@ -66,8 +66,7 @@ class NotificationHelper {
   }
 
   Future scheduleNotification(
-      {
-      required int id,
+      {required int id,
       required bool isSoundEnabled,
       required int hour,
       required int minutes,
@@ -84,7 +83,6 @@ class NotificationHelper {
     );
     if (scheduleDate.isBefore(now)) {
       scheduleDate = scheduleDate.add(const Duration(hours: 1));
-       return;
     }
 
     return flutterLocalNotificationsPlugin.zonedSchedule(

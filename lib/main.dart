@@ -21,6 +21,22 @@ import 'colors/theme.dart';
 import 'generated/codegen_loader.g.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
+const credentials = '''{
+  "type": "service_account",
+  "project_id": "azkar-de3a2",
+  "private_key_id": "f1166285ae8d9987a68235b06fb23e7a2074a806",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC3v7OFFmzcWW4E\nSdAcVXBLYfo7sBZvInavKoaWOe+aqsZQzbQouUvVakmF/FuwnpegMEvVIyuXt3qV\nLPu13p8Wv1h6qrhIJRCsiuf2ddV4go8NO831ppKc5b5++q0maUJTJqMtttBlyyja\nLrGaEUATdIj1Sax3x0rmBchBaqk364+yMluPuuYJw5j7npUk0EHH695xo4xNSiH2\nB7kACZcI750LHWihly8jP8YYEw+9lUah79N3r4Ox5LBy1sMSckcV3v0CG9FjufBf\nhv8ZC4SKZHyfGXQHTluOSP4RKdceGxjyIDWbzDX5FXUdV8RsW3njLsJezjKJp+ss\nj8ys/Yw3AgMBAAECggEAN8D5qjjHOEcEbFWvSWGdTKpCgMjpzbfh1j2rj7qtmrsV\nqJ/5+d9bhLqW64pKkflVHZx57gaZbBQWpFv9Vk5h7EeMA9B4UR+6Avi08KIJb2MC\nH+xVDqQH2YaWejX6wuxuXQecvLq7Wh++WhGP/yUb0atrAS5lIAT/E3OOs1a3WMlj\nkfEHJcVXnTw/IlVqzKiIOhu5/OOaMcdmaJhLLo42QXBq+Qb0mRBhIg+CE5SJrKj3\nWC3zYORac1J3AK/nQBXGzVAmh6rtvwJgjphRtk/CvyzArS3+FQSXbE1gwE8jA7u0\nQ2550+dmWoTCBsnjbPagEvL/A/7iSOkphugIx3zgPQKBgQDqT/+n7g00BcFVzoDb\nmWLfB+P3agVbWvUUouIFDbSyrZrb/PxGN5d+C3HeZXirCG74hkmkUYZwrkEBnNK3\na1VyoVnF4qyeAWz/dqjvJGeNdsNAzrJBtMcGmpe9cuLq4WPUWPsWdyw+qmElzzEQ\nkZw+4AzXmljiVyfFs2+ggDE/qwKBgQDIwZqSbtCLxFMNkbD1qEx5wO0ax9I2durS\ngUIeOJDB1YARnplamDqCWW7A90uzGXdVBpclnjymmJh8LrXbnwPEKY6y5jsJn1vi\n9hpqrm17nmOW/9cs0z5+QjE9+GadGqzNO0RS/KzCWj6CJjzD7DqUVDq+lBsd0zq7\ncCHyXYeJpQKBgQDD8GoF8BeybS2jp7Ax8y6u+1YzS8F3B7TysNL5DuEQmgRp+kCs\nJ0jT6pYqOAiUXdUOlp12f4ZBLDbINnAvWd52oV8FD+zxpJeVeZEDihnePnZA95gx\nQg89AoHptuzzJc/pfw9ZVgb10Fy01XJePKXAHnQex7+UZvWnacnrGcgVSQKBgD24\nsEI3Caz+9h3k3ggY7zI7q2ohZzLRis6faOmLsI23i0FfhnyA8vQidNek8EQnHzYn\n6Y5qQPFjVvZPEiBsmibUNAgympIRyZlU2rhT2ls4ThwdmlUwuTTuOt93oGzKx7ft\nccsl3iN+xVsUUHhYB4aVAt6XAGNCDvuTtQwjz0j1AoGAJAvBc9QcuDWPq3oRmCUk\nLXX+PqeA4yqBQU+vQWbL1TrqqzgHXDYbCbppFQ43XIyMHR5N++AcrH/venL7cpgy\nuBd6PHocAAF3k4HpQk9rUlyp/Kr6QXppxrAJhVX4O4BE91oErGjJT8g9nJOsdcTN\nq1JHOMgYhyWqMN6lTxHaYbY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "azkar-library@azkar-de3a2.iam.gserviceaccount.com",
+  "client_id": "105796456680463752282",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/azkar-library%40azkar-de3a2.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}''';
+
+const ssId = "1NUaa_QNY9mopiYGKbDvMPsqutZWdtnkiAwGLWhGw0I4";
+
 // ignore: constant_identifier_names
 const String FAVORITES_BOX = 'favorites_box';
 
@@ -94,8 +110,8 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
-          // home: const DataUploadedScreen(),
-          routes: appRoutes,
+         // home: const DataUploadedScreen(),
+         routes: appRoutes,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
@@ -112,22 +128,3 @@ Future<Locale?> getSavedLocale() async {
   final savedLocale = box.get('app_locale');
   return savedLocale != null ? Locale(savedLocale) : const Locale("en");
 }
-
-
-
-
-// const credentials = '''{
-//   "type": "service_account",
-//   "project_id": "azkar-4a452",
-//   "private_key_id": "78c040463f0ddcc06fed6ff7b99752559808b984",
-//   "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCu+UVTHOEsGQ8Q\nmVL29i8NcyZ8ID5XBQe43ZlmL13JdFNP0lnQTOjX/xVuZ3J/cnPQoW5QATxXQmy4\nmtyxXrpbxkZClXWiNcAuOH8NiJmIym+drywBEhn4Q6UT10Y82FlqzTIpGr4nx69V\nZ+57do72Q/5dCoiCqPojS7eXXcUJxcYIenqYMy70VfpIpLj0NJk2OpuQbOk/VKqQ\ntKgAbTE9gNWmGMofB1fYrpAw5PVp2Ljqv0KWNZjc6cju4FQ92YvxuJMGXpzl3/ct\nRJ+V46x0g5Tb05PyZuNW6aEXiRHZy/rki1Jn0Be6I0Rwh7+ravocTyK5VVxeilP2\nSoL4Tn5zAgMBAAECggEAJnqqLLt6p3SBVCCr1qTQNzB+I6kBnKh+CMEvBYJgKTf8\nRF8Zok3vnOS7hVKZov58CsMdm9mRuAzjFPv1kconyJwDgowU2Q3iDCgfhM3oGeWP\nA0ntLvUYofjaWlEq4KGhlHO41sJLVDs9S1Z2Y09w5CaSz0pMOBPKIq35m3+jH+Ex\n2m3vnBaentEK9yWQDr4HgtUUXHHd8rPBwzVNnT2IKrnPITB6iijf4AKLyhdjQ9s/\nhEf1MNc3GFA0jkbvXiksJLsuufmtojIRr+TU5ER5hy2PVptqh40gPWBzod83axg5\nJFnqH+4W++ogVB5HuJsWjIIFAuvy/YIuQ8Wk/n3boQKBgQDdngBKINcBzQGQvhrl\np8ngVxwSUwPO0OX/tdCMCLBybC1GHTyMSk2CgJpFR33TkLf37dGK55bvItQhFMCi\nQjsOG4deynplzwxxLDqH4+U5V0bU7FLAQwmmqYfc5PJzrB3UcnGC/Nq5jh9+gxzH\nCiFTLdDsTyqGijncetBMNGwnoQKBgQDKHrl+YWJKs9O8mn0M9WXFVZVvE1PVsJfr\nzcEuxvxjukxFlMATQtGLpmvq+9G8Tieu9WyoHfJwt9US9ZozHRCeQTRiXm6b0l3V\nB4pFAVvJHekkXGibAYMp0o4cJqwokX5LT2arGv0PfA8Q0WwleR8bxU0HOuS82Out\nobirqCadkwKBgQCT4rzEurdfX0M9KG7gc6A2UUrNO5Jd726bveMFn0LHiEKJ+DaQ\nU4D3pgPMWVGw3XC2RH/BFpvUxkQSMzv8yv+HgX1LFwioaYse9mm0hrJPGluM+Iqb\n++Az1Atyr2DPKbraKuhuhXcbvahsjuekNrFYRUmWd5mkIBdOdrILOCw4IQKBgQCM\nas//hvRcZZYiH0nlKM8tSwnoAwtpF6hTv7wIHWHWfuTiKjdOqksds96hf5T0N2/G\nUubL3RJDUNOMumgIPpb++tnDxUseogViLDzZN9pmXItOIYzisyhGc+saj5tnC70r\n4Nu436UTjuKAkp2JYx5Dksyyyy2CLUl+dS3ww38gVQKBgBs9t56pZD5O6cj6sISN\nYAdImQLNQHUdHVPm21jmLZbpGYTQ56WfgGHZGnyZp1U6+LNvWF72pUo0l1Zj/C0n\nX6gO1pPo68Qtk/w/ULi8U3f9uripXLZdZs30bZp5un0aeu60o2YqM7UEgjCS/1Nl\n7Sr4AWv/GvcC/4ww/Cq7YV3t\n-----END PRIVATE KEY-----\n",
-//   "client_email": "azkar-960@azkar-4a452.iam.gserviceaccount.com",
-//   "client_id": "117490652731857972167",
-//   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-//   "token_uri": "https://oauth2.googleapis.com/token",
-//   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-//   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/azkar-960%40azkar-4a452.iam.gserviceaccount.com",
-//   "universe_domain": "googleapis.com"
-// }''';
-
-// const _docsId = "1FVyD2oYSMdmZEIpYJYGUKXhvctAcrQ2qRge4qv7HoqE";

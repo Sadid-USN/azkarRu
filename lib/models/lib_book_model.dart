@@ -3,7 +3,7 @@ class LibBookModel {
   final String? author;
   final String? title;
   final String? image;
-  final List<Chapters>? chapters;
+  final List<LibChapters>? chapters;
 
   LibBookModel({
     this.id,
@@ -18,7 +18,7 @@ class LibBookModel {
       author = json['author'] as String?,
       title = json['title'] as String?,
       image = json['image'] as String?,
-      chapters = (json['chapters'] as List?)?.map((dynamic e) => Chapters.fromJson(e as Map<String,dynamic>)).toList();
+      chapters = (json['chapters'] as List?)?.map((dynamic e) => LibChapters.fromJson(e as Map<String,dynamic>)).toList();
 
   Map<String, dynamic> toJson() => {
     'id' : id,
@@ -29,23 +29,27 @@ class LibBookModel {
   };
 }
 
-class Chapters {
+class LibChapters {
+  final int? id;
   final String? subtitle;
   final String? text;
   final List<Sources>? sources;
 
-  Chapters({
+  LibChapters({
+    this.id,
     this.subtitle,
     this.text,
     this.sources,
   });
 
-  Chapters.fromJson(Map<String, dynamic> json)
-    : subtitle = json['subtitle'] as String?,
+  LibChapters.fromJson(Map<String, dynamic> json)
+    : id = json['id'] as int?,
+      subtitle = json['subtitle'] as String?,
       text = json['text'] as String?,
       sources = (json['sources'] as List?)?.map((dynamic e) => Sources.fromJson(e as Map<String,dynamic>)).toList();
 
   Map<String, dynamic> toJson() => {
+    'id' : id,
     'subtitle' : subtitle,
     'text' : text,
     'sources' : sources?.map((e) => e.toJson()).toList()
