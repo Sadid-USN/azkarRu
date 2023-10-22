@@ -28,7 +28,7 @@ final appTheme = ThemeData(
   appBarTheme: AppBarTheme(
     iconTheme: const IconThemeData(color: Colors.white),
     elevation: 0,
-    backgroundColor: const Color(0xffF6DEC4),
+    backgroundColor: bgColor,
     titleTextStyle: GoogleFonts.ptSerif(
       fontSize: 14.sp,
       color: textColor,

@@ -1,14 +1,7 @@
+import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/data_uploader.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:gsheets/gsheets.dart';
-import 'package:csv/csv.dart';
-
-import 'dart:async' show Future;
 import 'package:provider/provider.dart';
-
-import '../main.dart';
 
 class DataUploadedScreen extends StatefulWidget {
   const DataUploadedScreen({Key? key}) : super(key: key);
@@ -22,6 +15,7 @@ class _DataUploadedScreenState extends State<DataUploadedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgColor,
       body: Center(
         child: ChangeNotifierProvider<DataUploaderController>(
           create: (context) => DataUploaderController(context),
@@ -93,61 +87,61 @@ class _DataUploadedScreenState extends State<DataUploadedScreen> {
   //   }
   // }
 
-  Future<void> _handleExportData() async {
-    setState(() {
-      isUploading = true;
-    });
+  // Future<void> _handleExportData() async {
+  //   setState(() {
+  //     isUploading = true;
+  //   });
 
-    try {
-      final CollectionReference book =
-          FirebaseFirestore.instance.collection("molba");
-      final myData = await rootBundle.loadString("assets/DB/molba.csv");
-      List<List<dynamic>> csvTable = const CsvToListConverter().convert(myData);
-      List<List<dynamic>> data = [];
-      data = csvTable;
+  //   try {
+  //     final CollectionReference book =
+  //         FirebaseFirestore.instance.collection("molba");
+  //     final myData = await rootBundle.loadString("assets/DB/molba.csv");
+  //     List<List<dynamic>> csvTable = const CsvToListConverter().convert(myData);
+  //     List<List<dynamic>> data = [];
+  //     data = csvTable;
 
-      for (var i = 0; i < data.length; i++) {
-        var record = {
-          "molba": data[i][0],
-          "id": data[i][1],
-          "author": data[i][2],
-          "title": data[i][3],
-          "image": data[i][4],
-        };
-        await book.add(record);
-      }
+  //     for (var i = 0; i < data.length; i++) {
+  //       var record = {
+  //         "molba": data[i][0],
+  //         "id": data[i][1],
+  //         "author": data[i][2],
+  //         "title": data[i][3],
+  //         "image": data[i][4],
+  //       };
+  //       await book.add(record);
+  //     }
 
-      // Data upload successful
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Data successfully uploaded to Firebase'),
-        ),
-      );
-    } catch (error) {
-      // Handle the error, e.g., show an error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error uploading data to Firebase: $error'),
-        ),
-      );
-    } finally {
-      setState(() {
-        isUploading = false;
-      });
-    }
-  }
+  //     // Data upload successful
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('Data successfully uploaded to Firebase'),
+  //       ),
+  //     );
+  //   } catch (error) {
+  //     // Handle the error, e.g., show an error message
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text('Error uploading data to Firebase: $error'),
+  //       ),
+  //     );
+  //   } finally {
+  //     setState(() {
+  //       isUploading = false;
+  //     });
+  //   }
+  // }
 
-  Future<void> readFromGsheet() async {
-    final CollectionReference book =
-        FirebaseFirestore.instance.collection("molba");
-    final gsheets = GSheets(credentials);
-    final spreadsheet = await gsheets.spreadsheet(ssId);
-    var sheet = spreadsheet.worksheetByTitle("molba");
-    int rows = sheet!.rowCount;
-    List<Cell?> sellsRow;
-    for (var i = 0; i < rows; i++) {
-      sellsRow = await sheet.cells.row(i);
-      print(sellsRow.elementAt(1)!.value);
-    }
-  }
+  // Future<void> readFromGsheet() async {
+  //   final CollectionReference book =
+  //       FirebaseFirestore.instance.collection("molba");
+  //   final gsheets = GSheets(credentials);
+  //   final spreadsheet = await gsheets.spreadsheet(ssId);
+  //   var sheet = spreadsheet.worksheetByTitle("molba");
+  //   int rows = sheet!.rowCount;
+  //   List<Cell?> sellsRow;
+  //   for (var i = 0; i < rows; i++) {
+  //     sellsRow = await sheet.cells.row(i);
+  //     print(sellsRow.elementAt(1)!.value);
+  //   }
+  // }
 }

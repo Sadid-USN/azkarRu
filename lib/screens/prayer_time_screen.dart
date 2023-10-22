@@ -1,3 +1,4 @@
+import 'package:avrod/colors/colors.dart';
 import 'package:avrod/core/extention_capitalize.dart';
 import 'package:avrod/core/notify_helper.dart';
 import 'package:avrod/core/try_again_button.dart';
@@ -183,7 +184,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF3EEE2),
+      backgroundColor: bgColor,
       body: FutureBuilder<PrayersModel>(
         future: _prayerModel,
         builder: (context, snapshot) {

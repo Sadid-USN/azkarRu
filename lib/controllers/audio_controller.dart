@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:animate_icons/animate_icons.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:avrod/models/lib_book_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,23 @@ class AudioController extends ChangeNotifier {
         'author',
       )
       .snapshots();
+
+  // void loadData() {
+  //   final Stream<QuerySnapshot> books = FirebaseFirestore.instance
+  //       .collection('books')
+  //       .orderBy('author')
+  //       .snapshots();
+
+  //   books.listen((QuerySnapshot data) {
+  //     bookModel = data.docs.map((DocumentSnapshot doc) {
+  //       Map<String, dynamic> bookData = doc.data() as Map<String, dynamic>;
+  //       bookData['id'] = doc.id;
+  //       return LibBookModel.fromJson(bookData);
+  //     }).toList();
+  //     notifyListeners();
+  //     print(bookModel);
+  //   });
+  // }
 
   String getTitle() {
     switch (selectedIndex) {

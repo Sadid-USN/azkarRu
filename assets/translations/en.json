@@ -1,6 +1,7 @@
 {
     "avrod": "Azkar Daily prayers",
     "lang": "Languages",
+    "language": "Language",
     "search": "Search...",
     "startSearch": "Start typing to search",
     "radio": "Radio Quran",
@@ -40,7 +41,9 @@
     "maghrib": "Maghrib",
     "isha": "Isha",
     "itsTimeFor": "It's time for",
-   
+    "category": "Category",
+    "pages": "Pages",
+    "read": "Read",
 
 
 

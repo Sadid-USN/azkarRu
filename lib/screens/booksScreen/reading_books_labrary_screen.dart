@@ -93,7 +93,7 @@ class _BookReadingState extends State<BookReading> {
         ),
         centerTitle: true,
         elevation: 0.5,
-        backgroundColor: const Color.fromARGB(255, 231, 208, 180),
+        backgroundColor: const Color.fromARGB(255, 245, 221, 192),
         automaticallyImplyLeading: false,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -102,7 +102,7 @@ class _BookReadingState extends State<BookReading> {
           ),
         ),
       ),
-      backgroundColor: bgColor,
+      backgroundColor:  bgColor,
       extendBodyBehindAppBar: true,
       body: PageView.builder(
         controller: pageController,
