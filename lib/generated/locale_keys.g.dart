@@ -21,6 +21,7 @@ abstract class  LocaleKeys {
   static const title13 = 'title13';
   static const title14 = 'title14';
   static const share = 'share';
+  static const sentByAzkarApp = 'sentByAzkarApp';
   static const support = 'support';
   static const email = 'email';
   static const allApps = 'allApps';

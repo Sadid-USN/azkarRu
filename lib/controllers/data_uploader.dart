@@ -50,6 +50,7 @@ class DataUploaderController extends ChangeNotifier {
           "author": book.author,
            "category": book.category,
            "overview": book.overview,
+           "lang": book.lang,
           "title": book.title,
           "image": book.image,
           "chapters": book.chapters?.map((c) => c.toJson()).toList(),

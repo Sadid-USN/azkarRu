@@ -1,33 +1,33 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:expandable/expandable.dart';
+import 'package:flutter/material.dart';
+
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
-import 'package:avrod/screens/booksScreen/selected_books.dart';
-import 'package:avrod/screens/chapter_screen.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:avrod/models/lib_book_model.dart';
 import 'package:avrod/screens/booksScreen/reading_books_labrary_screen.dart';
+import 'package:avrod/screens/booksScreen/selected_books.dart';
+import 'package:avrod/screens/chapter_screen.dart';
 import 'package:avrod/widgets/costom_button.dart';
 
 class OverviewPage extends StatelessWidget {
+  final int? index;
   final LibBookModel? book;
   final int? numberOfPages;
   // final String image;
   final String? title;
   const OverviewPage({
     Key? key,
+    this.index,
     this.book,
     this.numberOfPages,
-    //   required this.image,
     this.title,
   }) : super(key: key);
-
-  
 
   @override
   Widget build(BuildContext context) {
     final hieght = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
-
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -63,7 +63,7 @@ class OverviewPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ShortInfo(
-                        data: getCategoryLanguage(book?.category ?? "null"),
+                        data: book?.lang ?? "_",
                         title: LocaleKeys.language.tr(),
                       ),
                       const SizedBox(
@@ -84,12 +84,30 @@ class OverviewPage extends StatelessWidget {
                         height: 8,
                       ),
                       const Divider(),
-                      Text(
-                        book?.overview ?? "null",
-                        maxLines: 6,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 14),
+                      ExpandablePanel(
+                        header: const Text(
+                          "",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 14),
+                        ),
+                        collapsed: SelectableText(
+                          book?.overview ?? "",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            color: textColor,
+                          ),
+                        ),
+                        expanded: SelectableText(
+                          book?.overview ?? "null",
+                          maxLines: 3,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 16,
@@ -101,7 +119,11 @@ class OverviewPage extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: const Icon(Icons.arrow_back_ios),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 6.0),
+                              child: Icon(Icons.arrow_back_ios,
+                                  color: Colors.blueGrey.shade700),
+                            ),
                           ),
                           CostomButton(
                             onPressed: () {
@@ -138,35 +160,50 @@ class OverviewPage extends StatelessWidget {
           Positioned(
             top: hieght * 0.5 - (width * 0.7),
             left: width * 0.3,
-            child: Hero(
-              tag: book?.image ?? "_",
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-                height: width * 0.6,
-                width: width * 0.4,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Colors.black26,
-                        offset: Offset(3.0, 3.0),
-                        blurRadius: 5.0)
-                  ],
-                  image: DecorationImage(
-                    image: NetworkImage(book?.image ?? "_"),
-                    fit: BoxFit.cover,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+              height: width * 0.6,
+              width: width * 0.4,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: const [
+                  BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(3.0, 3.0),
+                      blurRadius: 5.0)
+                ],
+                image: DecorationImage(
+                  image: NetworkImage(book?.image ?? "_"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Stack(
+                children: [
+                  Text(
+                    title ?? "_",
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12,
+                        color: Colors.blueGrey.shade700),
                   ),
-                ),
-                child: Text(
-                  title ?? "_",
-                  maxLines: 5,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 12,
-                      color: Colors.blueGrey.shade700),
-                ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.black38,
+                      radius: 12,
+                      child: Text(
+                        "${index! + 1}",
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 11),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

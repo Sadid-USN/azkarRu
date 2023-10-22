@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:avrod/colors/colors.dart';
 
 class CostomButton extends StatelessWidget {
   final Widget child;
@@ -16,7 +15,7 @@ class CostomButton extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: bgColor,
+          //backgroundColor: bgColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
