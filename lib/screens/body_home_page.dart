@@ -50,9 +50,7 @@ class _BodyHomePageState extends State<BodyHomePage> {
   Widget build(BuildContext context) {
     final books = Provider.of<List<Book>>(context);
 
-    return Scaffold(
-      backgroundColor: const Color(0xffF3EEE2),
-      body: ListView(
+    return  ListView(
         children: [
           Column(
             children: [
@@ -116,7 +114,7 @@ class _BodyHomePageState extends State<BodyHomePage> {
             ],
           ),
         ],
-      ),
-    );
+      );
+    
   }
 }

@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: bgColor,
         drawer: const DrawerModel(),
         // extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -87,7 +88,7 @@ class _HomePageState extends State<HomePage> {
           ),
           centerTitle: true,
           elevation: 3.0,
-          backgroundColor: const Color(0xffF8E4CF),
+          backgroundColor: const Color.fromARGB(255, 245, 221, 192),
         ),
 
         body: Consumer<AudioController>(
@@ -97,11 +98,11 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: Consumer<AudioController>(
           builder: (context, controller, child) => CurvedNavigationBar(
               animationDuration: const Duration(milliseconds: 500),
-              color: const Color(0xffF6DEC4),
-              buttonBackgroundColor: const Color(0xffF2DFC7),
+              color:  Colors.white,
+              buttonBackgroundColor:  Colors.white,
               // height: 7.h,
               index: controller.selectedIndex,
-              backgroundColor: const Color(0xffF3EEE2),
+              backgroundColor: bgColor,
               items: controller.navItems,
               onTap: (index) {
                 controller.onTapBar(index);

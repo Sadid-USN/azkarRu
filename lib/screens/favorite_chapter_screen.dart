@@ -69,7 +69,7 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
   Widget build(BuildContext context) {
     final books = Provider.of<List<Book>>(context);
     return Scaffold(
-      backgroundColor: const Color(0xffF3EEE2),
+      backgroundColor: bgColor,
         body: Consumer<AudioController>(
       builder: (context, value, child) => RefreshIndicator(
         onRefresh: () async {
@@ -91,6 +91,7 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
                     )
                   : const SizedBox(),
               Container(
+                
                 width: MediaQuery.sizeOf(context).width,
                 height: MediaQuery.sizeOf(context).height,
                 // Your container decoration

@@ -8,7 +8,7 @@ class GlowingProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF3EEE2),
+      backgroundColor: const  Color(0xffFEF6E4),
       body: Center(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),

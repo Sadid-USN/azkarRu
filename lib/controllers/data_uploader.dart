@@ -48,6 +48,8 @@ class DataUploaderController extends ChangeNotifier {
       for (var book in bookModels) {
         batch.set(booksCollection.doc(book.id), {
           "author": book.author,
+           "category": book.category,
+           "overview": book.overview,
           "title": book.title,
           "image": book.image,
           "chapters": book.chapters?.map((c) => c.toJson()).toList(),

@@ -1,3 +1,4 @@
+import 'package:avrod/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 BoxDecoration mainScreenGradient = const BoxDecoration(
@@ -5,10 +6,7 @@ BoxDecoration mainScreenGradient = const BoxDecoration(
     gradient: LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomLeft,
-  colors: [
-    Color(0xffF3EEE2),
-    Color(0xffF3EEE2),
-  ],
+  colors: [bgColor, bgColor],
 ));
 
 BoxDecoration searchScreenGradient = const BoxDecoration(
