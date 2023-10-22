@@ -18,7 +18,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
 
-import '../controllers/global_controller.dart';
 import '../font_storage.dart';
 import 'content_all_text.dart';
 
@@ -155,7 +154,7 @@ class _TextScreenState extends State<TextScreen>
       child: ChangeNotifierProvider(
         create: (context) => AudioController(),
         child: Scaffold(
-          backgroundColor: const Color(0xffF6F1E8),
+          backgroundColor: bgColor,
           bottomSheet: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             height: 13.5.h,
@@ -298,7 +297,7 @@ class _TextScreenState extends State<TextScreen>
             ),
             centerTitle: true,
             flexibleSpace: Container(
-              decoration: mainScreenGradient,
+              decoration: const BoxDecoration(color: appBarbg),
             ),
             bottom: TabBar(
               controller: _tabController,

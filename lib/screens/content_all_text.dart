@@ -100,11 +100,11 @@ class AllTextsContent extends StatelessWidget {
                   decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.grey,
+                          color: Colors.black26,
                           offset: Offset(1.0, 3.1),
                           blurRadius: 1.0),
                       BoxShadow(
-                        color: Colors.grey,
+                        color: Colors.black26,
                         offset: Offset(-1.0, 0.0), // Shadow to the left
                         blurRadius: 1.0,
                       ),
@@ -119,7 +119,8 @@ class AllTextsContent extends StatelessWidget {
                     ),
                   ),
                   padding: const EdgeInsets.all(40),
-                  child: ExpandablePanel(
+                  child: 
+                  ExpandablePanel(
                     header: const Text(''),
                     collapsed: SelectableText(
                       arabic,

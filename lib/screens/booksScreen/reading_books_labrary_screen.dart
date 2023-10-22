@@ -1,10 +1,17 @@
 import 'package:animate_icons/animate_icons.dart';
+import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
+
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/models/lib_book_model.dart';
+import 'package:share/share.dart';
+
+const String appLink =
+    "https://play.google.com/store/apps/details?id=com.darulasar.Azkar";
 
 class BookReading extends StatefulWidget {
   final LibBookModel book;
@@ -69,9 +76,41 @@ class _BookReadingState extends State<BookReading> {
     }
   }
 
-  onPageChanged(index) {
+  void onPageChanged(index) {
     currentPage = index;
     savePageBox.put(widget.book.id, currentPage);
+  }
+
+  void onNextPagePressed() {
+    if (currentPage < widget.book.chapters!.length) {
+      currentPage++;
+    } else {
+      currentPage = 0; // Return to the first page
+    }
+
+    // If we're at the last page, jump to the first page
+    if (currentPage >= widget.book.chapters!.length) {
+      currentPage = 0;
+    }
+
+    pageController.animateToPage(
+      currentPage,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
+    savePageBox.put(widget.book.id, currentPage);
+  }
+
+  void previousPagePressed() {
+    if (currentPage > 0) {
+      currentPage--;
+      pageController.animateToPage(
+        currentPage,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
+      savePageBox.put(widget.book.id, currentPage);
+    }
   }
 
   @override
@@ -102,7 +141,7 @@ class _BookReadingState extends State<BookReading> {
           ),
         ),
       ),
-      backgroundColor:  bgColor,
+      backgroundColor: bgColor,
       extendBodyBehindAppBar: true,
       body: PageView.builder(
         controller: pageController,
@@ -117,10 +156,20 @@ class _BookReadingState extends State<BookReading> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BookContent(
+                    onShareTap: () {
+                      final text = widget.book.chapters![index].text;
+                      final title = widget.book.title;
+                      final sentByAzkar = LocaleKeys.sentByAzkarApp.tr();
+                      Share.share(
+                          "$title\n$text\n$sentByAzkar\n👇👇👇\n$appLink");
+                    },
+                    max: widget.book.chapters!.length.toDouble() - 1,
                     image: widget.book.image ?? "_",
                     scrollController: scrollController,
                     page: index + 1,
                     chapters: widget.book.chapters![index],
+                    onNextPagePressed: onNextPagePressed,
+                    onPreviousPagePressed: previousPagePressed,
                   ),
                 ],
               ),
@@ -133,14 +182,22 @@ class _BookReadingState extends State<BookReading> {
 }
 
 class BookContent extends StatelessWidget {
+  final void Function()? onPreviousPagePressed;
+  final void Function()? onNextPagePressed;
+  final void Function()? onShareTap;
   final ScrollController scrollController;
-  final int page;
+  int? page;
+  final double max;
   final LibChapters chapters;
   final String image;
-  const BookContent({
+  BookContent({
     Key? key,
+    this.onPreviousPagePressed,
+    this.onNextPagePressed,
+    this.onShareTap,
     required this.scrollController,
-    required this.page,
+    this.page,
+    required this.max,
     required this.chapters,
     required this.image,
   }) : super(key: key);
@@ -221,12 +278,56 @@ class BookContent extends StatelessWidget {
             const SizedBox(
               height: 14,
             ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: onPreviousPagePressed,
+                    style: ElevatedButton.styleFrom(
+                      elevation: 1,
+                      foregroundColor: Colors.blueGrey.shade800,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.arrow_back_ios,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: onShareTap,
+                    child: Image.asset(
+                      "icons/shared.png",
+                      height: 30,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: onNextPagePressed,
+                    style: ElevatedButton.styleFrom(
+                      elevation: 1,
+                      foregroundColor: Colors.blueGrey.shade800,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
     );
   }
 }
+
+
+
 
 // class ReadingBooksOnline extends StatefulWidget {
 //   final File? file;

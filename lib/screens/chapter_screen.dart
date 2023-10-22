@@ -58,7 +58,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xffF2DFC7),
+        backgroundColor: const Color(0xffF9E2C5),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -154,7 +154,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
                     }));
                   },
                   trailing: CircleAvatar(
-                    backgroundColor: const Color(0xffF3EEE2),
+                    backgroundColor: const  Color(0xffF9E2C5),
                     child: LikeButton(
                       likeBuilder: (isLiked) {
                         return Icon(

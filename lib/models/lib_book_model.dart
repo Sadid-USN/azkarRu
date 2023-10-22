@@ -3,6 +3,7 @@ class LibBookModel {
   final String? author;
   final String? category;
   final String? overview;
+  final String? lang;
   final String? title;
   final String? image;
   final List<LibChapters>? chapters;
@@ -12,6 +13,7 @@ class LibBookModel {
     this.author,
     this.category,
     this.overview,
+    this.lang,
     this.title,
     this.image,
     this.chapters,
@@ -22,6 +24,7 @@ class LibBookModel {
       author = json['author'] as String?,
       category = json['category'] as String?,
       overview = json['overview'] as String?,
+      lang = json['lang'] as String?,
       title = json['title'] as String?,
       image = json['image'] as String?,
       chapters = (json['chapters'] as List?)?.map((dynamic e) => LibChapters.fromJson(e as Map<String,dynamic>)).toList();
@@ -31,6 +34,7 @@ class LibBookModel {
     'author' : author,
     'category' : category,
     'overview' : overview,
+    'lang' : lang,
     'title' : title,
     'image' : image,
     'chapters' : chapters?.map((e) => e.toJson()).toList()
