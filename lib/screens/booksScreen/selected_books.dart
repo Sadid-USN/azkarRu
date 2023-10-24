@@ -139,7 +139,6 @@ class _BuildRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-        
           child: Text(
             label,
             style: GoogleFonts.ptSerif(
@@ -150,22 +149,17 @@ class _BuildRow extends StatelessWidget {
             ),
           ),
         ),
-        const Spacer(),
         Expanded(
-        
-          child: Container(
-            child: Text(
-              data,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.end,
-              style: GoogleFonts.ptSerif(
-                height: 2,
-                
-                color: Colors.blueGrey.shade400,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
+          child: Text(
+            data,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.end,
+            style: GoogleFonts.ptSerif(
+              height: 2,
+              color: Colors.blueGrey.shade400,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
             ),
           ),
         ),
