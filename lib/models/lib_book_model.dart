@@ -2,7 +2,7 @@ class LibBookModel {
   final String? id;
   final String? author;
   final String? category;
-  final String? overview;
+  final String? published;
   final String? lang;
   final String? title;
   final String? image;
@@ -12,7 +12,7 @@ class LibBookModel {
     this.id,
     this.author,
     this.category,
-    this.overview,
+    this.published,
     this.lang,
     this.title,
     this.image,
@@ -23,7 +23,7 @@ class LibBookModel {
     : id = json['id'] as String?,
       author = json['author'] as String?,
       category = json['category'] as String?,
-      overview = json['overview'] as String?,
+      published = json['published'] as String?,
       lang = json['lang'] as String?,
       title = json['title'] as String?,
       image = json['image'] as String?,
@@ -33,7 +33,7 @@ class LibBookModel {
     'id' : id,
     'author' : author,
     'category' : category,
-    'overview' : overview,
+    'published' : published,
     'lang' : lang,
     'title' : title,
     'image' : image,

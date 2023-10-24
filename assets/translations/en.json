@@ -1,10 +1,14 @@
 {
     "avrod": "Azkar Daily prayers",
+    "author": "Author",
+    "overview": "Overview",
+    "published": "Published",
     "lang": "Languages",
     "language": "Language",
     "search": "Search...",
     "startSearch": "Start typing to search",
     "radio": "Radio Quran",
+    "libTitle": "Title",
     "title1": "Beginning of the day",
     "title2": "Salah prayers",
     "title3": "Morning and evening azkars",
@@ -45,6 +49,8 @@
     "category": "Category",
     "pages": "Pages",
     "read": "Read",
+    "russian": "Russian",
+    "english": "English",
 
 
 

@@ -14,6 +14,10 @@ package="com.darulasar.Azka">
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
         </intent>
+          <intent>
+       <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="sms" />
+         </intent>
         <!-- If your app makes calls -->
         <intent>
             <action android:name="android.intent.action.DIAL" />

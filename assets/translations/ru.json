@@ -1,10 +1,14 @@
 {
 
     "avrod": "Азкары",
+    "author": "Автор",
+    "overview": "Обзор",
+    "published": "Опубликовано",
     "lang": "Языки",
     "search": "Поиск...",
     "startSearch": "Введите текст для поиск", 
     "radio": "Радио Коран",
+    "libTitle": "Название",
     "title1": "Дуа начало дня",
     "title2": "Молитвы намаза",
     "title3": "Утренние и вечерние азкары",
@@ -45,6 +49,10 @@
     "itsTimeFor": "Время намаза",
     "chooseYourCountry": "Выберите вашу страну",
     "fast": "Пост",
+    "russian": "Русский",
+    "english": "Английский",
+
+
     "Lastthird": "Последняя треть",
     "downloadText": "Скачать приложение *Azkar* в Play Store",
     "category": "Категория",
