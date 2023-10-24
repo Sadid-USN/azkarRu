@@ -18,7 +18,7 @@ class DataUploaderController extends ChangeNotifier {
 
   void setMessage(BuildContext context, String msg) {
     ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
+      SnackBar(
         content: Text(msg),
       ),
     );
@@ -48,9 +48,9 @@ class DataUploaderController extends ChangeNotifier {
       for (var book in bookModels) {
         batch.set(booksCollection.doc(book.id), {
           "author": book.author,
-           "category": book.category,
-           "overview": book.overview,
-           "lang": book.lang,
+          "category": book.category,
+          "published": book.published,
+          "lang": book.lang,
           "title": book.title,
           "image": book.image,
           "chapters": book.chapters?.map((c) => c.toJson()).toList(),

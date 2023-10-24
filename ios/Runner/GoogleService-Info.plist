@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBozlMTl1kGOORs4QU5lwn2y3nVyruEONI</string>
+	<string>AIzaSyB7PgBbcAq4KItJl4u9Rpwc-RlNIyjB6Zo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1046174037467</string>
+	<string>919026984542</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.darulasar.Azkars-en</string>
 	<key>PROJECT_ID</key>
-	<string>azkar-4a452</string>
+	<string>azkar-de3a2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>azkar-4a452.appspot.com</string>
+	<string>azkar-de3a2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,8 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1046174037467:ios:adbd5cd88db0565faf23fe</string>
-	<key>DATABASE_URL</key>
-	<string>https://azkar-4a452-default-rtdb.firebaseio.com</string>
+	<string>1:919026984542:ios:10f074afed683fa52cf6cf</string>
 </dict>
 </plist>

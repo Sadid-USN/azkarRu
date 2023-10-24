@@ -2,10 +2,14 @@
 
 abstract class  LocaleKeys {
   static const avrod = 'avrod';
+  static const author = 'author';
+  static const overview = 'overview';
+  static const published = 'published';
   static const lang = 'lang';
   static const search = 'search';
   static const startSearch = 'startSearch';
   static const radio = 'radio';
+  static const libTitle = 'libTitle';
   static const title1 = 'title1';
   static const title2 = 'title2';
   static const title3 = 'title3';
@@ -46,6 +50,8 @@ abstract class  LocaleKeys {
   static const itsTimeFor = 'itsTimeFor';
   static const chooseYourCountry = 'chooseYourCountry';
   static const fast = 'fast';
+  static const russian = 'russian';
+  static const english = 'english';
   static const Lastthird = 'Lastthird';
   static const downloadText = 'downloadText';
   static const category = 'category';
