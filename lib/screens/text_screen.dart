@@ -35,10 +35,10 @@ class TextScreen extends StatefulWidget {
 
 class _TextScreenState extends State<TextScreen>
     with SingleTickerProviderStateMixin {
-  int currentIndex = 0;
-  late final AudioPlayer _audioPlayer = AudioPlayer();
-  bool isPlaying = false;
-  late TabController _tabController;
+  // int currentIndex = 0;
+  // late final AudioPlayer _audioPlayer = AudioPlayer();
+  // bool isPlaying = false;
+  // late TabController _tabController;
 
   double _fontSize = 18.sp;
   final double _arabicFontSize = 24.sp;
@@ -47,6 +47,7 @@ class _TextScreenState extends State<TextScreen>
   @override
   void initState() {
     super.initState();
+    var cntroller = Provider.of<AudioController>(context, listen: false);
 
     setState(() {
       bannerAdHelper.initializeAdMob(
@@ -55,13 +56,16 @@ class _TextScreenState extends State<TextScreen>
         },
       );
     });
+
     internetConnectionController = InternetConnectionController(Connectivity());
     internetConnectionController!.listenTonetworkChacges(context);
     _fontSize = textStorage.read('fontSize') ?? 18.0;
 
-    _tabController = TabController(length: widget.texts!.length, vsync: this);
+    cntroller.chapter = widget.chapter;
+    cntroller.texts = widget.texts;
 
-    playAudio();
+    cntroller.tabController =
+        TabController(length: cntroller.texts!.length, vsync: this);
   }
 
   void increaseSize() {
@@ -78,81 +82,73 @@ class _TextScreenState extends State<TextScreen>
     }
   }
 
-  void playAudioForTab(int index) {
-    if (currentIndex != index) {
-      currentIndex = index;
-      _audioPlayer.pause(); // Pause the audio when switching tabs
-      playAudio();
-    }
-  }
+  // void playAudioForTab(int index) {
+  //   if (currentIndex != index) {
+  //     currentIndex = index;
+  //     _audioPlayer.pause();
+  //     playAudio();
+  //   }
+  // }
 
-  void goToNextTab() {
-    final nextIndex = _tabController.index + 1;
-    if (nextIndex < widget.texts!.length) {
-      _tabController.animateTo(nextIndex);
-      playAudioForTab(nextIndex);
-    }
-  }
+  // void goToNextTab() {
+  //   final nextIndex = _tabController.index + 1;
+  //   if (nextIndex < widget.texts!.length) {
+  //     _tabController.animateTo(nextIndex);
+  //     playAudioForTab(nextIndex);
+  //   }
+  // }
 
-  void goToPreviousTab() {
-    final previousIndex = _tabController.index - 1;
-    if (previousIndex >= 0) {
-      _tabController.animateTo(previousIndex);
-      playAudioForTab(previousIndex);
-    }
-  }
+  // void goToPreviousTab() {
+  //   final previousIndex = _tabController.index - 1;
+  //   if (previousIndex >= 0) {
+  //     _tabController.animateTo(previousIndex);
+  //     playAudioForTab(previousIndex);
+  //   }
+  // }
 
-  Stream<PositioneData> get positioneDataStream =>
-      Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
-          _audioPlayer.positionStream,
-          _audioPlayer.bufferedPositionStream,
-          _audioPlayer.durationStream,
-          (positione, bufferedPosition, duration) => PositioneData(
-                positione,
-                bufferedPosition,
-                duration ?? Duration.zero,
-              ));
+  // Stream<PositioneData> get positioneDataStream =>
+  //     Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
+  //         _audioPlayer.positionStream,
+  //         _audioPlayer.bufferedPositionStream,
+  //         _audioPlayer.durationStream,
+  //         (positione, bufferedPosition, duration) => PositioneData(
+  //               positione,
+  //               bufferedPosition,
+  //               duration ?? Duration.zero,
+  //             ));
 
-  void _onPlayerCompletion(PlayerState playerState) {
-    if (playerState.processingState == ProcessingState.completed) {
-      _audioPlayer.seek(Duration.zero); // Reset to the beginning of the audio
-      _audioPlayer.pause(); // Pause the audio when it completes
-    }
-  }
+  // void _onPlayerCompletion(PlayerState playerState) {
+  //   if (playerState.processingState == ProcessingState.completed) {
+  //     _audioPlayer.seek(Duration.zero); // Reset to the beginning of the audio
+  //     _audioPlayer.pause(); // Pause the audio when it completes
+  //   }
+  // }
 
-  void playAudio() {
-    final audioSource = AudioSource.uri(
-      Uri.parse(widget.texts![currentIndex].url ?? ""),
-      tag: MediaItem(
-        id: widget.texts![currentIndex].id.toString(),
-        album: widget.chapter!.name,
-        title: widget.chapter!.name!,
-        artUri: Uri.parse(widget.chapter!.listimage!),
-      ),
-    );
+  // void playAudio() {
+  //   final audioSource = AudioSource.uri(
+  //     Uri.parse(widget.texts![currentIndex].url ?? ""),
+  //     tag: MediaItem(
+  //       id: widget.texts![currentIndex].id.toString(),
+  //       album: widget.chapter?.name,
+  //       title: widget.chapter?.name ?? "_",
+  //       artUri: Uri.parse(widget.chapter?.listimage ?? "_"),
+  //     ),
+  //   );
 
-    _audioPlayer.setAudioSource(audioSource);
-    _audioPlayer.playerStateStream.listen((playerState) {
-      _onPlayerCompletion(playerState);
-    });
-  }
-
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    _tabController.dispose();
-    super.dispose();
-  }
+  //   _audioPlayer.setAudioSource(audioSource);
+  //   _audioPlayer.playerStateStream.listen((playerState) {
+  //     _onPlayerCompletion(playerState);
+  //   });
+  // }
 
   final GlobalKey _key = GlobalKey();
   @override
   Widget build(
     BuildContext context,
   ) {
-    return DefaultTabController(
-      length: widget.texts!.length,
-      child: ChangeNotifierProvider(
-        create: (context) => AudioController(),
+    return Consumer<AudioController>(
+      builder: (context, value, child) => DefaultTabController(
+        length: value.texts!.length,
         child: Scaffold(
           backgroundColor: bgColor,
           bottomSheet: Container(
@@ -168,14 +164,14 @@ class _TextScreenState extends State<TextScreen>
                     IconButton(
                       onPressed: () {
                         Share.share(
-                            '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${LocaleKeys.downloadText.tr()}\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                            '*${widget.chapter?.name}*\n${widget.texts![value.currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![value.currentIndex].arabic!}\n${widget.texts![value.currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${LocaleKeys.downloadText.tr()}\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
                       },
                       icon: const Icon(Icons.share,
                           size: 30.0, color: Colors.white),
                     ),
                     IconButton(
                       onPressed: () {
-                        goToPreviousTab();
+                        value.goToPreviousTab();
                       },
                       icon: const Icon(
                         Icons.skip_previous,
@@ -183,7 +179,7 @@ class _TextScreenState extends State<TextScreen>
                       ),
                     ),
                     StreamBuilder<PlayerState>(
-                      stream: _audioPlayer.playerStateStream,
+                      stream: value.audioPlayer.playerStateStream,
                       builder: (context, snapshot) {
                         final playerState = snapshot.data;
                         final processingState = playerState?.processingState;
@@ -199,7 +195,7 @@ class _TextScreenState extends State<TextScreen>
                               color: Colors.grey,
                             ),
                             iconSize: 35,
-                            onPressed: _audioPlayer.stop,
+                            onPressed: value.audioPlayer.stop,
                           );
                         } else if (playing != true || completed) {
                           return IconButton(
@@ -207,7 +203,7 @@ class _TextScreenState extends State<TextScreen>
                             disabledColor: Colors.grey,
                             icon: const Icon(Icons.play_circle_outline),
                             iconSize: 35,
-                            onPressed: _audioPlayer.play,
+                            onPressed: value.audioPlayer.play,
                           );
                         } else {
                           return IconButton(
@@ -215,14 +211,14 @@ class _TextScreenState extends State<TextScreen>
                             disabledColor: Colors.grey,
                             icon: const Icon(Icons.pause_circle_outline),
                             iconSize: 35,
-                            onPressed: _audioPlayer.pause,
+                            onPressed: value.audioPlayer.pause,
                           );
                         }
                       },
                     ),
                     IconButton(
                       onPressed: () {
-                        goToNextTab();
+                        value.goToNextTab();
                       },
                       icon: const Icon(
                         Icons.skip_next,
@@ -230,11 +226,11 @@ class _TextScreenState extends State<TextScreen>
                       ),
                     ),
                     StreamBuilder<double>(
-                      stream: _audioPlayer.speedStream,
+                      stream: value.audioPlayer.speedStream,
                       builder: (context, snapshot) => PopupMenuButtonWidget(
-                        speedStream: _audioPlayer.speedStream,
+                        speedStream: value.audioPlayer.speedStream,
                         onSpeedSelected: (double newValue) {
-                          _audioPlayer.setSpeed(newValue);
+                          value.audioPlayer.setSpeed(newValue);
                         },
                       ),
                     ),
@@ -244,7 +240,7 @@ class _TextScreenState extends State<TextScreen>
                   height: 10,
                 ),
                 StreamBuilder<PositioneData>(
-                    stream: positioneDataStream,
+                    stream: value.positioneDataStream,
                     builder: (context, snapshot) {
                       final positionData = snapshot.data;
 
@@ -266,7 +262,7 @@ class _TextScreenState extends State<TextScreen>
                           buffered:
                               positionData?.bufferedPosition ?? Duration.zero,
                           total: positionData?.duration ?? Duration.zero,
-                          onSeek: _audioPlayer.seek,
+                          onSeek: value.audioPlayer.seek,
                         ),
                       );
                     }),
@@ -277,7 +273,7 @@ class _TextScreenState extends State<TextScreen>
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
-                _audioPlayer.stop();
+                value.audioPlayer.stop();
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -300,8 +296,8 @@ class _TextScreenState extends State<TextScreen>
               decoration: const BoxDecoration(color: appBarbg),
             ),
             bottom: TabBar(
-              controller: _tabController,
-              onTap: playAudioForTab,
+              controller: value.tabController,
+              onTap: value.playAudioForTab,
               labelColor: titleAbbBar,
               indicatorColor: titleAbbBar,
               isScrollable: true,
@@ -320,7 +316,7 @@ class _TextScreenState extends State<TextScreen>
               SizedBox(
                 height: MediaQuery.sizeOf(context).height / 2 * 1.5,
                 child: TabBarView(
-                  controller: _tabController,
+                  controller: value.tabController,
                   children: widget.texts!
                       .map(
                         (texts) => Container(

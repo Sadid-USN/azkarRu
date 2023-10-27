@@ -59,8 +59,8 @@ class LibraryScreen extends StatelessWidget {
           return ListView.builder(
               itemCount: booksList.length,
               itemBuilder: ((context, index) {
-                final chapters = booksList[index].chapters;
                 final book = booksList[index];
+                final text = booksList[index].chapters;
 
                 return Padding(
                   padding: const EdgeInsets.only(
@@ -78,7 +78,6 @@ class LibraryScreen extends StatelessWidget {
                           MaterialPageRoute(builder: ((context) {
                         return OverviewPage(
                           index: index,
-                          numberOfPages: chapters!.length,
                           book: booksList[index],
                           title: booksList[index].title ?? "null",
                         );
@@ -157,7 +156,7 @@ class _BuildRow extends StatelessWidget {
             textAlign: TextAlign.end,
             style: GoogleFonts.ptSerif(
               height: 2,
-              color: Colors.blueGrey.shade400,
+              color: Colors.blueGrey.shade700,
               fontWeight: FontWeight.w600,
               fontSize: 14,
             ),

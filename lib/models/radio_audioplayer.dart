@@ -301,13 +301,13 @@ class NextPreviousButton extends StatelessWidget {
               controller: audioController.buttonController,
               size: 50.0,
               onStartIconPress: () {
-                audioController.playAudio(
-                  url: listInfo[index].audioUrl,
-                  album: listInfo[index].name,
-                  id: listInfo[index].id,
-                  title: listInfo[index].subtitle,
-                  imgUrl: listInfo[index].image,
-                );
+                // audioController.playAudio(
+                //   url: listInfo[index].audioUrl,
+                //   album: listInfo[index].name,
+                //   id: listInfo[index].id,
+                //   title: listInfo[index].subtitle,
+                //   imgUrl: listInfo[index].image,
+                // );
 
                 return true;
               },

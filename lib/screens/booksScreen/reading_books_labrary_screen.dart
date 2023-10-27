@@ -1,25 +1,34 @@
 import 'package:animate_icons/animate_icons.dart';
-import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:avrod/controllers/library_controller.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/adapters.dart';
+
+import 'package:just_audio/just_audio.dart';
+
+import 'package:provider/provider.dart';
+
+import 'package:share/share.dart';
 
 import 'package:avrod/colors/colors.dart';
+import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
-import 'package:share/share.dart';
+
+import 'package:avrod/screens/text_screen.dart';
 
 const String appLink =
     "https://play.google.com/store/apps/details?id=com.darulasar.Azkar";
 
 class BookReading extends StatefulWidget {
   final LibBookModel book;
-
+  final int index;
   const BookReading({
     Key? key,
     // this.source,
     required this.book,
+    required this.index,
   }) : super(
           key: key,
         );
@@ -29,153 +38,82 @@ class BookReading extends StatefulWidget {
 }
 
 class _BookReadingState extends State<BookReading> {
-  late PageController pageController;
-  late int currentPage;
-
-  late Box savePageBox;
-
-  void initHive() {
-    savePageBox = Hive.box('pageBox');
-  }
-
   bool isOntap = false;
   ScrollController scrollController = ScrollController();
-  AnimateIconController controller = AnimateIconController();
+  AnimateIconController animateIconController = AnimateIconController();
   @override
   void initState() {
-    initHive();
-
-    int? lastReadedPage = savePageBox.get(
-      widget.book.id,
-    );
-    if (lastReadedPage != null) {
-      currentPage = lastReadedPage;
-      pageController = PageController(initialPage: lastReadedPage);
-    } else {
-      currentPage = 0;
-      pageController = PageController(initialPage: currentPage);
-    }
-    print(savePageBox);
-    controller = AnimateIconController();
+    final controller = Provider.of<LibraryController>(context, listen: false);
+    controller.book = widget.book;
+    controller.initHive();
+    controller.playAudio();
+    controller.getLastReadedPage();
     super.initState();
   }
 
   @override
-  void dispose() {
-    controller;
-
-    super.dispose();
-  }
-
-  nextPage() {
-    currentPage++;
-    if (currentPage > widget.book.chapters!.length) {
-    } else {
-      pageController.animateToPage(currentPage,
-          duration: const Duration(milliseconds: 300), curve: Curves.ease);
-    }
-  }
-
-  void onPageChanged(index) {
-    currentPage = index;
-    savePageBox.put(widget.book.id, currentPage);
-  }
-
-  void onNextPagePressed() {
-    if (currentPage < widget.book.chapters!.length) {
-      currentPage++;
-    } else {
-      currentPage = 0; // Return to the first page
-    }
-
-    // If we're at the last page, jump to the first page
-    if (currentPage >= widget.book.chapters!.length) {
-      currentPage = 0;
-    }
-
-    pageController.animateToPage(
-      currentPage,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.ease,
-    );
-    savePageBox.put(widget.book.id, currentPage);
-  }
-
-  void previousPagePressed() {
-    if (currentPage > 0) {
-      currentPage--;
-      pageController.animateToPage(
-        currentPage,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
-      savePageBox.put(widget.book.id, currentPage);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.of(context).pop();
+    return Consumer<LibraryController>(
+      builder: (context, value, child) => Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          title: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Text(
+              widget.book.title ?? "_",
+              style: TextStyle(color: Colors.grey.shade800, fontSize: 16.0),
+            ),
+          ),
+          centerTitle: true,
+          elevation: 0.5,
+          backgroundColor: const Color.fromARGB(255, 245, 221, 192),
+          automaticallyImplyLeading: false,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(12),
+              bottomRight: Radius.circular(12),
+            ),
+          ),
+        ),
+        backgroundColor: bgColor,
+        extendBodyBehindAppBar: true,
+        body: PageView.builder(
+          controller: value.pageController,
+          onPageChanged: (index) {
+            value.onPageChanged(index);
+            value.audioPlayer.stop();
+          },
+          itemCount: widget.book.chapters!.length,
+          itemBuilder: (context, index) {
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: BookContent(
+                  positioneDataStream: value.positioneDataStream,
+                  audioPlayer: value.audioPlayer,
+                  onShareTap: () {
+                    final text = widget.book.chapters![index].text;
+                    final title = widget.book.title;
+                    final sentByAzkar = LocaleKeys.sentByAzkarApp.tr();
+                    Share.share(
+                        "$title\n$text\n$sentByAzkar\n👇👇👇\n$appLink");
+                  },
+                  max: widget.book.chapters!.length.toDouble() - 1,
+                  image: widget.book.image ?? "_",
+                  scrollController: scrollController,
+                  page: index + 1,
+                  chapters: widget.book.chapters![index],
+                  onNextPagePressed: value.onNextPagePressed,
+                  onPreviousPagePressed: value.previousPagePressed,
+                ),
+              ),
+            );
           },
         ),
-        title: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Text(
-            widget.book.title ?? "_",
-            style: TextStyle(color: Colors.grey.shade800, fontSize: 16.0),
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0.5,
-        backgroundColor: const Color.fromARGB(255, 245, 221, 192),
-        automaticallyImplyLeading: false,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(12),
-            bottomRight: Radius.circular(12),
-          ),
-        ),
-      ),
-      backgroundColor: bgColor,
-      extendBodyBehindAppBar: true,
-      body: PageView.builder(
-        controller: pageController,
-        onPageChanged: (index) {
-          onPageChanged(index);
-        },
-        itemCount: widget.book.chapters!.length,
-        itemBuilder: (context, index) {
-          return SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  BookContent(
-                    onShareTap: () {
-                      final text = widget.book.chapters![index].text;
-                      final title = widget.book.title;
-                      final sentByAzkar = LocaleKeys.sentByAzkarApp.tr();
-                      Share.share(
-                          "$title\n$text\n$sentByAzkar\n👇👇👇\n$appLink");
-                    },
-                    max: widget.book.chapters!.length.toDouble() - 1,
-                    image: widget.book.image ?? "_",
-                    scrollController: scrollController,
-                    page: index + 1,
-                    chapters: widget.book.chapters![index],
-                    onNextPagePressed: onNextPagePressed,
-                    onPreviousPagePressed: previousPagePressed,
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
       ),
     );
   }
@@ -186,16 +124,21 @@ class BookContent extends StatelessWidget {
   final void Function()? onNextPagePressed;
   final void Function()? onShareTap;
   final ScrollController scrollController;
-  int? page;
+  final AudioPlayer audioPlayer;
+  final Stream<PositioneData> positioneDataStream;
+
+  final int? page;
   final double max;
   final LibChapters chapters;
   final String image;
-  BookContent({
+  const BookContent({
     Key? key,
     this.onPreviousPagePressed,
     this.onNextPagePressed,
     this.onShareTap,
     required this.scrollController,
+    required this.audioPlayer,
+    required this.positioneDataStream,
     this.page,
     required this.max,
     required this.chapters,
@@ -280,41 +223,135 @@ class BookContent extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
                 children: [
-                  ElevatedButton(
-                    onPressed: onPreviousPagePressed,
-                    style: ElevatedButton.styleFrom(
-                      elevation: 1,
-                      foregroundColor: Colors.blueGrey.shade800,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.arrow_back_ios,
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    decoration: BoxDecoration(
+                        color: Colors.black12,
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        StreamBuilder<PlayerState>(
+                          stream: audioPlayer.playerStateStream,
+                          builder: (context, snapshot) {
+                            final playerState = snapshot.data;
+                            final processingState =
+                                playerState?.processingState;
+                            final playing = playerState?.playing;
+                            final completed =
+                                processingState == ProcessingState.completed;
+
+                            if (processingState == ProcessingState.loading ||
+                                processingState == ProcessingState.buffering) {
+                              return IconButton(
+                                icon: const CircularProgressIndicator(
+                                  strokeWidth: 3.0,
+                                  color: Colors.grey,
+                                ),
+                                iconSize: 35,
+                                onPressed: audioPlayer.stop,
+                              );
+                            } else if (playing != true || completed) {
+                              return IconButton(
+                                color: Colors.blueGrey,
+                                disabledColor: Colors.grey,
+                                icon: const Icon(Icons.play_circle_outline),
+                                iconSize: 50,
+                                onPressed: audioPlayer.play,
+                              );
+                            } else {
+                              return IconButton(
+                                color: Colors.blueGrey,
+                                disabledColor: Colors.grey,
+                                icon: const Icon(Icons.pause_circle_outline),
+                                iconSize: 50,
+                                onPressed: audioPlayer.pause,
+                              );
+                            }
+                          },
+                        ),
+                        StreamBuilder<PositioneData>(
+                            stream: positioneDataStream,
+                            builder: (context, snapshot) {
+                              final positionData = snapshot.data;
+
+                              return SizedBox(
+                                width: MediaQuery.sizeOf(context).width / 2,
+                                child: ProgressBar(
+                                  barHeight: 4,
+                                  baseBarColor: Colors.grey.shade400,
+                                  bufferedBarColor: Colors.white,
+                                  progressBarColor: Colors.blueGrey,
+                                  thumbColor: Colors.green.shade800,
+                                  thumbRadius: 6,
+                                  timeLabelTextStyle: const TextStyle(
+                                      height: 1.2,
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                  progress:
+                                      positionData?.positione ?? Duration.zero,
+                                  buffered: positionData?.bufferedPosition ??
+                                      Duration.zero,
+                                  total:
+                                      positionData?.duration ?? Duration.zero,
+                                  onSeek: audioPlayer.seek,
+                                ),
+                              );
+                            }),
+                        StreamBuilder<double>(
+                          stream: audioPlayer.speedStream,
+                          builder: (context, snapshot) => PopupMenuButtonWidget(
+                            speedStream: audioPlayer.speedStream,
+                            onSpeedSelected: (double newValue) {
+                              audioPlayer.setSpeed(newValue);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  GestureDetector(
-                    onTap: onShareTap,
-                    child: Image.asset(
-                      "icons/shared.png",
-                      height: 30,
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: onNextPagePressed,
-                    style: ElevatedButton.styleFrom(
-                      elevation: 1,
-                      foregroundColor: Colors.blueGrey.shade800,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        onPressed: onPreviousPagePressed,
+                        style: ElevatedButton.styleFrom(
+                          elevation: 1,
+                          foregroundColor: Colors.blueGrey.shade800,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.arrow_back_ios,
+                        ),
                       ),
-                    ),
-                    child: const Icon(
-                      Icons.arrow_forward_ios,
-                    ),
+                      GestureDetector(
+                        onTap: onShareTap,
+                        child: Image.asset(
+                          "icons/shared.png",
+                          height: 30,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: onNextPagePressed,
+                        style: ElevatedButton.styleFrom(
+                          elevation: 1,
+                          foregroundColor: Colors.blueGrey.shade800,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.arrow_forward_ios,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

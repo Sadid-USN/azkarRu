@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:animate_icons/animate_icons.dart';
+import 'package:avrod/data/book_map.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,7 +20,17 @@ import '../screens/text_screen.dart';
 
 class AudioController extends ChangeNotifier {
   int selectedIndex = 0;
+  int currentIndex = 0;
   bool onRefresh = false;
+  List<Texts>? texts;
+  Chapters? chapter;
+  late TabController _tabController;
+  TabController? get tabController => _tabController;
+
+  set tabController(TabController? tabController) {
+    _tabController = tabController!;
+     playAudio();
+  }
 
   // AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.MEDIA_PLAYER);
   final AnimateIconController copyController = AnimateIconController();
@@ -51,22 +62,30 @@ class AudioController extends ChangeNotifier {
       )
       .snapshots();
 
-  // void loadData() {
-  //   final Stream<QuerySnapshot> books = FirebaseFirestore.instance
-  //       .collection('books')
-  //       .orderBy('author')
-  //       .snapshots();
+  void playAudioForTab(int index) {
+    if (currentIndex != index) {
+      currentIndex = index;
+      _audioPlayer.pause();
+      playAudio();
+    }
+  }
 
-  //   books.listen((QuerySnapshot data) {
-  //     bookModel = data.docs.map((DocumentSnapshot doc) {
-  //       Map<String, dynamic> bookData = doc.data() as Map<String, dynamic>;
-  //       bookData['id'] = doc.id;
-  //       return LibBookModel.fromJson(bookData);
-  //     }).toList();
-  //     notifyListeners();
-  //     print(bookModel);
-  //   });
-  // }
+  void goToNextTab() {
+    final nextIndex = _tabController.index + 1;
+    if (nextIndex < texts!.length) {
+      _tabController.animateTo(nextIndex);
+      playAudioForTab(nextIndex);
+      
+    }
+  }
+
+  void goToPreviousTab() {
+    final previousIndex = _tabController.index - 1;
+    if (previousIndex >= 0) {
+      _tabController.animateTo(previousIndex);
+      playAudioForTab(previousIndex);
+    }
+  }
 
   String getTitle() {
     switch (selectedIndex) {
@@ -96,21 +115,15 @@ class AudioController extends ChangeNotifier {
                 duration ?? Duration.zero,
               ));
 
-  void playAudio({
-    required String url,
-    required String id,
-    required String album,
-    required String title,
-    required imgUrl,
-  }) {
+  void playAudio() {
     _audioPlayer.setAudioSource(
       AudioSource.uri(
-        Uri.parse(url),
+        Uri.parse(texts?[currentIndex].url ?? "_"),
         tag: MediaItem(
-          id: id,
-          album: album,
-          title: title,
-          artUri: Uri.parse(imgUrl),
+          id: texts?[currentIndex].id ?? "_",
+          album: chapter?.name ?? "_",
+          title: chapter?.name ?? "",
+          artUri: Uri.parse(chapter?.listimage ?? "_"),
         ),
       ),
     );
@@ -119,12 +132,7 @@ class AudioController extends ChangeNotifier {
     notifyListeners();
   }
 
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-
-    super.dispose();
-  }
+ 
 
   final navItems = [
     Image.asset(

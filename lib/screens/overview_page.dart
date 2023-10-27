@@ -2,25 +2,26 @@ import 'package:animate_do/animate_do.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
 import 'package:avrod/screens/booksScreen/reading_books_labrary_screen.dart';
 import 'package:avrod/screens/booksScreen/selected_books.dart';
 import 'package:avrod/widgets/costom_button.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class OverviewPage extends StatelessWidget {
   final int? index;
   final LibBookModel? book;
-  final int? numberOfPages;
+
   // final String image;
   final String? title;
+
   const OverviewPage({
     Key? key,
     this.index,
     this.book,
-    this.numberOfPages,
     this.title,
   }) : super(key: key);
 
@@ -30,6 +31,7 @@ class OverviewPage extends StatelessWidget {
       bottomSheet: _BottomSheet(
         index: index ?? 0,
         book: book!,
+        text: book?.chapters,
         overview: book?.published ?? "",
       ),
       backgroundColor: Colors.grey.shade100,
@@ -209,14 +211,16 @@ class _BuildColumn extends StatelessWidget {
 
 class _BottomSheet extends StatelessWidget {
   final String overview;
-  final int index;
+    final int index;
   final LibBookModel book;
-  const _BottomSheet({
-    Key? key,
-    required this.overview,
-    required this.index,
-    required this.book,
-  }) : super(key: key);
+  final List<LibChapters?>? text;
+  const _BottomSheet(
+      {Key? key,
+      required this.overview,
+      required this.index,
+      required this.book,
+      required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -248,10 +252,10 @@ class _BottomSheet extends StatelessWidget {
             ),
           ),
           Text(
-            book.chapters?[index].text ?? "",
+            text!.map((e) => e?.text).join(),
             maxLines: 6,
-            overflow: TextOverflow.ellipsis,
             style: TextStyle(
+              overflow: TextOverflow.ellipsis,
               fontWeight: FontWeight.w500,
               fontSize: 14,
               color: textColor,
@@ -281,6 +285,7 @@ class _BottomSheet extends StatelessWidget {
                       builder: ((context) {
                         return BookReading(
                           book: book,
+                          index: index,
                         );
                       }),
                     ),
