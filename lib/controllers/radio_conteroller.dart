@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:animate_icons/animate_icons.dart';
-import 'package:avrod/data/radio_data_list.dart';
 import 'package:avrod/models/radio_audioplayer.dart';
 import 'package:avrod/screens/text_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +10,8 @@ import 'package:rxdart/rxdart.dart';
 
 class RadioController extends ChangeNotifier {
   late final AudioPlayer _audioPlayer = AudioPlayer();
-    final AnimateIconController refreshController = AnimateIconController();
-   bool onRefresh = false;
+  final AnimateIconController refreshController = AnimateIconController();
+  bool onRefresh = false;
   RadioController() {
     // Initialize the fields in the constructor.
     currentPage = 0;
@@ -25,11 +23,8 @@ class RadioController extends ChangeNotifier {
   get audioPlayer => _audioPlayer;
   late int currentPage;
   late PageController pageController;
- 
+
   late int? lastReadedPage;
-
-
- 
 
   Stream<PositioneData> get positioneDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
@@ -49,8 +44,6 @@ class RadioController extends ChangeNotifier {
     }
   }
 
-
-
   void playAudio() {
     final audioSource = AudioSource.uri(
       Uri.parse(newListInfo[currentPage].audioUrl),
@@ -68,21 +61,23 @@ class RadioController extends ChangeNotifier {
     });
   }
 
-    void refreshAudioUrls() {
-    for (int i = 0; i < newListInfo.length; i++) {
-      if (i != 0) {
-        newListInfo[i].audioUrl =
-            'https://download.quranicaudio.com/qdc/siddiq_minshawi/murattal/${Random().nextInt(114) + 1}.mp3';
+  void refreshAudioUrls(PlayerState playerState) {
+    if (playerState.processingState == ProcessingState.loading) {
+      for (int i = 0; i < newListInfo.length; i++) {
+        if (i != 0) {
+          newListInfo[i].audioUrl =
+              'https://download.quranicaudio.com/qdc/siddiq_minshawi/murattal/${Random().nextInt(114) + 1}.mp3';
+        }
       }
+      notifyListeners(); // Notify listeners to rebuild the UI with updated audio URLs
     }
 
-    onRefresh = true;
     notifyListeners();
   }
 
   void onPageChanged(index) {
     currentPage = index;
-  
+
     playAudio();
   }
 
@@ -96,16 +91,14 @@ class RadioController extends ChangeNotifier {
         curve: Curves.ease,
       );
     } else {
-      currentPage = 0; // Return to the first page
-      playAudio(); // Play the audio for the first page
-      pageController.animateToPage(
-        currentPage,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
+      // currentPage = 0; // Return to the first page
+      // playAudio(); // Play the audio for the first page
+      // pageController.animateToPage(
+      //   currentPage,
+      //   duration: const Duration(milliseconds: 300),
+      //   curve: Curves.ease,
+      // );
     }
-
-  
   }
 
   void previousPagePressed() {
@@ -117,7 +110,6 @@ class RadioController extends ChangeNotifier {
         duration: const Duration(milliseconds: 300),
         curve: Curves.ease,
       );
-     
     }
   }
 }
