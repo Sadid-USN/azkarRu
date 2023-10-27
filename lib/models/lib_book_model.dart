@@ -45,12 +45,14 @@ class LibChapters {
   final int? id;
   final String? subtitle;
   final String? text;
+  final String? url;
   final List<Sources>? sources;
 
   LibChapters({
     this.id,
     this.subtitle,
     this.text,
+    this.url,
     this.sources,
   });
 
@@ -58,12 +60,14 @@ class LibChapters {
     : id = json['id'] as int?,
       subtitle = json['subtitle'] as String?,
       text = json['text'] as String?,
+      url = json['url'] as String?,
       sources = (json['sources'] as List?)?.map((dynamic e) => Sources.fromJson(e as Map<String,dynamic>)).toList();
 
   Map<String, dynamic> toJson() => {
     'id' : id,
     'subtitle' : subtitle,
     'text' : text,
+    'url' : url,
     'sources' : sources?.map((e) => e.toJson()).toList()
   };
 }

@@ -88,7 +88,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
     }
 
     final Map<String, String> timingsMap = {
-      LocaleKeys.fajr.tr().capitalize(): prayerTimings.fajr ?? "_",
+      LocaleKeys.fajr.tr().capitalize():  prayerTimings.dhuhr  ?? "_",
       LocaleKeys.duhr.tr().capitalize(): prayerTimings.dhuhr  ?? "_",
       LocaleKeys.asr.tr().capitalize():  prayerTimings.asr ?? "_",
       LocaleKeys.maghrib.tr().capitalize(): prayerTimings.maghrib ?? "_",

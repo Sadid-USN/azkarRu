@@ -100,11 +100,11 @@ class AllTextsContent extends StatelessWidget {
                   decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.black26,
+                          color: Colors.black12,
                           offset: Offset(1.0, 3.1),
                           blurRadius: 1.0),
                       BoxShadow(
-                        color: Colors.black26,
+                        color: Colors.black12,
                         offset: Offset(-1.0, 0.0), // Shadow to the left
                         blurRadius: 1.0,
                       ),

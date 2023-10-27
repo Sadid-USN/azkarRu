@@ -1,6 +1,8 @@
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/controllers/data_uploader.dart';
 import 'package:avrod/controllers/internet_chacker.dart';
+import 'package:avrod/controllers/library_controller.dart';
+import 'package:avrod/controllers/radio_conteroller.dart';
 import 'package:avrod/core/notify_helper.dart';
 import 'package:avrod/routes.dart';
 import 'package:avrod/screens/uploder_screen.dart';
@@ -87,10 +89,14 @@ Future<void> main() async {
             lazy: true,
             create: (context) => AudioController(),
           ),
-          // ChangeNotifierProvider<DataUploaderController>(
-          //   lazy: false,
-          //   create: (context) => DataUploaderController(c),
-          // ),
+          ChangeNotifierProvider<LibraryController>(
+            lazy: false,
+            create: (context) => LibraryController(),
+          ),
+          ChangeNotifierProvider<RadioController>(
+            lazy: false,
+            create: (context) => RadioController(),
+          ),
           ChangeNotifierProvider<InternetConnectionController>(
             lazy: true,
             create: (context) => InternetConnectionController(connectivity),

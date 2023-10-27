@@ -35,10 +35,10 @@ class TextScreen extends StatefulWidget {
 
 class _TextScreenState extends State<TextScreen>
     with SingleTickerProviderStateMixin {
-  int currentIndex = 0;
-  late final AudioPlayer _audioPlayer = AudioPlayer();
-  bool isPlaying = false;
-  late TabController _tabController;
+  // int currentIndex = 0;
+  // late final AudioPlayer _audioPlayer = AudioPlayer();
+  // bool isPlaying = false;
+  // late TabController _tabController;
 
   double _fontSize = 18.sp;
   final double _arabicFontSize = 24.sp;
@@ -47,21 +47,25 @@ class _TextScreenState extends State<TextScreen>
   @override
   void initState() {
     super.initState();
+    var cntroller = Provider.of<AudioController>(context, listen: false);
 
-    setState(() {
-      bannerAdHelper.initializeAdMob(
-        onAdLoaded: (ad) {
-          bannerAdHelper.isBannerAd = true;
-        },
-      );
-    });
+    bannerAdHelper.initializeAdMob(
+      onAdLoaded: (ad) {
+        bannerAdHelper.isBannerAd = true;
+      },
+    );
+
     internetConnectionController = InternetConnectionController(Connectivity());
     internetConnectionController!.listenTonetworkChacges(context);
     _fontSize = textStorage.read('fontSize') ?? 18.0;
 
-    _tabController = TabController(length: widget.texts!.length, vsync: this);
+    cntroller.chapter = widget.chapter;
+    cntroller.texts = widget.texts!;
 
-    playAudio();
+    cntroller.tabController =
+        TabController(length: cntroller.texts.length, vsync: this);
+
+    cntroller.playAudio();
   }
 
   void increaseSize() {
@@ -78,278 +82,275 @@ class _TextScreenState extends State<TextScreen>
     }
   }
 
-  void playAudioForTab(int index) {
-    if (currentIndex != index) {
-      currentIndex = index;
-      _audioPlayer.pause(); // Pause the audio when switching tabs
-      playAudio();
-    }
-  }
+  // void playAudioForTab(int index) {
+  //   if (currentIndex != index) {
+  //     currentIndex = index;
+  //     _audioPlayer.pause();
+  //     playAudio();
+  //   }
+  // }
 
-  void goToNextTab() {
-    final nextIndex = _tabController.index + 1;
-    if (nextIndex < widget.texts!.length) {
-      _tabController.animateTo(nextIndex);
-      playAudioForTab(nextIndex);
-    }
-  }
+  // void goToNextTab() {
+  //   final nextIndex = _tabController.index + 1;
+  //   if (nextIndex < widget.texts!.length) {
+  //     _tabController.animateTo(nextIndex);
+  //     playAudioForTab(nextIndex);
+  //   }
+  // }
 
-  void goToPreviousTab() {
-    final previousIndex = _tabController.index - 1;
-    if (previousIndex >= 0) {
-      _tabController.animateTo(previousIndex);
-      playAudioForTab(previousIndex);
-    }
-  }
+  // void goToPreviousTab() {
+  //   final previousIndex = _tabController.index - 1;
+  //   if (previousIndex >= 0) {
+  //     _tabController.animateTo(previousIndex);
+  //     playAudioForTab(previousIndex);
+  //   }
+  // }
 
-  Stream<PositioneData> get positioneDataStream =>
-      Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
-          _audioPlayer.positionStream,
-          _audioPlayer.bufferedPositionStream,
-          _audioPlayer.durationStream,
-          (positione, bufferedPosition, duration) => PositioneData(
-                positione,
-                bufferedPosition,
-                duration ?? Duration.zero,
-              ));
+  // Stream<PositioneData> get positioneDataStream =>
+  //     Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
+  //         _audioPlayer.positionStream,
+  //         _audioPlayer.bufferedPositionStream,
+  //         _audioPlayer.durationStream,
+  //         (positione, bufferedPosition, duration) => PositioneData(
+  //               positione,
+  //               bufferedPosition,
+  //               duration ?? Duration.zero,
+  //             ));
 
-  void _onPlayerCompletion(PlayerState playerState) {
-    if (playerState.processingState == ProcessingState.completed) {
-      _audioPlayer.seek(Duration.zero); // Reset to the beginning of the audio
-      _audioPlayer.pause(); // Pause the audio when it completes
-    }
-  }
+  // void _onPlayerCompletion(PlayerState playerState) {
+  //   if (playerState.processingState == ProcessingState.completed) {
+  //     _audioPlayer.seek(Duration.zero); // Reset to the beginning of the audio
+  //     _audioPlayer.pause(); // Pause the audio when it completes
+  //   }
+  // }
 
-  void playAudio() {
-    final audioSource = AudioSource.uri(
-      Uri.parse(widget.texts![currentIndex].url ?? ""),
-      tag: MediaItem(
-        id: widget.texts![currentIndex].id.toString(),
-        album: widget.chapter!.name,
-        title: widget.chapter!.name!,
-        artUri: Uri.parse(widget.chapter!.listimage!),
-      ),
-    );
+  // void playAudio() {
+  //   final audioSource = AudioSource.uri(
+  //     Uri.parse(widget.texts![currentIndex].url ?? ""),
+  //     tag: MediaItem(
+  //       id: widget.texts![currentIndex].id.toString(),
+  //       album: widget.chapter?.name,
+  //       title: widget.chapter?.name ?? "_",
+  //       artUri: Uri.parse(widget.chapter?.listimage ?? "_"),
+  //     ),
+  //   );
 
-    _audioPlayer.setAudioSource(audioSource);
-    _audioPlayer.playerStateStream.listen((playerState) {
-      _onPlayerCompletion(playerState);
-    });
-  }
+  //   _audioPlayer.setAudioSource(audioSource);
+  //   _audioPlayer.playerStateStream.listen((playerState) {
+  //     _onPlayerCompletion(playerState);
+  //   });
+  // }
 
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  final GlobalKey _key = GlobalKey();
   @override
   Widget build(
     BuildContext context,
   ) {
-    return DefaultTabController(
-      length: widget.texts!.length,
-      child: ChangeNotifierProvider(
-        create: (context) => AudioController(),
-        child: Scaffold(
-          backgroundColor: bgColor,
-          bottomSheet: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            height: 13.5.h,
-            color: const Color.fromARGB(255, 55, 100, 4),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Share.share(
-                            '*${widget.chapter?.name}*\n${widget.texts![currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![currentIndex].arabic!}\n${widget.texts![currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${LocaleKeys.downloadText.tr()}\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
-                      },
-                      icon: const Icon(Icons.share,
-                          size: 30.0, color: Colors.white),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        goToPreviousTab();
-                      },
-                      icon: const Icon(
-                        Icons.skip_previous,
-                        color: Colors.white,
+    return Consumer<AudioController>(
+      builder: (context, value, child) => DefaultTabController(
+        length: value.texts.length,
+        child: WillPopScope(
+          onWillPop: () async {
+            value.audioPlayer.stop();
+            return true;
+          },
+          child: Scaffold(
+            backgroundColor: bgColor,
+            bottomSheet: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              height: 13.5.h,
+              color: const Color.fromARGB(255, 55, 100, 4),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Share.share(
+                              '*${widget.chapter?.name}*\n${widget.texts![value.currentIndex].text!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${widget.texts![value.currentIndex].arabic!}\n${widget.texts![value.currentIndex].translation!}\n☘️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️☘️\n${LocaleKeys.downloadText.tr()}\n👇👇👇👇\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                        },
+                        icon: const Icon(Icons.share,
+                            size: 30.0, color: Colors.white),
                       ),
-                    ),
-                    StreamBuilder<PlayerState>(
-                      stream: _audioPlayer.playerStateStream,
-                      builder: (context, snapshot) {
-                        final playerState = snapshot.data;
-                        final processingState = playerState?.processingState;
-                        final playing = playerState?.playing;
-                        final completed =
-                            processingState == ProcessingState.completed;
+                      IconButton(
+                        onPressed: () {
+                          value.goToPreviousTab();
+                        },
+                        icon: const Icon(
+                          Icons.skip_previous,
+                          color: Colors.white,
+                        ),
+                      ),
+                      StreamBuilder<PlayerState>(
+                        stream: value.audioPlayer.playerStateStream,
+                        builder: (context, snapshot) {
+                          final playerState = snapshot.data;
+                          final processingState = playerState?.processingState;
+                          final playing = playerState?.playing;
+                          final completed =
+                              processingState == ProcessingState.completed;
 
-                        if (processingState == ProcessingState.loading ||
-                            processingState == ProcessingState.buffering) {
-                          return IconButton(
-                            icon: const CircularProgressIndicator(
-                              strokeWidth: 3.0,
-                              color: Colors.grey,
-                            ),
-                            iconSize: 35,
-                            onPressed: _audioPlayer.stop,
-                          );
-                        } else if (playing != true || completed) {
-                          return IconButton(
-                            color: Colors.white,
-                            disabledColor: Colors.grey,
-                            icon: const Icon(Icons.play_circle_outline),
-                            iconSize: 35,
-                            onPressed: _audioPlayer.play,
-                          );
-                        } else {
-                          return IconButton(
-                            color: Colors.white,
-                            disabledColor: Colors.grey,
-                            icon: const Icon(Icons.pause_circle_outline),
-                            iconSize: 35,
-                            onPressed: _audioPlayer.pause,
-                          );
-                        }
-                      },
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        goToNextTab();
-                      },
-                      icon: const Icon(
-                        Icons.skip_next,
-                        color: Colors.white,
-                      ),
-                    ),
-                    StreamBuilder<double>(
-                      stream: _audioPlayer.speedStream,
-                      builder: (context, snapshot) => PopupMenuButtonWidget(
-                        speedStream: _audioPlayer.speedStream,
-                        onSpeedSelected: (double newValue) {
-                          _audioPlayer.setSpeed(newValue);
+                          if (processingState == ProcessingState.loading ||
+                              processingState == ProcessingState.buffering) {
+                            return IconButton(
+                              icon: const CircularProgressIndicator(
+                                strokeWidth: 3.0,
+                                color: Colors.grey,
+                              ),
+                              iconSize: 35,
+                              onPressed: value.audioPlayer.stop,
+                            );
+                          } else if (playing != true || completed) {
+                            return IconButton(
+                              color: Colors.white,
+                              disabledColor: Colors.grey,
+                              icon: const Icon(Icons.play_circle_outline),
+                              iconSize: 35,
+                              onPressed: value.audioPlayer.play,
+                            );
+                          } else {
+                            return IconButton(
+                              color: Colors.white,
+                              disabledColor: Colors.grey,
+                              icon: const Icon(Icons.pause_circle_outline),
+                              iconSize: 35,
+                              onPressed: value.audioPlayer.pause,
+                            );
+                          }
                         },
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                StreamBuilder<PositioneData>(
-                    stream: positioneDataStream,
-                    builder: (context, snapshot) {
-                      final positionData = snapshot.data;
-
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 70),
-                        child: ProgressBar(
-                          barHeight: 4,
-                          baseBarColor: Colors.grey.shade400,
-                          bufferedBarColor: Colors.white,
-                          progressBarColor: Colors.cyanAccent,
-                          thumbColor: Colors.cyanAccent,
-                          thumbRadius: 6,
-                          timeLabelTextStyle: const TextStyle(
-                              height: 1.2,
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
-                          progress: positionData?.positione ?? Duration.zero,
-                          buffered:
-                              positionData?.bufferedPosition ?? Duration.zero,
-                          total: positionData?.duration ?? Duration.zero,
-                          onSeek: _audioPlayer.seek,
+                      IconButton(
+                        onPressed: () {
+                          value.goToNextTab();
+                        },
+                        icon: const Icon(
+                          Icons.skip_next,
+                          color: Colors.white,
                         ),
-                      );
-                    }),
+                      ),
+                      StreamBuilder<double>(
+                        stream: value.audioPlayer.speedStream,
+                        builder: (context, snapshot) => PopupMenuButtonWidget(
+                          speedStream: value.audioPlayer.speedStream,
+                          onSpeedSelected: (double newValue) {
+                            value.audioPlayer.setSpeed(newValue);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  StreamBuilder<PositioneData>(
+                      stream: value.positioneDataStream,
+                      builder: (context, snapshot) {
+                        final positionData = snapshot.data;
+
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 70),
+                          child: ProgressBar(
+                            barHeight: 4,
+                            baseBarColor: Colors.grey.shade400,
+                            bufferedBarColor: Colors.white,
+                            progressBarColor: Colors.cyanAccent,
+                            thumbColor: Colors.cyanAccent,
+                            thumbRadius: 6,
+                            timeLabelTextStyle: const TextStyle(
+                                height: 1.2,
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                            progress: positionData?.positione ?? Duration.zero,
+                            buffered:
+                                positionData?.bufferedPosition ?? Duration.zero,
+                            total: positionData?.duration ?? Duration.zero,
+                            onSeek: value.audioPlayer.seek,
+                          ),
+                        );
+                      }),
+                ],
+              ),
+            ),
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  value.audioPlayer.stop();
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: iconColor,
+                ),
+              ),
+              elevation: 3.0,
+              title: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  widget.chapter?.name ?? "",
+                  style: TextStyle(
+                      color: textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              centerTitle: true,
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(color: appBarbg),
+              ),
+              bottom: TabBar(
+                controller: value.tabController,
+                onTap: value.playAudioForTab,
+                labelColor: titleAbbBar,
+                indicatorColor: titleAbbBar,
+                isScrollable: true,
+                tabs: widget.texts!.map((Texts e) => Tab(text: e.id)).toList(),
+              ),
+            ),
+            body: Column(
+              children: [
+                bannerAdHelper.isBannerAd
+                    ? SizedBox(
+                        height: bannerAdHelper.bannerAd.size.height.toDouble(),
+                        width: bannerAdHelper.bannerAd.size.width.toDouble(),
+                        child: AdWidget(ad: bannerAdHelper.bannerAd),
+                      )
+                    : const SizedBox(),
+                SizedBox(
+                  height: MediaQuery.sizeOf(context).height / 2 * 1.5,
+                  child: TabBarView(
+                    controller: value.tabController,
+                    children: value.texts
+                        .map(
+                          (texts) => Container(
+                            decoration: mainScreenGradient,
+                            child: Builder(builder: (context) {
+                              return AllTextsContent(
+                                arabicFontSize: _arabicFontSize,
+                                text: texts.text!,
+                                arabic: texts.arabic!,
+                                translation: texts.translation!,
+                                fontSize: _fontSize,
+                                increaseSize: () {
+                                  setState(() {
+                                    increaseSize();
+                                  });
+                                },
+                                decreaseSize: () {
+                                  setState(() {
+                                    decreaseSize();
+                                  });
+                                },
+                              );
+                            }),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
               ],
             ),
-          ),
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-                _audioPlayer.stop();
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: iconColor,
-              ),
-            ),
-            elevation: 3.0,
-            title: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Text(
-                widget.chapter?.name ?? "",
-                style: TextStyle(
-                    color: textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            centerTitle: true,
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(color: appBarbg),
-            ),
-            bottom: TabBar(
-              controller: _tabController,
-              onTap: playAudioForTab,
-              labelColor: titleAbbBar,
-              indicatorColor: titleAbbBar,
-              isScrollable: true,
-              tabs: widget.texts!.map((Texts e) => Tab(text: e.id)).toList(),
-            ),
-          ),
-          body: Column(
-            children: [
-              bannerAdHelper.isBannerAd
-                  ? SizedBox(
-                      height: bannerAdHelper.bannerAd.size.height.toDouble(),
-                      width: bannerAdHelper.bannerAd.size.width.toDouble(),
-                      child: AdWidget(ad: bannerAdHelper.bannerAd),
-                    )
-                  : const SizedBox(),
-              SizedBox(
-                height: MediaQuery.sizeOf(context).height / 2 * 1.5,
-                child: TabBarView(
-                  controller: _tabController,
-                  children: widget.texts!
-                      .map(
-                        (texts) => Container(
-                          decoration: mainScreenGradient,
-                          child: Builder(builder: (context) {
-                            return AllTextsContent(
-                              arabicFontSize: _arabicFontSize,
-                              text: texts.text!,
-                              arabic: texts.arabic!,
-                              translation: texts.translation!,
-                              fontSize: _fontSize,
-                              increaseSize: () {
-                                setState(() {
-                                  increaseSize();
-                                });
-                              },
-                              decreaseSize: () {
-                                setState(() {
-                                  decreaseSize();
-                                });
-                              },
-                            );
-                          }),
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-            ],
           ),
         ),
       ),

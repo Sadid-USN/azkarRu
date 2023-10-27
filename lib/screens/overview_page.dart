@@ -1,25 +1,27 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
 import 'package:avrod/screens/booksScreen/reading_books_labrary_screen.dart';
 import 'package:avrod/screens/booksScreen/selected_books.dart';
 import 'package:avrod/widgets/costom_button.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class OverviewPage extends StatelessWidget {
   final int? index;
   final LibBookModel? book;
-  final int? numberOfPages;
+
   // final String image;
   final String? title;
+
   const OverviewPage({
     Key? key,
     this.index,
     this.book,
-    this.numberOfPages,
     this.title,
   }) : super(key: key);
 
@@ -29,6 +31,7 @@ class OverviewPage extends StatelessWidget {
       bottomSheet: _BottomSheet(
         index: index ?? 0,
         book: book!,
+        text: book?.chapters,
         overview: book?.published ?? "",
       ),
       backgroundColor: Colors.grey.shade100,
@@ -75,7 +78,7 @@ class OverviewPage extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 22,
+                      fontSize: 20,
                       color: Colors.blueGrey.shade700),
                 ),
               ),
@@ -88,36 +91,41 @@ class OverviewPage extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 18,
                     color: Colors.grey),
               ),
               const SizedBox(
                 height: 8,
               ),
-              InkWell(
-                onTap: () async {
-                  const url =
-                      'https://play.google.com/store/apps/details?id=com.darulasar.Azkar&hl=en&gl=US';
+              Center(
+                child: InkWell(
+                  onTap: () async {
+                    const url =
+                        'https://play.google.com/store/apps/details?id=com.darulasar.Azkar&hl=en&gl=US';
 
-                  if (await canLaunchUrl(Uri.parse(url))) {
-                    await launchUrl(Uri.parse(url));
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                },
-                child: const Text(
-                  "⭐️  ⭐️  ⭐️  ⭐️  ⭐️",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20),
+                    if (await canLaunchUrl(Uri.parse(url))) {
+                      await launchUrl(Uri.parse(url));
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                  child: FadeInLeft(
+                    duration: const Duration(milliseconds: 1000),
+                    child: const Text(
+                      "⭐️  ⭐️  ⭐️  ⭐️  ⭐️",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(
                 height: 8,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.only(left: 20, right: 10),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _BuildColumn(
                       label: book!.chapters!.length.toString(),
@@ -138,7 +146,7 @@ class OverviewPage extends StatelessWidget {
                       height: 50,
                       child: VerticalDivider(
                         color: Colors.grey,
-                        thickness: 0.9,
+                        thickness: 0.5,
                       ),
                     ),
                     _BuildColumn(
@@ -184,7 +192,7 @@ class _BuildColumn extends StatelessWidget {
             style: GoogleFonts.ptSerif(
               color: Colors.blueGrey.shade800,
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 16,
             )),
         const SizedBox(
           height: 6,
@@ -203,14 +211,16 @@ class _BuildColumn extends StatelessWidget {
 
 class _BottomSheet extends StatelessWidget {
   final String overview;
-  final int index;
+    final int index;
   final LibBookModel book;
-  const _BottomSheet({
-    Key? key,
-    required this.overview,
-    required this.index,
-    required this.book,
-  }) : super(key: key);
+  final List<LibChapters?>? text;
+  const _BottomSheet(
+      {Key? key,
+      required this.overview,
+      required this.index,
+      required this.book,
+      required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -237,15 +247,15 @@ class _BottomSheet extends StatelessWidget {
             LocaleKeys.overview.tr(),
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 25,
+              fontSize: 20,
               color: textColor,
             ),
           ),
           Text(
-            book.chapters?[index].text ?? "",
+            text!.map((e) => e?.text).join(),
             maxLines: 6,
-            overflow: TextOverflow.ellipsis,
             style: TextStyle(
+              overflow: TextOverflow.ellipsis,
               fontWeight: FontWeight.w500,
               fontSize: 14,
               color: textColor,
@@ -275,6 +285,7 @@ class _BottomSheet extends StatelessWidget {
                       builder: ((context) {
                         return BookReading(
                           book: book,
+                          index: index,
                         );
                       }),
                     ),
