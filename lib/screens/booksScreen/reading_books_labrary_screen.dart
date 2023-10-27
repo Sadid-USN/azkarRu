@@ -59,6 +59,7 @@ class _BookReadingState extends State<BookReading> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
+             value.audioPlayer.stop();
               Navigator.of(context).pop();
             },
           ),
@@ -90,25 +91,31 @@ class _BookReadingState extends State<BookReading> {
           },
           itemCount: widget.book.chapters!.length,
           itemBuilder: (context, index) {
-            return SafeArea(
-              child: SingleChildScrollView(
-                child: BookContent(
-                  positioneDataStream: value.positioneDataStream,
-                  audioPlayer: value.audioPlayer,
-                  onShareTap: () {
-                    final text = widget.book.chapters![index].text;
-                    final title = widget.book.title;
-                    final sentByAzkar = LocaleKeys.sentByAzkarApp.tr();
-                    Share.share(
-                        "$title\n$text\n$sentByAzkar\n👇👇👇\n$appLink");
-                  },
-                  max: widget.book.chapters!.length.toDouble() - 1,
-                  image: widget.book.image ?? "_",
-                  scrollController: scrollController,
-                  page: index + 1,
-                  chapters: widget.book.chapters![index],
-                  onNextPagePressed: value.onNextPagePressed,
-                  onPreviousPagePressed: value.previousPagePressed,
+            return WillPopScope(
+              onWillPop: () async {
+                value.audioPlayer.stop();
+                return true;
+              },
+              child: SafeArea(
+                child: SingleChildScrollView(
+                  child: BookContent(
+                    positioneDataStream: value.positioneDataStream,
+                    audioPlayer: value.audioPlayer,
+                    onShareTap: () {
+                      final text = widget.book.chapters![index].text;
+                      final title = widget.book.title;
+                      final sentByAzkar = LocaleKeys.sentByAzkarApp.tr();
+                      Share.share(
+                          "$title\n$text\n$sentByAzkar\n👇👇👇\n$appLink");
+                    },
+                    max: widget.book.chapters!.length.toDouble() - 1,
+                    image: widget.book.image ?? "_",
+                    scrollController: scrollController,
+                    page: index + 1,
+                    chapters: widget.book.chapters![index],
+                    onNextPagePressed: value.onNextPagePressed,
+                    onPreviousPagePressed: value.previousPagePressed,
+                  ),
                 ),
               ),
             );
