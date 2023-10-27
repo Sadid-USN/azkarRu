@@ -53,8 +53,8 @@ class LibraryController extends ChangeNotifier {
 
   void _onPlayerCompletion(PlayerState playerState) {
     if (playerState.processingState == ProcessingState.completed) {
-      _audioPlayer.seek(Duration.zero); // Reset to the beginning of the audio
-      _audioPlayer.pause(); // Pause the audio when it completes
+      _audioPlayer.seek(Duration.zero);
+      _audioPlayer.pause();
     }
   }
 
@@ -91,8 +91,8 @@ class LibraryController extends ChangeNotifier {
         curve: Curves.ease,
       );
     } else {
-      currentPage = 0; // Return to the first page
-      playAudio(); // Play the audio for the first page
+      currentPage = 0;
+      playAudio();
       pageController.animateToPage(
         currentPage,
         duration: const Duration(milliseconds: 300),
@@ -106,7 +106,7 @@ class LibraryController extends ChangeNotifier {
   void previousPagePressed() {
     if (currentPage > 0) {
       currentPage--;
-      playAudio(); // Play the audio for the new page
+      playAudio();
       pageController.animateToPage(
         currentPage,
         duration: const Duration(milliseconds: 300),
