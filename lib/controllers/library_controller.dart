@@ -12,7 +12,6 @@ class LibraryController extends ChangeNotifier {
   late final AudioPlayer _audioPlayer = AudioPlayer();
 
   LibraryController() {
-    // Initialize the fields in the constructor.
     currentPage = 0;
     pageController = PageController(initialPage: currentPage);
   }
