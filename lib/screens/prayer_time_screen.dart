@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/core/extention_capitalize.dart';
 import 'package:avrod/core/notify_helper.dart';
@@ -41,7 +43,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
 
     _loadSavedCountry();
     _fetchAndCacheData();
-    _notificationHelper.initNotification();
+    //  _notificationHelper.initNotification();
   }
 
   Future<void> _fetchAndCacheData() async {
@@ -86,13 +88,14 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
       prayStorage.write('prayer_data', newData.toJson());
       prayerTimings = newData.data!.timings!;
     }
+    int id = Random().nextInt(10000);
 
     final Map<String, String> timingsMap = {
-      LocaleKeys.fajr.tr().capitalize():  prayerTimings.dhuhr  ?? "_",
-      LocaleKeys.duhr.tr().capitalize(): prayerTimings.dhuhr  ?? "_",
-      LocaleKeys.asr.tr().capitalize():  prayerTimings.asr ?? "_",
-      LocaleKeys.maghrib.tr().capitalize(): prayerTimings.maghrib ?? "_",
-      LocaleKeys.isha.tr().capitalize(): prayerTimings.isha ?? "_",
+      LocaleKeys.fajr.tr(): prayerTimings.fajr??  "19:04",
+      LocaleKeys.duhr.tr(): prayerTimings.dhuhr ?? "_",
+      LocaleKeys.asr.tr(): prayerTimings.asr ?? "_",
+      LocaleKeys.maghrib.tr(): prayerTimings.maghrib ?? "_",
+      LocaleKeys.isha.tr(): prayerTimings.isha ?? "_",
     };
 
     for (var prayerName in timingsMap.keys) {
@@ -100,9 +103,9 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
       final hour = int.parse(prayerTime[0]);
       final minutes = int.parse(prayerTime[1]);
 
-      _notificationHelper.scheduleNotification(
-        isSoundEnabled: isSoundEnabled,
-        id: notificationId++,
+      await _notificationHelper.scheduleNotification(
+        id: id,
+        //id: notificationId++,
         hour: hour,
         minutes: minutes,
         parayName: prayerName,
@@ -158,7 +161,6 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   }
 
   Future<void> _loadSavedCountry() async {
-    // final savedCity = storage.read('city');
     final savedCountry = countryStorage.read('country');
     final savedCapital = capitalStorage.read('capital');
 
@@ -184,6 +186,14 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //     title: IconButton(
+      //   onPressed: () {
+
+      // _notificationHelper.showNotification();
+      //   },
+      //   icon: const Icon(Icons.notification_add),
+      // )),
       backgroundColor: bgColor,
       body: FutureBuilder<PrayersModel>(
         future: _prayerModel,

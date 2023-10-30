@@ -13,8 +13,10 @@ import 'package:avrod/core/addbunner_helper.dart';
 import 'package:avrod/data/radio_data_list.dart';
 
 class RadioAudioPlayer extends StatefulWidget {
+  final int? index;
   const RadioAudioPlayer({
     Key? key,
+    this.index,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,10 @@ class _RadioAudioPlayerState extends State<RadioAudioPlayer> {
     final controller = Provider.of<RadioController>(context, listen: false);
     controller.newListInfo = listInfo;
     controller.playAudio();
+
+    if (widget.index! < 4) {
+      controller.audioPlayer.stop();
+    }
     super.initState();
   }
 
@@ -111,16 +117,20 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
               : const SizedBox(
                   height: 40,
                 ),
+          const Spacer(),
           CircleAvatar(
             backgroundImage: NetworkImage(listInfo[widget.index].image),
             radius: 140,
           ),
+          const Spacer(),
           Container(
+          
             padding: const EdgeInsets.symmetric(vertical: 20.0),
-            margin: const EdgeInsets.symmetric(horizontal: 16.0),
+            margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14),
             decoration: BoxDecoration(
                 color: Colors.black12, borderRadius: BorderRadius.circular(12)),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // widget.index == 0
                 //     ? const SizedBox()
@@ -161,7 +171,8 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                       stream: value.audioPlayer.playerStateStream,
                       builder: (context, snapshot) {
                         final playerState = snapshot.data;
-                        final processingState = playerState?.processingState;
+                        final processingState =
+                            playerState?.processingState;
                         final playing = playerState?.playing;
                         final completed =
                             processingState == ProcessingState.completed;
@@ -171,14 +182,14 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                           return IconButton(
                             icon: const CircularProgressIndicator(
                               strokeWidth: 3.0,
-                              color: Colors.grey,
+                              color: Colors.white,
                             ),
                             iconSize: 60,
                             onPressed: value.audioPlayer.stop,
                           );
                         } else if (playing != true || completed) {
                           return IconButton(
-                            color: Colors.blueGrey,
+                            color: Colors.white,
                             disabledColor: Colors.grey,
                             icon: const Icon(Icons.play_circle_outline),
                             iconSize: 60,
@@ -186,7 +197,7 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                           );
                         } else {
                           return IconButton(
-                            color: Colors.blueGrey,
+                            color: Colors.white,
                             disabledColor: Colors.grey,
                             icon: const Icon(Icons.pause_circle_outline),
                             iconSize: 60,
@@ -212,7 +223,7 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -299,8 +310,6 @@ class NextPreviousButton extends StatelessWidget {
               controller: audioController.buttonController,
               size: 50.0,
               onStartIconPress: () {
-                audioController.playAudio();
-
                 return true;
               },
               onEndIconPress: () {

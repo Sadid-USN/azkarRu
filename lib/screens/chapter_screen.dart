@@ -12,7 +12,7 @@ import 'package:avrod/data/book_map.dart';
 import 'package:avrod/screens/text_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
-import 'package:logger/logger.dart';
+
 import 'package:sizer/sizer.dart';
 import '../main.dart';
 import '../core/glowing_progress.dart';
@@ -36,13 +36,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
   List<Chapters> _filteredChapters = [];
   String _searchQuery = "";
   final likeDBHelper = LikeDBHelper();
-  final Logger logger = Logger(
-    printer: PrettyPrinter(
-      methodCount: 0,
-      errorMethodCount: 3,
-      lineLength: 50,
-    ),
-  );
+
 
   @override
   void initState() {
@@ -143,7 +137,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
                 padding: const EdgeInsets.all(5.0),
                 child: ListTile(
                   onTap: () {
-                    logger.i("Text Screen");
+                 
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return TextScreen(

@@ -1,17 +1,22 @@
-import 'package:avrod/colors/colors.dart';
 import 'package:flutter/material.dart';
+
+import 'package:avrod/colors/colors.dart';
 
 import '../models/radio_audioplayer.dart';
 
 class RadioPlayerScreen extends StatelessWidget {
-  const RadioPlayerScreen({Key? key}) : super(key: key);
+  final int ? index;
+  const RadioPlayerScreen({
+    Key? key,
+    this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return   const Scaffold(
+    return    Scaffold(
           backgroundColor: bgColor,
         
-          body: RadioAudioPlayer(),
+          body: RadioAudioPlayer(index: index),
         );
     
   }

@@ -85,14 +85,18 @@ class OverviewPage extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              Text(
-                book?.author ?? "_",
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.grey),
+              Padding(
+               padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Text(
+                  book?.author ?? "_",
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.grey),
+                ),
               ),
               const SizedBox(
                 height: 8,
