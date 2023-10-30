@@ -16,7 +16,7 @@ class LibraryController extends ChangeNotifier {
     pageController = PageController(initialPage: currentPage);
   }
 
-  get audioPlayer => _audioPlayer;
+  AudioPlayer get audioPlayer => _audioPlayer;
   late int currentPage;
   late PageController pageController;
   late Box savePageBox;

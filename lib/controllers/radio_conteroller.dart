@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:animate_icons/animate_icons.dart';
-import 'package:avrod/data/radio_data_list.dart';
 import 'package:avrod/models/radio_audioplayer.dart';
 import 'package:avrod/screens/text_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,31 +9,33 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RadioController extends ChangeNotifier {
-  late final AudioPlayer _audioPlayer = AudioPlayer();
-    final AnimateIconController refreshController = AnimateIconController();
-   bool onRefresh = false;
+  late final AudioPlayer _radioAaudioPlayer = AudioPlayer();
+  final AnimateIconController refreshController = AnimateIconController();
+
   RadioController() {
-    // Initialize the fields in the constructor.
+    
     currentPage = 0;
     pageController = PageController(initialPage: currentPage);
   }
 
+  
+ 
+
+  
+
   List<InfoData> newListInfo = [];
 
-  get audioPlayer => _audioPlayer;
+  AudioPlayer get audioPlayer => _radioAaudioPlayer;
   late int currentPage;
   late PageController pageController;
- 
+
   late int? lastReadedPage;
 
-
- 
-
-  Stream<PositioneData> get positioneDataStream =>
+  Stream<PositioneData> get radioPositioneDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
-          _audioPlayer.positionStream,
-          _audioPlayer.bufferedPositionStream,
-          _audioPlayer.durationStream,
+          _radioAaudioPlayer.positionStream,
+          _radioAaudioPlayer.bufferedPositionStream,
+          _radioAaudioPlayer.durationStream,
           (positione, bufferedPosition, duration) => PositioneData(
                 positione,
                 bufferedPosition,
@@ -44,12 +44,11 @@ class RadioController extends ChangeNotifier {
 
   void _onPlayerCompletion(PlayerState playerState) {
     if (playerState.processingState == ProcessingState.completed) {
-      _audioPlayer.seek(Duration.zero); // Reset to the beginning of the audio
-      _audioPlayer.pause(); // Pause the audio when it completes
+      _radioAaudioPlayer
+          .seek(Duration.zero); // Reset to the beginning of the audio
+      _radioAaudioPlayer.pause(); // Pause the audio when it completes
     }
   }
-
-
 
   void playAudio() {
     final audioSource = AudioSource.uri(
@@ -62,33 +61,38 @@ class RadioController extends ChangeNotifier {
       ),
     );
 
-    _audioPlayer.setAudioSource(audioSource);
-    _audioPlayer.playerStateStream.listen((playerState) {
+    _radioAaudioPlayer.setAudioSource(audioSource);
+    _radioAaudioPlayer.playerStateStream.listen((playerState) {
       _onPlayerCompletion(playerState);
+      
     });
   }
 
-    void refreshAudioUrls() {
-    for (int i = 0; i < newListInfo.length; i++) {
-      if (i != 0) {
-        newListInfo[i].audioUrl =
-            'https://download.quranicaudio.com/qdc/siddiq_minshawi/murattal/${Random().nextInt(114) + 1}.mp3';
+  void refreshAudioUrls() {
+  _radioAaudioPlayer.playerStateStream.listen((playerState) {
+    if (playerState.processingState == ProcessingState.loading) {
+      for (int i = 0; i < newListInfo.length; i++) {
+        if (i != 0) {
+          newListInfo[i].audioUrl =
+              'https://download.quranicaudio.com/qdc/siddiq_minshawi/murattal/${Random().nextInt(114) + 1}.mp3';
+        }
+         notifyListeners(); 
       }
+      notifyListeners(); // Notify listeners to rebuild the UI with updated audio URLs
     }
-
-    onRefresh = true;
-    notifyListeners();
-  }
+  });
+}
 
   void onPageChanged(index) {
     currentPage = index;
-  
+
     playAudio();
   }
 
   void onNextPagePressed() {
     if (currentPage < newListInfo.length - 1) {
       currentPage++;
+       refreshAudioUrls();
       playAudio(); // Play the audio for the new page
       pageController.animateToPage(
         currentPage,
@@ -96,28 +100,27 @@ class RadioController extends ChangeNotifier {
         curve: Curves.ease,
       );
     } else {
-      currentPage = 0; // Return to the first page
-      playAudio(); // Play the audio for the first page
-      pageController.animateToPage(
-        currentPage,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
+      // currentPage = 0; // Return to the first page
+      // playAudio(); // Play the audio for the first page
+      // pageController.animateToPage(
+      //   currentPage,
+      //   duration: const Duration(milliseconds: 300),
+      //   curve: Curves.ease,
+      // );
     }
-
-  
   }
 
   void previousPagePressed() {
     if (currentPage > 0) {
       currentPage--;
+      refreshAudioUrls();
       playAudio(); // Play the audio for the new page
+      
       pageController.animateToPage(
         currentPage,
         duration: const Duration(milliseconds: 300),
         curve: Curves.ease,
       );
-     
     }
   }
 }

@@ -34,31 +34,7 @@ class AllTextsContent extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  onPressed: decreaseSize,
-                  icon: const Icon(
-                    Icons.remove_circle_outline,
-                    size: 25,
-                  ),
-                ),
-                Text(
-                  fontSize.toStringAsFixed(0),
-                ),
-                IconButton(
-                  onPressed: increaseSize,
-                  icon: const Icon(
-                    Icons.add_circle_outline,
-                    size: 25,
-                  ),
-                ),
-              ],
-            ),
-          ),
+       
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(

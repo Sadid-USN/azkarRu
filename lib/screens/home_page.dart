@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:animate_do/animate_do.dart';
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/audio_controller.dart';
+import 'package:avrod/controllers/radio_conteroller.dart';
 import 'package:avrod/core/notify_helper.dart';
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/screens/prayer_time_screen.dart';
@@ -41,7 +42,9 @@ class _HomePageState extends State<HomePage> {
     const LibraryScreen(),
     const FavoriteChaptersSceen(),
     const PrayerTimeScreen(),
-    const RadioPlayerScreen()
+    Consumer<AudioController>(
+        builder: (context, value, child) =>
+            RadioPlayerScreen(index: value.selectedIndex))
   ];
 
   final colorizeTextStyle = TextStyle(
@@ -98,14 +101,15 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: Consumer<AudioController>(
           builder: (context, controller, child) => CurvedNavigationBar(
               animationDuration: const Duration(milliseconds: 500),
-              color:  Colors.white,
-              buttonBackgroundColor:  Colors.white,
+              color: Colors.white,
+              buttonBackgroundColor: Colors.white,
               // height: 7.h,
               index: controller.selectedIndex,
               backgroundColor: bgColor,
               items: controller.navItems,
               onTap: (index) {
                 controller.onTapBar(index);
+                controller.radioController.audioPlayer.stop();
               }),
         ),
       ),

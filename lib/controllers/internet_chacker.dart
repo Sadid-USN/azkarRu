@@ -5,7 +5,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+
 
 import '../generated/locale_keys.g.dart'; 
 
@@ -13,7 +13,7 @@ class InternetConnectionController extends ChangeNotifier {
 
   late final Connectivity _connectivity;
   InternetConnectionController(this._connectivity);
-  var logger = Logger();
+
 
   StreamSubscription? streamSubscription;
   bool isConnected = true;
@@ -23,7 +23,7 @@ class InternetConnectionController extends ChangeNotifier {
       if (result == ConnectivityResult.mobile || result == ConnectivityResult.wifi) {
         isConnected = true;
         ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
-        logger.d("Internet is Connected");
+     
       } else {
         isConnected = false;
         CustomBanner.showBanner(
@@ -32,7 +32,7 @@ class InternetConnectionController extends ChangeNotifier {
           Colors.grey.shade800,
           const Duration(days: 100),
         );
-        logger.d("Internet is OFF");
+     
       }
       // Instead of `update()`, use `notifyListeners()` to notify listeners of the change.
       notifyListeners();

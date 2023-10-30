@@ -7,7 +7,7 @@ package="com.darulasar.Azka">
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     
-
+    
     <queries>
         <!-- If your app opens https URLs -->
         <intent>
@@ -65,7 +65,9 @@ package="com.darulasar.Azka">
             </intent-filter>
         </receiver> 
 
- 
+       <meta-data
+      android:name="com.google.firebase.messaging.default_notification_channel_id"
+    android:value="high_importance_channel"/>
 
         <meta-data
             android:name="flutterEmbedding"

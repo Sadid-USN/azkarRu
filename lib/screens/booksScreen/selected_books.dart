@@ -37,15 +37,6 @@ class LibraryScreen extends StatelessWidget {
             return const Center(
               child: CircularProgressIndicator(),
             );
-            // GridView.builder(
-            //     itemCount: 4,
-            //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //       crossAxisCount: 3,
-            //       childAspectRatio: 2 / 2.7,
-            //     ),
-            //     itemBuilder: ((context, index) {
-            //       return const Skelton();
-            //     }));
           }
 
           final data = snapshot.requireData;

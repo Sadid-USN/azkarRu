@@ -13,15 +13,15 @@ void selectNotification(NotificationResponse details) {
   print("Go to the page");
 }
 
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
 class NotificationHelper {
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  bool isSoundEnabled = false;
   Future<void> initNotification() async {
-    _configureLocalTimeZone();
+    await _configureLocalTimeZone();
     print("Notification successfully initialized");
     AndroidInitializationSettings initializationSettingsAndroid =
-        const AndroidInitializationSettings('mipmap/ic_launcher');
+        const AndroidInitializationSettings('@drawable/ic_launcher');
 
     var initializationSettingsIOS = DarwinInitializationSettings(
       requestAlertPermission: true,
@@ -34,7 +34,7 @@ class NotificationHelper {
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestPermission();
+        ?.requestNotificationsPermission();
 
     var initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
@@ -46,32 +46,35 @@ class NotificationHelper {
     );
   }
 
-  notificationDetails(bool isSoundEnabled) {
-    return NotificationDetails(
-        android: AndroidNotificationDetails(
-          'com.darulasar.Azkar',
-          'Azkar',
-          icon: "mipmap/ic_launcher",
-          importance: Importance.max,
-          sound: RawResourceAndroidNotificationSound(
-              isSoundEnabled ? "azan" : "--"),
-        ),
-        iOS: const DarwinNotificationDetails());
+  notificationDetails() {
+    return const NotificationDetails(
+      android: AndroidNotificationDetails(
+        'com.darulasar.Azkar',
+        'Azkar',
+        icon: "@drawable/ic_launcher",
+        importance: Importance.max,
+        sound: RawResourceAndroidNotificationSound("azan"),
+      ),
+      iOS: DarwinNotificationDetails(
+        threadIdentifier: "com.darulasar.Azkars-en",
+        sound: "azan",
+      ),
+    );
   }
 
   Future showNotification(
       {int id = 0, String? title, String? body, String? payLoad}) async {
     return flutterLocalNotificationsPlugin.show(
-        id, title, body, await notificationDetails(false));
+        id, title, body, await notificationDetails());
   }
 
-  Future scheduleNotification(
-      {required int id,
-      required bool isSoundEnabled,
-      required int hour,
-      required int minutes,
-      required String parayName,
-      required String body}) async {
+  Future<void> scheduleNotification({
+    required int id,
+    required int hour,
+    required int minutes,
+    required String parayName,
+    required String body,
+  }) async {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     tz.TZDateTime scheduleDate = tz.TZDateTime(
       tz.local,
@@ -90,7 +93,7 @@ class NotificationHelper {
       parayName,
       body,
       scheduleDate,
-      await notificationDetails(isSoundEnabled),
+      await notificationDetails(),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
@@ -119,30 +122,4 @@ class NotificationHelper {
     final timeZone = await FlutterNativeTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZone));
   }
-
-//   Future scheduleNotification({
-//   int id = 0,
-//   String? title,
-//   String? body,
-//   String? payload,
-// }) async {
-//   final now = DateTime.now();
-//   final scheduledTime = now.add(const Duration(seconds: 5));
-
-//   var notificationTime = tz.TZDateTime.from(
-//     scheduledTime,
-//     tz.local,
-//   );
-
-//   return notificationsPlugin.zonedSchedule(
-//     id,
-//     title,
-//     body,
-//     notificationTime,
-//     await notificationDetails(),
-//     androidScheduleMode: AndroidScheduleMode.exact,
-//     uiLocalNotificationDateInterpretation:
-//         UILocalNotificationDateInterpretation.absoluteTime,
-//   );
-// }
 }
