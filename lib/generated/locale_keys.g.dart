@@ -52,6 +52,7 @@ abstract class  LocaleKeys {
   static const fast = 'fast';
   static const russian = 'russian';
   static const english = 'english';
+  static const tajik = 'tajik';
   static const Lastthird = 'Lastthird';
   static const downloadText = 'downloadText';
   static const category = 'category';

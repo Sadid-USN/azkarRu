@@ -93,7 +93,7 @@ class _TextScreenState extends State<TextScreen>
     final nextIndex = _tabController.index + 1;
     if (nextIndex < widget.texts!.length) {
       _tabController.animateTo(nextIndex);
-   
+
       playAudioForTab(nextIndex);
     }
   }
@@ -301,6 +301,7 @@ class _TextScreenState extends State<TextScreen>
               decoration: const BoxDecoration(color: appBarbg),
             ),
             bottom: TabBar(
+              onTap: goToTab,
               controller: _tabController,
               isScrollable: true,
               tabs: List<Widget>.generate(
@@ -364,26 +365,6 @@ class _TextScreenState extends State<TextScreen>
       ),
     );
   }
-}
-
-List<Widget> generateDots(List<Texts> texts, int currentPage) {
-  return texts.map((text) {
-    int dotCount = text.id!.length; // Get the length of the id
-    return Row(
-      children: List.generate(dotCount, (index) {
-        return AnimatedContainer(
-          margin: const EdgeInsets.only(right: 4),
-          duration: const Duration(milliseconds: 300),
-          height: 6,
-          width: currentPage == index ? 20 : 6,
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(12),
-          ),
-        );
-      }),
-    );
-  }).toList();
 }
 
 class PositioneData {
