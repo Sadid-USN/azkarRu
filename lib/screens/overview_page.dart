@@ -174,6 +174,8 @@ String lang(String languageCode) {
       return LocaleKeys.english.tr();
     case "Ru":
       return LocaleKeys.russian.tr();
+        case "Tj": 
+        return LocaleKeys.tajik.tr();
     default:
       return "Unknown Language";
   }
