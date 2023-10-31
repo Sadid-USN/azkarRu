@@ -46,6 +46,7 @@ class LibChapters {
   final String? subtitle;
   final String? text;
   final String? url;
+  final bool? isAudioUrl;
   final List<Sources>? sources;
 
   LibChapters({
@@ -53,6 +54,7 @@ class LibChapters {
     this.subtitle,
     this.text,
     this.url,
+    this.isAudioUrl,
     this.sources,
   });
 
@@ -61,6 +63,7 @@ class LibChapters {
       subtitle = json['subtitle'] as String?,
       text = json['text'] as String?,
       url = json['url'] as String?,
+      isAudioUrl = json['isAudioUrl'] as bool?,
       sources = (json['sources'] as List?)?.map((dynamic e) => Sources.fromJson(e as Map<String,dynamic>)).toList();
 
   Map<String, dynamic> toJson() => {
@@ -68,6 +71,7 @@ class LibChapters {
     'subtitle' : subtitle,
     'text' : text,
     'url' : url,
+    'isAudioUrl' : isAudioUrl,
     'sources' : sources?.map((e) => e.toJson()).toList()
   };
 }

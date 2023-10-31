@@ -62,7 +62,7 @@ class OverviewPage extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          OverviewBookCard(
+          OverviewBookImage(
             image: book?.image ?? noImage,
             index: index ?? 0,
           ),
@@ -409,10 +409,10 @@ class _BottomSheet extends StatelessWidget {
 //                   ],
 //                 ),
 
-class OverviewBookCard extends StatelessWidget {
+class OverviewBookImage extends StatelessWidget {
   final int index;
   final String image;
-  const OverviewBookCard({
+  const OverviewBookImage({
     Key? key,
     required this.index,
     required this.image,

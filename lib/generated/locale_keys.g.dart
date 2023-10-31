@@ -53,6 +53,7 @@ abstract class  LocaleKeys {
   static const russian = 'russian';
   static const english = 'english';
   static const tajik = 'tajik';
+  static const audioIsPending = 'audioIsPending';
   static const Lastthird = 'Lastthird';
   static const downloadText = 'downloadText';
   static const category = 'category';
