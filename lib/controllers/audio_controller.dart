@@ -1,31 +1,31 @@
 import 'package:animate_icons/animate_icons.dart';
-import 'package:avrod/controllers/radio_conteroller.dart';
+
 
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:avrod/models/lib_book_model.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:sizer/sizer.dart';
 
 class AudioController extends ChangeNotifier {
   int selectedIndex = 0;
   int currentIndex = 0;
-
+  late List<LibBookModel> categoryBooks;
+  final List<String> selectedCategories = [];
+bool get hasSelectedCategories => selectedCategories.isNotEmpty;
   List<Texts> texts = [];
+  final String _boxName = 'selectedCategories';
+
   Chapters? chapter;
   late TabController _tabController;
   TabController? get tabController => _tabController;
-  late RadioController radioController;
 
-  // set tabController(TabController? tabController) {
-  //   _tabController = tabController!;
 
-  // }
-
-  // AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.MEDIA_PLAYER);
   final AnimateIconController copyController = AnimateIconController();
   final AnimateIconController controller = AnimateIconController();
   final AnimateIconController buttonController = AnimateIconController();
@@ -43,6 +43,20 @@ class AudioController extends ChangeNotifier {
         'author',
       )
       .snapshots();
+
+  void toggleCategory(String category) async {
+    if (selectedCategories.contains(category)) {
+      selectedCategories.remove(category);
+    } else {
+      selectedCategories.add(category);
+    }
+
+    notifyListeners();
+
+    final box = await Hive.openBox<List<String>>(_boxName);
+    await box.put(_boxName, selectedCategories);
+    print(box.values);
+  }
 
   final navItems = [
     Image.asset(
@@ -63,8 +77,6 @@ class AudioController extends ChangeNotifier {
       height: 27,
     ),
   ];
-
-
 
   void onTapBar(int index) {
     selectedIndex = index;

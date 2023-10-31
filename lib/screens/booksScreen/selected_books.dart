@@ -43,72 +43,115 @@ class LibraryScreen extends StatelessWidget {
 
           List<LibBookModel> booksList = data.docs.map((DocumentSnapshot doc) {
             Map<String, dynamic> bookData = doc.data() as Map<String, dynamic>;
-            bookData['id'] = doc.id;
+           // bookData['id'] = doc.id;
             return LibBookModel.fromJson(bookData);
           }).toList();
 
-          return ListView.builder(
-              itemCount: booksList.length,
-              itemBuilder: ((context, index) {
-                final book = booksList[index];
-                final text = booksList[index].chapters;
+          // List<LibBookModel> filteredBooksList = booksList.where((book) {
+          //   return controller.selectedCategories.contains(book.category);
+          // }).toList();
 
-                return Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: 5, top: 10, left: 10, right: 10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 2.0,
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return OverviewPage(
-                          index: index,
-                          book: booksList[index],
-                          title: booksList[index].title ?? "null",
-                        );
-                      })));
-                    },
-                    child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _BookCard(
-                          index: index,
-                          image: booksList[index].image ?? noImage,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _BuildRow(
-                                label: LocaleKeys.libTitle.tr(),
-                                data: book.title ?? "_",
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Wrap(
+                    children: booksList
+                        .map(
+                          (book) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 3),
+                            child: FilterChip(
+                              selected: controller.selectedCategories
+                                  .contains(book.category),
+                              label: Text(
+                                book.category ?? "",
+                                style: const TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500),
                               ),
-                              _BuildRow(
-                                label: LocaleKeys.category.tr(),
-                                data: book.category ?? "_",
-                              ),
-                              _BuildRow(
-                                label: LocaleKeys.language.tr(),
-                                data: book.lang ?? "_",
-                              ),
-                              _BuildRow(
-                                label: LocaleKeys.pages.tr(),
-                                data: book.chapters?.length.toString() ?? "_",
-                              ),
-                            ],
+                              onSelected: (vaSelected) {
+                                controller.toggleCategory(book.category!);
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        )
+                        .toSet()
+                        .toList(),
                   ),
-                );
-              }));
+                ),
+                SizedBox(
+                  height: MediaQuery.sizeOf(context).height / 2 * 1.3,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: booksList.length,
+                      itemBuilder: ((context, index) {
+                        final book = booksList[index];
+
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 5, top: 10, left: 10, right: 10),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              elevation: 2.0,
+                            ),
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: ((context) {
+                                return OverviewPage(
+                                  index: index,
+                                  book: booksList[index],
+                                  title: booksList[index].title ?? "null",
+                                );
+                              })));
+                            },
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _BookImageCard(
+                                  index: index,
+                                  image: booksList[index].image ?? noImage,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      _BuildRow(
+                                        label: LocaleKeys.libTitle.tr(),
+                                        data: book.title ?? "_",
+                                      ),
+                                      _BuildRow(
+                                        label: LocaleKeys.category.tr(),
+                                        data: book.category ?? "_",
+                                      ),
+                                      _BuildRow(
+                                        label: LocaleKeys.language.tr(),
+                                        data: book.lang ?? "_",
+                                      ),
+                                      _BuildRow(
+                                        label: LocaleKeys.pages.tr(),
+                                        data:
+                                            book.chapters?.length.toString() ??
+                                                "_",
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      })),
+                ),
+              ],
+            ),
+          );
         }),
       ),
     );
@@ -158,11 +201,11 @@ class _BuildRow extends StatelessWidget {
   }
 }
 
-class _BookCard extends StatelessWidget {
+class _BookImageCard extends StatelessWidget {
   final String image;
 
   final int index;
-  const _BookCard({
+  const _BookImageCard({
     Key? key,
     required this.image,
     required this.index,

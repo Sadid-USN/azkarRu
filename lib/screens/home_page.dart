@@ -109,7 +109,6 @@ class _HomePageState extends State<HomePage> {
               items: controller.navItems,
               onTap: (index) {
                 controller.onTapBar(index);
-                controller.radioController.audioPlayer.stop();
               }),
         ),
       ),
