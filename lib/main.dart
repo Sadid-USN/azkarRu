@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return MaterialApp(
          // home: const DataUploadedScreen(),
-         routes: appRoutes,
+        routes: appRoutes,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,

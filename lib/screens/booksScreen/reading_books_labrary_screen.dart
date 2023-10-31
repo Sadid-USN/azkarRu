@@ -1,4 +1,5 @@
 import 'package:animate_icons/animate_icons.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:avrod/controllers/library_controller.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -59,7 +60,7 @@ class _BookReadingState extends State<BookReading> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
-             value.audioPlayer.stop();
+              value.audioPlayer.stop();
               Navigator.of(context).pop();
             },
           ),
@@ -228,141 +229,171 @@ class BookContent extends StatelessWidget {
             const SizedBox(
               height: 14,
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 8),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    decoration: BoxDecoration(
-                        color: Colors.black12,
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            chapters.isAudioUrl!
+                ? Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Column(
                       children: [
-                        StreamBuilder<PlayerState>(
-                          stream: audioPlayer.playerStateStream,
-                          builder: (context, snapshot) {
-                            final playerState = snapshot.data;
-                            final processingState =
-                                playerState?.processingState;
-                            final playing = playerState?.playing;
-                            final completed =
-                                processingState == ProcessingState.completed;
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 16),
+                          decoration: BoxDecoration(
+                              color: Colors.black12,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              StreamBuilder<PlayerState>(
+                                stream: audioPlayer.playerStateStream,
+                                builder: (context, snapshot) {
+                                  final playerState = snapshot.data;
+                                  final processingState =
+                                      playerState?.processingState;
+                                  final playing = playerState?.playing;
+                                  final completed = processingState ==
+                                      ProcessingState.completed;
 
-                            if (processingState == ProcessingState.loading ||
-                                processingState == ProcessingState.buffering) {
-                              return IconButton(
-                                icon: const CircularProgressIndicator(
-                                  strokeWidth: 3.0,
-                                  color: Colors.grey,
-                                ),
-                                iconSize: 35,
-                                onPressed: audioPlayer.stop,
-                              );
-                            } else if (playing != true || completed) {
-                              return IconButton(
-                                color: Colors.blueGrey,
-                                disabledColor: Colors.grey,
-                                icon: const Icon(Icons.play_circle_outline),
-                                iconSize: 50,
-                                onPressed: audioPlayer.play,
-                              );
-                            } else {
-                              return IconButton(
-                                color: Colors.blueGrey,
-                                disabledColor: Colors.grey,
-                                icon: const Icon(Icons.pause_circle_outline),
-                                iconSize: 50,
-                                onPressed: audioPlayer.pause,
-                              );
-                            }
-                          },
-                        ),
-                        StreamBuilder<PositioneData>(
-                            stream: positioneDataStream,
-                            builder: (context, snapshot) {
-                              final positionData = snapshot.data;
+                                  if (processingState ==
+                                          ProcessingState.loading ||
+                                      processingState ==
+                                          ProcessingState.buffering) {
+                                    return IconButton(
+                                      icon: const CircularProgressIndicator(
+                                        strokeWidth: 3.0,
+                                        color: Colors.grey,
+                                      ),
+                                      iconSize: 35,
+                                      onPressed: audioPlayer.stop,
+                                    );
+                                  } else if (playing != true || completed) {
+                                    return IconButton(
+                                      color: Colors.blueGrey,
+                                      disabledColor: Colors.grey,
+                                      icon:
+                                          const Icon(Icons.play_circle_outline),
+                                      iconSize: 50,
+                                      onPressed: audioPlayer.play,
+                                    );
+                                  } else {
+                                    return IconButton(
+                                      color: Colors.blueGrey,
+                                      disabledColor: Colors.grey,
+                                      icon: const Icon(
+                                          Icons.pause_circle_outline),
+                                      iconSize: 50,
+                                      onPressed: audioPlayer.pause,
+                                    );
+                                  }
+                                },
+                              ),
+                              StreamBuilder<PositioneData>(
+                                  stream: positioneDataStream,
+                                  builder: (context, snapshot) {
+                                    final positionData = snapshot.data;
 
-                              return SizedBox(
-                                width: MediaQuery.sizeOf(context).width / 2,
-                                child: ProgressBar(
-                                  barHeight: 4,
-                                  baseBarColor: Colors.grey.shade400,
-                                  bufferedBarColor: Colors.white,
-                                  progressBarColor: Colors.blueGrey,
-                                  thumbColor: Colors.green.shade800,
-                                  thumbRadius: 6,
-                                  timeLabelTextStyle: const TextStyle(
-                                      height: 1.2,
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                  progress:
-                                      positionData?.positione ?? Duration.zero,
-                                  buffered: positionData?.bufferedPosition ??
-                                      Duration.zero,
-                                  total:
-                                      positionData?.duration ?? Duration.zero,
-                                  onSeek: audioPlayer.seek,
+                                    return SizedBox(
+                                      width:
+                                          MediaQuery.sizeOf(context).width / 2,
+                                      child: ProgressBar(
+                                        barHeight: 4,
+                                        baseBarColor: Colors.grey.shade400,
+                                        bufferedBarColor: Colors.white,
+                                        progressBarColor: Colors.blueGrey,
+                                        thumbColor: Colors.green.shade800,
+                                        thumbRadius: 6,
+                                        timeLabelTextStyle: const TextStyle(
+                                            height: 1.2,
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                        progress: positionData?.positione ??
+                                            Duration.zero,
+                                        buffered:
+                                            positionData?.bufferedPosition ??
+                                                Duration.zero,
+                                        total: positionData?.duration ??
+                                            Duration.zero,
+                                        onSeek: audioPlayer.seek,
+                                      ),
+                                    );
+                                  }),
+                              StreamBuilder<double>(
+                                stream: audioPlayer.speedStream,
+                                builder: (context, snapshot) =>
+                                    PopupMenuButtonWidget(
+                                  speedStream: audioPlayer.speedStream,
+                                  onSpeedSelected: (double newValue) {
+                                    audioPlayer.setSpeed(newValue);
+                                  },
                                 ),
-                              );
-                            }),
-                        StreamBuilder<double>(
-                          stream: audioPlayer.speedStream,
-                          builder: (context, snapshot) => PopupMenuButtonWidget(
-                            speedStream: audioPlayer.speedStream,
-                            onSpeedSelected: (double newValue) {
-                              audioPlayer.setSpeed(newValue);
-                            },
+                              ),
+                            ],
                           ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              onPressed: onPreviousPagePressed,
+                              style: ElevatedButton.styleFrom(
+                                elevation: 1,
+                                foregroundColor: Colors.blueGrey.shade800,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.arrow_back_ios,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: onShareTap,
+                              child: Image.asset(
+                                "icons/shared.png",
+                                height: 30,
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: onNextPagePressed,
+                              style: ElevatedButton.styleFrom(
+                                elevation: 1,
+                                foregroundColor: Colors.blueGrey.shade800,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.arrow_forward_ios,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        onPressed: onPreviousPagePressed,
-                        style: ElevatedButton.styleFrom(
-                          elevation: 1,
-                          foregroundColor: Colors.blueGrey.shade800,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                  )
+                : Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 10, right: 20, left: 20),
+                      child: AnimatedTextKit(
+                        totalRepeatCount: 1,
+                        repeatForever: false,
+                        pause: const Duration(seconds: 2),
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                            LocaleKeys.audioIsPending.tr(),
+                            textAlign: TextAlign.center,
+                            textStyle: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blueGrey.shade600),
+                            speed: const Duration(milliseconds: 50),
                           ),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                        ),
+                        ],
                       ),
-                      GestureDetector(
-                        onTap: onShareTap,
-                        child: Image.asset(
-                          "icons/shared.png",
-                          height: 30,
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: onNextPagePressed,
-                        style: ElevatedButton.styleFrom(
-                          elevation: 1,
-                          foregroundColor: Colors.blueGrey.shade800,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_forward_ios,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
+                    ),
+                  )
           ],
         ),
       ),
