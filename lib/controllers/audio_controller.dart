@@ -55,8 +55,6 @@ class AudioController extends ChangeNotifier {
       )
       .snapshots();
 
-
-
  Future<void> loadSelectedCategories() async {
     final box = await Hive.openBox<List<String>>(_boxName);
     if (box.isNotEmpty) {
