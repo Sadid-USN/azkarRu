@@ -21,6 +21,7 @@ class LibraryController extends ChangeNotifier {
   late PageController pageController;
   late Box savePageBox;
   late int? lastReadedPage;
+  late int? getCurrentIndexAudio;
   late LibBookModel book;
   void getLastReadedPage() {
     lastReadedPage = savePageBox.get(
@@ -53,13 +54,14 @@ class LibraryController extends ChangeNotifier {
   void _onPlayerCompletion(PlayerState playerState) {
     if (playerState.processingState == ProcessingState.completed) {
       _audioPlayer.seek(Duration.zero);
-      _audioPlayer.pause();
+      // _audioPlayer.pause();
     }
   }
 
   void playAudio() {
+    int getCurrentIndexAudio = savePageBox.get(book.id);
     final audioSource = AudioSource.uri(
-      Uri.parse(book.chapters?[currentPage].url ?? "_"),
+      Uri.parse(book.chapters?[getCurrentIndexAudio].url ?? "_"),
       tag: MediaItem(
         id: book.id.toString(),
         album: book.title,
@@ -67,6 +69,8 @@ class LibraryController extends ChangeNotifier {
         artUri: Uri.parse(book.image ?? noImage),
       ),
     );
+
+    print("THIS IS CURRENT SAVED INDEX AUDIO ====>>>> $getCurrentIndexAudio");
 
     _audioPlayer.setAudioSource(audioSource);
     _audioPlayer.playerStateStream.listen((playerState) {
