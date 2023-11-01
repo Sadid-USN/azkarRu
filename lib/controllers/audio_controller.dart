@@ -1,6 +1,5 @@
 import 'package:animate_icons/animate_icons.dart';
 
-
 import 'package:avrod/data/book_map.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
@@ -15,16 +14,28 @@ import 'package:sizer/sizer.dart';
 class AudioController extends ChangeNotifier {
   int selectedIndex = 0;
   int currentIndex = 0;
-  late List<LibBookModel> categoryBooks;
+
   final List<String> selectedCategories = [];
-bool get hasSelectedCategories => selectedCategories.isNotEmpty;
+  final List<String> categories = [
+    "Aqidah",
+    "Adab",
+    "Fiqh",
+    "Tafsir",
+  ];
+
+  AudioController() {
+    loadSelectedCategories();
+    selectedCategories
+        .addAll(categories); // Добавьте все категории по умолчанию
+  }
+
+  bool get hasSelectedCategories => selectedCategories.isNotEmpty;
   List<Texts> texts = [];
   final String _boxName = 'selectedCategories';
 
   Chapters? chapter;
   late TabController _tabController;
   TabController? get tabController => _tabController;
-
 
   final AnimateIconController copyController = AnimateIconController();
   final AnimateIconController controller = AnimateIconController();
@@ -44,6 +55,16 @@ bool get hasSelectedCategories => selectedCategories.isNotEmpty;
       )
       .snapshots();
 
+
+
+ Future<void> loadSelectedCategories() async {
+    final box = await Hive.openBox<List<String>>(_boxName);
+    if (box.isNotEmpty) {
+      final loadedCategories = box.get(_boxName, defaultValue: []);
+      selectedCategories.clear();
+      selectedCategories.addAll(loadedCategories!);
+    }
+  }
   void toggleCategory(String category) async {
     if (selectedCategories.contains(category)) {
       selectedCategories.remove(category);

@@ -47,9 +47,9 @@ class LibraryScreen extends StatelessWidget {
             return LibBookModel.fromJson(bookData);
           }).toList();
 
-          // List<LibBookModel> filteredBooksList = booksList.where((book) {
-          //   return controller.selectedCategories.contains(book.category);
-          // }).toList();
+          List<LibBookModel> filteredBooksList = booksList.where((book) {
+            return controller.selectedCategories.contains(book.category);
+          }).toList();
 
           return SingleChildScrollView(
             child: Column(
@@ -57,22 +57,22 @@ class LibraryScreen extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Wrap(
-                    children: booksList
+                    children:controller.categories
                         .map(
-                          (book) => Padding(
+                          (category) => Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 3),
                             child: FilterChip(
                               selected: controller.selectedCategories
-                                  .contains(book.category),
+                                  .contains(category),
                               label: Text(
-                                book.category ?? "",
+                                category,
                                 style: const TextStyle(
                                     color: Colors.black87,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500),
                               ),
                               onSelected: (vaSelected) {
-                                controller.toggleCategory(book.category!);
+                                controller.toggleCategory(category);
                               },
                             ),
                           ),
@@ -85,9 +85,9 @@ class LibraryScreen extends StatelessWidget {
                   height: MediaQuery.sizeOf(context).height / 2 * 1.3,
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: booksList.length,
+                      itemCount: filteredBooksList.length,
                       itemBuilder: ((context, index) {
-                        final book = booksList[index];
+                        final book = filteredBooksList[index];
 
                         return Padding(
                           padding: const EdgeInsets.only(
@@ -105,8 +105,8 @@ class LibraryScreen extends StatelessWidget {
                                   MaterialPageRoute(builder: ((context) {
                                 return OverviewPage(
                                   index: index,
-                                  book: booksList[index],
-                                  title: booksList[index].title ?? "null",
+                                  book: filteredBooksList[index],
+                                  title: filteredBooksList[index].title ?? "null",
                                 );
                               })));
                             },
@@ -115,7 +115,7 @@ class LibraryScreen extends StatelessWidget {
                               children: [
                                 _BookImageCard(
                                   index: index,
-                                  image: booksList[index].image ?? noImage,
+                                  image: filteredBooksList[index].image ?? noImage,
                                 ),
                                 Expanded(
                                   child: Column(

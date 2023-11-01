@@ -54,6 +54,10 @@ abstract class  LocaleKeys {
   static const english = 'english';
   static const tajik = 'tajik';
   static const audioIsPending = 'audioIsPending';
+  static const Aqidah = 'Aqidah';
+  static const Adab = 'Adab';
+  static const Fiqh = 'Fiqh';
+  static const Tafsir = 'Tafsir';
   static const Lastthird = 'Lastthird';
   static const downloadText = 'downloadText';
   static const category = 'category';
