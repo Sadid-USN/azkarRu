@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/audio_controller.dart';
-import 'package:avrod/core/scelton.dart';
+
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
 import 'package:avrod/screens/overview_page.dart';
@@ -14,14 +14,21 @@ import 'package:avrod/screens/overview_page.dart';
 const String noImage =
     "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";
 
-class LibraryScreen extends StatelessWidget {
+class LibraryScreen extends StatefulWidget {
   const LibraryScreen({Key? key}) : super(key: key);
 
   static String routName = '/libraryScreen';
 
   @override
+  State<LibraryScreen> createState() => _LibraryScreenState();
+}
+
+class _LibraryScreenState extends State<LibraryScreen> {
+
+
+  @override
   Widget build(BuildContext context) {
-    var controller = Provider.of<AudioController>(context);
+    var controller = Provider.of<AudioController>(context,);
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -43,7 +50,7 @@ class LibraryScreen extends StatelessWidget {
 
           List<LibBookModel> booksList = data.docs.map((DocumentSnapshot doc) {
             Map<String, dynamic> bookData = doc.data() as Map<String, dynamic>;
-           // bookData['id'] = doc.id;
+            // bookData['id'] = doc.id;
             return LibBookModel.fromJson(bookData);
           }).toList();
 
@@ -57,7 +64,7 @@ class LibraryScreen extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Wrap(
-                    children:controller.categories
+                    children: controller.categories
                         .map(
                           (category) => Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 3),
@@ -77,7 +84,6 @@ class LibraryScreen extends StatelessWidget {
                             ),
                           ),
                         )
-                        .toSet()
                         .toList(),
                   ),
                 ),
@@ -106,7 +112,8 @@ class LibraryScreen extends StatelessWidget {
                                 return OverviewPage(
                                   index: index,
                                   book: filteredBooksList[index],
-                                  title: filteredBooksList[index].title ?? "null",
+                                  title:
+                                      filteredBooksList[index].title ?? "null",
                                 );
                               })));
                             },
@@ -115,7 +122,8 @@ class LibraryScreen extends StatelessWidget {
                               children: [
                                 _BookImageCard(
                                   index: index,
-                                  image: filteredBooksList[index].image ?? noImage,
+                                  image:
+                                      filteredBooksList[index].image ?? noImage,
                                 ),
                                 Expanded(
                                   child: Column(

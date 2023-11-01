@@ -32,7 +32,7 @@ class LibraryController extends ChangeNotifier {
     );
     if (lastReadedPage != null) {
       currentPage = lastReadedPage!;
-      pageController = PageController(initialPage: lastReadedPage!);
+      pageController = PageController(initialPage: lastReadedPage??0);
     } else {
       currentPage = 0;
       pageController = PageController(initialPage: currentPage);

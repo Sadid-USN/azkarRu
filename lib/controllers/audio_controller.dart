@@ -55,9 +55,7 @@ class AudioController extends ChangeNotifier {
       )
       .snapshots();
 
-
-
- Future<void> loadSelectedCategories() async {
+  Future<void> loadSelectedCategories() async {
     final box = await Hive.openBox<List<String>>(_boxName);
     if (box.isNotEmpty) {
       final loadedCategories = box.get(_boxName, defaultValue: []);
@@ -65,18 +63,16 @@ class AudioController extends ChangeNotifier {
       selectedCategories.addAll(loadedCategories!);
     }
   }
+
   void toggleCategory(String category) async {
     if (selectedCategories.contains(category)) {
       selectedCategories.remove(category);
     } else {
       selectedCategories.add(category);
     }
-
     notifyListeners();
-
     final box = await Hive.openBox<List<String>>(_boxName);
     await box.put(_boxName, selectedCategories);
-    print(box.values);
   }
 
   final navItems = [
