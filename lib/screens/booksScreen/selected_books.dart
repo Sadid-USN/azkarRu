@@ -24,11 +24,11 @@ class LibraryScreen extends StatefulWidget {
 }
 
 class _LibraryScreenState extends State<LibraryScreen> {
-
-
   @override
   Widget build(BuildContext context) {
-    var controller = Provider.of<AudioController>(context,);
+    var controller = Provider.of<AudioController>(
+      context,
+    );
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -50,7 +50,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
           List<LibBookModel> booksList = data.docs.map((DocumentSnapshot doc) {
             Map<String, dynamic> bookData = doc.data() as Map<String, dynamic>;
-            // bookData['id'] = doc.id;
+            bookData['id'] = doc.id;
             return LibBookModel.fromJson(bookData);
           }).toList();
 
@@ -88,7 +88,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.sizeOf(context).height / 2 * 1.3,
+                  height: MediaQuery.sizeOf(context).height / 2 * 1.4,
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: filteredBooksList.length,

@@ -11,14 +11,10 @@ import 'package:rxdart/rxdart.dart';
 class LibraryController extends ChangeNotifier {
   late final AudioPlayer _audioPlayer = AudioPlayer();
 
-  
   LibraryController() {
-   
     currentPage = 0;
     pageController = PageController(initialPage: currentPage);
   }
-
-  
 
   AudioPlayer get audioPlayer => _audioPlayer;
   late int currentPage;
@@ -32,7 +28,7 @@ class LibraryController extends ChangeNotifier {
     );
     if (lastReadedPage != null) {
       currentPage = lastReadedPage!;
-      pageController = PageController(initialPage: lastReadedPage??0);
+      pageController = PageController(initialPage: lastReadedPage ?? 0);
     } else {
       currentPage = 0;
       pageController = PageController(initialPage: currentPage);
