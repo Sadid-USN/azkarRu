@@ -14,14 +14,21 @@ import 'package:avrod/screens/overview_page.dart';
 const String noImage =
     "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";
 
-class LibraryScreen extends StatelessWidget {
+class LibraryScreen extends StatefulWidget {
   const LibraryScreen({Key? key}) : super(key: key);
 
   static String routName = '/libraryScreen';
 
   @override
+  State<LibraryScreen> createState() => _LibraryScreenState();
+}
+
+class _LibraryScreenState extends State<LibraryScreen> {
+
+
+  @override
   Widget build(BuildContext context) {
-    var controller = Provider.of<AudioController>(context);
+    var controller = Provider.of<AudioController>(context,);
 
     return Scaffold(
       backgroundColor: bgColor,
