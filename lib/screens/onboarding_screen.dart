@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../data/book_functions.dart';
-import '../data/book_map.dart';
+import '../data/book_model.dart';
 import '../core/glowing_progress.dart';
 import 'home_page.dart';
 class OnBoardingScreen extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/core/addbunner_helper.dart';
-import 'package:avrod/data/book_map.dart';
+import 'package:avrod/data/book_model.dart';
 import 'package:avrod/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

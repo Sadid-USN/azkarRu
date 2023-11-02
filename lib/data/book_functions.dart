@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'book_map.dart';
+import 'book_model.dart';
 
 class BookFunctions {
   static Future<List<Book>> getBookLocally(BuildContext context) async {

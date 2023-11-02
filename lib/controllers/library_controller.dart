@@ -1,6 +1,7 @@
 import 'package:avrod/models/lib_book_model.dart';
 import 'package:avrod/screens/booksScreen/selected_books.dart';
 import 'package:avrod/screens/text_screen.dart';
+import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -54,12 +55,12 @@ class LibraryController extends ChangeNotifier {
   void _onPlayerCompletion(PlayerState playerState) {
     if (playerState.processingState == ProcessingState.completed) {
       _audioPlayer.seek(Duration.zero);
-      // _audioPlayer.pause();
+      _audioPlayer.pause();
     }
   }
 
   void playAudio() {
-    int getCurrentIndexAudio = savePageBox.get(book.id);
+    int getCurrentIndexAudio = savePageBox.get(book.id) ?? 0;
     final audioSource = AudioSource.uri(
       Uri.parse(book.chapters?[getCurrentIndexAudio].url ?? "_"),
       tag: MediaItem(

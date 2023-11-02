@@ -12,8 +12,7 @@ import '../style/my_text_style.dart';
 class AllTextsContent extends StatelessWidget {
   final double fontSize;
   final double arabicFontSize;
-  final void Function()? increaseSize;
-  final void Function()? decreaseSize;
+
   final String text;
   final String arabic;
   final String translation;
@@ -22,8 +21,6 @@ class AllTextsContent extends StatelessWidget {
     Key? key,
     required this.fontSize,
     required this.arabicFontSize,
-    required this.increaseSize,
-    required this.decreaseSize,
     required this.text,
     required this.arabic,
     required this.translation,
@@ -34,7 +31,6 @@ class AllTextsContent extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-       
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -95,8 +91,7 @@ class AllTextsContent extends StatelessWidget {
                     ),
                   ),
                   padding: const EdgeInsets.all(40),
-                  child: 
-                  ExpandablePanel(
+                  child: ExpandablePanel(
                     header: const Text(''),
                     collapsed: SelectableText(
                       arabic,
@@ -108,18 +103,15 @@ class AllTextsContent extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    expanded: SelectableText(
-                      arabic,
-                      maxLines: 1,
-                      textAlign: TextAlign.justify,
-                      style: ArabicTextStyle(
-                        arabicFont: ArabicFont.scheherazade,
-             
-                        color: textColor,
-                        fontSize: 18,
-                         fontWeight: FontWeight.w400,
-                      )
-                    ),
+                    expanded: SelectableText(arabic,
+                        maxLines: 1,
+                        textAlign: TextAlign.justify,
+                        style: ArabicTextStyle(
+                          arabicFont: ArabicFont.scheherazade,
+                          color: textColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        )),
                   ),
                 ),
               ],

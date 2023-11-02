@@ -4,8 +4,10 @@ import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/controllers/internet_chacker.dart';
 import 'package:avrod/core/addbunner_helper.dart';
-import 'package:avrod/data/book_map.dart';
+import 'package:avrod/core/custom_banner.dart';
+import 'package:avrod/data/book_model.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +47,9 @@ class _TextScreenState extends State<TextScreen>
     super.initState();
 
     internetConnectionController = InternetConnectionController(Connectivity());
-    internetConnectionController!.listenTonetworkChacges(context);
+
+    internetConnectionController!.listenToNetworkChanges(context);
+
     _fontSize = textStorage.read('fontSize') ?? 18.0;
 
     currentIndex = 0;
@@ -150,128 +154,28 @@ class _TextScreenState extends State<TextScreen>
       child: WillPopScope(
         onWillPop: () async {
           _audioPlayer.stop();
+          ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
 
           return true;
         },
         child: Scaffold(
           backgroundColor: bgColor,
-          bottomSheet: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            height: 14.5.h,
-            color: const Color.fromARGB(255, 55, 100, 4),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Share.share(
-                            '*${widget.chapter?.name}\n\n${widget.texts?[currentIndex].text!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${widget.texts?[currentIndex].arabic!}\n\n${widget.texts?[currentIndex].translation!}\n\n${widget.texts?[currentIndex].url!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${LocaleKeys.downloadText.tr()}\n\n👇👇👇👇\n\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
-                      },
-                      icon: const Icon(Icons.share,
-                          size: 30.0, color: Colors.white),
-                    ),
-                    // IconButton(
-                    //   onPressed: () {
-                    //     goToPreviousTab();
-                    //   },
-                    //   icon: const Icon(
-                    //     Icons.skip_previous,
-                    //     color: Colors.white,
-                    //   ),
-                    // ),
-                    StreamBuilder<PlayerState>(
-                      stream: _audioPlayer.playerStateStream,
-                      builder: (context, snapshot) {
-                        final playerState = snapshot.data;
-                        final processingState = playerState?.processingState;
-                        final playing = playerState?.playing;
-                        final completed =
-                            processingState == ProcessingState.completed;
-
-                        if (processingState == ProcessingState.loading ||
-                            processingState == ProcessingState.buffering) {
-                          return IconButton(
-                            icon: const CircularProgressIndicator(
-                              strokeWidth: 3.0,
-                              color: Colors.grey,
-                            ),
-                            iconSize: 40,
-                            onPressed: _audioPlayer.stop,
-                          );
-                        } else if (playing != true || completed) {
-                          return IconButton(
-                            color: Colors.white,
-                            disabledColor: Colors.grey,
-                            icon: const Icon(Icons.play_circle_outline),
-                            iconSize: 40,
-                            onPressed: _audioPlayer.play,
-                          );
-                        } else {
-                          return IconButton(
-                            color: Colors.white,
-                            disabledColor: Colors.grey,
-                            icon: const Icon(Icons.pause_circle_outline),
-                            iconSize: 40,
-                            onPressed: _audioPlayer.pause,
-                          );
-                        }
-                      },
-                    ),
-                    // IconButton(
-                    //   onPressed: () {
-                    //     goToNextTab();
-                    //   },
-                    //   icon: const Icon(
-                    //     Icons.skip_next,
-                    //     color: Colors.white,
-                    //   ),
-                    // ),
-                    StreamBuilder<double>(
-                      stream: _audioPlayer.speedStream,
-                      builder: (context, snapshot) => PopupMenuButtonWidget(
-                        speedStream: _audioPlayer.speedStream,
-                        onSpeedSelected: (double newwidget) {
-                          _audioPlayer.setSpeed(newwidget);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                StreamBuilder<PositioneData>(
-                    stream: positioneDataStream,
-                    builder: (context, snapshot) {
-                      final positionData = snapshot.data;
-
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 70),
-                        child: ProgressBar(
-                          barHeight: 4,
-                          baseBarColor: Colors.grey.shade400,
-                          bufferedBarColor: Colors.white,
-                          progressBarColor: Colors.cyanAccent,
-                          thumbColor: Colors.cyanAccent,
-                          thumbRadius: 6,
-                          timeLabelTextStyle: const TextStyle(
-                              height: 1.2,
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
-                          progress: positionData?.positione ?? Duration.zero,
-                          buffered:
-                              positionData?.bufferedPosition ?? Duration.zero,
-                          total: positionData?.duration ?? Duration.zero,
-                          onSeek: _audioPlayer.seek,
-                        ),
-                      );
-                    }),
-              ],
-            ),
+          bottomSheet: AudioPlayerBottomSheet(
+            audioPlayer: _audioPlayer,
+            chapter: widget.chapter!,
+            texts: widget.texts ?? [],
+            currentIndex: currentIndex,
+            positioneDataStream: positioneDataStream,
+            increaseSize: () {
+              setState(() {
+                increaseSize();
+              });
+            },
+            decreaseSize: () {
+              setState(() {
+                decreaseSize();
+              });
+            },
           ),
           appBar: AppBar(
             leading: IconButton(
@@ -279,6 +183,7 @@ class _TextScreenState extends State<TextScreen>
                 _audioPlayer.stop();
 
                 Navigator.pop(context);
+                ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -343,16 +248,16 @@ class _TextScreenState extends State<TextScreen>
                           arabic: widget.texts![index].arabic!,
                           translation: widget.texts![index].translation!,
                           fontSize: _fontSize,
-                          increaseSize: () {
-                            setState(() {
-                              increaseSize();
-                            });
-                          },
-                          decreaseSize: () {
-                            setState(() {
-                              decreaseSize();
-                            });
-                          },
+                          // increaseSize: () {
+                          //   setState(() {
+                          //     increaseSize();
+                          //   });
+                          // },
+                          // decreaseSize: () {
+                          //   setState(() {
+                          //     decreaseSize();
+                          //   });
+                          // },
                         );
                       }),
                     );
@@ -361,126 +266,6 @@ class _TextScreenState extends State<TextScreen>
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class PositioneData {
-  final Duration positione;
-  final Duration bufferedPosition;
-  final Duration duration;
-  PositioneData(
-    this.positione,
-    this.bufferedPosition,
-    this.duration,
-  );
-}
-
-class DotWidget extends StatelessWidget {
-  final bool isCurrentPage;
-
-  const DotWidget({Key? key, required this.isCurrentPage}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      margin: EdgeInsets.all(isCurrentPage ? 5 : 0),
-      width: isCurrentPage ? 20 : 10, // You can adjust the sizes
-      height: 10, // You can adjust the sizes
-      decoration: BoxDecoration(
-        color: isCurrentPage
-            ? Colors.blue
-            : Colors.grey, // Change the colors as needed
-        borderRadius: BorderRadius.circular(5),
-      ),
-    );
-  }
-}
-
-class PopupMenuButtonWidget extends StatelessWidget {
-  final Stream<double> speedStream;
-  final Function(double) onSpeedSelected;
-
-  const PopupMenuButtonWidget(
-      {Key? key, required this.speedStream, required this.onSpeedSelected})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return PopupMenuButton<double>(
-      elevation: 3,
-      surfaceTintColor: const Color(0xff376404),
-      itemBuilder: (context) {
-        return <PopupMenuEntry<double>>[
-          PopupMenuItem<double>(
-            value: 0.25,
-            child: Text("0.25",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
-          ),
-          PopupMenuItem<double>(
-            value: 0.5,
-            child: Text("0.5",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
-          ),
-          PopupMenuItem<double>(
-            value: 0.75,
-            child: Text("0.75",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
-          ),
-          PopupMenuItem<double>(
-            value: 1.0,
-            child: Text("Normal",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
-          ),
-          PopupMenuItem<double>(
-            value: 1.25,
-            child: Text("1.25x",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
-          ),
-          PopupMenuItem<double>(
-            value: 1.5,
-            child: Text("1.5x",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
-          ),
-          PopupMenuItem<double>(
-            value: 1.75,
-            child: Text("1.75x",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
-          ),
-          PopupMenuItem<double>(
-            value: 2.0,
-            child: Text("2.0x",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
-          ),
-        ];
-      },
-      onSelected: onSpeedSelected,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.black12,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: StreamBuilder<double>(
-          stream: speedStream,
-          builder: (context, snapshot) {
-            return Text(
-              "${snapshot.data?.toStringAsFixed(1)}x",
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.white),
-            );
-          },
         ),
       ),
     );

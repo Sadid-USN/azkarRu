@@ -4,7 +4,7 @@ import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/controllers/radio_conteroller.dart';
 import 'package:avrod/core/notify_helper.dart';
-import 'package:avrod/data/book_map.dart';
+import 'package:avrod/data/book_model.dart';
 import 'package:avrod/screens/prayer_time_screen.dart';
 import 'package:avrod/screens/body_home_page.dart';
 import 'package:avrod/screens/favorite_chapter_screen.dart';
