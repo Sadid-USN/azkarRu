@@ -1,21 +1,13 @@
-import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
-import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/controllers/internet_chacker.dart';
-import 'package:avrod/core/addbunner_helper.dart';
-import 'package:avrod/core/custom_banner.dart';
 import 'package:avrod/data/book_model.dart';
-import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
 import '../font_storage.dart';
 import 'content_all_text.dart';
@@ -35,9 +27,9 @@ class TextScreen extends StatefulWidget {
 class _TextScreenState extends State<TextScreen>
     with SingleTickerProviderStateMixin {
   double _fontSize = 18.sp;
+  double _arabicFontSize = 31.0;
   late int currentIndex;
   late final AudioPlayer _audioPlayer = AudioPlayer();
-  final double _arabicFontSize = 24.sp;
   InternetConnectionController? internetConnectionController;
   late TabController _tabController;
   late PageController _pageController;
@@ -50,7 +42,9 @@ class _TextScreenState extends State<TextScreen>
 
     internetConnectionController!.listenToNetworkChanges(context);
 
-    _fontSize = textStorage.read('fontSize') ?? 18.0;
+    _fontSize = textStorage.read('fontSize') ?? 30.0;
+
+    _arabicFontSize = arabicTextStorage.read("arabicFont") ?? 25.0;
 
     currentIndex = 0;
     _tabController = TabController(length: widget.texts!.length, vsync: this);
@@ -65,8 +59,22 @@ class _TextScreenState extends State<TextScreen>
     }
   }
 
+  void arabicIncreaseSize() {
+    if (_arabicFontSize < 40) {
+      _arabicFontSize++;
+      arabicTextStorage.write("arabicFont", _arabicFontSize);
+    }
+  }
+
+  void arabicdecreaseSize() {
+    if (_arabicFontSize > 31.0) {
+      _arabicFontSize--;
+      arabicTextStorage.write("arabicFont", _arabicFontSize);
+    }
+  }
+
   void decreaseSize() {
-    if (_fontSize > 14.0) {
+    if (_fontSize > 16.0) {
       _fontSize--;
       textStorage.write('fontSize', _fontSize);
     }
@@ -166,6 +174,16 @@ class _TextScreenState extends State<TextScreen>
             texts: widget.texts ?? [],
             currentIndex: currentIndex,
             positioneDataStream: positioneDataStream,
+            arabicIncreaseSize: () {
+              setState(() {
+                arabicIncreaseSize();
+              });
+            },
+            arabicdecreaseSize: () {
+              setState(() {
+                arabicdecreaseSize();
+              });
+            },
             increaseSize: () {
               setState(() {
                 increaseSize();

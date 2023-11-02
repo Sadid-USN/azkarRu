@@ -90,28 +90,46 @@ class AllTextsContent extends StatelessWidget {
                       Radius.circular(10.0),
                     ),
                   ),
-                  padding: const EdgeInsets.all(40),
-                  child: ExpandablePanel(
-                    header: const Text(''),
-                    collapsed: SelectableText(
-                      arabic,
-                      textAlign: TextAlign.justify,
-                      style: ArabicTextStyle(
-                        arabicFont: ArabicFont.scheherazade,
-                        color: textColor,
-                        fontSize: arabicFontSize,
-                        fontWeight: FontWeight.w400,
+                  padding: const EdgeInsets.all(25),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Container(
+                      //   padding: const EdgeInsets.all(5),
+                      //   decoration: BoxDecoration(
+                      //       color: Colors.black12,
+                      //       borderRadius: BorderRadius.circular(5)),
+                      //   child: SelectableText(
+                      //     arabicFontSize.round().toStringAsFixed(1),
+                      //     style: const TextStyle(
+                      //         fontWeight: FontWeight.w600,
+                      //         fontSize: 14,
+                      //         color: Colors.white70),
+                      //   ),
+                      // ),
+                      ExpandablePanel(
+                        header: const Text(''),
+                        collapsed: SelectableText(
+                          arabic,
+                          textAlign: TextAlign.justify,
+                          style: ArabicTextStyle(
+                            arabicFont: ArabicFont.scheherazade,
+                            color: textColor,
+                            fontSize: arabicFontSize,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        expanded: SelectableText(arabic,
+                            maxLines: 1,
+                            textAlign: TextAlign.justify,
+                            style: ArabicTextStyle(
+                              arabicFont: ArabicFont.scheherazade,
+                              color: textColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                            )),
                       ),
-                    ),
-                    expanded: SelectableText(arabic,
-                        maxLines: 1,
-                        textAlign: TextAlign.justify,
-                        style: ArabicTextStyle(
-                          arabicFont: ArabicFont.scheherazade,
-                          color: textColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
-                        )),
+                    ],
                   ),
                 ),
               ],
