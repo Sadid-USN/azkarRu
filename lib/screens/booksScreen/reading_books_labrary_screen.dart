@@ -2,21 +2,18 @@ import 'package:animate_icons/animate_icons.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:avrod/controllers/library_controller.dart';
+import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
+import 'package:avrod/widgets/popup_menu_btutton.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:just_audio/just_audio.dart';
-
 import 'package:provider/provider.dart';
-
 import 'package:share/share.dart';
-
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
-
 import 'package:avrod/screens/text_screen.dart';
 
 const String appLink =

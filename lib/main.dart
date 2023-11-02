@@ -34,10 +34,10 @@ const String FAVORITES_BOX = 'favorites_box';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  tz.initializeTimeZones();
+  await FirebaseMessaginApi().initNotification();
   await NotificationHelper().initNotification();
   await MobileAds.instance.initialize();
-  await FirebaseMessaginApi().initNotification();
+  tz.initializeTimeZones();
 
   // CoordinatesInit().initCoordinates();
 

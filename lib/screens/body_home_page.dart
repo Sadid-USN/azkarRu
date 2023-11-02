@@ -7,7 +7,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
 import '../colors/colors.dart';
-import '../data/book_map.dart';
+import '../data/book_model.dart';
 
 import 'chapter_screen.dart';
 
@@ -48,6 +48,7 @@ class _BodyHomePageState extends State<BodyHomePage> {
       children: [
         Column(
           children: [
+            const SizedBox(height: 5,),
             bannerAdHelper.isBannerAd
                 ? SizedBox(
                     height: bannerAdHelper.bannerAd.size.height.toDouble(),

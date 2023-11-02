@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -211,56 +212,71 @@ class _BuildRow extends StatelessWidget {
 
 class _BookImageCard extends StatelessWidget {
   final String image;
-
   final int index;
+
   const _BookImageCard({
     Key? key,
     required this.image,
     required this.index,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final hieght = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
+
     return Container(
       height: hieght / 2 * 0.3,
       width: width / 2 * 0.4,
       margin: const EdgeInsets.only(top: 16.0, right: 16.0, bottom: 16.0),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            onError: (exception, stackTrace) {
-              print(exception);
-            },
-            image: NetworkImage(image),
-            fit: BoxFit.cover),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(10.0),
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(4.0, 4.0),
-            blurRadius: 6.0,
-          ),
-        ],
-      ),
-      child: Stack(children: [
-        Positioned(
-          bottom: 8,
-          right: 8,
-          child: CircleAvatar(
-            backgroundColor: Colors.black38,
-            radius: 10,
-            child: Text(
-              "${index + 1}",
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 10),
+      child: CachedNetworkImage(
+        imageUrl: image,
+        placeholder: (context, url) => const Center(
+            child:
+                CircularProgressIndicator()), // Placeholder widget while loading
+        errorWidget: (context, url, error) =>
+            const Icon(Icons.error), // Widget to display when an error occurs
+        imageBuilder: (context, imageProvider) {
+          return Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.cover,
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10.0),
+              ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(4.0, 4.0),
+                  blurRadius: 6.0,
+                ),
+              ],
             ),
-          ),
-        ),
-      ]),
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 8,
+                  right: 8,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.black38,
+                    radius: 10,
+                    child: Text(
+                      "${index + 1}",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -8,7 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
-import 'package:avrod/data/book_map.dart';
+import 'package:avrod/data/book_model.dart';
 import 'package:avrod/screens/text_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';

@@ -1,5 +1,5 @@
 import 'package:avrod/colors/colors.dart';
-import 'package:avrod/data/book_map.dart';
+import 'package:avrod/data/book_model.dart';
 import 'package:avrod/screens/text_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';

@@ -1,6 +1,6 @@
 import 'package:animate_icons/animate_icons.dart';
 
-import 'package:avrod/data/book_map.dart';
+import 'package:avrod/data/book_model.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
 
