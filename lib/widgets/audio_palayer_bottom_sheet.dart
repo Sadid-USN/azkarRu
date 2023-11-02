@@ -12,16 +12,21 @@ import 'package:avrod/widgets/popup_menu_btutton.dart';
 class AudioPlayerBottomSheet extends StatelessWidget {
   final void Function()? increaseSize;
   final void Function()? decreaseSize;
+  final void Function()? arabicIncreaseSize;
+  final void Function()? arabicdecreaseSize;
 
   final AudioPlayer audioPlayer;
   final Chapters chapter;
   final List<Texts> texts;
   final int currentIndex;
+
   final Stream<PositioneData> positioneDataStream;
   const AudioPlayerBottomSheet({
     Key? key,
     required this.increaseSize,
     required this.decreaseSize,
+    this.arabicIncreaseSize,
+    this.arabicdecreaseSize,
     required this.audioPlayer,
     required this.chapter,
     required this.texts,
@@ -34,12 +39,12 @@ class AudioPlayerBottomSheet extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       height: 15.5.h,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
+      decoration:   BoxDecoration(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
-        color: Color.fromARGB(255, 55, 100, 4),
+       color: Colors.blueGrey.withOpacity(0.7),
       ),
       child: Expanded(
         child: Column(
@@ -72,7 +77,7 @@ class AudioPlayerBottomSheet extends StatelessWidget {
                         return IconButton(
                           icon: const CircularProgressIndicator(
                             strokeWidth: 3.0,
-                            color: Colors.grey,
+                            color: Colors.white,
                           ),
                           iconSize: 40,
                           onPressed: audioPlayer.stop,
@@ -120,17 +125,44 @@ class AudioPlayerBottomSheet extends StatelessWidget {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                content: Row(
+                                alignment: Alignment.bottomRight,
+                                content: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Text("Enlarge text"),
-                                    IconButton(
-                                      onPressed: decreaseSize,
-                                      icon: const Icon(Icons.remove),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "icons/resize.png",
+                                          height: 18,
+                                        ),
+                                        const Spacer(),
+                                        IconButton(
+                                          onPressed: decreaseSize,
+                                          icon: const Icon(Icons.remove),
+                                        ),
+                                        IconButton(
+                                          onPressed: increaseSize,
+                                          icon: const Icon(Icons.add),
+                                        ),
+                                      ],
                                     ),
-                                    IconButton(
-                                      onPressed: increaseSize,
-                                      icon: const Icon(Icons.add),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "icons/dhad.png",
+                                          height: 25,
+                                        ),
+                                        const Spacer(),
+                                        IconButton(
+                                          onPressed: arabicdecreaseSize,
+                                          icon: const Icon(Icons.remove),
+                                        ),
+                                        IconButton(
+                                          onPressed: arabicIncreaseSize,
+                                          icon: const Icon(Icons.add),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -155,8 +187,8 @@ class AudioPlayerBottomSheet extends StatelessWidget {
                           barHeight: 4,
                           baseBarColor: Colors.grey.shade400,
                           bufferedBarColor: Colors.white,
-                          progressBarColor: Colors.cyanAccent,
-                          thumbColor: Colors.cyanAccent,
+                          progressBarColor: Colors.indigo.shade700,
+                          thumbColor: Colors.indigo.shade700,
                           thumbRadius: 6,
                           timeLabelTextStyle: const TextStyle(
                               height: 1.2,
