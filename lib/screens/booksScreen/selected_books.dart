@@ -65,7 +65,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Wrap(
-                    children: controller.categories
+                    children: controller.categories.keys
                         .map(
                           (category) => Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 3),
@@ -73,11 +73,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               selected: controller.selectedCategories
                                   .contains(category),
                               label: Text(
-                                category,
+                                controller.getTranslatedCategory(category.tr()),
                                 style: const TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500),
+                                  color: Colors.black87,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                               onSelected: (vaSelected) {
                                 controller.toggleCategory(category);
@@ -122,7 +123,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 _BookImageCard(
-                                  index: index,
+                                  id: filteredBooksList[index].id ?? "0.0",
                                   image:
                                       filteredBooksList[index].image ?? noImage,
                                 ),
@@ -212,12 +213,12 @@ class _BuildRow extends StatelessWidget {
 
 class _BookImageCard extends StatelessWidget {
   final String image;
-  final int index;
+  final String id;
 
   const _BookImageCard({
     Key? key,
     required this.image,
-    required this.index,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -263,7 +264,7 @@ class _BookImageCard extends StatelessWidget {
                     backgroundColor: Colors.black38,
                     radius: 10,
                     child: Text(
-                      "${index + 1}",
+                      id,
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

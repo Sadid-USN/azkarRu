@@ -7,7 +7,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
 import '../colors/colors.dart';
-import '../data/book_model.dart';
+import '../models/book_model.dart';
 
 import 'chapter_screen.dart';
 
@@ -42,7 +42,7 @@ class _BodyHomePageState extends State<BodyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final books = Provider.of<List<Book>>(context);
+    final books = Provider.of<List<BookModel>>(context);
 
     return ListView(
       children: [

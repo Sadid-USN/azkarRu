@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-Future<void> handleBackgroundMessage(RemoteMessage message) async {
+Future<void> _handleBackgroundMessage(RemoteMessage message) async {
   print("Body: ${message.notification!.body}");
   print("Title: ${message.notification!.title}");
   print("Data: ${message.data}");
@@ -14,7 +14,7 @@ class FirebaseMessaginApi {
     String? fcmToken = await messaging.getToken();
     print("FCM Token: ----> $fcmToken");
     FirebaseMessaging.onMessageOpenedApp;
-   FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
+   FirebaseMessaging.onBackgroundMessage(_handleBackgroundMessage);
   }
 
   //

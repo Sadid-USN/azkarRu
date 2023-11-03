@@ -1,8 +1,7 @@
 import 'package:animate_icons/animate_icons.dart';
 
-import 'package:avrod/data/book_model.dart';
+import 'package:avrod/models/book_model.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
-import 'package:avrod/models/lib_book_model.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -16,17 +15,21 @@ class AudioController extends ChangeNotifier {
   int currentIndex = 0;
 
   final List<String> selectedCategories = [];
-  final List<String> categories = [
-    "Aqidah",
-    "Adab",
-    "Fiqh",
-    "Tafsir",
-  ];
+
+  final Map<String, String> categories = {
+    "Aqidah": LocaleKeys.Aqidah.tr(),
+    "Adab": LocaleKeys.Adab.tr(),
+    "Fiqh": LocaleKeys.Fiqh.tr(),
+    "Tafsir": LocaleKeys.Tafsir.tr(),
+  };
+  String getTranslatedCategory(String categoryName) {
+    return categories[categoryName] ?? categoryName;
+  }
 
   AudioController() {
     loadSelectedCategories();
     selectedCategories
-        .addAll(categories); // Добавьте все категории по умолчанию
+        .addAll(categories.keys); // Добавьте все категории по умолчанию
   }
 
   bool get hasSelectedCategories => selectedCategories.isNotEmpty;
@@ -57,10 +60,12 @@ class AudioController extends ChangeNotifier {
 
   Future<void> loadSelectedCategories() async {
     final box = await Hive.openBox<List<String>>(_boxName);
-    if (box.isNotEmpty) {
-      final loadedCategories = box.get(_boxName, defaultValue: []);
-      selectedCategories.clear();
-      selectedCategories.addAll(loadedCategories!);
+    if (box.containsKey(_boxName)) {
+      final loadedCategories = box.get(_boxName);
+      if (loadedCategories != null && loadedCategories.isNotEmpty) {
+        selectedCategories.clear();
+        selectedCategories.addAll(loadedCategories);
+      }
     }
   }
 
@@ -70,7 +75,8 @@ class AudioController extends ChangeNotifier {
     } else {
       selectedCategories.add(category);
     }
-    notifyListeners();
+    notifyListeners(); // Notify listeners about the changes
+
     final box = await Hive.openBox<List<String>>(_boxName);
     await box.put(_boxName, selectedCategories);
   }

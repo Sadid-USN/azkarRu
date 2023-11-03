@@ -5,7 +5,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
 
-import 'package:avrod/data/book_model.dart';
+import 'package:avrod/models/book_model.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/widgets/font_settings.dart';
 import 'package:avrod/widgets/popup_menu_btutton.dart';
@@ -52,139 +52,138 @@ class _AudioPlayerBottomSheetState extends State<AudioPlayerBottomSheet> {
         ),
         color: Colors.blueGrey.withOpacity(0.7),
       ),
-      child: Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Share.share(
-                          '*${widget.chapter.name}\n\n${widget.texts[widget.currentIndex].text!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${widget.texts[widget.currentIndex].arabic!}\n\n${widget.texts[widget.currentIndex].translation!}\n\n${widget.texts[widget.currentIndex].url!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${LocaleKeys.downloadText.tr()}\n\n👇👇👇👇\n\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
-                    },
-                    icon: const Icon(Icons.share,
-                        size: 30.0, color: Colors.white),
-                  ),
-                  StreamBuilder<PlayerState>(
-                    stream: widget.audioPlayer.playerStateStream,
-                    builder: (context, snapshot) {
-                      final playerState = snapshot.data;
-                      final processingState = playerState?.processingState;
-                      final playing = playerState?.playing;
-                      final completed =
-                          processingState == ProcessingState.completed;
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Share.share(
+                        '*${widget.chapter.name}\n\n${widget.texts[widget.currentIndex].text!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${widget.texts[widget.currentIndex].arabic!}\n\n${widget.texts[widget.currentIndex].translation!}\n\n${widget.texts[widget.currentIndex].url!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${LocaleKeys.downloadText.tr()}\n\n👇👇👇👇\n\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                  },
+                  icon: const Icon(Icons.share,
+                      size: 30.0, color: Colors.white),
+                ),
+                StreamBuilder<PlayerState>(
+                  stream: widget.audioPlayer.playerStateStream,
+                  builder: (context, snapshot) {
+                    final playerState = snapshot.data;
+                    final processingState = playerState?.processingState;
+                    final playing = playerState?.playing;
+                    final completed =
+                        processingState == ProcessingState.completed;
 
-                      if (processingState == ProcessingState.loading ||
-                          processingState == ProcessingState.buffering) {
-                        return IconButton(
-                          icon: const CircularProgressIndicator(
-                            strokeWidth: 3.0,
-                            color: Colors.white,
-                          ),
-                          iconSize: 40,
-                          onPressed: widget.audioPlayer.stop,
-                        );
-                      } else if (playing != true || completed) {
-                        return IconButton(
+                    if (processingState == ProcessingState.loading ||
+                        processingState == ProcessingState.buffering) {
+                      return IconButton(
+                        icon: const CircularProgressIndicator(
+                          strokeWidth: 3.0,
                           color: Colors.white,
-                          disabledColor: Colors.grey,
-                          icon: const Icon(Icons.play_circle_outline),
-                          iconSize: 40,
-                          onPressed: widget.audioPlayer.play,
-                        );
-                      } else {
-                        return IconButton(
-                          color: Colors.white,
-                          disabledColor: Colors.grey,
-                          icon: const Icon(Icons.pause_circle_outline),
-                          iconSize: 40,
-                          onPressed: widget.audioPlayer.pause,
-                        );
-                      }
-                    },
-                  ),
-                  StreamBuilder<double>(
-                    stream: widget.audioPlayer.speedStream,
-                    builder: (context, snapshot) => PopupMenuButtonWidget(
-                      speedStream: widget.audioPlayer.speedStream,
-                      onSpeedSelected: (double newwidget) {
-                        widget.audioPlayer.setSpeed(newwidget);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8, bottom: 8),
-                    child: IconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8 + 1)),
-                          builder: (context) {
-                            return FontsSettings(
-                              fontSize: widget.fontSize,
-                              arabicFontSize: widget.arabicFontSize,
-                              onArabicFontSizeChanged:
-                                  widget.onArabicFontSizeChanged,
-                              onFontSizeChanged: widget.onFontSizeChanged,
-                            );
-                          },
-                        );
-                      },
-                      icon: Image.asset(
-                        'icons/textsize.png',
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  StreamBuilder<PositioneData>(
-                    stream: widget.positioneDataStream,
-                    builder: (context, snapshot) {
-                      final positionData = snapshot.data;
-
-                      return SizedBox(
-                        width: 220,
-                        child: ProgressBar(
-                          barHeight: 4,
-                          baseBarColor: Colors.grey.shade400,
-                          bufferedBarColor: Colors.white,
-                          progressBarColor: Colors.indigo.shade700,
-                          thumbColor: Colors.indigo.shade700,
-                          thumbRadius: 6,
-                          timeLabelTextStyle: const TextStyle(
-                              height: 1.2,
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
-                          progress: positionData?.positione ?? Duration.zero,
-                          buffered:
-                              positionData?.bufferedPosition ?? Duration.zero,
-                          total: positionData?.duration ?? Duration.zero,
-                          onSeek: widget.audioPlayer.seek,
                         ),
+                        iconSize: 40,
+                        onPressed: widget.audioPlayer.stop,
+                      );
+                    } else if (playing != true || completed) {
+                      return IconButton(
+                        color: Colors.white,
+                        disabledColor: Colors.grey,
+                        icon: const Icon(Icons.play_circle_outline),
+                        iconSize: 40,
+                        onPressed: widget.audioPlayer.play,
+                      );
+                    } else {
+                      return IconButton(
+                        color: Colors.white,
+                        disabledColor: Colors.grey,
+                        icon: const Icon(Icons.pause_circle_outline),
+                        iconSize: 40,
+                        onPressed: widget.audioPlayer.pause,
+                      );
+                    }
+                  },
+                ),
+                StreamBuilder<double>(
+                  stream: widget.audioPlayer.speedStream,
+                  builder: (context, snapshot) => PopupMenuButtonWidget(
+                    speedStream: widget.audioPlayer.speedStream,
+                    onSpeedSelected: (double newwidget) {
+                      widget.audioPlayer.setSpeed(newwidget);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, bottom: 8),
+                  child: IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8 + 1)),
+                        builder: (context) {
+                          return FontsSettings(
+                            fontSize: widget.fontSize,
+                            arabicFontSize: widget.arabicFontSize,
+                            onArabicFontSizeChanged:
+                                widget.onArabicFontSizeChanged,
+                            onFontSizeChanged: widget.onFontSizeChanged,
+                          );
+                        },
                       );
                     },
+                    icon: Image.asset(
+                      'icons/textsize.png',
+                      color: Colors.white,
+                      height: 25,
+                    ),
                   ),
-                  const Spacer(
-                    flex: 2,
-                  ),
-                ],
-              ),
+                ),
+                const Spacer(),
+                StreamBuilder<PositioneData>(
+                  stream: widget.positioneDataStream,
+                  builder: (context, snapshot) {
+                    final positionData = snapshot.data;
+
+                    return SizedBox(
+                      width: 220,
+                      child: ProgressBar(
+                        barHeight: 4,
+                        baseBarColor: Colors.grey.shade400,
+                        bufferedBarColor: Colors.white,
+                        progressBarColor: Colors.indigo.shade700,
+                        thumbColor: Colors.indigo.shade700,
+                        thumbRadius: 6,
+                        timeLabelTextStyle: const TextStyle(
+                            height: 1.2,
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold),
+                        progress: positionData?.positione ?? Duration.zero,
+                        buffered:
+                            positionData?.bufferedPosition ?? Duration.zero,
+                        total: positionData?.duration ?? Duration.zero,
+                        onSeek: widget.audioPlayer.seek,
+                      ),
+                    );
+                  },
+                ),
+                const Spacer(
+                  flex: 2,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

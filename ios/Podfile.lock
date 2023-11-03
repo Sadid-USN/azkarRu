@@ -638,7 +638,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-  - cloud_firestore (4.12.1):
+  - cloud_firestore (4.12.2):
     - Firebase/Firestore (= 10.16.0)
     - firebase_core
     - Flutter
@@ -660,18 +660,18 @@ PODS:
   - Firebase/Storage (10.16.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.16.0)
-  - firebase_core (2.20.0):
+  - firebase_core (2.21.0):
     - Firebase/CoreOnly (= 10.16.0)
     - Flutter
-  - firebase_database (10.3.2):
+  - firebase_database (10.3.3):
     - Firebase/Database (= 10.16.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (14.7.2):
+  - firebase_messaging (14.7.3):
     - Firebase/Messaging (= 10.16.0)
     - firebase_core
     - Flutter
-  - firebase_storage (11.4.0):
+  - firebase_storage (11.4.1):
     - Firebase/Storage (= 10.16.0)
     - firebase_core
     - Flutter
@@ -974,13 +974,13 @@ SPEC CHECKSUMS:
   audio_service: f509d65da41b9521a61f1c404dd58651f265a567
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  cloud_firestore: abc819b936be92e6167aec1a8983d1e48ded2674
+  cloud_firestore: 8adb36c2bc754352c717984153ecd7e6c6898047
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
   Firebase: 25899099b77d255a636e3579c3d9dce10ec150d5
-  firebase_core: 2e0e89436a00b664a23bebb08859e5fede7215e9
-  firebase_database: 861128b1c487c47fc72fb13c857ced94482de746
-  firebase_messaging: 2b2ed8f43ca8289caebfa324ada472e527bebcdf
-  firebase_storage: 2972c861e7edafb526553f0f6de65a918e4a9ac0
+  firebase_core: 68027ba03585e3efe1608e35d3ab2777a64eabe9
+  firebase_database: f676aa735c93c83b465d1aa0f5a48b4d1f5a5200
+  firebase_messaging: e11ea61b449e6e39741b8a309ddab803ef1eb5cd
+  firebase_storage: 39292d9729a2840035c6156fcec73168c7c234d4
   FirebaseAppCheckInterop: 82358cff9f33452dd44259e88eea5e562500b1cb
   FirebaseAuthInterop: b79fab8ce80e685145eee5f973d9ad5210e19d44
   FirebaseCore: 65a801af84cca84361ef9eac3fd868656968a53b

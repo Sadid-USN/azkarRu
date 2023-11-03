@@ -6,15 +6,14 @@ import 'package:avrod/controllers/radio_conteroller.dart';
 import 'package:avrod/core/notify_helper.dart';
 import 'package:avrod/firebase/firebase_messagin.dart';
 import 'package:avrod/routes.dart';
-import 'package:avrod/screens/uploder_screen.dart';
+
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -68,7 +67,7 @@ Future<void> main() async {
       ],
       assetLoader: const CodegenLoader(),
       path: 'assets/translations',
-      startLocale: const Locale('en'),
+      startLocale: startLocale,
       fallbackLocale: const Locale('en'),
       saveLocale: true,
       child: MultiProvider(
