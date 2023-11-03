@@ -26,7 +26,7 @@ class TextScreen extends StatefulWidget {
 
 class _TextScreenState extends State<TextScreen>
     with SingleTickerProviderStateMixin {
-  double _fontSize = 18.sp;
+  double _fontSize = 18.0;
   double _arabicFontSize = 31.0;
   late int currentIndex;
   late final AudioPlayer _audioPlayer = AudioPlayer();
@@ -42,7 +42,7 @@ class _TextScreenState extends State<TextScreen>
 
     internetConnectionController!.listenToNetworkChanges(context);
 
-    _fontSize = textStorage.read('fontSize') ?? 30.0;
+    _fontSize = textStorage.read('fontSize') ?? 18.0;
 
     _arabicFontSize = arabicTextStorage.read("arabicFont") ?? 25.0;
 
@@ -52,33 +52,29 @@ class _TextScreenState extends State<TextScreen>
     playAudio();
   }
 
-  void increaseSize() {
-    if (_fontSize < 25.0) {
-      _fontSize++;
-      textStorage.write('fontSize', _fontSize);
-    }
+  void onArabicFontSizeChanged(double value) {
+    _arabicFontSize = value;
+    arabicTextStorage.write("arabicFont", _arabicFontSize);
   }
 
-  void arabicIncreaseSize() {
-    if (_arabicFontSize < 40) {
-      _arabicFontSize++;
-      arabicTextStorage.write("arabicFont", _arabicFontSize);
-    }
+  void onFontSizeChanged(double value) {
+    _fontSize = value;
+    textStorage.write('fontSize', _fontSize);
   }
 
-  void arabicdecreaseSize() {
-    if (_arabicFontSize > 31.0) {
-      _arabicFontSize--;
-      arabicTextStorage.write("arabicFont", _arabicFontSize);
-    }
-  }
+  //   void increaseSize() {
+  //   if (_fontSize < 25.0) {
+  //     _fontSize++;
+  //     textStorage.write('fontSize', _fontSize);
+  //   }
+  // }
 
-  void decreaseSize() {
-    if (_fontSize > 16.0) {
-      _fontSize--;
-      textStorage.write('fontSize', _fontSize);
-    }
-  }
+  // void decreaseSize() {
+  //   if (_fontSize > 16.0) {
+  //     _fontSize--;
+  //     textStorage.write('fontSize', _fontSize);
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -169,29 +165,21 @@ class _TextScreenState extends State<TextScreen>
         child: Scaffold(
           backgroundColor: bgColor,
           bottomSheet: AudioPlayerBottomSheet(
+            fontSize: _fontSize,
+            arabicFontSize: _arabicFontSize,
             audioPlayer: _audioPlayer,
             chapter: widget.chapter!,
             texts: widget.texts ?? [],
             currentIndex: currentIndex,
             positioneDataStream: positioneDataStream,
-            arabicIncreaseSize: () {
+            onArabicFontSizeChanged: (val) {
               setState(() {
-                arabicIncreaseSize();
+                onArabicFontSizeChanged(val);
               });
             },
-            arabicdecreaseSize: () {
+            onFontSizeChanged: (val) {
               setState(() {
-                arabicdecreaseSize();
-              });
-            },
-            increaseSize: () {
-              setState(() {
-                increaseSize();
-              });
-            },
-            decreaseSize: () {
-              setState(() {
-                decreaseSize();
+                onFontSizeChanged(val);
               });
             },
           ),
