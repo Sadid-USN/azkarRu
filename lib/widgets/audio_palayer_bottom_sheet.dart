@@ -7,14 +7,15 @@ import 'package:sizer/sizer.dart';
 
 import 'package:avrod/data/book_model.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:avrod/widgets/font_settings.dart';
 import 'package:avrod/widgets/popup_menu_btutton.dart';
 
-class AudioPlayerBottomSheet extends StatelessWidget {
-  final void Function()? increaseSize;
-  final void Function()? decreaseSize;
-  final void Function()? arabicIncreaseSize;
-  final void Function()? arabicdecreaseSize;
+class AudioPlayerBottomSheet extends StatefulWidget {
+  final void Function(double) onArabicFontSizeChanged;
+  final void Function(double) onFontSizeChanged;
 
+  final double fontSize;
+  final double arabicFontSize;
   final AudioPlayer audioPlayer;
   final Chapters chapter;
   final List<Texts> texts;
@@ -23,10 +24,10 @@ class AudioPlayerBottomSheet extends StatelessWidget {
   final Stream<PositioneData> positioneDataStream;
   const AudioPlayerBottomSheet({
     Key? key,
-    required this.increaseSize,
-    required this.decreaseSize,
-    this.arabicIncreaseSize,
-    this.arabicdecreaseSize,
+    required this.onArabicFontSizeChanged,
+    required this.onFontSizeChanged,
+    required this.fontSize,
+    required this.arabicFontSize,
     required this.audioPlayer,
     required this.chapter,
     required this.texts,
@@ -35,16 +36,21 @@ class AudioPlayerBottomSheet extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<AudioPlayerBottomSheet> createState() => _AudioPlayerBottomSheetState();
+}
+
+class _AudioPlayerBottomSheetState extends State<AudioPlayerBottomSheet> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       height: 15.5.h,
-      decoration:   BoxDecoration(
+      decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
-       color: Colors.blueGrey.withOpacity(0.7),
+        color: Colors.blueGrey.withOpacity(0.7),
       ),
       child: Expanded(
         child: Column(
@@ -58,13 +64,13 @@ class AudioPlayerBottomSheet extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       Share.share(
-                          '*${chapter.name}\n\n${texts[currentIndex].text!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${texts[currentIndex].arabic!}\n\n${texts[currentIndex].translation!}\n\n${texts[currentIndex].url!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${LocaleKeys.downloadText.tr()}\n\n👇👇👇👇\n\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                          '*${widget.chapter.name}\n\n${widget.texts[widget.currentIndex].text!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${widget.texts[widget.currentIndex].arabic!}\n\n${widget.texts[widget.currentIndex].translation!}\n\n${widget.texts[widget.currentIndex].url!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${LocaleKeys.downloadText.tr()}\n\n👇👇👇👇\n\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
                     },
                     icon: const Icon(Icons.share,
                         size: 30.0, color: Colors.white),
                   ),
                   StreamBuilder<PlayerState>(
-                    stream: audioPlayer.playerStateStream,
+                    stream: widget.audioPlayer.playerStateStream,
                     builder: (context, snapshot) {
                       final playerState = snapshot.data;
                       final processingState = playerState?.processingState;
@@ -80,7 +86,7 @@ class AudioPlayerBottomSheet extends StatelessWidget {
                             color: Colors.white,
                           ),
                           iconSize: 40,
-                          onPressed: audioPlayer.stop,
+                          onPressed: widget.audioPlayer.stop,
                         );
                       } else if (playing != true || completed) {
                         return IconButton(
@@ -88,7 +94,7 @@ class AudioPlayerBottomSheet extends StatelessWidget {
                           disabledColor: Colors.grey,
                           icon: const Icon(Icons.play_circle_outline),
                           iconSize: 40,
-                          onPressed: audioPlayer.play,
+                          onPressed: widget.audioPlayer.play,
                         );
                       } else {
                         return IconButton(
@@ -96,17 +102,17 @@ class AudioPlayerBottomSheet extends StatelessWidget {
                           disabledColor: Colors.grey,
                           icon: const Icon(Icons.pause_circle_outline),
                           iconSize: 40,
-                          onPressed: audioPlayer.pause,
+                          onPressed: widget.audioPlayer.pause,
                         );
                       }
                     },
                   ),
                   StreamBuilder<double>(
-                    stream: audioPlayer.speedStream,
+                    stream: widget.audioPlayer.speedStream,
                     builder: (context, snapshot) => PopupMenuButtonWidget(
-                      speedStream: audioPlayer.speedStream,
+                      speedStream: widget.audioPlayer.speedStream,
                       onSpeedSelected: (double newwidget) {
-                        audioPlayer.setSpeed(newwidget);
+                        widget.audioPlayer.setSpeed(newwidget);
                       },
                     ),
                   ),
@@ -118,66 +124,33 @@ class AudioPlayerBottomSheet extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                      padding: const EdgeInsets.only(left: 8, bottom: 8),
-                      child: IconButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                alignment: Alignment.bottomRight,
-                                content: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Image.asset(
-                                          "icons/resize.png",
-                                          height: 18,
-                                        ),
-                                        const Spacer(),
-                                        IconButton(
-                                          onPressed: decreaseSize,
-                                          icon: const Icon(Icons.remove),
-                                        ),
-                                        IconButton(
-                                          onPressed: increaseSize,
-                                          icon: const Icon(Icons.add),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image.asset(
-                                          "icons/dhad.png",
-                                          height: 25,
-                                        ),
-                                        const Spacer(),
-                                        IconButton(
-                                          onPressed: arabicdecreaseSize,
-                                          icon: const Icon(Icons.remove),
-                                        ),
-                                        IconButton(
-                                          onPressed: arabicIncreaseSize,
-                                          icon: const Icon(Icons.add),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.settings,
-                          color: Colors.white,
-                        ),
-                      )),
+                    padding: const EdgeInsets.only(left: 8, bottom: 8),
+                    child: IconButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8 + 1)),
+                          builder: (context) {
+                            return FontsSettings(
+                              fontSize: widget.fontSize,
+                              arabicFontSize: widget.arabicFontSize,
+                              onArabicFontSizeChanged:
+                                  widget.onArabicFontSizeChanged,
+                              onFontSizeChanged: widget.onFontSizeChanged,
+                            );
+                          },
+                        );
+                      },
+                      icon: Image.asset(
+                        'icons/textsize.png',
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                   const Spacer(),
                   StreamBuilder<PositioneData>(
-                    stream: positioneDataStream,
+                    stream: widget.positioneDataStream,
                     builder: (context, snapshot) {
                       final positionData = snapshot.data;
 
@@ -199,7 +172,7 @@ class AudioPlayerBottomSheet extends StatelessWidget {
                           buffered:
                               positionData?.bufferedPosition ?? Duration.zero,
                           total: positionData?.duration ?? Duration.zero,
-                          onSeek: audioPlayer.seek,
+                          onSeek: widget.audioPlayer.seek,
                         ),
                       );
                     },
