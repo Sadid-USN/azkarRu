@@ -1,21 +1,23 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/core/db_helper.dart';
+import 'package:avrod/core/glowing_progress.dart';
 import 'package:avrod/data/book_functions.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:avrod/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
-import 'package:avrod/data/book_model.dart';
+import 'package:avrod/models/book_model.dart';
 import 'package:avrod/screens/text_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 
 import 'package:sizer/sizer.dart';
-import '../main.dart';
-import '../core/glowing_progress.dart';
+
+
 
 class ChapterScreen extends StatefulWidget {
   const ChapterScreen({
@@ -73,7 +75,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder<List<Book>>(
+      body: FutureBuilder<List<BookModel>>(
         future: BookFunctions.getBookLocally(context),
         builder: (context, snapshot) {
           final books = snapshot.data;

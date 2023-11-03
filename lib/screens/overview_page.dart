@@ -33,6 +33,7 @@ class OverviewPage extends StatelessWidget {
         book: book!,
         text: book?.chapters,
         overview: book?.published ?? "",
+        id: book?.id ?? "0.0",
       ),
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
@@ -64,7 +65,7 @@ class OverviewPage extends StatelessWidget {
         children: [
           OverviewBookImage(
             image: book?.image ?? noImage,
-            index: index ?? 0,
+            id: book?.id ?? "0.0",
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,7 +87,7 @@ class OverviewPage extends StatelessWidget {
                 height: 8,
               ),
               Padding(
-               padding: const EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Text(
                   book?.author ?? "_",
                   textAlign: TextAlign.center,
@@ -174,8 +175,8 @@ String lang(String languageCode) {
       return LocaleKeys.english.tr();
     case "Ru":
       return LocaleKeys.russian.tr();
-        case "Tj": 
-        return LocaleKeys.tajik.tr();
+    case "Tj":
+      return LocaleKeys.tajik.tr();
     default:
       return "Unknown Language";
   }
@@ -217,12 +218,14 @@ class _BuildColumn extends StatelessWidget {
 
 class _BottomSheet extends StatelessWidget {
   final String overview;
-    final int index;
+  final String id;
+  final int index;
   final LibBookModel book;
   final List<LibChapters?>? text;
   const _BottomSheet(
       {Key? key,
       required this.overview,
+      required this.id,
       required this.index,
       required this.book,
       required this.text})
@@ -410,11 +413,11 @@ class _BottomSheet extends StatelessWidget {
 //                 ),
 
 class OverviewBookImage extends StatelessWidget {
-  final int index;
+  final String id;
   final String image;
   const OverviewBookImage({
     Key? key,
-    required this.index,
+    required this.id,
     required this.image,
   }) : super(key: key);
   @override
@@ -445,7 +448,7 @@ class OverviewBookImage extends StatelessWidget {
               backgroundColor: Colors.black38,
               radius: 12,
               child: Text(
-                "${index + 1}",
+                id,
                 style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

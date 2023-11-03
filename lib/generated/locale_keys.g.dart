@@ -59,6 +59,7 @@ abstract class  LocaleKeys {
   static const Fiqh = 'Fiqh';
   static const Tafsir = 'Tafsir';
   static const fontsize = 'fontsize';
+  static const categories = 'categories';
   static const Lastthird = 'Lastthird';
   static const downloadText = 'downloadText';
   static const category = 'category';

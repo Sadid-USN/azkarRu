@@ -90,7 +90,7 @@ class AllTextsContent extends StatelessWidget {
                       Radius.circular(10.0),
                     ),
                   ),
-                  padding: const EdgeInsets.all(25),
+                  padding: const EdgeInsets.all(30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

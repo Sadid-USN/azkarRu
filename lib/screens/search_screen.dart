@@ -1,5 +1,5 @@
 import 'package:avrod/colors/colors.dart';
-import 'package:avrod/data/book_model.dart';
+import 'package:avrod/models/book_model.dart';
 import 'package:avrod/screens/text_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -35,7 +35,7 @@ class CoustomSearch extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final books = Provider.of<List<Book>>(context);
+    final books = Provider.of<List<BookModel>>(context);
     var chapters = books[index].chapters;
     List<String> matchQuery = [];
 

@@ -73,6 +73,14 @@ class CodegenLoader extends AssetLoader{
   "Fiqh": "Фикх",
   "Tafsir": "Тафсир",
   "fontsize": "Размер шрифта",
+  "categories": [
+    {
+      "Aqidah": "Ақида",
+      "Adab": "Адаб",
+      "Fiqh": "Фиқх",
+      "Tafsir": "Тафсир"
+    }
+  ],
   "Lastthird": "Последняя треть",
   "downloadText": "Скачать приложение *Azkar* в Play Store",
   "category": "Категория",

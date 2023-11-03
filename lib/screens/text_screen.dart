@@ -1,7 +1,8 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/controllers/internet_chacker.dart';
-import 'package:avrod/data/book_model.dart';
+import 'package:avrod/font_storage.dart';
+import 'package:avrod/models/book_model.dart';
 import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,6 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sizer/sizer.dart';
-import '../font_storage.dart';
 import 'content_all_text.dart';
 
 class TextScreen extends StatefulWidget {
@@ -53,13 +53,17 @@ class _TextScreenState extends State<TextScreen>
   }
 
   void onArabicFontSizeChanged(double value) {
-    _arabicFontSize = value;
-    arabicTextStorage.write("arabicFont", _arabicFontSize);
+    setState(() {
+      _arabicFontSize = value;
+      arabicTextStorage.write("arabicFont", _arabicFontSize);
+    });
   }
 
   void onFontSizeChanged(double value) {
-    _fontSize = value;
-    textStorage.write('fontSize', _fontSize);
+    setState(() {
+      _fontSize = value;
+      textStorage.write('fontSize', _fontSize);
+    });
   }
 
   //   void increaseSize() {
@@ -169,19 +173,11 @@ class _TextScreenState extends State<TextScreen>
             arabicFontSize: _arabicFontSize,
             audioPlayer: _audioPlayer,
             chapter: widget.chapter!,
-            texts: widget.texts ?? [],
+            texts: widget.texts!,
             currentIndex: currentIndex,
             positioneDataStream: positioneDataStream,
-            onArabicFontSizeChanged: (val) {
-              setState(() {
-                onArabicFontSizeChanged(val);
-              });
-            },
-            onFontSizeChanged: (val) {
-              setState(() {
-                onFontSizeChanged(val);
-              });
-            },
+            onArabicFontSizeChanged: onArabicFontSizeChanged,
+            onFontSizeChanged: onFontSizeChanged,
           ),
           appBar: AppBar(
             leading: IconButton(
@@ -216,7 +212,7 @@ class _TextScreenState extends State<TextScreen>
               controller: _tabController,
               isScrollable: true,
               tabs: List<Widget>.generate(
-                widget.texts?.length ?? 0,
+                widget.texts!.length,
                 (index) {
                   return Tab(
                     text: widget.texts![index].id,
@@ -249,21 +245,11 @@ class _TextScreenState extends State<TextScreen>
                       decoration: mainScreenGradient,
                       child: Builder(builder: (context) {
                         return AllTextsContent(
-                          arabicFontSize: _arabicFontSize,
                           text: widget.texts![index].text!,
                           arabic: widget.texts![index].arabic!,
                           translation: widget.texts![index].translation!,
                           fontSize: _fontSize,
-                          // increaseSize: () {
-                          //   setState(() {
-                          //     increaseSize();
-                          //   });
-                          // },
-                          // decreaseSize: () {
-                          //   setState(() {
-                          //     decreaseSize();
-                          //   });
-                          // },
+                          arabicFontSize: _arabicFontSize,
                         );
                       }),
                     );

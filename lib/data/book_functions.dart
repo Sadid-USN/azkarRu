@@ -1,12 +1,12 @@
 import 'dart:convert';
-
+import 'package:avrod/models/book_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'book_model.dart';
+
 
 class BookFunctions {
-  static Future<List<Book>> getBookLocally(BuildContext context) async {
+  static Future<List<BookModel>> getBookLocally(BuildContext context) async {
     String path = '';
 
     // Check the current language and update the path accordingly
@@ -22,7 +22,7 @@ class BookFunctions {
     final data = await rootBundle.loadString(path);
 
     final List<dynamic> body = json.decode(data);
-    return body.map((e) => Book.fromJson(e)).toList();
+    return body.map((e) => BookModel.fromJson(e)).toList();
   }
 }
 
@@ -32,7 +32,7 @@ Future<List<Chapters>> getChaptersLocally(
   BuildContext context,
   int index,
 ) async {
-  final List<Book> books = await BookFunctions.getBookLocally(context);
+  final List<BookModel> books = await BookFunctions.getBookLocally(context);
   return books[index].chapters!;
 }
 

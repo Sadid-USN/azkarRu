@@ -1,7 +1,7 @@
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/colors/gradient_class.dart';
 import 'package:avrod/core/addbunner_helper.dart';
-import 'package:avrod/data/book_model.dart';
+import 'package:avrod/models/book_model.dart';
 import 'package:avrod/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class FavoriteChaptersSceen extends StatefulWidget {
 
 class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
     with TickerProviderStateMixin {
-  Book? book;
+  BookModel? book;
 
   late AnimationController _slideAnimationController;
   late AnimationController _rotationAnimationController;
@@ -57,7 +57,7 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
 
   @override
   Widget build(BuildContext context) {
-    final books = Provider.of<List<Book>>(context);
+    final books = Provider.of<List<BookModel>>(context);
     return Scaffold(
         backgroundColor: bgColor,
         body: Consumer<AudioController>(
@@ -81,7 +81,7 @@ class _FavoriteChaptersSceenState extends State<FavoriteChaptersSceen>
                       valueListenable: Hive.box(FAVORITES_BOX).listenable(),
                       builder: (context, Box box, child) {
                         List<Chapters> chapters = [];
-                        for (Book book in books) {
+                        for (BookModel book in books) {
                           chapters.addAll(book.chapters!);
                         }
                         final List<dynamic> likedChapterIds = box.keys.toList();
