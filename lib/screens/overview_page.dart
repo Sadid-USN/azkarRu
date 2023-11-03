@@ -182,6 +182,21 @@ String lang(String languageCode) {
   }
 }
 
+String translateCategory(String tlateCategory) {
+  switch (tlateCategory) {
+    case "Aqidah":
+      return LocaleKeys.Aqidah.tr();
+    case "Adab":
+      return LocaleKeys.Adab.tr();
+    case "Fiqh":
+      return LocaleKeys.Fiqh.tr();
+    case "Tafsir":
+      return LocaleKeys.Tafsir.tr();
+    default:
+      return "Unknown category";
+  }
+}
+
 class _BuildColumn extends StatelessWidget {
   final String label;
   final String data;

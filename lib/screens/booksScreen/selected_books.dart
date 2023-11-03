@@ -138,7 +138,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                       ),
                                       _BuildRow(
                                         label: LocaleKeys.category.tr(),
-                                        data: book.category ?? "_",
+                                        data: translateCategory(
+                                            book.category ?? "_"),
                                       ),
                                       _BuildRow(
                                         label: LocaleKeys.language.tr(),
