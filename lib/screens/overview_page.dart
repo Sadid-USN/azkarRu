@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,15 +41,15 @@ class OverviewPage extends StatelessWidget {
         centerTitle: false,
         backgroundColor: Colors.grey.shade100,
         // title: const Text("Back"),
-        // leading: IconButton(
-        //   onPressed: () {
-        //     Navigator.of(context).pop();
-        //   },
-        //   icon: Icon(
-        //     Icons.arrow_back_ios,
-        //     color: Colors.blueGrey.shade800,
-        //   ),
-        // ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.blueGrey.shade700,
+          ),
+        ),
         actions: const [
           // IconButton(
           //     onPressed: () {},
@@ -63,9 +64,12 @@ class OverviewPage extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          OverviewBookImage(
-            image: book?.image ?? noImage,
-            id: book?.id ?? "0.0",
+          Hero(
+            tag: book?.image ?? noImage ,
+            child: OverviewBookImage(
+              image: book?.image ?? noImage,
+              id: book?.id ?? "0.0",
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,8 +196,10 @@ String translateCategory(String tlateCategory) {
       return LocaleKeys.Fiqh.tr();
     case "Tafsir":
       return LocaleKeys.Tafsir.tr();
+    case "Sirah":
+      return LocaleKeys.Sirah.tr();
     default:
-      return "Unknown category";
+      return "Unknown";
   }
 }
 
@@ -288,42 +294,44 @@ class _BottomSheet extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CostomButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 6.0),
-                  child: Icon(Icons.arrow_back_ios,
-                      color: Colors.blueGrey.shade700),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CostomButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 6.0),
+                    child: Icon(Icons.arrow_back_ios,
+                        color: Colors.blueGrey.shade700),
+                  ),
                 ),
-              ),
-              CostomButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: ((context) {
-                        return BookReading(
-                          book: book,
-                          index: index,
-                        );
-                      }),
-                    ),
-                  );
-                },
-                child: Text(
-                  LocaleKeys.read.tr(),
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.blueGrey.shade700),
+                CostomButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) {
+                          return BookReading(
+                            book: book,
+                            index: index,
+                          );
+                        }),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    LocaleKeys.read.tr(),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.blueGrey.shade700),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -430,11 +438,13 @@ class _BottomSheet extends StatelessWidget {
 class OverviewBookImage extends StatelessWidget {
   final String id;
   final String image;
+
   const OverviewBookImage({
     Key? key,
     required this.id,
     required this.image,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
@@ -445,33 +455,52 @@ class OverviewBookImage extends StatelessWidget {
       width: width * 0.4,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
-        boxShadow: const [
-          BoxShadow(
-              color: Colors.black26, offset: Offset(3.0, 3.0), blurRadius: 5.0)
-        ],
-        image: DecorationImage(
-          image: NetworkImage(image),
-          fit: BoxFit.cover,
-        ),
       ),
-      child: Stack(
-        children: [
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: CircleAvatar(
-              backgroundColor: Colors.black38,
-              radius: 12,
-              child: Text(
-                id,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 11),
-              ),
+      child: CachedNetworkImage(
+        imageUrl: image,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
+        placeholder: (context, url) => const Center(
+          child: CircularProgressIndicator(), // Show a loading indicator
+        ),
+        errorWidget: (context, url, error) =>
+            const Center(child: Icon(Icons.error)),
+        imageBuilder: (context, imageProvider) {
+          return Container(
+            decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(3.0, 3.0),
+                  blurRadius: 5.0,
+                ),
+              ],
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+              borderRadius: BorderRadius.circular(16.0),
             ),
-          ),
-        ],
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 8,
+                  right: 5,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.black38,
+                    radius: 12,
+                    child: Text(
+                      id,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
