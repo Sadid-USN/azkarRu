@@ -17,11 +17,13 @@ class AudioController extends ChangeNotifier {
   final List<String> selectedCategories = [];
 
   final Map<String, String> categories = {
-    "Aqidah": LocaleKeys.Aqidah.tr(),
-    "Adab": LocaleKeys.Adab.tr(),
-    "Fiqh": LocaleKeys.Fiqh.tr(),
-    "Tafsir": LocaleKeys.Tafsir.tr(),
+    "Aqidah": LocaleKeys.Aqidah,
+    "Adab": LocaleKeys.Adab,
+    "Fiqh": LocaleKeys.Fiqh,
+    "Tafsir": LocaleKeys.Tafsir,
+    "Sirah": LocaleKeys.Sirah,
   };
+
   String getTranslatedCategory(String categoryName) {
     return categories[categoryName] ?? categoryName;
   }
@@ -53,9 +55,9 @@ class AudioController extends ChangeNotifier {
 
   final Stream<QuerySnapshot> books = FirebaseFirestore.instance
       .collection('books')
-      .orderBy(
-        'author',
-      )
+      // .orderBy(
+      //   'author',
+      // )
       .snapshots();
 
   Future<void> loadSelectedCategories() async {

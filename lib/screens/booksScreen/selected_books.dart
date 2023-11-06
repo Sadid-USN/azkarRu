@@ -122,10 +122,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
                             child: Row(
                               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                _BookImageCard(
-                                  id: filteredBooksList[index].id ?? "0.0",
-                                  image:
-                                      filteredBooksList[index].image ?? noImage,
+                                Hero(
+                                  tag: filteredBooksList[index].image ?? noImage,
+                                  child: _BookImageCard(
+                                    id: filteredBooksList[index].id ?? "0.0",
+                                    image:
+                                        filteredBooksList[index].image ?? noImage,
+                                  ),
                                 ),
                                 Expanded(
                                   child: Column(
@@ -283,103 +286,3 @@ class _BookImageCard extends StatelessWidget {
   }
 }
 
-  // Stack(
-  //                     alignment: Alignment.bottomRight,
-  //                     children: [
-  //                       Column(
-  //                         mainAxisAlignment: MainAxisAlignment.start,
-  //                         crossAxisAlignment: CrossAxisAlignment.start,
-  //                         children: [
-  //                           Padding(
-  //                             padding: const EdgeInsets.only(top: 8, left: 8),
-  //                             child: Text(
-  //                               name.author ?? "_",
-  //                               style: const TextStyle(
-  //                                   color: Colors.white,
-  //                                   fontWeight: FontWeight.bold,
-  //                                   fontSize: 10),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             width: double.infinity,
-  //                             margin: const EdgeInsets.only(
-  //                                 top: 4, left: 6, right: 8),
-  //                             padding: const EdgeInsets.symmetric(
-  //                                 horizontal: 6, vertical: 2),
-  //                             decoration: BoxDecoration(
-  //                               color: Colors.black,
-  //                               borderRadius: BorderRadius.circular(2),
-  //                             ),
-  //                             child: Text(
-  //                               "${name.category!} ${name.lang}",
-  //                               style: const TextStyle(
-  //                                   color: Colors.white,
-  //                                   fontWeight: FontWeight.bold,
-  //                                   fontSize: 10),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             margin: const EdgeInsets.only(
-  //                                 top: 4, left: 6, right: 8),
-  //                             padding: const EdgeInsets.all(4),
-  //                             decoration: BoxDecoration(
-  //                                 color: Colors.black45,
-  //                                 borderRadius: BorderRadius.circular(2)),
-  //                             child: Text(
-  //                               name.title ?? "_",
-  //                               style: const TextStyle(
-  //                                   color: Colors.white,
-  //                                   fontWeight: FontWeight.bold,
-  //                                   fontSize: 8),
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                       //  top: hieght * 0.4 - (width * 0.4),
-  //                       //  left: width * 0.2 * 1.1,
-  //                       Positioned(
-  //                         bottom: 8,
-  //                         right: 8,
-  //                         child: 
-  //                         CircleAvatar(
-  //                           backgroundColor: Colors.black38,
-  //                           radius: 10,
-  //                           child: Text(
-  //                             "${index + 1}",
-  //                             style: const TextStyle(
-  //                                 color: Colors.white,
-  //                                 fontWeight: FontWeight.bold,
-  //                                 fontSize: 10),
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-                 
-                 
-//  Padding(
-//         padding: EdgeInsets.symmetric(horizontal: 20),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Text(
-//               "Библиотека находится в процессе обработки и скоро будет доступна для пользователей. Благодарим за терпение.",
-//               style: TextStyle(fontSize: 18),
-//             ),
-//             SizedBox(
-//               height: 16,
-//             ),
-//             Text(
-//               "Китобхона дар ҳоли таҳия аст ва ба зудӣ дастраси шумо хоҳад шуд. Ташаккур зиёд барои сабратон.",
-//               style: TextStyle(fontSize: 18),
-//             ),
-//             SizedBox(
-//               height: 16,
-//             ),
-//             Text(
-//               "The library is under development and will be available to users soon. Thank you for your patience.",
-//               style: TextStyle(fontSize: 18),
-//             ),
-//           ],
-//         ),
-//       )
