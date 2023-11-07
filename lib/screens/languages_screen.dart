@@ -61,6 +61,18 @@ class LangugesScreen extends StatelessWidget {
                   .pushNamedAndRemoveUntil('/', (route) => false);
             },
           ),
+          const SizedBox(
+            height: 16,
+          ),
+          LangButton(
+            title: '🇺🇦  Український',
+            onPressed: () {
+              context.setLocale(const Locale('uk'));
+
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/', (route) => false);
+            },
+          ),
         ],
       ),
     );
@@ -77,31 +89,34 @@ class LangButton extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20),
-      child: ElevatedButton(
-        onPressed:
-            onPressed, // This child can be everything. I want to choose a beautiful Text Widget
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(255, 243, 225, 183),
-          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          minimumSize:
-              const Size(150, 50), //change size of this beautiful button
-
-          shadowColor: Colors
-              .grey, //shadow prop is a very nice prop for every button or card widgets.
-          elevation: 5, // we can set elevation of this beautiful button
-          // change border side of this beautiful button
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                12), //change border radius of this beautiful button thanks to BorderRadius.circular function
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: ElevatedButton(
+          onPressed:
+              onPressed, // This child can be everything. I want to choose a beautiful Text Widget
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 243, 225, 183),
+            textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            minimumSize:
+                const Size(150, 50), //change size of this beautiful button
+    
+            shadowColor: Colors
+                .grey, //shadow prop is a very nice prop for every button or card widgets.
+            elevation: 5, // we can set elevation of this beautiful button
+            // change border side of this beautiful button
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  12), //change border radius of this beautiful button thanks to BorderRadius.circular function
+            ),
+            tapTargetSize: MaterialTapTargetSize.padded,
+          ), //This prop for beautiful expressions
+          child: Text(
+            title,
+            style: GoogleFonts.ptSerif(
+                fontSize: 18, fontWeight: FontWeight.w500, color: textColor),
           ),
-          tapTargetSize: MaterialTapTargetSize.padded,
-        ), //This prop for beautiful expressions
-        child: Text(
-          title,
-          style: GoogleFonts.ptSerif(
-              fontSize: 18, fontWeight: FontWeight.w500, color: textColor),
         ),
       ),
     );

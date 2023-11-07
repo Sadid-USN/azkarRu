@@ -63,6 +63,7 @@ Future<void> main() async {
         Locale('en'),
         Locale('ru'),
         Locale('fr'),
+        Locale('uk'),
       ],
       assetLoader: const CodegenLoader(),
       path: 'assets/translations',
@@ -106,8 +107,8 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
-          //home: const DataUploadedScreen(),
-          routes: appRoutes,
+       // home: const DataUploadedScreen(),
+        routes: appRoutes,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
