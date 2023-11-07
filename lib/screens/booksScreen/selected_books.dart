@@ -62,9 +62,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: Wrap(
+                SizedBox(
+                  height: 50,
+                  child: ListView(
+                    padding:
+                        const EdgeInsets.only(right: 5.0, left: 5.0, top: 8),
+                    scrollDirection: Axis.horizontal,
                     children: controller.categories.keys
                         .map(
                           (category) => Padding(
@@ -123,11 +126,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Hero(
-                                  tag: filteredBooksList[index].image ?? noImage,
+                                  tag:
+                                      filteredBooksList[index].image ?? noImage,
                                   child: _BookImageCard(
                                     id: filteredBooksList[index].id ?? "0.0",
-                                    image:
-                                        filteredBooksList[index].image ?? noImage,
+                                    image: filteredBooksList[index].image ??
+                                        noImage,
                                   ),
                                 ),
                                 Expanded(
@@ -285,4 +289,3 @@ class _BookImageCard extends StatelessWidget {
     );
   }
 }
-

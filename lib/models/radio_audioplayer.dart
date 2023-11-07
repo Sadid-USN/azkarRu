@@ -1,5 +1,7 @@
 import 'package:animate_icons/animate_icons.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -10,7 +12,7 @@ import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/controllers/radio_conteroller.dart';
 import 'package:avrod/core/addbunner_helper.dart';
-import 'package:avrod/data/radio_data_list.dart';
+import 'package:avrod/data/reciters_data_list.dart';
 
 class RadioAudioPlayer extends StatefulWidget {
   final int? index;
@@ -24,15 +26,13 @@ class RadioAudioPlayer extends StatefulWidget {
 }
 
 class _RadioAudioPlayerState extends State<RadioAudioPlayer> {
+  int currenIndex = 0;
   @override
   void initState() {
     final controller = Provider.of<RadioController>(context, listen: false);
-    controller.newListInfo = listInfo;
+    controller.newListInfo = reciters;
     controller.playAudio();
 
-    if (widget.index! < 4) {
-      controller.audioPlayer.stop();
-    }
     super.initState();
   }
 
@@ -119,12 +119,21 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                 ),
           const Spacer(),
           CircleAvatar(
-            backgroundImage: NetworkImage(listInfo[widget.index].image),
+            backgroundImage: NetworkImage(reciters[widget.index].image),
             radius: 140,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Text(
+            reciters[widget.index].subtitle,
+            style: const TextStyle(
+              color: Colors.blueGrey,
+              fontSize: 20,
+            ),
           ),
           const Spacer(),
           Container(
-          
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14),
             decoration: BoxDecoration(
@@ -132,25 +141,19 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // widget.index == 0
-                //     ? const SizedBox()
-                //     : Padding(
-                //         padding: const EdgeInsets.only(right: 10, bottom: 5),
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.end,
-                //           children: [
-                //             IconButton(
-                //               onPressed: () {
-
-                //               },
-                //               icon: const Icon(
-                //                 Icons.refresh,
-                //                 size: 30,
-                //               ),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
+                widget.index == 0
+                    ? const SizedBox()
+                    : _SurahsDropdownButton(
+                        selectedChapter: value.selectedChapter,
+                        quranChapters: quranChapters.entries.toList(),
+                        onChapterSelected: (int chapter) {
+                          value.selectedChapter = chapter;
+                          value.refreshAudioUrls(value.reciterNames, chapter);
+                          Future.delayed(const Duration(milliseconds: 20), () {
+                            value.playAudio();
+                          });
+                        },
+                      ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -171,8 +174,7 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                       stream: value.audioPlayer.playerStateStream,
                       builder: (context, snapshot) {
                         final playerState = snapshot.data;
-                        final processingState =
-                            playerState?.processingState;
+                        final processingState = playerState?.processingState;
                         final playing = playerState?.playing;
                         final completed =
                             processingState == ProcessingState.completed;
@@ -230,122 +232,62 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
   }
 }
 
-// class RefreshButton extends StatelessWidget {
-//   const RefreshButton({Key? key}) : super(key: key);
+class _SurahsDropdownButton extends StatelessWidget {
+  final int selectedChapter;
+  final List<MapEntry<String, int>> quranChapters;
+  final Function(int) onChapterSelected;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Positioned(
-//       right: 0,
-//       child: Consumer<RadioController>(
-//         builder: (context, value, child) {
-//           return AnimateIcons(
-//               duration: const Duration(milliseconds: 250),
-//               startIconColor: Colors.white,
-//               endIconColor: Colors.white,
-//               size: 30,
-//               startIcon: Icons.refresh,
-//               endIcon: Icons.refresh,
-//               onStartIconPress: () {
-//                 value.refreshAudioUrls();
-//                 value.audioPlayer.stop();
-
-//                 return true;
-//               },
-//               onEndIconPress: () {
-//                 value.refreshAudioUrls();
-//                 value.audioPlayer.stop();
-//                 return true;
-//               },
-//               controller: value.refreshController);
-//         },
-//       ),
-//     );
-//   }
-// }
-
-class NextPreviousButton extends StatelessWidget {
-  final PageController pageController;
-  final int index;
-
-  const NextPreviousButton({
+  const _SurahsDropdownButton({
     Key? key,
-    required this.pageController,
-    required this.index,
+    required this.selectedChapter,
+    required this.quranChapters,
+    required this.onChapterSelected,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AudioController>(
-      builder: (context, value, child) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            onPressed: () {
-              if (pageController.page != 0) {
-                pageController.previousPage(
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.easeInOut,
-                );
-              } else {
-                pageController.jumpToPage(
-                    (pageController.page!.toInt() - 1) % listInfo.length);
-              }
-              value.audioPlayer.stop();
-            },
-            icon: const Icon(
-              Icons.skip_previous,
-              size: 40,
-              color: Colors.white,
-            ),
-          ),
-          Consumer<AudioController>(
-            builder: (context, audioController, child) => AnimateIcons(
-              startIcon: listInfo[index].audioUrl != listInfo[index].audioUrl
-                  ? Icons.pause_circle
-                  : Icons.play_circle,
-              endIcon: listInfo[index].audioUrl != listInfo[index].audioUrl
-                  ? Icons.play_circle
-                  : Icons.pause_circle,
-              controller: audioController.buttonController,
-              size: 50.0,
-              onStartIconPress: () {
-                return true;
-              },
-              onEndIconPress: () {
-                audioController.audioPlayer.stop();
-
-                return true;
-              },
-              duration: const Duration(milliseconds: 250),
-              startIconColor: Colors.white,
-              endIconColor: Colors.white,
-              clockwise: false,
-            ),
-          ),
-          Consumer<AudioController>(
-            builder: (context, value, child) => IconButton(
-              onPressed: () {
-                if (pageController.page != listInfo.length - 1) {
-                  pageController.nextPage(
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeInOut,
-                  );
-                } else {
-                  pageController.jumpToPage(
-                      (pageController.page!.toInt() + 1) % listInfo.length);
-                }
-
-                value.audioPlayer.stop();
-              },
-              icon: const Icon(
-                Icons.skip_next,
-                size: 40,
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.only(right: 5),
+      alignment: Alignment.bottomRight,
+      //width: MediaQuery.sizeOf(context).width /2,
+      decoration: const BoxDecoration(
+        color: Colors.black38
+      ),
+      child: PopupMenuButton<int>(
+        onSelected: (int chapter) {
+          onChapterSelected(chapter);
+        },
+        itemBuilder: (BuildContext context) {
+          return quranChapters.map((MapEntry<String, int> entry) {
+            return PopupMenuItem<int>(
+              value: entry.value,
+              child: Text(entry.key),
+            );
+          }).toList();
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            
+            Text(
+              "${LocaleKeys.surah.tr()}: ${quranChapters.firstWhere(
+                    (entry) => entry.value == selectedChapter,
+                    orElse: () => const MapEntry("Al-Fatihah", 1),
+                  ).key}",
+              style: const TextStyle(
                 color: Colors.white,
               ),
             ),
-          ),
-        ],
+            const SizedBox(
+              width: 8,
+            ),
+            const Icon(
+              Icons.arrow_drop_down,
+              color: Colors.white,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -354,7 +296,7 @@ class NextPreviousButton extends StatelessWidget {
 class InfoData {
   String id;
   String image;
-  String audioUrl;
+  String? audioUrl;
   String name;
   String subtitle;
   InfoData(
@@ -362,5 +304,5 @@ class InfoData {
       required this.image,
       required this.name,
       required this.subtitle,
-      required this.audioUrl});
+      this.audioUrl});
 }
