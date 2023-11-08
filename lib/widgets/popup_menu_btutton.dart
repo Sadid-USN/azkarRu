@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 class PopupMenuButtonWidget extends StatelessWidget {
   final Stream<double> speedStream;
+  final Color ?containerColor;
   final Function(double) onSpeedSelected;
 
   const PopupMenuButtonWidget(
-      {Key? key, required this.speedStream, required this.onSpeedSelected})
+      {Key? key, 
+      
+      this.containerColor,
+      required this.speedStream, required this.onSpeedSelected})
       : super(key: key);
 
   @override
@@ -69,8 +73,8 @@ class PopupMenuButtonWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.black12,
-          borderRadius: BorderRadius.circular(8),
+          color: containerColor ?? Colors.black12,
+          borderRadius: BorderRadius.circular(4),
         ),
         child: StreamBuilder<double>(
           stream: speedStream,

@@ -1,7 +1,7 @@
 
 import 'package:animate_icons/animate_icons.dart';
 import 'package:avrod/data/reciters_data_list.dart';
-import 'package:avrod/models/radio_audioplayer.dart';
+import 'package:avrod/widgets/radio_audioplayer.dart';
 import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';

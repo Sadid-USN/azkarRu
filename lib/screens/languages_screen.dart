@@ -65,7 +65,7 @@ class LangugesScreen extends StatelessWidget {
             height: 16,
           ),
           LangButton(
-            title: '🇺🇦  Український',
+            title: '🇺🇦  Українська',
             onPressed: () {
               context.setLocale(const Locale('uk'));
 

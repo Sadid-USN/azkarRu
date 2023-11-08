@@ -1,18 +1,17 @@
-import 'package:animate_icons/animate_icons.dart';
+
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
-
-import 'package:avrod/colors/colors.dart';
-import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/controllers/radio_conteroller.dart';
 import 'package:avrod/core/addbunner_helper.dart';
 import 'package:avrod/data/reciters_data_list.dart';
+import 'package:avrod/generated/locale_keys.g.dart';
+import 'package:avrod/widgets/popup_menu_btutton.dart';
 
 class RadioAudioPlayer extends StatefulWidget {
   final int? index;
@@ -144,6 +143,7 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                 widget.index == 0
                     ? const SizedBox()
                     : _SurahsDropdownButton(
+                        audioPlayer: value.audioPlayer,
                         selectedChapter: value.selectedChapter,
                         quranChapters: quranChapters.entries.toList(),
                         onChapterSelected: (int chapter) {
@@ -165,7 +165,7 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                         ),
                       ),
                       child: const Icon(
-                        Icons.arrow_back_ios,
+                        Icons.skip_previous,
                         color: Colors.blueGrey,
                         size: 30,
                       ),
@@ -216,13 +216,53 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                         ),
                       ),
                       child: const Icon(
-                        Icons.arrow_forward_ios,
+                        Icons.skip_next,
                         color: Colors.blueGrey,
                         size: 30,
                       ),
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 8.0,
+                ),
+                widget.index == 0
+                    ? const SizedBox()
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          StreamBuilder<PositioneData>(
+                            stream: value.radioPositioneDataStream,
+                            builder: (context, snapshot) {
+                              final positionData = snapshot.data;
+
+                              return SizedBox(
+                                width: 220,
+                                child: ProgressBar(
+                                  barHeight: 4,
+                                  baseBarColor: Colors.grey.shade400,
+                                  bufferedBarColor: Colors.white,
+                                  progressBarColor: Colors.indigo.shade700,
+                                  thumbColor: Colors.indigo.shade700,
+                                  thumbRadius: 6,
+                                  timeLabelTextStyle: const TextStyle(
+                                      height: 1.2,
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                  progress:
+                                      positionData?.positione ?? Duration.zero,
+                                  buffered: positionData?.bufferedPosition ??
+                                      Duration.zero,
+                                  total:
+                                      positionData?.duration ?? Duration.zero,
+                                  onSeek: value.audioPlayer.seek,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
               ],
             ),
           ),
@@ -234,12 +274,14 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
 
 class _SurahsDropdownButton extends StatelessWidget {
   final int selectedChapter;
+  final AudioPlayer audioPlayer;
   final List<MapEntry<String, int>> quranChapters;
   final Function(int) onChapterSelected;
 
   const _SurahsDropdownButton({
     Key? key,
     required this.selectedChapter,
+    required this.audioPlayer,
     required this.quranChapters,
     required this.onChapterSelected,
   }) : super(key: key);
@@ -251,9 +293,7 @@ class _SurahsDropdownButton extends StatelessWidget {
       padding: const EdgeInsets.only(right: 5),
       alignment: Alignment.bottomRight,
       //width: MediaQuery.sizeOf(context).width /2,
-      decoration: const BoxDecoration(
-        color: Colors.black38
-      ),
+      decoration: const BoxDecoration(color: Colors.black38),
       child: PopupMenuButton<int>(
         onSelected: (int chapter) {
           onChapterSelected(chapter);
@@ -269,7 +309,17 @@ class _SurahsDropdownButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            
+            StreamBuilder<double>(
+              stream: audioPlayer.speedStream,
+              builder: (context, snapshot) => PopupMenuButtonWidget(
+                containerColor: Colors.blueGrey,
+                speedStream: audioPlayer.speedStream,
+                onSpeedSelected: (double newwidget) {
+                  audioPlayer.setSpeed(newwidget);
+                },
+              ),
+            ),
+            const Spacer(),
             Text(
               "${LocaleKeys.surah.tr()}: ${quranChapters.firstWhere(
                     (entry) => entry.value == selectedChapter,
