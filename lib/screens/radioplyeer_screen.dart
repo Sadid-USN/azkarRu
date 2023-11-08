@@ -1,8 +1,7 @@
+import 'package:avrod/widgets/radio_audioplayer.dart';
 import 'package:flutter/material.dart';
-
 import 'package:avrod/colors/colors.dart';
 
-import '../models/radio_audioplayer.dart';
 
 class RadioPlayerScreen extends StatelessWidget {
   final int ? index;

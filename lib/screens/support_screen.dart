@@ -1,7 +1,7 @@
 import 'package:animate_icons/animate_icons.dart';
+import 'package:arabic_font/arabic_font.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
-
 
 import 'package:clipboard/clipboard.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -248,7 +248,7 @@ class SupportCard extends StatelessWidget {
                         ),
                       ),
                       const Text(
-                        '/Avrod',
+                        '/Azkar',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -280,26 +280,28 @@ class SupportCard extends StatelessWidget {
                 blurRadius: 6.0)
           ],
         ),
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'ٱلَّذِینَ یَذۡكُرُونَ ٱللَّهَ قِیَـٰمࣰا وَقُعُودࣰا وَعَلَىٰ جُنُوبِهِمۡ وَیَتَفَكَّرُونَ فِی خَلۡقِ ٱلسَّمَـٰوَ ٰ⁠تِ وَٱلۡأَرۡضِ رَبَّنَا مَا خَلَقۡتَ هَـٰذَا بَـٰطِلࣰا سُبۡحَـٰنَكَ فَقِنَا عَذَابَ ٱلنَّارِ',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.amiri(
-                  fontWeight: FontWeight.bold,
+                style: ArabicTextStyle(
+                  arabicFont: ArabicFont.scheherazade,
                   color: Colors.white,
-                  fontSize: 14,
+                  height: 1.5,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(bottom: 10),
               child: Text(
-                'Avrod',
+                'Azkar',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
@@ -316,7 +318,7 @@ class SupportCard extends StatelessWidget {
 List<SupportCard> listCard = [
   SupportCard(
     cardNumbers: '4177   4901   6419   2280',
-    initials: 'Natynkul Zhyrgalbekova',
+    initials: 'Narynkul Zhyrgalbekova',
     icon: 'assets/support/mbank.png',
     gradient: LinearGradient(
       colors: [
@@ -329,7 +331,7 @@ List<SupportCard> listCard = [
   ),
   SupportCard(
     cardNumbers: "4177   4901   6183   8117",
-    initials: 'Natynkul Zhyrgalbekova',
+    initials: 'Narynkul Zhyrgalbekova',
     icon: 'assets/support/mbank.png',
     gradient: LinearGradient(colors: [
       Colors.blue.shade900,

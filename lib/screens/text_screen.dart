@@ -49,6 +49,7 @@ class _TextScreenState extends State<TextScreen>
     currentIndex = 0;
     _tabController = TabController(length: widget.texts!.length, vsync: this);
     _pageController = PageController();
+
     playAudio();
   }
 
@@ -82,6 +83,8 @@ class _TextScreenState extends State<TextScreen>
 
   @override
   void dispose() {
+    _pageController.dispose();
+
     _audioPlayer.dispose();
     super.dispose();
   }
@@ -208,7 +211,9 @@ class _TextScreenState extends State<TextScreen>
               decoration: const BoxDecoration(color: appBarbg),
             ),
             bottom: TabBar(
-              onTap: goToTab,
+              onTap: (index) {
+                _pageController.jumpToPage(index);
+              },
               controller: _tabController,
               isScrollable: true,
               tabs: List<Widget>.generate(
@@ -232,12 +237,14 @@ class _TextScreenState extends State<TextScreen>
           ),
           body: Column(
             children: [
-              const SizedBox(
-                height: 20,
-              ),
               Expanded(
                 child: PageView.builder(
-                  onPageChanged: goToTab,
+                  onPageChanged: (index) {
+                    setState(() {
+                      goToTab(index);
+                      _pageController.jumpToPage(index);
+                    });
+                  },
                   controller: _pageController,
                   itemCount: widget.texts!.length,
                   itemBuilder: (context, index) {

@@ -1,6 +1,6 @@
-import 'dart:math';
 
-import 'package:avrod/models/radio_audioplayer.dart';
+
+import 'package:avrod/widgets/radio_audioplayer.dart';
 
 List<InfoData> reciters = [
   InfoData(
@@ -72,7 +72,7 @@ List<InfoData> reciters = [
 Map<String, int> quranChapters = {
   "Al-Fatihah": 1,
   "Al-Baqarah": 2,
-  "Aali Imran": 3,
+  "Al-Imran": 3,
   "An-Nisa’": 4,
   "Al-Ma’idah": 5,
   "Al-An’am": 6,
