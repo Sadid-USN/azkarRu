@@ -224,173 +224,22 @@ class BookContent extends StatelessWidget {
               )),
             ),
             const SizedBox(
-              height: 14,
+              height: 20,
             ),
-            chapters.isAudioUrl!
-                ? Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 8),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 16),
-                          decoration: BoxDecoration(
-                              color: Colors.black12,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              StreamBuilder<PlayerState>(
-                                stream: audioPlayer.playerStateStream,
-                                builder: (context, snapshot) {
-                                  final playerState = snapshot.data;
-                                  final processingState =
-                                      playerState?.processingState;
-                                  final playing = playerState?.playing;
-                                  final completed = processingState ==
-                                      ProcessingState.completed;
-
-                                  if (processingState ==
-                                          ProcessingState.loading ||
-                                      processingState ==
-                                          ProcessingState.buffering) {
-                                    return IconButton(
-                                      icon: const CircularProgressIndicator(
-                                        strokeWidth: 3.0,
-                                        color: Colors.grey,
-                                      ),
-                                      iconSize: 35,
-                                      onPressed: audioPlayer.stop,
-                                    );
-                                  } else if (playing != true || completed) {
-                                    return IconButton(
-                                      color: Colors.blueGrey,
-                                      disabledColor: Colors.grey,
-                                      icon:
-                                          const Icon(Icons.play_circle_outline),
-                                      iconSize: 50,
-                                      onPressed: audioPlayer.play,
-                                    );
-                                  } else {
-                                    return IconButton(
-                                      color: Colors.blueGrey,
-                                      disabledColor: Colors.grey,
-                                      icon: const Icon(
-                                          Icons.pause_circle_outline),
-                                      iconSize: 50,
-                                      onPressed: audioPlayer.pause,
-                                    );
-                                  }
-                                },
-                              ),
-                              StreamBuilder<PositioneData>(
-                                  stream: positioneDataStream,
-                                  builder: (context, snapshot) {
-                                    final positionData = snapshot.data;
-
-                                    return SizedBox(
-                                      width:
-                                          MediaQuery.sizeOf(context).width / 2,
-                                      child: ProgressBar(
-                                        barHeight: 4,
-                                        baseBarColor: Colors.grey.shade400,
-                                        bufferedBarColor: Colors.white,
-                                        progressBarColor: Colors.blueGrey,
-                                        thumbColor: Colors.green.shade800,
-                                        thumbRadius: 6,
-                                        timeLabelTextStyle: const TextStyle(
-                                            height: 1.2,
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                        progress: positionData?.positione ??
-                                            Duration.zero,
-                                        buffered:
-                                            positionData?.bufferedPosition ??
-                                                Duration.zero,
-                                        total: positionData?.duration ??
-                                            Duration.zero,
-                                        onSeek: audioPlayer.seek,
-                                      ),
-                                    );
-                                  }),
-                              StreamBuilder<double>(
-                                stream: audioPlayer.speedStream,
-                                builder: (context, snapshot) =>
-                                    PopupMenuButtonWidget(
-                                  speedStream: audioPlayer.speedStream,
-                                  onSpeedSelected: (double newValue) {
-                                    audioPlayer.setSpeed(newValue);
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ElevatedButton(
-                              onPressed: onPreviousPagePressed,
-                              style: ElevatedButton.styleFrom(
-                                elevation: 1,
-                                foregroundColor: Colors.blueGrey.shade800,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                              child: const Icon(
-                                Icons.arrow_back_ios,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: onShareTap,
-                              child: Image.asset(
-                                "icons/shared.png",
-                                height: 30,
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: onNextPagePressed,
-                              style: ElevatedButton.styleFrom(
-                                elevation: 1,
-                                foregroundColor: Colors.blueGrey.shade800,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                              child: const Icon(
-                                Icons.arrow_forward_ios,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                : Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 10, right: 20, left: 20),
-                      child: AnimatedTextKit(
-                        totalRepeatCount: 1,
-                        repeatForever: false,
-                        pause: const Duration(seconds: 2),
-                        animatedTexts: [
-                          TypewriterAnimatedText(
-                            LocaleKeys.audioIsPending.tr(),
-                            textAlign: TextAlign.center,
-                            textStyle: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blueGrey.shade600),
-                            speed: const Duration(milliseconds: 50),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
+            _ReadingAudioPlayer(
+              positioneDataStream: positioneDataStream,
+              audioPlayer: audioPlayer,
+              onShareTap: onShareTap,
+              max: max,
+              scrollController: scrollController,
+              page: page!,
+              chapters: chapters,
+              onNextPagePressed: onNextPagePressed,
+              onPreviousPagePressed: onPreviousPagePressed,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
@@ -398,8 +247,196 @@ class BookContent extends StatelessWidget {
   }
 }
 
+class _ReadingAudioPlayer extends StatelessWidget {
+  final void Function()? onPreviousPagePressed;
+  final void Function()? onNextPagePressed;
+  final void Function()? onShareTap;
+  final ScrollController scrollController;
+  final AudioPlayer audioPlayer;
+  final Stream<PositioneData> positioneDataStream;
+  final int page;
+  final double max;
+  final LibChapters chapters;
 
+  const _ReadingAudioPlayer({
+    required this.onPreviousPagePressed,
+    required this.onNextPagePressed,
+    required this.onShareTap,
+    required this.scrollController,
+    required this.audioPlayer,
+    required this.positioneDataStream,
+    required this.page,
+    required this.max,
+    required this.chapters,
+  });
 
+  @override
+  Widget build(BuildContext context) {
+    return chapters.isAudioUrl!
+        ? Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                // margin: const EdgeInsets.only(bottom: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                decoration: BoxDecoration(
+                  color: Colors.black12,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    StreamBuilder<PlayerState>(
+                      stream: audioPlayer.playerStateStream,
+                      builder: (context, snapshot) {
+                        final playerState = snapshot.data;
+                        final processingState = playerState?.processingState;
+                        final playing = playerState?.playing;
+                        final completed =
+                            processingState == ProcessingState.completed;
+
+                        if (processingState == ProcessingState.loading ||
+                            processingState == ProcessingState.buffering) {
+                          return IconButton(
+                            icon: const CircularProgressIndicator(
+                              strokeWidth: 3.0,
+                              color: Colors.grey,
+                            ),
+                            iconSize: 35,
+                            onPressed: audioPlayer.stop,
+                          );
+                        } else if (playing != true || completed) {
+                          return IconButton(
+                            color: Colors.blueGrey,
+                            disabledColor: Colors.grey,
+                            icon: const Icon(Icons.play_circle_outline),
+                            iconSize: 50,
+                            onPressed: audioPlayer.play,
+                          );
+                        } else {
+                          return IconButton(
+                            color: Colors.blueGrey,
+                            disabledColor: Colors.grey,
+                            icon: const Icon(Icons.pause_circle_outline),
+                            iconSize: 50,
+                            onPressed: audioPlayer.pause,
+                          );
+                        }
+                      },
+                    ),
+                    StreamBuilder<PositioneData>(
+                      stream: positioneDataStream,
+                      builder: (context, snapshot) {
+                        final positionData = snapshot.data;
+
+                        return SizedBox(
+                          width: MediaQuery.of(context).size.width / 2,
+                          child: ProgressBar(
+                            barHeight: 4,
+                            baseBarColor: Colors.grey.shade400,
+                            bufferedBarColor: Colors.white,
+                            progressBarColor: Colors.blueGrey,
+                            thumbColor: Colors.green.shade800,
+                            thumbRadius: 6,
+                            timeLabelTextStyle: const TextStyle(
+                              height: 1.2,
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            progress: positionData?.positione ?? Duration.zero,
+                            buffered:
+                                positionData?.bufferedPosition ?? Duration.zero,
+                            total: positionData?.duration ?? Duration.zero,
+                            onSeek: audioPlayer.seek,
+                          ),
+                        );
+                      },
+                    ),
+                    StreamBuilder<double>(
+                      stream: audioPlayer.speedStream,
+                      builder: (context, snapshot) => PopupMenuButtonWidget(
+                        speedStream: audioPlayer.speedStream,
+                        onSpeedSelected: (double newValue) {
+                          audioPlayer.setSpeed(newValue);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 5, vertical: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: onPreviousPagePressed,
+                      style: ElevatedButton.styleFrom(
+                        elevation: 1,
+                        backgroundColor: Colors.blueGrey.shade100,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Icon(
+                        Icons.skip_previous_sharp,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: onShareTap,
+                      child: Image.asset(
+                        "icons/shared.png",
+                        height: 30,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: onNextPagePressed,
+                      style: ElevatedButton.styleFrom(
+                        elevation: 1,
+                        backgroundColor: Colors.blueGrey.shade100,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Icon(
+                        Icons.skip_next,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        : Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    bottom: 10, right: 20, left: 20, top: 20),
+                child: AnimatedTextKit(
+                  totalRepeatCount: 1,
+                  repeatForever: false,
+                  pause: const Duration(seconds: 2),
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      LocaleKeys.audioIsPending.tr(),
+                      textAlign: TextAlign.center,
+                      textStyle: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueGrey.shade600),
+                      speed: const Duration(milliseconds: 50),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+  }
+}
 
 // class ReadingBooksOnline extends StatefulWidget {
 //   final File? file;

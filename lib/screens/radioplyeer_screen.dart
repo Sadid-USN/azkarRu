@@ -4,18 +4,18 @@ import 'package:avrod/colors/colors.dart';
 
 
 class RadioPlayerScreen extends StatelessWidget {
-  final int ? index;
+
   const RadioPlayerScreen({
     Key? key,
-    this.index,
+   
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return    Scaffold(
+    return    const Scaffold(
           backgroundColor: bgColor,
         
-          body: RadioAudioPlayer(index: index),
+          body: RadioAudioPlayer(),
         );
     
   }

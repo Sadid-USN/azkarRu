@@ -1,4 +1,3 @@
-
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,10 +13,10 @@ import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/widgets/popup_menu_btutton.dart';
 
 class RadioAudioPlayer extends StatefulWidget {
-  final int? index;
+  // final int? index;
   const RadioAudioPlayer({
     Key? key,
-    this.index,
+    // this.index,
   }) : super(key: key);
 
   @override
@@ -35,6 +34,7 @@ class _RadioAudioPlayerState extends State<RadioAudioPlayer> {
     super.initState();
   }
 
+ 
   @override
   Widget build(BuildContext context) {
     // final PageController pageController = PageController();
@@ -119,7 +119,7 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
           const Spacer(),
           CircleAvatar(
             backgroundImage: NetworkImage(reciters[widget.index].image),
-            radius: 140,
+            radius: 120,
           ),
           const SizedBox(
             height: 16,

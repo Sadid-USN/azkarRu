@@ -101,8 +101,7 @@ class RadioController extends ChangeNotifier {
     if (currentPage < newListInfo.length) {
       currentPage++;
       refreshAudioUrls(reciterNames, selectedChapter);
-      // playAudio();
-      // Play the audio for the new page
+  
       pageController.animateToPage(
         currentPage,
         duration: const Duration(milliseconds: 300),

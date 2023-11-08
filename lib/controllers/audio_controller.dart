@@ -1,4 +1,5 @@
 import 'package:animate_icons/animate_icons.dart';
+import 'package:avrod/controllers/radio_conteroller.dart';
 
 import 'package:avrod/models/book_model.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
@@ -14,6 +15,12 @@ class AudioController extends ChangeNotifier {
   int selectedIndex = 0;
   int currentIndex = 0;
 
+  AudioController() {
+    loadSelectedCategories();
+    selectedCategories
+        .addAll(categories.keys); // Добавьте все категории по умолчанию
+  }
+
   final List<String> selectedCategories = [];
 
   final Map<String, String> categories = {
@@ -26,12 +33,6 @@ class AudioController extends ChangeNotifier {
 
   String getTranslatedCategory(String categoryName) {
     return categories[categoryName] ?? categoryName;
-  }
-
-  AudioController() {
-    loadSelectedCategories();
-    selectedCategories
-        .addAll(categories.keys); // Добавьте все категории по умолчанию
   }
 
   bool get hasSelectedCategories => selectedCategories.isNotEmpty;
