@@ -27,14 +27,16 @@ class _RadioAudioPlayerState extends State<RadioAudioPlayer> {
   int currenIndex = 0;
   @override
   void initState() {
-    final controller = Provider.of<RadioController>(context, listen: false);
-    controller.newListInfo = reciters;
-    controller.playAudio();
+    if (context.mounted) {
+      final controller = Provider.of<RadioController>(context, listen: false);
+      controller.newListInfo = reciters;
+     
+      controller.playAudio();
+    }
 
     super.initState();
   }
 
- 
   @override
   Widget build(BuildContext context) {
     // final PageController pageController = PageController();
@@ -81,24 +83,25 @@ class AudiPlyerCard extends StatefulWidget {
 
 class _AudiPlyerCardState extends State<AudiPlyerCard> {
   late BannerAdHelper bannerAdHelper = BannerAdHelper();
+  @override
+  void dispose() {
+    bannerAdHelper.bannerAd.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
 
-    bannerAdHelper.initializeAdMob(
-      onAdLoaded: (ad) {
-        setState(() {
-          bannerAdHelper.isBannerAd = true;
-        });
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    bannerAdHelper.bannerAd.dispose();
-    super.dispose();
+    if (context.mounted) {
+      bannerAdHelper.initializeAdMob(
+        onAdLoaded: (ad) {
+          setState(() {
+            bannerAdHelper.isBannerAd = true;
+          });
+        },
+      );
+    }
   }
 
   @override
@@ -208,6 +211,8 @@ class _AudiPlyerCardState extends State<AudiPlyerCard> {
                         }
                       },
                     ),
+                    //  widget.index == 7 ?
+                    //  const SizedBox(width: 60,):
                     ElevatedButton(
                       onPressed: value.onNextPagePressed,
                       style: ElevatedButton.styleFrom(

@@ -9,7 +9,7 @@ List<InfoData> reciters = [
     image:
         'https://i.pinimg.com/564x/39/aa/2b/39aa2b0f6647ae3b098820c0285271f2.jpg',
     name: 'furqan-radio',
-    subtitle: '24/7',
+    subtitle: 'Furqan Radio 24/7',
   ),
   InfoData(
       id: "2",
@@ -17,56 +17,56 @@ List<InfoData> reciters = [
       //     'https://download.quranicaudio.com/qdc/siddiq_minshawi/murattal/${Random().nextInt(114) + 1}.mp3',
       image:
           'https://static.qurancdn.com/images/reciters/7/mohamed-siddiq-el-minshawi-profile.jpeg?v=1',
-      name: 'Mohamed Siddiq',
-      subtitle: 'al-Minshawi'),
+      name: '',
+      subtitle: 'Mohamed Siddiq al-Minshawi'),
   InfoData(
       id: "3",
       // audioUrl:
       //     'https://download.quranicaudio.com/qdc/khalil_al_husary/murattal/${Random().nextInt(114) + 1}.mp3',
       image:
           'https://static.qurancdn.com/images/reciters/5/mahmoud-khalil-al-hussary-profile.png?v=1',
-      name: 'Mahmoud Khalil',
-      subtitle: 'Al-Husary'),
+      name: '',
+      subtitle: 'Mahmoud Khalil Al-Husary'),
   InfoData(
       id: "4",
       // audioUrl:
       //     'https://download.quranicaudio.com/qdc/abdul_baset/murattal/${Random().nextInt(114) + 1}.mp3',
       image:
           'https://static.qurancdn.com/images/reciters/1/abdelbasset-profile.jpeg?v=1',
-      name: 'AbdulBaset',
-      subtitle: 'AbdulSamad'),
+      name: '',
+      subtitle: 'AbdulBaset AbdulSamad'),
   InfoData(
       id: "5",
       // audioUrl:
       //     'https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/${Random().nextInt(114) + 1}.mp3',
       image:
           'https://static.qurancdn.com/images/reciters/6/mishary-rashid-alafasy-profile.jpeg?v=1',
-      name: 'Mishari Rashid',
-      subtitle: 'al-`Afasy'),
+      name: '',
+      subtitle: 'Mishari Rashid Al-`Afasy'),
   InfoData(
       id: "6",
       // audioUrl:
       //     'https://download.quranicaudio.com/qdc/abu_bakr_shatri/murattal/${Random().nextInt(114) + 1}.mp3',
       image:
           'https://2.bp.blogspot.com/-zbRVES0XunQ/TgRDKGBDG6I/AAAAAAAABuA/2hFmIkeQTqE/s1600/abu-bakr-al-shatri.jpg',
-      name: 'Abu Bakr',
-      subtitle: 'al-Shatri'),
+      name: '',
+      subtitle: 'Abu Bakr Al-Shatri'),
   InfoData(
       id: "7",
       // audioUrl:
       //     'https://download.quranicaudio.com/qdc/khalifah_taniji/murattal/${Random().nextInt(114) + 1}.mp3',
       image:
           'https://static.qurancdn.com/images/reciters/11/khalifa-al-tunaiji-profile.jpeg?v=1',
-      name: ' Khalifa Musabah',
-      subtitle: 'Al-Tunaiji'),
+      name: '',
+      subtitle: 'Khalifa Musabah Al-Tunaiji'),
   InfoData(
       id: "8",
       // audioUrl:
       //     'https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/${Random().nextInt(114) + 1}.mp3',
       image:
           'https://static.qurancdn.com/images/reciters/4/hani-ar-rifai-profile.jpeg?v=1',
-      name: 'Sheikh Hani',
-      subtitle: 'ar-Rifai'),
+      name: '',
+      subtitle: 'Sheikh Hani ar-Rifai'),
 ];
 
 Map<String, int> quranChapters = {
