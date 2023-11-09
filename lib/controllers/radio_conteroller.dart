@@ -1,4 +1,3 @@
-
 import 'package:animate_icons/animate_icons.dart';
 import 'package:avrod/data/reciters_data_list.dart';
 import 'package:avrod/widgets/radio_audioplayer.dart';
@@ -16,8 +15,12 @@ class RadioController extends ChangeNotifier {
   late int currentPage;
   RadioController() {
     currentPage = 0;
+    newListInfo = reciters;
     selectedChapter = 1;
     pageController = PageController(initialPage: currentPage);
+    Future.delayed(const Duration(milliseconds: 100));
+     playAudio();
+    
   }
 
   List<InfoData> newListInfo = [];
@@ -55,7 +58,7 @@ class RadioController extends ChangeNotifier {
     }
   }
 
-  void playAudio() {
+  Future<void> playAudio() async {
     final audioSource = AudioSource.uri(
       Uri.parse(newListInfo[currentPage].audioUrl ?? ""),
       tag: MediaItem(
@@ -85,7 +88,6 @@ class RadioController extends ChangeNotifier {
           reciters[i].audioUrl = audioUrl;
           reciters[i].name = reciterName;
         }
-        notifyListeners();
       }
     });
   }
@@ -94,41 +96,34 @@ class RadioController extends ChangeNotifier {
     currentPage = index;
 
     playAudio();
-    notifyListeners();
   }
 
-  void onNextPagePressed() {
-    if (currentPage < newListInfo.length) {
+  void onNextPagePressed() async {
+      await _radioAaudioPlayer.stop();
+    if (currentPage < newListInfo.length - 1) {
+      // Проверка на выход за пределы допустимого диапазона
       currentPage++;
-      refreshAudioUrls(reciterNames, selectedChapter);
-  
-      pageController.animateToPage(
-        currentPage,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
     } else {
-      // currentPage = 0; // Return to the first page
-      // refreshAudioUrls();
-      // playAudio(); // Play the audio for the first page
-      // pageController.animateToPage(
-      //   currentPage,
-      //   duration: const Duration(milliseconds: 300),
-      //   curve: Curves.ease,
-      // );
-      // notifyListeners();
+       await playAudio();
+      currentPage = 0;
+      refreshAudioUrls(reciterNames, selectedChapter);
     }
+
+
+    pageController.animateToPage(
+      currentPage,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
   }
 
   void previousPagePressed() {
-    if (currentPage < newListInfo.length) {
+    if (currentPage > 0) {
       currentPage--;
-      refreshAudioUrls(reciterNames, selectedChapter);
-      // playAudio();
 
       pageController.animateToPage(
         currentPage,
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 200),
         curve: Curves.ease,
       );
     }
