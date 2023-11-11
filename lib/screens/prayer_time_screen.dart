@@ -57,7 +57,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
     }
 
     if (context.mounted) {
-      final PrayersModel newData = await PrayersApi().getData(
+      final PrayersModel newData = await PrayersApi().getPrayerTimes(
           context: context,
           capital: capital,
           country: country,
@@ -80,7 +80,7 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
       Timings prayerTimings, String currentDate) async {
     if (currentDate != DateFormat('dd-MM-yyyy').format(dateForfam)) {
       // Если данные о времени молитвы не актуальны для текущей даты, перезагрузагружаем
-      final PrayersModel newData = await PrayersApi().getData(
+      final PrayersModel newData = await PrayersApi().getPrayerTimes(
           context: context,
           capital: capital,
           country: country,
