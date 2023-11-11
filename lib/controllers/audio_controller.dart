@@ -16,6 +16,7 @@ class AudioController extends ChangeNotifier {
   int currentIndex = 0;
 
   AudioController() {
+      // _tabController = TabController();
     loadSelectedCategories();
     selectedCategories
         .addAll(categories.keys); // Добавьте все категории по умолчанию
@@ -40,8 +41,8 @@ class AudioController extends ChangeNotifier {
   final String _boxName = 'selectedCategories';
 
   Chapters? chapter;
-  late TabController _tabController;
-  TabController? get tabController => _tabController;
+  // late TabController _tabController;
+  // TabController? get tabController => _tabController;
 
   final AnimateIconController copyController = AnimateIconController();
   final AnimateIconController controller = AnimateIconController();
@@ -50,9 +51,9 @@ class AudioController extends ChangeNotifier {
   bool isPlaying = false;
   String? currentUrl;
 
-  late final AudioPlayer _audioPlayer = AudioPlayer();
+  // late final AudioPlayer _audioPlayer = AudioPlayer();
 
-  AudioPlayer get audioPlayer => _audioPlayer;
+  // AudioPlayer get audioPlayer => _audioPlayer;
 
   final Stream<QuerySnapshot> books = FirebaseFirestore.instance
       .collection('books')

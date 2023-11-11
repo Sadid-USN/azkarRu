@@ -37,18 +37,15 @@ Future<void> main() async {
   await MobileAds.instance.initialize();
   tz.initializeTimeZones();
 
-  // CoordinatesInit().initCoordinates();
-
   await GetStorage.init();
 
   // FirebaseDatabase.instance.setPersistenceEnabled(true);
   await EasyLocalization.ensureInitialized();
-  await JustAudioBackground.init(
-    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
-    androidNotificationChannelName: 'Audio playback',
-    androidNotificationOngoing: true,
-  );
-
+  // await JustAudioBackground.init(
+  //   androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+  //   androidNotificationChannelName: 'Audio playback',
+  //   androidNotificationOngoing: true,
+  // );
   await Hive.initFlutter();
 
   await Hive.openBox('pageBox');
@@ -107,8 +104,8 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
-    // home: const DataUploadedScreen(),
-        routes: appRoutes,
+          // home: const DataUploadedScreen(),
+          routes: appRoutes,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,

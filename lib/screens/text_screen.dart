@@ -34,9 +34,18 @@ class _TextScreenState extends State<TextScreen>
   late TabController _tabController;
   late PageController _pageController;
 
+  // Future<void> initJustAudioBG() async {
+  //   await JustAudioBackground.init(
+  //     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+  //     androidNotificationChannelName: 'Audio playback',
+  //     androidNotificationOngoing: true,
+  //   );
+  // }
+
   @override
   void initState() {
     super.initState();
+
 
     internetConnectionController = InternetConnectionController(Connectivity());
 
@@ -139,7 +148,9 @@ class _TextScreenState extends State<TextScreen>
     }
   }
 
-  void playAudio() {
+  void playAudio(
+    
+  ) {
     final audioSource = AudioSource.uri(
       Uri.parse(widget.texts![currentIndex].url ?? ""),
       tag: MediaItem(

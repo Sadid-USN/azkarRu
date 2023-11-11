@@ -63,7 +63,7 @@ class _AudioPlayerBottomSheetState extends State<AudioPlayerBottomSheet> {
                 IconButton(
                   onPressed: () {
                     Share.share(
-                        '*${widget.chapter.name}\n\n${widget.texts[widget.currentIndex].text!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${widget.texts[widget.currentIndex].arabic!}\n\n${widget.texts[widget.currentIndex].translation!}\n\n${widget.texts[widget.currentIndex].url!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${LocaleKeys.downloadText.tr()}\n\n👇👇👇👇\n\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
+                        '*${widget.chapter.name}\n\n${widget.texts[widget.currentIndex].text!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${widget.texts[widget.currentIndex].arabic!}\n\n${widget.texts[widget.currentIndex].translation!}\n\nAudio 🎵\n\n${widget.texts[widget.currentIndex].url!}\n\n❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃❃\n\n${LocaleKeys.downloadText.tr()}\n\n👇👇👇👇\n\nhttps://play.google.com/store/apps/details?id=com.darulasar.Azkar');
                   },
                   icon: const Icon(Icons.share,
                       size: 30.0, color: Colors.white),
