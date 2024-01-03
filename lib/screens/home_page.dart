@@ -10,14 +10,14 @@ import 'package:avrod/screens/favorite_chapter_screen.dart';
 import 'package:avrod/screens/radioplyeer_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import 'package:provider/provider.dart';
 import '../widgets/drawer_widget.dart';
 import 'booksScreen/selected_books.dart';
 import 'languages_screen.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+//     FlutterLocalNotificationsPlugin();
 
 class HomePage extends StatefulWidget {
   static const HOME = '/home';

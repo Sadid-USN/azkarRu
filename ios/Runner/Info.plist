@@ -48,6 +48,9 @@
     <array>
         <string>audio</string>
     </array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need your location for XYZ feature.</string>
+
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen.storyboard</string>
     <key>UIMainStoryboardFile</key>

@@ -2,6 +2,7 @@ import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/controllers/data_uploader.dart';
 import 'package:avrod/controllers/internet_chacker.dart';
 import 'package:avrod/controllers/library_controller.dart';
+import 'package:avrod/controllers/prayer_time_controller.dart';
 import 'package:avrod/controllers/radio_conteroller.dart';
 import 'package:avrod/core/notify_helper.dart';
 import 'package:avrod/firebase/firebase_messagin.dart';
@@ -33,7 +34,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseMessaginApi().initNotification();
-  await NotificationHelper().initNotification();
+  // await NotificationHelper().initNotification();
   await MobileAds.instance.initialize();
   tz.initializeTimeZones();
 
@@ -71,6 +72,9 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider<DataUploaderController>(
             create: (context) => DataUploaderController(context),
+          ),
+          ChangeNotifierProvider<PrayTimeController>(
+            create: (context) => PrayTimeController(),
           ),
           ChangeNotifierProvider<AudioController>(
             lazy: true,

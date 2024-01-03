@@ -1,20 +1,16 @@
-import 'dart:math';
-
 import 'package:avrod/colors/colors.dart';
-import 'package:avrod/core/extention_capitalize.dart';
-import 'package:avrod/core/notify_helper.dart';
+import 'package:avrod/controllers/audio_controller.dart';
+import 'package:avrod/controllers/internet_chacker.dart';
+import 'package:avrod/controllers/prayer_time_controller.dart';
 import 'package:avrod/core/try_again_button.dart';
-import 'package:avrod/data/counties_and_capitals.dart';
-import 'package:country_picker/country_picker.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:hijri/hijri_calendar.dart';
-import 'package:avrod/API/prayers_api.dart';
-
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/prayers_model.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:provider/provider.dart';
 
 class PrayerTimeScreen extends StatefulWidget {
   const PrayerTimeScreen({Key? key}) : super(key: key);
@@ -24,165 +20,31 @@ class PrayerTimeScreen extends StatefulWidget {
 }
 
 class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
-  Future<PrayersModel>? _prayerModel;
-  // String city = "Bishkek";
-  String country = "North Korea";
-  String capital = "Pyongyang";
-  DateTime dateForfam = DateTime.now();
-  final prayStorage = GetStorage();
-  final countryStorage = GetStorage();
-  final capitalStorage = GetStorage();
-  final player = AudioPlayer();
-  int notificationId = 0;
-  bool isSoundEnabled = true;
-  final NotificationHelper _notificationHelper = NotificationHelper();
+  late final InternetConnectionController internetConnectionController;
+  late final PrayTimeController prayTimeController;
 
   @override
   void initState() {
     super.initState();
+    // Initialize the controllers
+    final Connectivity connectivity = Connectivity();
+    internetConnectionController = InternetConnectionController(connectivity);
+    prayTimeController = PrayTimeController();
 
-    _loadSavedCountry();
-    _fetchAndCacheData();
-    //  _notificationHelper.initNotification();
+    // Start listening to network changes
+    internetConnectionController.listenToNetworkChanges(context);
   }
 
-  Future<void> _fetchAndCacheData() async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    final cachedData = prayStorage.read('prayer_data');
-
-    if (cachedData != null) {
-      setState(() {
-        _prayerModel = Future.value(PrayersModel.fromJson(cachedData));
-      });
-    }
-
-    if (context.mounted) {
-      final PrayersModel newData = await PrayersApi().getPrayerTimes(
-          context: context,
-          capital: capital,
-          country: country,
-          date: DateFormat('dd-MM-yyyy').format(dateForfam));
-      prayStorage.write('prayer_data', newData.toJson());
-
-      setState(() {
-        _prayerModel = Future.value(newData);
-      });
-      final Timings prayerTimings = newData.data!.timings!;
-
-      _schedulePrayerNotifications(
-        prayerTimings,
-        DateFormat('dd-MM-yyyy').format(dateForfam),
-      );
-    }
+  @override
+  void dispose() {
+    internetConnectionController.dispose();
+    super.dispose();
   }
 
-  Future<void> _schedulePrayerNotifications(
-      Timings prayerTimings, String currentDate) async {
-    if (currentDate != DateFormat('dd-MM-yyyy').format(dateForfam)) {
-      // Если данные о времени молитвы не актуальны для текущей даты, перезагрузагружаем
-      final PrayersModel newData = await PrayersApi().getPrayerTimes(
-          context: context,
-          capital: capital,
-          country: country,
-          date: formattedDate);
-      prayStorage.write('prayer_data', newData.toJson());
-      prayerTimings = newData.data!.timings!;
-    }
-    int id = Random().nextInt(10000);
+  final player = AudioPlayer();
+  int notificationId = 0;
+  bool isSoundEnabled = true;
 
-    final Map<String, String> timingsMap = {
-      LocaleKeys.fajr.tr(): prayerTimings.fajr??  "19:04",
-      LocaleKeys.duhr.tr(): prayerTimings.dhuhr ?? "_",
-      LocaleKeys.asr.tr(): prayerTimings.asr ?? "_",
-      LocaleKeys.maghrib.tr(): prayerTimings.maghrib ?? "_",
-      LocaleKeys.isha.tr(): prayerTimings.isha ?? "_",
-    };
-
-    for (var prayerName in timingsMap.keys) {
-      final prayerTime = timingsMap[prayerName]!.split(':');
-      final hour = int.parse(prayerTime[0]);
-      final minutes = int.parse(prayerTime[1]);
-
-      await _notificationHelper.scheduleNotification(
-        id: id,
-        //id: notificationId++,
-        hour: hour,
-        minutes: minutes,
-        parayName: prayerName,
-        body:
-            '${LocaleKeys.itsTimeFor.tr().capitalize()} ${prayerName.capitalize()}',
-      );
-    }
-  }
-
-  // Function to show the country picker
-  void _showCountryPicker() {
-    showCountryPicker(
-      context: context,
-      countryListTheme: CountryListThemeData(
-        flagSize: 25,
-        backgroundColor: Colors.white,
-        textStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey),
-        bottomSheetHeight: 500,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
-        inputDecoration: InputDecoration(
-          labelText: LocaleKeys.search.tr(),
-          hintText: LocaleKeys.startSearch.tr(),
-          labelStyle: const TextStyle(fontSize: 14),
-          hintStyle: const TextStyle(fontSize: 14),
-          prefixIcon: const Icon(Icons.search),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              width: 0.5,
-              color: const Color(0xFF8C98A8).withOpacity(0.2),
-            ),
-          ),
-        ),
-      ),
-      onSelect: (Country selectedCountry) {
-        setState(() {
-          country = selectedCountry.name;
-
-          capital = countriesAndCapitals[country] ?? 'Pyongyang';
-        });
-
-        final storage = GetStorage();
-
-        storage.write('country', country);
-        capitalStorage.write('capital', capital);
-
-        _fetchAndCacheData();
-      },
-    );
-  }
-
-  Future<void> _loadSavedCountry() async {
-    final savedCountry = countryStorage.read('country');
-    final savedCapital = capitalStorage.read('capital');
-
-    if (savedCountry != null) {
-      setState(() {
-        country = savedCountry;
-        capital = savedCapital;
-
-        print(country);
-      });
-    } else {
-      setState(() {
-        country;
-      });
-    }
-  }
-
-  var todayHijry = HijriCalendar.now();
-
-  final formattedDate = DateFormat(
-    'd MMMM y',
-  ).format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,229 +57,238 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
       //   icon: const Icon(Icons.notification_add),
       // )),
       backgroundColor: bgColor,
-      body: FutureBuilder<PrayersModel>(
-        future: _prayerModel,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(
-              child: TryAgainButton(onPressed: () {
-                _fetchAndCacheData();
-              }),
-            );
-          } else if (snapshot.hasData) {
-            final data = snapshot.data!.data;
+      body: Consumer<PrayTimeController>(
+        builder: (context, value, child) => FutureBuilder<PrayersModel>(
+          future: value.prayerModel,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return TryAgainButton(
+                  errorTitle: snapshot.error.toString(),
+                  onPressed: () {
+                    value.fetchAndCacheData();
+                  });
+            } else if (snapshot.hasData) {
+              final data = snapshot.data!.data;
 
-            final prayerTimings = [
-              LocaleKeys.fajr.tr(),
-              LocaleKeys.duhr.tr(),
-              LocaleKeys.asr.tr(),
-              LocaleKeys.maghrib.tr(),
-              LocaleKeys.isha.tr(),
-              LocaleKeys.fast.tr(),
-              LocaleKeys.Lastthird.tr()
-            ];
+              final prayerTimings = [
+                LocaleKeys.fajr.tr(),
+                LocaleKeys.duhr.tr(),
+                LocaleKeys.asr.tr(),
+                LocaleKeys.maghrib.tr(),
+                LocaleKeys.isha.tr(),
+                LocaleKeys.fast.tr(),
+                LocaleKeys.Lastthird.tr()
+              ];
 
-            return SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(top: 20, bottom: 25),
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0.0, 1.0),
-                          blurRadius: 4.0,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
-                              Icons.calendar_month,
-                              size: 40,
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Column(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              _TopHeader(
+                                ignoring: value.isLoading,
+                                title: data!.meta?.timezone ?? "null",
+                                onTap: () {
+                                  value.fetchAndCacheData();
+                                },
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          _SunriseCard(
+                            sunrise: data.timings?.sunrise ?? "null",
+                            sunset: data.timings?.sunset ?? "null",
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          _SalahCard(
+                            label: prayerTimings[0],
+                            time: data.timings!.fajr ?? "null",
+                            icon: Image.asset(
+                              "icons/timesalah.png",
+                              height: 30,
                             ),
-                            const SizedBox(
-                              width: 10,
+                          ),
+                          _SalahCard(
+                            label: prayerTimings[1],
+                            time: data.timings!.dhuhr ?? "null",
+                            icon: Image.asset(
+                              "icons/timesalah.png",
+                              height: 30,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("${LocaleKeys.today.tr()}/$formattedDate"),
-                                Text(todayHijry.toFormat(
-                                  "MMMM dd yyyy",
-                                )),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                              ],
+                          ),
+                          _SalahCard(
+                            label: prayerTimings[2],
+                            time: data.timings!.asr ?? "null",
+                            icon: Image.asset(
+                              "icons/timesalah.png",
+                              height: 30,
                             ),
-
-                            // InkWell(
-                            //   onTap: () {
-                            //     setState(() {
-                            //       isSoundEnabled = !isSoundEnabled;
-                            //     });
-                            //   },
-                            //   child: Image.asset(
-                            //     isSoundEnabled
-                            //         ? "icons/volume.png"
-                            //         : "icons/volumeOff.png",
-                            //     height: 30,
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                        _CountrySelectionButton(
-                          title: country.isEmpty || country == "North Korea"
-                              ? LocaleKeys.chooseYourCountry.tr()
-                              : country,
-                          onTap: () {
-                            _showCountryPicker();
-                          },
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        _SunriseCard(
-                          sunrise: data?.timings?.sunrise ?? "null",
-                          sunset: data?.timings?.sunset ?? "null",
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        _SalahCard(
-                          label: prayerTimings[0],
-                          time: data?.timings!.fajr ?? "null",
-                          icon: Image.asset(
-                            "icons/timesalah.png",
-                            height: 30,
                           ),
-                        ),
-                        _SalahCard(
-                          label: prayerTimings[1],
-                          time: data?.timings!.dhuhr ?? "null",
-                          icon: Image.asset(
-                            "icons/timesalah.png",
-                            height: 30,
+                          _SalahCard(
+                            label: prayerTimings[3],
+                            time: data.timings!.maghrib ?? "null",
+                            icon: Image.asset(
+                              "icons/timesalah.png",
+                              height: 30,
+                            ),
                           ),
-                        ),
-                        _SalahCard(
-                          label: prayerTimings[2],
-                          time: data?.timings!.asr ?? "null",
-                          icon: Image.asset(
-                            "icons/timesalah.png",
-                            height: 30,
+                          _SalahCard(
+                            label: prayerTimings[4],
+                            time: data.timings!.isha ?? "null",
+                            icon: Image.asset(
+                              "icons/timesalah.png",
+                              height: 30,
+                            ),
                           ),
-                        ),
-                        _SalahCard(
-                          label: prayerTimings[3],
-                          time: data?.timings!.maghrib ?? "null",
-                          icon: Image.asset(
-                            "icons/timesalah.png",
-                            height: 30,
+                          const SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        _SalahCard(
-                          label: prayerTimings[4],
-                          time: data?.timings!.isha ?? "null",
-                          icon: Image.asset(
-                            "icons/timesalah.png",
-                            height: 30,
+                          _SalahCard(
+                            label: prayerTimings[5],
+                            time: data.timings!.imsak ?? "null",
+                            icon: Image.asset(
+                              "icons/fasting.png",
+                              height: 25,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        _SalahCard(
-                          label: prayerTimings[5],
-                          time: data?.timings!.imsak ?? "null",
-                          icon: Image.asset(
-                            "icons/fasting.png",
-                            height: 25,
+                          _SalahCard(
+                            label: prayerTimings[6],
+                            time: data.timings!.lastthird ?? "null",
+                            icon: Image.asset(
+                              "icons/praying.png",
+                              height: 25,
+                            ),
                           ),
-                        ),
-                        _SalahCard(
-                          label: prayerTimings[6],
-                          time: data?.timings!.lastthird ?? "null",
-                          icon: Image.asset(
-                            "icons/praying.png",
-                            height: 25,
-                          ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
+                ),
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
     );
   }
 }
 
-class _CountrySelectionButton extends StatelessWidget {
+class _TopHeader extends StatelessWidget {
   final void Function()? onTap;
   final String title;
-  const _CountrySelectionButton({
+  final bool ignoring;
+  const _TopHeader({
     Key? key,
     this.onTap,
     required this.title,
+    required this.ignoring,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: ElevatedButton(
-        onPressed: onTap,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xffF8E4CF),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          foregroundColor: Colors.blueGrey.shade800,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        child: Row(
+    var todayHijry = HijriCalendar.now();
+
+    final formattedDate = DateFormat(
+      'd MMMM y',
+    ).format(DateTime.now());
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
           children: [
-            const Spacer(),
-            Icon(
-              Icons.location_on,
-              color: Colors.blue.shade700,
-            ),
-            const Spacer(
-              flex: 3,
-            ),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 14),
-            ),
-            const Spacer(
-              flex: 3,
+            const Icon(
+              Icons.calendar_month,
+              size: 45,
             ),
             const SizedBox(
-              width: 14,
+              width: 25,
             ),
-            Icon(Icons.arrow_drop_down, color: Colors.blueGrey.shade800),
-            const Spacer(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  todayHijry.toFormat("MMMM dd yyyy"),
+                  style: const TextStyle(fontSize: 18.0),
+                ),
+                Text(
+                  "${LocaleKeys.today.tr()}/$formattedDate",
+                  style: const TextStyle(fontSize: 18.0),
+                ),
+              ],
+            )
           ],
         ),
-      ),
+
+        const SizedBox(
+          height: 16,
+        ),
+        Row(
+          children: [
+            IgnorePointer(
+              ignoring: ignoring,
+              child: SizedBox(
+                height: 45,
+                child: FloatingActionButton(
+                  elevation: 2,
+                  onPressed: onTap,
+                  backgroundColor: Colors.blueGrey.shade100,
+                  foregroundColor: Colors.blueGrey.shade800,
+                  shape: const CircleBorder(),
+                  child: ignoring
+                      ? const SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3,
+                            ),
+                          ),
+                        )
+                      : Icon(
+                          Icons.location_on,
+                          color: Colors.blue.shade700,
+                        ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 25,
+            ),
+            ignoring
+                ? const SizedBox()
+                : Text(
+                    title,
+                    style: const TextStyle(fontSize: 18),
+                  ),
+          ],
+        ),
+
+        // _CountrySelectionButton(
+        //   ignoring: value.isLoading,
+        //   title: data!.meta?.timezone ?? "null",
+        //   onTap: () {
+        //     value.isLoading = !value.isLoading;
+        //     value.fetchAndCacheData();
+        //   },
+        // ),
+      ],
     );
   }
 }
@@ -437,18 +308,21 @@ class _SalahCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      height: 45,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.1),
+      margin: const EdgeInsets.only(
+        bottom: 8,
+        left: 16.0,
+        right: 16.0,
       ),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(4.0)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             label,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.blueGrey.shade700),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width / 2 / 1.2,
@@ -457,7 +331,10 @@ class _SalahCard extends StatelessWidget {
               children: [
                 Text(
                   time,
-                  style: const TextStyle(fontSize: 16),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.blueGrey.shade700),
                 ),
                 icon,
               ],
@@ -482,23 +359,106 @@ class _SunriseCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text(sunrise),
+        Text(
+          sunrise,
+          style: const TextStyle(fontSize: 16),
+        ),
         Image.asset(
           "icons/sunrise.png",
-          height: 30,
+          height: 40,
         ),
         const SizedBox(
           width: 10,
         ),
         Image.asset(
           "icons/sunset.png",
-          height: 30,
+          height: 40,
         ),
-        Text(sunset),
+        Text(
+          sunset,
+          style: const TextStyle(fontSize: 16),
+        ),
       ],
     );
   }
 }
+
+
+
+// class _CountrySelectionButton extends StatefulWidget {
+//   final Map<String, String> timeZones;
+//   final String selectedLocation;
+//   final ValueChanged<String> onChanged;
+
+//   const _CountrySelectionButton({
+//     required this.timeZones,
+//     required this.selectedLocation,
+//     required this.onChanged,
+//     Key? key,
+//   }) : super(key: key);
+
+//   @override
+//   _CountrySelectionButtonState createState() => _CountrySelectionButtonState();
+// }
+
+// class _CountrySelectionButtonState extends State<_CountrySelectionButton> {
+//   late TextEditingvalue _searchvalue;
+//   late List<String> filteredLocations;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _searchvalue = TextEditingvalue();
+//     filteredLocations = widget.timeZones.values.toList();
+//   }
+
+//   @override
+//   void dispose() {
+//     _searchvalue.dispose();
+//     super.dispose();
+//   }
+
+//   void _filterLocations(String query) {
+//     setState(() {
+//       filteredLocations = widget.timeZones.values
+//           .where((location) =>
+//               location.toLowerCase().contains(query.toLowerCase()))
+//           .toList();
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         TextField(
+//           value: _searchvalue,
+//           onChanged: _filterLocations,
+//           decoration: const InputDecoration(
+//             labelText: 'Поиск',
+//             hintText: 'Введите название локации',
+//             prefixIcon: Icon(Icons.search),
+//           ),
+//         ),
+//         DropdownButton<String>(
+//           value: widget.selectedLocation,
+//           onChanged: (String? newValue) {
+//             if (newValue != null) {
+//               widget.onChanged(newValue);
+//             }
+//           },
+//           items:
+//               filteredLocations.map<DropdownMenuItem<String>>((String value) {
+//             return DropdownMenuItem<String>(
+//               value: value,
+//               child: Text(value),
+//             );
+//           }).toList(),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 // class GregorianCalendar extends StatefulWidget {
 //   const GregorianCalendar({Key? key}) : super(key: key);
@@ -545,6 +505,191 @@ class _SunriseCard extends StatelessWidget {
 //             setState(() {
 //               format = _format;
 //             });
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+// class PrayerTimeScreen extends StatefulWidget {
+//   const PrayerTimeScreen({Key? key}) : super(key: key);
+
+//   @override
+//   _PrayerTimeScreenState createState() => _PrayerTimeScreenState();
+// }
+
+// class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
+//   Future<PrayerTimes>? _prayerTimesFuture;
+//   late String _selectedLocation;
+//    DateTime currebtDateTime = DateTime.now();
+//   // Список всех доступных часовых поясов и городов
+//   Map<String, String> timeZones = {};
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _selectedLocation = 'Asia/Bishkek';
+//     _prayerTimesFuture = _getUserPrayerTimes(_selectedLocation, currebtDateTime);
+//     tzdata.initializeTimeZones();
+//     _getTimeZoneList();
+//   }
+
+//   void _getTimeZoneList() {
+//     final locations = tz.timeZoneDatabase.locations;
+//     for (var location in locations.values) {
+//       timeZones[location.name] = location.name;
+//     }
+//   }
+
+//   Future<PrayerTimes> _getUserPrayerTimes(String locationName,  DateTime currebtDateTime ) async {
+//     try {
+//       Position position = await _determinePosition();
+
+//       double latitude = position.latitude;
+//       double longitude = position.longitude;
+
+//       Coordinates coordinates = Coordinates(latitude, longitude);
+
+//       PrayerCalculationParameters params =
+//           PrayerCalculationMethod.muslimWorldLeague();
+//       params.madhab = PrayerMadhab.hanafi;
+
+//       return PrayerTimes(
+//         coordinates: coordinates,
+//         calculationParameters: params,
+//         precision: true,
+//         locationName: locationName,
+//         dateTime: DateTime.now(),
+//       );
+//     } catch (e) {
+//       throw 'Ошибка получения местоположения: $e';
+//     }
+//   }
+
+//   Future<Position> _determinePosition() async {
+//     bool serviceEnabled;
+//     LocationPermission permission;
+
+//     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+//     if (!serviceEnabled) {
+//       throw 'Службы местоположения отключены.';
+//     }
+
+//     permission = await Geolocator.checkPermission();
+//     if (permission == LocationPermission.denied) {
+//       permission = await Geolocator.requestPermission();
+//       if (permission == LocationPermission.denied) {
+//         throw 'Разрешения на местоположение отклонены.';
+//       }
+//     }
+
+//     if (permission == LocationPermission.deniedForever) {
+//       throw 'Разрешения на местоположение отклонены навсегда.';
+//     }
+
+//     return await Geolocator.getCurrentPosition();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: bgColor,
+//       body: Center(
+//         child: FutureBuilder<PrayerTimes>(
+//           future: _prayerTimesFuture,
+//           builder: (context, snapshot) {
+//             if (snapshot.connectionState == ConnectionState.waiting) {
+//               return const CircularProgressIndicator();
+//             } else if (snapshot.hasError) {
+//               return SelectableText('Ошибка: ${snapshot.error}');
+//             } else if (snapshot.hasData) {
+//               PrayerTimes prayerTimes = snapshot.data!;
+//               print("Fajr Time ${prayerTimes.coordinates.latitude}");
+//               print("Fajr Time ${prayerTimes.coordinates.longitude}");
+           
+//               String formatPrayerTime(DateTime? time) {
+//                 return DateFormat.Hm().format(time!);
+//               }
+
+//               return Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 children: [
+//                   Padding(
+//                     padding: const EdgeInsets.only(left: 16),
+//                     child: DropdownButton<String>(
+//                       icon: const Icon(Icons.location_on),
+//                       value: _selectedLocation,
+//                       // hint: const Text('Выберите часовой пояс'),
+//                       onChanged: (String? newValue) {
+//                         setState(() {
+//                           _selectedLocation = newValue!;
+//                           _prayerTimesFuture = _getUserPrayerTimes(newValue, currebtDateTime);
+//                         });
+//                       },
+//                       items: timeZones.values
+//                           .map<DropdownMenuItem<String>>((String value) {
+//                         return DropdownMenuItem<String>(
+//                           value: value,
+//                           child: Column(
+//                             mainAxisSize: MainAxisSize.min,
+//                             children: [
+//                               Text(value),
+//                             ],
+//                           ),
+//                         );
+//                       }).toList(),
+//                     ),
+//                   ),
+//                   const SizedBox(height: 20),
+//                   _SalahCard(
+//                     label: LocaleKeys.fajr.tr(),
+//                     time: formatPrayerTime(prayerTimes.fajrEndTime),
+//                     icon: Image.asset(
+//                       "icons/timesalah.png",
+//                       height: 30,
+//                     ),
+//                   ),
+//                   _SalahCard(
+//                     label: LocaleKeys.duhr.tr(),
+//                     time: formatPrayerTime(prayerTimes.dhuhrStartTime),
+//                     icon: Image.asset(
+//                       "icons/timesalah.png",
+//                       height: 30,
+//                     ),
+//                   ),
+//                   _SalahCard(
+//                     label: LocaleKeys.asr.tr(),
+//                     time: formatPrayerTime(prayerTimes.asrStartTime),
+//                     icon: Image.asset(
+//                       "icons/timesalah.png",
+//                       height: 30,
+//                     ),
+//                   ),
+//                   _SalahCard(
+//                     label: LocaleKeys.maghrib.tr(),
+//                     time: formatPrayerTime(prayerTimes.maghribStartTime),
+//                     icon: Image.asset(
+//                       "icons/timesalah.png",
+//                       height: 30,
+//                     ),
+//                   ),
+//                   _SalahCard(
+//                     label: LocaleKeys.isha.tr(),
+//                     time: formatPrayerTime(prayerTimes.ishaStartTime),
+//                     icon: Image.asset(
+//                       "icons/timesalah.png",
+//                       height: 30,
+//                     ),
+//                   ),
+//                 ],
+//               );
+//             } else {
+//               return const Text('Нет данных');
+//             }
 //           },
 //         ),
 //       ),

@@ -5,20 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 
-
 class PrayersApi {
-  Future<PrayersModel> getPrayerTimes(
-      {required BuildContext context,
-      required String country,
-      required String capital,
-      required String date}) async {
+  Future<PrayersModel> getPrayerTimes({
+ 
+    required String date,
+    required double latitude,
+    required double longitude,
+  }) async {
     try {
       final response = await http.get(Uri.parse(
-          "https://api.aladhan.com/v1/timingsByCity/$date?city=$capital&country=$country&method=8"));
+        'http://api.aladhan.com/v1/timings/$date?latitude=$latitude&longitude=$longitude&method=4'
+           // "https://api.aladhan.com/v1/timingsByCity/$date?city=$capital&country=$country&method=4&latitude=$latitude&longitude=$longitude",
+            
+            ));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final prayersModel = PrayersModel.fromJson(data);
-        print(capital);
+        print(prayersModel.data!.meta!.timezone);
+        print(prayersModel.data!.meta!.latitude);
+        print(prayersModel.data!.meta!.longitude);
         return prayersModel;
       } else {
         // Show a Snackbar for failed network request
@@ -26,10 +31,6 @@ class PrayersApi {
         throw Exception("Failed to fetch data");
       }
     } catch (e) {
-      if (context.mounted) {
-        //  showNetworkSnackbar(context, LocaleKeys.checkConnection.tr());
-      }
-
       throw "Error";
     }
   }
@@ -42,7 +43,6 @@ class PrayersApi {
     );
   }
 }
-
 
 Future<Position> determinePosition() async {
   bool serviceEnabled;

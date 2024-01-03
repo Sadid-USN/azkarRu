@@ -62,7 +62,7 @@ class CodegenLoader extends AssetLoader{
   "maghrib": "Магриб",
   "isha": "Иша",
   "itsTimeFor": "Время намаза",
-  "chooseYourCountry": "Выберите вашу страну",
+  "setPrayerTime": "Установите время молитв для вашего города",
   "fast": "Пост",
   "russian": "Русский",
   "english": "Английский",
@@ -87,7 +87,8 @@ class CodegenLoader extends AssetLoader{
   "supportText4": "«Когда человек умирает, (все) его дела прекращаются (прекращает получать награду) за исключением трёх: непрерывной милостыни, знания, которым могут пользоваться (другие люди), или праведного ребёнка, который станет обращаться к Аллаху с мольбами за него”». Этот хадис передал Муслим (1631).",
   "supportText5": "С дозволения Всевышнего мы будем продолжать работать над улучшением приложения. Вся хвала Всевышнему Аллаху, Господу миров!",
   "supportText6": "Если вы хотите финансово поддержать наш проект, пожалуйста, свяжитесь с нами по электронной почте по адресу ulamuyaman@gmail.com",
-  "favoriteText": "Здесь будут отображаться ваши избранные главы"
+  "favoriteText": "Здесь будут отображаться ваши избранные главы",
+  "locationErrorTexr": "Для отображения времени молитв необходимо включить геолокации."
 };
 static const Map<String,dynamic> uk = {
   "avrod": "Азкари",
@@ -138,7 +139,7 @@ static const Map<String,dynamic> uk = {
   "maghrib": "Магріб",
   "isha": "Іша",
   "itsTimeFor": "Час намазу",
-  "chooseYourCountry": "Виберіть вашу країну",
+  "setPrayerTime": "Встановіть час молитов для вашого міста",
   "fast": "Піст",
   "russian": "Російська",
   "english": "Англійська",
@@ -162,7 +163,8 @@ static const Map<String,dynamic> uk = {
   "supportText4": "«Коли людина помирає, (усі) її справи припиняються (припиняє отримувати винагороду) за винятком трьох: безперервної милостині; знання, яким можуть користуватися (інші люди); або праведної дитини, що звертатиметься до Аллага з благаннями за неї”». Цей хадис передав Муслім (1631).",
   "supportText5": "З дозволу Всевишнього ми продовжуватимемо працювати над поліпшенням додатка. Вся хвала Всевишньому Аллаху, Господу світів!",
   "supportText6": "Якщо ви хочете фінансово підтримати наш проект, будь ласка, зв'яжіться з нами електронною поштою за адресою ulamuyaman@gmail.com",
-  "favoriteText": "Тут відображатимуться ваші обрані глави"
+  "favoriteText": "Тут відображатимуться ваші обрані глави",
+  "locationErrorTexr": "Для відображення часу молитов необхідно увімкнути геолокацію."
 };
 static const Map<String,dynamic> en = {
   "avrod": "Azkar Daily prayers",
@@ -226,7 +228,7 @@ static const Map<String,dynamic> en = {
   "Tafsir": "Tafsir",
   "Sirah": "Sirah",
   "fontsize": "Font size",
-  "chooseYourCountry": "Choose your Country",
+  "setPrayerTime": "Set prayer times for your city",
   "fast": "Fasting",
   "Lastthird": "Last third",
   "downloadText": "Download the *Azkar* application in the Play Store",
@@ -237,7 +239,8 @@ static const Map<String,dynamic> en = {
   "supportText4": "When a man dies, his deeds come to an end except for three things: Sadaqah Jariyah (ceaseless charity); a knowledge which is beneficial, or a virtuous descendant who prays for him (for the deceased). (Muslim:1631)",
   "supportText5": "With the permission of the Most High, we will continue to work on improving the application. All praise is due to Allah, the Lord of the worlds!",
   "supportText6": "If you want to financially support our project, please contact us via email at ulamuyaman@gmail.com",
-  "favoriteText": "Your favorite chapters will be displayed here"
+  "favoriteText": "Your favorite chapters will be displayed here",
+  "locationErrorTexr": "To display prayer times, you must enable geolocation."
 };
 static const Map<String,dynamic> fr = {
   "avrod": "Авроди субҳу шом",
@@ -301,7 +304,7 @@ static const Map<String,dynamic> fr = {
   "isha": "Хуфтан",
   "surah": "Сураи",
   "itsTimeFor": "Вақти намози",
-  "chooseYourCountry": "Кишваратонро интихоб кунед",
+  "setPrayerTime": "Вақтҳои намозро таъин кунед",
   "category": "Даста",
   "pages": "Саҳифа",
   "read": "Хондан",
@@ -312,7 +315,8 @@ static const Map<String,dynamic> fr = {
   "supportText3": "Инчунин Аз Абуҳурайра ривоят аст, ки Расули Аллоҳ (ﷺ) фармуд:",
   "supportText4": "«Чун инсон мемирад, (ҳама) аъмоли ӯ қатъ мегардад ба ҷуз се чиз: садақаи ҷория, донише, ки (дигарон) аз он истифода мекунанд ё фарзандони солеҳе, ки ба сӯи Аллоҳ рӯй оварда дар ҳақи ӯ дуо мекунанд. Муслим (1631).",
   "supportText5": "Ҳамеша аз дастгирии шумо самимона миннатдорем!",
-  "supportText6": "Агар муфассалтар оиди кумак хохед маълумот пайдо кунед, пас бо мо тавассути почтаи электронии ulamuyaman@gmail.com тамос гиред"
+  "supportText6": "Агар муфассалтар оиди кумак хохед маълумот пайдо кунед, пас бо мо тавассути почтаи электронии ulamuyaman@gmail.com тамос гиред",
+  "locationErrorTexr": "Барои намоиш додани вақтҳои намоз, шумо бояд ҷойгиршавии худро боз кунед."
 };
 static const Map<String,dynamic> ar = {
   "avrod": "أذكار الصباح والمساء",
@@ -387,7 +391,8 @@ static const Map<String,dynamic> ar = {
   "supportText4": "إذا مات ابن آدم انقطع عمله إلا من ثلاث: صدقة جارية، أو علم ينتفع به، أو ولد صالح يدعو له. (مسلم: 1631)",
   "supportText5": "بإذن الله العلي العظيم، سنواصل العمل على تحسين التطبيق. كل الحمد لله رب العالمين!",
   "supportText6": "إذا كنت ترغب في دعم مشروعنا مالياً، يُرجى التواصل معنا عبر البريد الإلكتروني على ulamuyaman@gmail.com",
-  "favoriteText": "سيتم عرض الفصول المفضلة لديك هنا"
+  "favoriteText": "سيتم عرض الفصول المفضلة لديك هنا",
+  "locationErrorTexr": "لعرض أوقات الصلاة، يلزم عليك تمكين تحديد موقعك "
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "uk": uk, "en": en, "fr": fr, "ar": ar};
 }

@@ -19,8 +19,7 @@ class RadioController extends ChangeNotifier {
     selectedChapter = 1;
     pageController = PageController(initialPage: currentPage);
     Future.delayed(const Duration(milliseconds: 100));
-     playAudio();
-    
+    playAudio();
   }
 
   List<InfoData> newListInfo = [];
@@ -57,6 +56,8 @@ class RadioController extends ChangeNotifier {
       _radioAaudioPlayer.pause();
     }
   }
+
+
 
   Future<void> playAudio() async {
     final audioSource = AudioSource.uri(
@@ -99,16 +100,15 @@ class RadioController extends ChangeNotifier {
   }
 
   void onNextPagePressed() async {
-      await _radioAaudioPlayer.stop();
+    await _radioAaudioPlayer.stop();
     if (currentPage < newListInfo.length - 1) {
       // Проверка на выход за пределы допустимого диапазона
       currentPage++;
     } else {
-       await playAudio();
+      await playAudio();
       currentPage = 0;
       refreshAudioUrls(reciterNames, selectedChapter);
     }
-
 
     pageController.animateToPage(
       currentPage,
