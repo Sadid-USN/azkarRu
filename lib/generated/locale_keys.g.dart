@@ -49,7 +49,10 @@ abstract class  LocaleKeys {
   static const isha = 'isha';
   static const itsTimeFor = 'itsTimeFor';
   static const setPrayerTime = 'setPrayerTime';
-  static const fast = 'fast';
+  static const imsak = 'imsak';
+  static const sunrise = 'sunrise';
+  static const Sunset = 'Sunset';
+  static const midnight = 'midnight';
   static const russian = 'russian';
   static const english = 'english';
   static const tajik = 'tajik';
@@ -60,7 +63,8 @@ abstract class  LocaleKeys {
   static const Tafsir = 'Tafsir';
   static const Sirah = 'Sirah';
   static const fontsize = 'fontsize';
-  static const Lastthird = 'Lastthird';
+  static const firstthird = 'firstthird';
+  static const lastthird = 'lastthird';
   static const downloadText = 'downloadText';
   static const category = 'category';
   static const pages = 'pages';

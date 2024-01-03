@@ -78,8 +78,8 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
                 LocaleKeys.asr.tr(),
                 LocaleKeys.maghrib.tr(),
                 LocaleKeys.isha.tr(),
-                LocaleKeys.fast.tr(),
-                LocaleKeys.Lastthird.tr()
+                LocaleKeys.imsak.tr(),
+                LocaleKeys.lastthird.tr()
               ];
 
               return SingleChildScrollView(
