@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomBanner {
   CustomBanner._();
 
-  static showBanner(
+  static void showBanner(
       BuildContext context, String message, Color bgColor, Duration? duration) {
     ScaffoldMessenger.of(context).showMaterialBanner(MaterialBanner(
       actions: [
@@ -36,5 +36,12 @@ class CustomBanner {
         ),
       ),
     ));
+
+    if (duration != null) {
+      // Hide the banner after the specified duration
+      Future.delayed(duration, () {
+        ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+      });
+    }
   }
 }

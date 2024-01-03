@@ -28,7 +28,7 @@ class InternetConnectionController extends ChangeNotifier {
           context,
           LocaleKeys.noInternetConnection.tr(),
           Colors.grey.shade800,
-          const Duration(days: 100),
+          const Duration(seconds: 2),
         );
       }
       internetNotifier.value = isConnected;
@@ -45,7 +45,7 @@ class InternetConnectionController extends ChangeNotifier {
           context,
           LocaleKeys.noInternetConnection.tr(),
           Colors.grey.shade800,
-          const Duration(days: 100),
+          const Duration(seconds: 2),
         );
       }
       internetNotifier.value = isConnected;

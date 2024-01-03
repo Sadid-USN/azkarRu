@@ -48,7 +48,7 @@ abstract class  LocaleKeys {
   static const maghrib = 'maghrib';
   static const isha = 'isha';
   static const itsTimeFor = 'itsTimeFor';
-  static const chooseYourCountry = 'chooseYourCountry';
+  static const setPrayerTime = 'setPrayerTime';
   static const fast = 'fast';
   static const russian = 'russian';
   static const english = 'english';
@@ -74,5 +74,6 @@ abstract class  LocaleKeys {
   static const supportText5 = 'supportText5';
   static const supportText6 = 'supportText6';
   static const favoriteText = 'favoriteText';
+  static const locationErrorTexr = 'locationErrorTexr';
 
 }
