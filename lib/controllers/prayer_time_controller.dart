@@ -2,6 +2,7 @@ import 'package:avrod/API/prayers_api.dart';
 import 'package:avrod/data/counties_and_capitals.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/prayers_model.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -17,31 +18,44 @@ class PrayTimeController extends ChangeNotifier {
   final capitalStorage = GetStorage();
   bool isLoading = false;
 
-   PrayTimeController() {
-  
+  PrayTimeController() {
     _initialize();
   }
 
   Future<void> _initialize() async {
-
     await fetchAndCacheData();
   }
 
- Future<void> fetchAndCacheData() async {
+  Future<void> fetchAndCacheData() async {
     await Future.delayed(const Duration(milliseconds: 300));
     if (isLoading) return; // Prevent recursive calls
     isLoading = true;
     notifyListeners();
+
     try {
+      var connectivityResult = await (Connectivity().checkConnectivity());
+      if (connectivityResult == ConnectivityResult.none) {
+        var cachedData = prayStorage.read('prayer_data');
+        if (cachedData != null) {
+          var cachedPrayerModel = PrayersModel.fromJson(cachedData);
+          prayerModel = Future.value(cachedPrayerModel);
+          isLoading = false;
+          notifyListeners();
+          return;
+        }
+      }
+
+      // Internet connection available, fetch data from API
       final position = await determinePosition();
       final newData = await PrayersApi().getPrayerTimes(
         latitude: position.latitude,
         longitude: position.longitude,
         date: DateFormat('dd-MM-yyyy').format(dateForfam),
+
+  
       );
-
+   
       prayStorage.write('prayer_data', newData.toJson());
-
       prayerModel = Future.value(newData);
     } catch (e) {
       prayerModel = Future.error(LocaleKeys.locationErrorTexr.tr());
@@ -56,6 +70,7 @@ class PrayTimeController extends ChangeNotifier {
     capital = countriesAndCapitals[country] ?? 'Pyongyang';
     fetchAndCacheData();
   }
+
   void onShowCountryPicker(BuildContext context) {
     showCountryPicker(
       context: context,

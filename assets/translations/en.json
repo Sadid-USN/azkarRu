@@ -46,6 +46,10 @@
     "asr": "Asr",
     "maghrib": "Maghrib",
     "isha": "Isha",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "midnight": "midnight",
+    "firstthird": "Firstthird",
     "itsTimeFor": "It's time for",
     "category": "Category",
     "pages": "Pages",
@@ -61,9 +65,8 @@
     "Sirah": "Sirah",
     "fontsize": "Font size",
     "setPrayerTime": "Set prayer times for your city",
-  
-    "fast": "Fasting",
-    "Lastthird": "Last third",
+    "imsak": "Fasting",
+    "lastthird": "Last third",
     "downloadText": "Download the *Azkar* application in the Play Store",
     "translation": "Translation",
     "supportText1": "Your support helps us improve and expand the application. We value any form of support that promotes the revival of the Sunnah of the Prophet (ﷺ), whether it be financial assistance or spreading information about our application. We are grateful for any help. As Allah the Almighty said in His Holy Book:",
@@ -74,5 +77,4 @@
     "supportText6": "If you want to financially support our project, please contact us via email at ulamuyaman@gmail.com",
     "favoriteText": "Your favorite chapters will be displayed here",
     "locationErrorTexr": "To display prayer times, you must enable geolocation."
-
 }
