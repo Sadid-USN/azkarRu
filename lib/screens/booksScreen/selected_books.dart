@@ -1,3 +1,4 @@
+import 'package:avrod/screens/booksScreen/contents_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -99,6 +100,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       itemCount: filteredBooksList.length,
                       itemBuilder: ((context, index) {
                         final book = filteredBooksList[index];
+                        final chapters = filteredBooksList[index].chapters;
 
                         return Padding(
                           padding: const EdgeInsets.only(
@@ -112,15 +114,19 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               elevation: 2.0,
                             ),
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: ((context) {
-                                return OverviewPage(
-                                  index: index,
-                                  book: filteredBooksList[index],
-                                  title:
-                                      filteredBooksList[index].title ?? "null",
-                                );
-                              })));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: ((context) {
+                                    return OverviewPage(
+                                      index: index,
+                                      book: filteredBooksList[index],
+                                      title: filteredBooksList[index].title ??
+                                          "null",
+                                    );
+                                  }),
+                                ),
+                              );
                             },
                             child: Row(
                               // mainAxisAlignment: MainAxisAlignment.spaceBetween,

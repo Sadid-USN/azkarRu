@@ -48,7 +48,8 @@
     "isha": "Іша",
     "itsTimeFor": "Час намазу",
     "setPrayerTime": "Встановіть час молитов для вашого міста",
-    "imsak":"Піст",
+    "imsak": "Піст",
+    "contents": "Вміст",
     "russian": "Російська",
     "english": "Англійська",
     "tajik": "Таджицька",
@@ -59,7 +60,6 @@
     "Tafsir": "Тафсір",
     "Sirah": "Сіра",
     "fontsize": "Розмір шрифту",
-
     "firstthird": "Першийтретій",
     "lastthird": "Остання третина",
     "downloadText": "Завантажити додаток *Azkar* в Play Store",

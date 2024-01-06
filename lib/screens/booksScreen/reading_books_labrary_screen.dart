@@ -37,15 +37,20 @@ class BookReading extends StatefulWidget {
 
 class _BookReadingState extends State<BookReading> {
   bool isOntap = false;
+  // late int initialPage;
   ScrollController scrollController = ScrollController();
   AnimateIconController animateIconController = AnimateIconController();
   @override
   void initState() {
     final controller = Provider.of<LibraryController>(context, listen: false);
     controller.book = widget.book;
-    controller.initHive();
+
+    int initialPage = controller.currentPage = widget.index;
+
+    controller.pageController = PageController(initialPage: initialPage);
+
     controller.playAudio();
-    controller.getLastReadedPage();
+
     super.initState();
   }
 
@@ -84,6 +89,7 @@ class _BookReadingState extends State<BookReading> {
         body: PageView.builder(
           controller: value.pageController,
           onPageChanged: (index) {
+            value.currentPage = index;
             value.onPageChanged(index);
             value.audioPlayer.stop();
           },
@@ -109,7 +115,7 @@ class _BookReadingState extends State<BookReading> {
                     max: widget.book.chapters!.length.toDouble() - 1,
                     image: widget.book.image ?? "_",
                     scrollController: scrollController,
-                    page: index + 1,
+                    page: value.currentPage + 1,
                     chapters: widget.book.chapters![index],
                     onNextPagePressed: value.onNextPagePressed,
                     onPreviousPagePressed: value.previousPagePressed,
@@ -410,31 +416,32 @@ class _ReadingAudioPlayer extends StatelessWidget {
               ),
             ],
           )
-        : Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 10, right: 20, left: 20, top: 20),
-                child: AnimatedTextKit(
-                  totalRepeatCount: 1,
-                  repeatForever: false,
-                  pause: const Duration(seconds: 2),
-                  animatedTexts: [
-                    TypewriterAnimatedText(
-                      LocaleKeys.audioIsPending.tr(),
-                      textAlign: TextAlign.center,
-                      textStyle: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blueGrey.shade600),
-                      speed: const Duration(milliseconds: 50),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
+        : const SizedBox();
+    // : Column(
+    //     mainAxisSize: MainAxisSize.min,
+    //     children: [
+    //       Padding(
+    //         padding: const EdgeInsets.only(
+    //             bottom: 10, right: 20, left: 20, top: 20),
+    //         child: AnimatedTextKit(
+    //           totalRepeatCount: 1,
+    //           repeatForever: false,
+    //           pause: const Duration(seconds: 2),
+    //           animatedTexts: [
+    //             TypewriterAnimatedText(
+    //               LocaleKeys.audioIsPending.tr(),
+    //               textAlign: TextAlign.center,
+    //               textStyle: TextStyle(
+    //                   fontSize: 16.0,
+    //                   fontWeight: FontWeight.bold,
+    //                   color: Colors.blueGrey.shade600),
+    //               speed: const Duration(milliseconds: 50),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ],
+    //   );
   }
 }
 
