@@ -1,3 +1,4 @@
+import 'package:avrod/screens/booksScreen/contents_page.dart';
 import 'package:avrod/screens/favorite_chapter_screen.dart';
 import 'package:avrod/screens/home_page.dart';
 import 'package:avrod/screens/languages_screen.dart';
@@ -16,4 +17,5 @@ final Map<String, WidgetBuilder> appRoutes = {
   "/radio": (context) => const RadioPlayerScreen(),
   "/uploader": (context) =>  const DataUploadedScreen(),
   "/overview": (context) =>    const OverviewPage(),
+  "/contentspage": (context) =>     const ContentsPage(),
 };

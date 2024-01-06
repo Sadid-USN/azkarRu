@@ -50,6 +50,7 @@ abstract class  LocaleKeys {
   static const itsTimeFor = 'itsTimeFor';
   static const setPrayerTime = 'setPrayerTime';
   static const imsak = 'imsak';
+  static const contents = 'contents';
   static const sunrise = 'sunrise';
   static const Sunset = 'Sunset';
   static const midnight = 'midnight';

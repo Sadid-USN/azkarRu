@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:avrod/screens/booksScreen/contents_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class OverviewPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Hero(
-            tag: book?.image ?? noImage ,
+            tag: book?.image ?? noImage,
             child: OverviewBookImage(
               image: book?.image ?? noImage,
               id: book?.id ?? "0.0",
@@ -314,10 +315,15 @@ class _BottomSheet extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: ((context) {
-                          return BookReading(
-                            book: book,
+                          return ContentsPage(
+                            bookModel: book,
                             index: index,
                           );
+
+                          // BookReading(
+                          //   book: book,
+                          //   index: index,
+                          // );
                         }),
                       ),
                     );

@@ -12,10 +12,10 @@ import 'package:rxdart/rxdart.dart';
 class LibraryController extends ChangeNotifier {
   late final AudioPlayer _audioPlayer = AudioPlayer();
 
-  LibraryController() {
-    currentPage = 0;
-    pageController = PageController(initialPage: currentPage);
-  }
+  // LibraryController() {
+  //   currentPage = 0;
+  // pageController = PageController(initialPage: currentPage);
+  // }
 
   AudioPlayer get audioPlayer => _audioPlayer;
   late int currentPage;
@@ -24,22 +24,22 @@ class LibraryController extends ChangeNotifier {
   late int? lastReadedPage;
   late int? getCurrentIndexAudio;
   late LibBookModel book;
-  void getLastReadedPage() {
-    lastReadedPage = savePageBox.get(
-      book.id,
-    );
-    if (lastReadedPage != null) {
-      currentPage = lastReadedPage!;
-      pageController = PageController(initialPage: lastReadedPage ?? 0);
-    } else {
-      currentPage = 0;
-      pageController = PageController(initialPage: currentPage);
-    }
-  }
+  // void getLastReadedPage(int? lastReadedPage) {
+  //   lastReadedPage = savePageBox.get(
+  //     book.id,
+  //   );
+  //   if (lastReadedPage != null) {
+  //     currentPage = lastReadedPage;
+  //     pageController = PageController(initialPage: lastReadedPage ?? 0);
+  //   } else {
+  //     currentPage = 0;
+  //     pageController = PageController(initialPage: currentPage);
+  //   }
+  // }
 
-  void initHive() {
-    savePageBox = Hive.box('pageBox');
-  }
+  // void initHive() {
+  //   savePageBox = Hive.box('pageBox');
+  // }
 
   Stream<PositioneData> get positioneDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
@@ -60,9 +60,9 @@ class LibraryController extends ChangeNotifier {
   }
 
   void playAudio() {
-    int getCurrentIndexAudio = savePageBox.get(book.id) ?? 0;
+   // int getCurrentIndexAudio = savePageBox.get(book.id) ?? 0;
     final audioSource = AudioSource.uri(
-      Uri.parse(book.chapters?[getCurrentIndexAudio].url ?? "_"),
+      Uri.parse(book.chapters?[currentPage].url ?? "_"),
       tag: MediaItem(
         id: book.id.toString(),
         album: book.title,
@@ -71,7 +71,7 @@ class LibraryController extends ChangeNotifier {
       ),
     );
 
-    print("THIS IS CURRENT SAVED INDEX AUDIO ====>>>> $getCurrentIndexAudio");
+    print("THIS IS CURRENT SAVED INDEX AUDIO ====>>>> $currentPage");
 
     _audioPlayer.setAudioSource(audioSource);
     _audioPlayer.playerStateStream.listen((playerState) {
@@ -79,11 +79,11 @@ class LibraryController extends ChangeNotifier {
     });
   }
 
-  void onPageChanged(index) {
-    currentPage = index;
-    savePageBox.put(book.id, currentPage);
-    playAudio();
-  }
+void onPageChanged(int index) {
+  currentPage = index;
+  // savePageBox.put(book.id, currentPage);
+  playAudio();
+}
 
   void onNextPagePressed() {
     if (currentPage < book.chapters!.length - 1) {
@@ -104,7 +104,7 @@ class LibraryController extends ChangeNotifier {
       );
     }
 
-    savePageBox.put(book.id, currentPage);
+   // savePageBox.put(book.id, currentPage);
   }
 
   void previousPagePressed() {

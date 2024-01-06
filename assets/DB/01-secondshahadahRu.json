@@ -6,7 +6,9 @@
     "lang": "Ru",
     "title": "Свидетельство Мухаммад (ﷺ) посланник Аллаха",
     "image": "https://firebasestorage.googleapis.com/v0/b/azkar-de3a2.appspot.com/o/images%2FsecondShadah.jpeg?alt=media&token=888bc904-41da-4cf6-bcff-e0f978a19ce6",
+ 
     "chapters": [
+       
         
         {
             "id": 1,
@@ -191,7 +193,7 @@
         },
         {
             "id": 12,
-            "subtitle": "Предпочтение слов Пророка (ﷺ) словам остальных людей и соблюдение его Сунны",
+            "subtitle": "6 - Предпочтение слов Пророка (ﷺ) словам остальных людей и соблюдение его Сунны",
             "text": "Сказал Всевышний Аллах: **О те, которые уверовали! Не опережайте Аллаха и Его Посланника…** ¹",
             "url": "https://firebasestorage.googleapis.com/v0/b/azkar-de3a2.appspot.com/o/libaudios%2FSecond%20Shahadah%2F12.mp3?alt=media&token=0b7ff13c-4e4e-4747-b838-82340907ed6c",
             "isAudioUrl" : true,

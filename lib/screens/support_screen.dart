@@ -1,6 +1,7 @@
 import 'package:animate_icons/animate_icons.dart';
 import 'package:arabic_font/arabic_font.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+
 import 'package:avrod/generated/locale_keys.g.dart';
 
 import 'package:clipboard/clipboard.dart';
@@ -171,17 +172,7 @@ class SupportCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            const Positioned(
-              right: 0.0,
-              child: AvatarGlow(
-                endRadius: 30.0,
-                child: Material(
-                  // Replace this child with your own
-                  elevation: 8.0,
-                  shape: CircleBorder(),
-                ),
-              ),
-            ),
+  
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
