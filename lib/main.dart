@@ -6,6 +6,7 @@ import 'package:avrod/controllers/prayer_time_controller.dart';
 import 'package:avrod/controllers/radio_conteroller.dart';
 import 'package:avrod/core/notify_helper.dart';
 import 'package:avrod/firebase/firebase_messagin.dart';
+import 'package:avrod/models/lib_book_model.dart';
 import 'package:avrod/routes.dart';
 import 'package:avrod/screens/uploder_screen.dart';
 
@@ -49,12 +50,14 @@ Future<void> main() async {
   // );
   await Hive.initFlutter();
 
+
   await Hive.openBox('pageBox');
   await Hive.openBox(FAVORITES_BOX);
 
   Locale? startLocale = await getSavedLocale();
   startLocale ??= WidgetsBinding.instance.platformDispatcher.locale;
   final Connectivity connectivity = Connectivity();
+
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -108,8 +111,8 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
-        //  home: const DataUploadedScreen(),
-        routes: appRoutes,
+      // home: const DataUploadedScreen(),
+      routes: appRoutes,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,

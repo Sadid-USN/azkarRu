@@ -167,12 +167,14 @@ class BookContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+           
             Center(
               child: Image.asset(
                 "icons/pattern.png",
                 height: 60,
               ),
             ),
+          
             const SizedBox(
               height: 20,
             ),
