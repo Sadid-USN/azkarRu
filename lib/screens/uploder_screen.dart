@@ -36,7 +36,7 @@ class _DataUploadedScreenState extends State<DataUploadedScreen> {
                     }
                   },
                   child: const Text(
-                      "Upload Json to Firebase"), // No need for const here
+                      "Upload Json to Firebase"), 
                 ),
               ),
 

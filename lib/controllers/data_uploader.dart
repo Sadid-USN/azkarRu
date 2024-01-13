@@ -53,6 +53,7 @@ class DataUploaderController extends ChangeNotifier {
           "lang": book.lang,
           "title": book.title,
           "image": book.image,
+
           "chapters": book.chapters?.map((c) => c.toJson()).toList(),
           // Add other fields specific to your LibBookModel
         });
