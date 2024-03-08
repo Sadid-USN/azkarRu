@@ -1,16 +1,16 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:avrod/controllers/library_controller.dart';
 import 'package:avrod/screens/booksScreen/contents_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
-import 'package:avrod/screens/booksScreen/reading_books_labrary_screen.dart';
-import 'package:avrod/screens/booksScreen/selected_books.dart';
+import 'package:avrod/screens/booksScreen/library_screen.dart';
 import 'package:avrod/widgets/costom_button.dart';
 
 class OverviewPage extends StatelessWidget {
@@ -112,7 +112,7 @@ class OverviewPage extends StatelessWidget {
                   onTap: () async {
                     const url =
                         'https://play.google.com/store/apps/details?id=com.darulasar.Azkar&hl=en&gl=US';
-
+          
                     if (await canLaunchUrl(Uri.parse(url))) {
                       await launchUrl(Uri.parse(url));
                     } else {
@@ -313,19 +313,17 @@ class _BottomSheet extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: ((context) {
-                          return ContentsPage(
-                            bookModel: book,
-                            index: index,
-                          );
+                      MaterialPageRoute(builder: (context) {
+                        return ContentsPage(
+                          bookModel: book,
+                          indexPage: index,
+                        );
 
-                          // BookReading(
-                          //   book: book,
-                          //   index: index,
-                          // );
-                        }),
-                      ),
+                        // BookReading(
+                        //   book: book,
+                        //   index: index,
+                        // );
+                      }),
                     );
                   },
                   child: Text(
@@ -345,102 +343,6 @@ class _BottomSheet extends StatelessWidget {
   }
 }
 
-// Column(
-//                   mainAxisAlignment: MainAxisAlignment.end,
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     ShortInfo(
-//                       data: book?.lang ?? "_",
-//                       title: LocaleKeys.language.tr(),
-//                     ),
-//                     const SizedBox(
-//                       height: 5,
-//                     ),
-//                     ShortInfo(
-//                       data: book?.category ?? "",
-//                       title: LocaleKeys.category.tr(),
-//                     ),
-//                     const SizedBox(
-//                       height: 5,
-//                     ),
-//                     ShortInfo(
-//                       data: numberOfPages.toString(),
-//                       title: LocaleKeys.pages.tr(),
-//                     ),
-//                     const SizedBox(
-//                       height: 8,
-//                     ),
-//                     const Divider(),
-//                     ExpandablePanel(
-//                       header: const Text(
-//                         "",
-//                         textAlign: TextAlign.start,
-//                         style: TextStyle(
-//                             fontWeight: FontWeight.w400, fontSize: 14),
-//                       ),
-//                       collapsed: SelectableText(
-//                         book?.overview ?? "",
-//                         style: TextStyle(
-//                           fontWeight: FontWeight.w600,
-//                           fontSize: 14,
-//                           color: textColor,
-//                         ),
-//                       ),
-//                       expanded: SelectableText(
-//                         book?.overview ?? "null",
-//                         maxLines: 3,
-//                         style: const TextStyle(
-//                           overflow: TextOverflow.ellipsis,
-//                           fontWeight: FontWeight.w400,
-//                           fontSize: 14,
-//                         ),
-//                       ),
-//                     ),
-//                     const SizedBox(
-//                       height: 16,
-//                     ),
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         CostomButton(
-//                           onPressed: () {
-//                             Navigator.of(context).pop();
-//                           },
-//                           child: Padding(
-//                             padding: const EdgeInsets.only(left: 6.0),
-//                             child: Icon(Icons.arrow_back_ios,
-//                                 color: Colors.blueGrey.shade700),
-//                           ),
-//                         ),
-//                         CostomButton(
-//                           onPressed: () {
-//                             Navigator.push(
-//                               context,
-//                               MaterialPageRoute(
-//                                 builder: ((context) {
-//                                   return BookReading(
-//                                     book: book!,
-//                                   );
-//                                 }),
-//                               ),
-//                             );
-//                           },
-//                           child: Text(
-//                             LocaleKeys.read.tr(),
-//                             style: TextStyle(
-//                                 fontSize: 18,
-//                                 fontWeight: FontWeight.w500,
-//                                 color: Colors.blueGrey.shade700),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                     const SizedBox(
-//                       height: 16,
-//                     ),
-//                   ],
-//                 ),
-
 class OverviewBookImage extends StatelessWidget {
   final String id;
   final String image;
@@ -453,60 +355,78 @@ class OverviewBookImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
-    return Container(
-      margin: const EdgeInsets.only(top: 10, bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-      height: width * 0.6,
-      width: width * 0.4,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: CachedNetworkImage(
-        imageUrl: image,
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: double.infinity,
-        placeholder: (context, url) => const Center(
-          child: CircularProgressIndicator(), // Show a loading indicator
-        ),
-        errorWidget: (context, url, error) =>
-            const Center(child: Icon(Icons.error)),
-        imageBuilder: (context, imageProvider) {
-          return Container(
-            decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black26,
-                  offset: Offset(3.0, 3.0),
-                  blurRadius: 5.0,
-                ),
-              ],
-              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-            child: Stack(
-              children: [
-                Positioned(
-                  bottom: 8,
-                  right: 5,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.black38,
-                    radius: 12,
-                    child: Text(
-                      id,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 11,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
+    final size = MediaQuery.sizeOf(context).width;
+    return Consumer<LibraryController>(
+      builder: (context, libraryController, child) => GestureDetector(
+        onDoubleTap: () {
+          libraryController.increaseImage();
         },
+        onScaleStart: (details) {
+          libraryController.startScale(libraryController.imageSize);
+        },
+        onScaleUpdate: (details) {
+          libraryController.updateScale(details.scale);
+        },
+        child: Container(
+          margin: const EdgeInsets.only(top: 10, bottom: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+          height: size * 0.6 * libraryController.imageSize,
+          width: size * 0.4 * libraryController.imageSize,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: AnimatedSize(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.bounceIn,
+            child: CachedNetworkImage(
+              imageUrl: image,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+              placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator(), // Show a loading indicator
+              ),
+              errorWidget: (context, url, error) =>
+                  const Center(child: Icon(Icons.error)),
+              imageBuilder: (context, imageProvider) {
+                return Container(
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26,
+                        offset: Offset(3.0, 3.0),
+                        blurRadius: 5.0,
+                      ),
+                    ],
+                    image: DecorationImage(
+                        image: imageProvider, fit: BoxFit.cover),
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        bottom: 8,
+                        right: 5,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.black38,
+                          radius: 12,
+                          child: Text(
+                            id,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
       ),
     );
   }

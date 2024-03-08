@@ -4,6 +4,7 @@ import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/audio_controller.dart';
 import 'package:avrod/controllers/radio_conteroller.dart';
 import 'package:avrod/models/book_model.dart';
+import 'package:avrod/screens/booksScreen/all_language_library_screen.dart';
 import 'package:avrod/screens/prayer_time_screen.dart';
 import 'package:avrod/screens/body_home_page.dart';
 import 'package:avrod/screens/favorite_chapter_screen.dart';
@@ -13,7 +14,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import '../widgets/drawer_widget.dart';
-import 'booksScreen/selected_books.dart';
+import 'booksScreen/library_screen.dart';
 import 'languages_screen.dart';
 
 // final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -38,7 +39,9 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> pages = [
     const BodyHomePage(),
-    const LibraryScreen(),
+
+   const LibraryScreen(),
+   // const AllLanguageLibraryScreen(),
     const FavoriteChaptersSceen(),
     const PrayerTimeScreen(),
     const RadioPlayerScreen()

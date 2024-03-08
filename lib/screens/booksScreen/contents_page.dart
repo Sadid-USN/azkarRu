@@ -10,11 +10,11 @@ import 'package:provider/provider.dart';
 
 class ContentsPage extends StatelessWidget {
   final LibBookModel? bookModel;
-  final int? index;
+  final int? indexPage;
 
   const ContentsPage({
     this.bookModel,
-    this.index,
+    this.indexPage,
     Key? key,
   }) : super(key: key);
 
@@ -38,18 +38,14 @@ class ContentsPage extends StatelessWidget {
       ),
       body: Consumer<LibraryController>(
         builder: (context, value, child) {
-          value.book = bookModel!;
+         final getbook = value.book = bookModel!;
           return ListView.separated(
             separatorBuilder: (context, index) {
               return const Divider();
             },
-            itemCount: bookModel?.chapters?.length ?? 0,
+            itemCount: getbook.chapters?.length ?? 0,
             itemBuilder: (context, index) {
-              final chapter = bookModel?.chapters?[index];
-
-              final bool isFirstTap = value.isFirstTap(value.book.id!, index);
-              final Color textColor =
-                  isFirstTap ? Colors.purple : primaryTextColor;
+               final chapter = getbook.chapters?[index];
 
               return Align(
                 alignment: Alignment.topLeft,
@@ -60,18 +56,18 @@ class ContentsPage extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.ptSerif(
                       fontSize: 14.0,
-                      color: textColor,
+                      color: value.getChapterTextColor(index),
                     ),
                   ),
                   trailing: Text(
                     " ・・・  ${index + 1}",
                     style: GoogleFonts.ptSerif(
                       fontSize: 14.0,
-                      color: textColor,
+                      color: value.getChapterTextColor(index),
                     ),
                   ),
                   onTap: () {
-                    value.markIndexAsTapped(value.book.id!, index);
+                    value.saveChapterTextColor(index);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return BookReading(

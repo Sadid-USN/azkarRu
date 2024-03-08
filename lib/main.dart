@@ -28,17 +28,12 @@ import 'package:timezone/data/latest.dart' as tz;
 
 const String FAVORITES_BOX = 'favorites_box';
 
-// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-//     FlutterLocalNotificationsPlugin();
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseMessaginApi().initNotification();
-  // await NotificationHelper().initNotification();
-  await MobileAds.instance.initialize();
-  tz.initializeTimeZones();
 
+  await MobileAds.instance.initialize();
   await GetStorage.init();
 
   // FirebaseDatabase.instance.setPersistenceEnabled(true);
@@ -111,8 +106,8 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
-      // home: const DataUploadedScreen(),
-      routes: appRoutes,
+     home: const DataUploadedScreen(),
+     //routes: appRoutes,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,

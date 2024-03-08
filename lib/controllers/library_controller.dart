@@ -1,6 +1,6 @@
+import 'package:avrod/colors/colors.dart';
 import 'package:avrod/models/lib_book_model.dart';
-import 'package:avrod/screens/booksScreen/selected_books.dart';
-import 'package:avrod/screens/text_screen.dart';
+import 'package:avrod/screens/booksScreen/library_screen.dart';
 import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -20,90 +20,55 @@ class LibraryController extends ChangeNotifier {
   late int? lastReadedPage;
   late int? getCurrentIndexAudio;
   late LibBookModel book;
-  late Map<int, bool> tappedIndexes;
-
+  GetStorage colorBox = GetStorage();
+  Map<String, Set<String>> clickedChaptersMap = {};
   LibraryController() {
-    initialColorData();
+    book = const LibBookModel();
+    _loadClickedChapters();
+  }
+  void _loadClickedChapters() {
+    final bookId = book.id.toString();
+
+    // Retrieve the clicked chapters from GetStorage
+    final List<String>? storedChapters = colorBox.read<List<String>>(bookId);
+
+    // Update the clicked chapters map
+    clickedChaptersMap[bookId] = storedChapters?.toSet() ?? {};
   }
 
-  void initialColorData() async {
-    final colorBox = GetStorage();
-    if (colorBox.hasData('tappedIndexes')) {
-      final data = colorBox.read('tappedIndexes');
-      tappedIndexes = Map<int, bool>.from(data);
-    } else {
-      tappedIndexes = {};
-      await saveTappedIndexes(book); // Save initial empty tappedIndexes
-    }
+  Color getChapterTextColor(int index) {
+    final chapter = book.chapters?[index];
+    final chapterId = chapter?.id.toString();
+    final bookId = book.id.toString();
+
+    // Retrieve the set of clicked chapters for the current book
+    Set<String> clickedChapters = clickedChaptersMap[bookId] ?? {};
+
+    bool isCurrentChapterClicked = clickedChapters.contains(chapterId);
+
+    return isCurrentChapterClicked ? Colors.purple : textColor;
   }
 
-  Future<void> saveTappedIndexes(LibBookModel bookModel) async {
-    final box = GetStorage();
-    await box.write(bookModel.id!, tappedIndexes);
-  }
+  void saveChapterTextColor(int index) {
+    final chapter = book.chapters?[index];
+    final chapterId = chapter?.id.toString();
+    final bookId = book.id.toString();
 
-bool isFirstTap(String bookId, int index) {
-  final box = GetStorage();
-  final key = bookId;
+    // Retrieve the set of clicked chapters for the current book
+    Set<String> clickedChapters = clickedChaptersMap[bookId] ?? {};
 
-  if (!box.hasData(key)) {
-    return false;
-  } else {
-    final dynamic bookData = box.read(key);
-    if (bookData != null && bookData is Map<String, dynamic> && bookData.containsKey(key)) {
-      final tappedIndexes = _convertMapToIntKey(bookData[key]);
-      return tappedIndexes.containsKey(index) ? tappedIndexes[index]! : false;
-    } else {
-      return false;
-    }
-  }
-}
+    // Mark the chapter as clicked
+    clickedChapters.add(chapterId!);
 
-void markIndexAsTapped(String bookId, int index) {
-  final box = GetStorage();
-  final key = bookId;
+    // Save changes to clickedChaptersMap
+    clickedChaptersMap[bookId] = clickedChapters;
 
-  if (!box.hasData(key)) {
-    final tappedIndexes = <int, bool>{};
-    tappedIndexes[index] = true;
-    final Map<String, dynamic> bookData = {key: tappedIndexes};
-    box.write(key, bookData);
+    // Save changes to colorBox
+    colorBox.write(bookId, clickedChapters.toList());
+
+    // Notify listeners to update UI
     notifyListeners();
-    saveTappedIndexes(book);
-    print('New data saved: $bookData'); // Вывод в консоль
-  } else {
-    final dynamic dynamicBookData = box.read(key);
-    if (dynamicBookData is Map<String, dynamic> && dynamicBookData.containsKey(key)) {
-      final tappedIndexes = _convertMapToIntKey(dynamicBookData[key]);
-      
-      if (!tappedIndexes.containsKey(index)) {
-        tappedIndexes[index] = true;
-        dynamicBookData[key] = _convertMapToStringKey(tappedIndexes);
-        box.write(key, dynamicBookData);
-        saveTappedIndexes(book);
-        notifyListeners();
-        print('Data updated: $dynamicBookData'); // Вывод в консоль
-      }
-    } else {
-      final tappedIndexes = <int, bool>{};
-      tappedIndexes[index] = true;
-      final Map<String, dynamic> newBookData = {key: tappedIndexes};
-      box.write(key, newBookData);
-      saveTappedIndexes(book);
-      notifyListeners();
-      print('New data saved: $newBookData'); // Вывод в консоль
-    }
   }
-}
-
-// Функция преобразования типов ключей и значений в карту
-Map<String, dynamic> _convertMapToStringKey(Map<int, bool> map) {
-  return map.map((key, value) => MapEntry(key.toString(), value));
-}
-
-Map<int, bool> _convertMapToIntKey(Map<String, dynamic> map) {
-  return map.map((key, value) => MapEntry(int.parse(key), value));
-}
 
   // void getLastReadedPage(int? lastReadedPage) {
   //   lastReadedPage = savePageBox.get(
@@ -160,6 +125,7 @@ Map<int, bool> _convertMapToIntKey(Map<String, dynamic> map) {
     currentPage = index;
     // savePageBox.put(book.id, currentPage);
     playAudio();
+    notifyListeners();
   }
 
   void onNextPagePressed() {
@@ -195,5 +161,39 @@ Map<int, bool> _convertMapToIntKey(Map<String, dynamic> map) {
       );
       savePageBox.put(book.id, currentPage);
     }
+  }
+
+  double imageSize = 1.0;
+  double _startScale = 1.0;
+
+  final double minImageSize = 0.6;
+  final double maxImageSize = 2.0;
+
+  void increaseImage() {
+    if (imageSize == 1.0) {
+      imageSize = 2.0;
+    } else {
+      imageSize = 1.0;
+    }
+    notifyListeners();
+  }
+
+  void startScale(double startScale) {
+    _startScale = startScale;
+    notifyListeners();
+  }
+
+  void updateScale(double newScale) {
+    double scaledSize = _startScale * newScale;
+    // Ограничиваем масштаб, чтобы он не превышал максимальное значение
+    if (scaledSize > maxImageSize) {
+      scaledSize = maxImageSize;
+    }
+    // Ограничиваем масштаб, чтобы он не был меньше минимального значения
+    if (scaledSize * 0.6 < minImageSize) {
+      scaledSize = minImageSize / 0.6;
+    }
+    imageSize = scaledSize;
+    notifyListeners();
   }
 }

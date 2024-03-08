@@ -1,14 +1,11 @@
-import 'package:avrod/screens/booksScreen/contents_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/audio_controller.dart';
-
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
 import 'package:avrod/screens/overview_page.dart';
@@ -16,16 +13,11 @@ import 'package:avrod/screens/overview_page.dart';
 const String noImage =
     "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";
 
-class LibraryScreen extends StatefulWidget {
+class LibraryScreen extends StatelessWidget {
   const LibraryScreen({Key? key}) : super(key: key);
 
   static String routName = '/libraryScreen';
 
-  @override
-  State<LibraryScreen> createState() => _LibraryScreenState();
-}
-
-class _LibraryScreenState extends State<LibraryScreen> {
   @override
   Widget build(BuildContext context) {
     var controller = Provider.of<AudioController>(
@@ -37,8 +29,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
       extendBodyBehindAppBar: true,
       body: StreamBuilder<QuerySnapshot>(
         stream: controller.books,
-        builder:
-            ((BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        builder: ((BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return const Center(child: Text('Something went wrong'));
           }
@@ -66,35 +57,33 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 SizedBox(
                   height: 50,
                   child: ListView(
-                    padding:
-                        const EdgeInsets.only(right: 5.0, left: 5.0, top: 8),
+                    padding: const EdgeInsets.only(right: 5.0, left: 5.0, top: 8),
                     scrollDirection: Axis.horizontal,
                     children: controller.categories.keys
                         .map(
                           (category) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 3),
-                            child: FilterChip(
-                              selected: controller.selectedCategories
-                                  .contains(category),
-                              label: Text(
-                                controller.getTranslatedCategory(category.tr()),
-                                style: const TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              onSelected: (vaSelected) {
-                                controller.toggleCategory(category);
-                              },
+                        padding: const EdgeInsets.symmetric(horizontal: 3),
+                        child: FilterChip(
+                          selected: controller.selectedCategories.contains(category),
+                          label: Text(
+                            controller.getTranslatedCategory(category.tr()),
+                            style: const TextStyle(
+                              color: Colors.black87,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                        )
+                          onSelected: (vaSelected) {
+                            controller.toggleCategory(category);
+                          },
+                        ),
+                      ),
+                    )
                         .toList(),
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.sizeOf(context).height / 2 * 1.4,
+                  height: MediaQuery.of(context).size.height / 2 * 1.4,
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: filteredBooksList.length,
@@ -103,8 +92,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         final chapters = filteredBooksList[index].chapters;
 
                         return Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 5, top: 10, left: 10, right: 10),
+                          padding: const EdgeInsets.only(bottom: 5, top: 10, left: 10, right: 10),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
@@ -121,29 +109,24 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                     return OverviewPage(
                                       index: index,
                                       book: filteredBooksList[index],
-                                      title: filteredBooksList[index].title ??
-                                          "null",
+                                      title: filteredBooksList[index].title ?? "null",
                                     );
                                   }),
                                 ),
                               );
                             },
                             child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Hero(
-                                  tag:
-                                      filteredBooksList[index].image ?? noImage,
+                                  tag: filteredBooksList[index].image ?? noImage,
                                   child: _BookImageCard(
                                     id: filteredBooksList[index].id ?? "0.0",
-                                    image: filteredBooksList[index].image ??
-                                        noImage,
+                                    image: filteredBooksList[index].image ?? noImage,
                                   ),
                                 ),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       _BuildRow(
                                         label: LocaleKeys.libTitle.tr(),
@@ -151,8 +134,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                       ),
                                       _BuildRow(
                                         label: LocaleKeys.category.tr(),
-                                        data: translateCategory(
-                                            book.category ?? "_"),
+                                        data: translateCategory(book.category ?? "_"),
                                       ),
                                       _BuildRow(
                                         label: LocaleKeys.language.tr(),
@@ -160,9 +142,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                       ),
                                       _BuildRow(
                                         label: LocaleKeys.pages.tr(),
-                                        data:
-                                            book.chapters?.length.toString() ??
-                                                "_",
+                                        data: book.chapters?.length.toString() ?? "_",
                                       ),
                                     ],
                                   ),
