@@ -1,5 +1,4 @@
 import 'package:animate_icons/animate_icons.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:avrod/controllers/library_controller.dart';
 import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
@@ -10,11 +9,10 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
-import 'package:share/share.dart';
 import 'package:avrod/colors/colors.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
-import 'package:avrod/screens/text_screen.dart';
+import 'package:share_plus/share_plus.dart';
 
 const String appLink =
     "https://play.google.com/store/apps/details?id=com.darulasar.Azkar";

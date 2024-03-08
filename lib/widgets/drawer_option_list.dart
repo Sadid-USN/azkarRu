@@ -1,7 +1,7 @@
 import 'package:avrod/screens/support_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 
 import '../generated/locale_keys.g.dart';
