@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters
 
 import 'dart:ui';
 
@@ -93,7 +93,8 @@ class CodegenLoader extends AssetLoader{
   "supportText5": "С дозволения Всевышнего мы будем продолжать работать над улучшением приложения. Вся хвала Всевышнему Аллаху, Господу миров!",
   "supportText6": "Если вы хотите финансово поддержать наш проект, пожалуйста, свяжитесь с нами по электронной почте по адресу ulamuyaman@gmail.com",
   "favoriteText": "Здесь будут отображаться ваши избранные главы",
-  "locationErrorTexr": "Для отображения времени молитв необходимо включить геолокации."
+  "locationErrorTexr": "Для отображения времени молитв необходимо включить геолокации.",
+  "toContents": "к содержанию"
 };
 static const Map<String,dynamic> uk = {
   "avrod": "Азкари",
@@ -171,7 +172,8 @@ static const Map<String,dynamic> uk = {
   "supportText5": "З дозволу Всевишнього ми продовжуватимемо працювати над поліпшенням додатка. Вся хвала Всевишньому Аллаху, Господу світів!",
   "supportText6": "Якщо ви хочете фінансово підтримати наш проект, будь ласка, зв'яжіться з нами електронною поштою за адресою ulamuyaman@gmail.com",
   "favoriteText": "Тут відображатимуться ваші обрані глави",
-  "locationErrorTexr": "Для відображення часу молитов необхідно увімкнути геолокацію."
+  "locationErrorTexr": "Для відображення часу молитов необхідно увімкнути геолокацію.",
+  "toContents": "До змісту"
 };
 static const Map<String,dynamic> en = {
   "avrod": "Azkar Daily prayers",
@@ -252,7 +254,8 @@ static const Map<String,dynamic> en = {
   "supportText5": "With the permission of the Most High, we will continue to work on improving the application. All praise is due to Allah, the Lord of the worlds!",
   "supportText6": "If you want to financially support our project, please contact us via email at ulamuyaman@gmail.com",
   "favoriteText": "Your favorite chapters will be displayed here",
-  "locationErrorTexr": "To display prayer times, you must enable geolocation."
+  "locationErrorTexr": "To display prayer times, you must enable geolocation.",
+  "toContents": "To contents"
 };
 static const Map<String,dynamic> fr = {
   "avrod": "Авроди субҳу шом",
@@ -333,7 +336,8 @@ static const Map<String,dynamic> fr = {
   "supportText4": "«Чун инсон мемирад, (ҳама) аъмоли ӯ қатъ мегардад ба ҷуз се чиз: садақаи ҷория, донише, ки (дигарон) аз он истифода мекунанд ё фарзандони солеҳе, ки ба сӯи Аллоҳ рӯй оварда дар ҳақи ӯ дуо мекунанд. Муслим (1631).",
   "supportText5": "Ҳамеша аз дастгирии шумо самимона миннатдорем!",
   "supportText6": "Агар муфассалтар оиди кумак хохед маълумот пайдо кунед, пас бо мо тавассути почтаи электронии ulamuyaman@gmail.com тамос гиред",
-  "locationErrorTexr": "Барои намоиш додани вақтҳои намоз, шумо бояд ҷойгиршавии худро боз кунед."
+  "locationErrorTexr": "Барои намоиш додани вақтҳои намоз, шумо бояд ҷойгиршавии худро боз кунед.",
+  "toContents": "Мундариҷа"
 };
 static const Map<String,dynamic> ar = {
   "avrod": "أذكار الصباح والمساء",
@@ -409,7 +413,8 @@ static const Map<String,dynamic> ar = {
   "supportText5": "بإذن الله العلي العظيم، سنواصل العمل على تحسين التطبيق. كل الحمد لله رب العالمين!",
   "supportText6": "إذا كنت ترغب في دعم مشروعنا مالياً، يُرجى التواصل معنا عبر البريد الإلكتروني على ulamuyaman@gmail.com",
   "favoriteText": "سيتم عرض الفصول المفضلة لديك هنا",
-  "locationErrorTexr": "لعرض أوقات الصلاة، يلزم عليك تمكين تحديد موقعك "
+  "locationErrorTexr": "لعرض أوقات الصلاة، يلزم عليك تمكين تحديد موقعك ",
+  "toContents": "إلى المحتويات"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "uk": uk, "en": en, "fr": fr, "ar": ar};
 }

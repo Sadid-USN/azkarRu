@@ -1,9 +1,12 @@
 import 'package:animate_icons/animate_icons.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:avrod/controllers/library_controller.dart';
+import 'package:avrod/screens/booksScreen/contents_page.dart';
+import 'package:avrod/screens/languages_screen.dart';
 import 'package:avrod/widgets/audio_palayer_bottom_sheet.dart';
 import 'package:avrod/widgets/popup_menu_btutton.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,17 +17,21 @@ import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../overview_page.dart';
+
 const String appLink =
     "https://play.google.com/store/apps/details?id=com.darulasar.Azkar";
 
 class BookReading extends StatefulWidget {
   final LibBookModel book;
   final int index;
+  final Function(int) onPageChanged;
   const BookReading({
     Key? key,
     // this.source,
     required this.book,
     required this.index,
+    required this.onPageChanged,
   }) : super(
           key: key,
         );
@@ -34,8 +41,6 @@ class BookReading extends StatefulWidget {
 }
 
 class _BookReadingState extends State<BookReading> {
-  bool isOntap = false;
-  // late int initialPage;
   ScrollController scrollController = ScrollController();
   AnimateIconController animateIconController = AnimateIconController();
   @override
@@ -43,7 +48,8 @@ class _BookReadingState extends State<BookReading> {
     final controller = Provider.of<LibraryController>(context, listen: false);
     controller.book = widget.book;
 
-    int initialPage = controller.currentPage = widget.index;
+    controller.getLastReadedPage(bookId: widget.book.id.toString());
+    int initialPage = controller.currentPage;
 
     controller.pageController = PageController(initialPage: initialPage);
 
@@ -56,11 +62,39 @@ class _BookReadingState extends State<BookReading> {
   Widget build(BuildContext context) {
     return Consumer<LibraryController>(
       builder: (context, value, child) => Scaffold(
+        floatingActionButton: SizedBox(
+          width: 70,
+          height: 50,
+          child: LangButton(
+            padding: EdgeInsets.zero,
+            title: '',
+            child: const Icon(Icons.subject),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: ((context) {
+                    return ContentsPage(
+                      bookModel: widget.book,
+                      indexPage: value.currentPage,
+                    );
+                  }),
+                ),
+              );
+            },
+          ),
+        ),
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
-              value.audioPlayer.stop();
+              if (widget.book.chapters != null) {
+                bool hasAudioChapter = widget.book.chapters!
+                    .any((chapter) => chapter.isAudioUrl == true);
+                if (hasAudioChapter) {
+                  value.audioPlayer.stop();
+                }
+              }
               Navigator.of(context).pop();
             },
           ),
@@ -87,16 +121,22 @@ class _BookReadingState extends State<BookReading> {
         body: PageView.builder(
           controller: value.pageController,
           onPageChanged: (index) {
+            value.onPageChanged(index);
+            value.saveLastReadedPage(
+                bookId: widget.book.id.toString(), page: index);
             value.currentPage = index;
             value.onPageChanged(index);
             value.audioPlayer.stop();
           },
           itemCount: widget.book.chapters!.length,
           itemBuilder: (context, index) {
-            return WillPopScope(
-              onWillPop: () async {
-                value.audioPlayer.stop();
-                return true;
+            return PopScope(
+              canPop: true,
+              onPopInvoked: (bool didPop) async {
+                if (didPop) {
+                  value.audioPlayer.stop();
+                  Navigator.of(context).pop();
+                }
               },
               child: SafeArea(
                 child: SingleChildScrollView(
@@ -104,11 +144,12 @@ class _BookReadingState extends State<BookReading> {
                     positioneDataStream: value.positioneDataStream,
                     audioPlayer: value.audioPlayer,
                     onShareTap: () {
+                      final subtitle = widget.book.chapters![index].subtitle;
                       final text = widget.book.chapters![index].text;
-                      final title = widget.book.title;
+                      final audioUrl = widget.book.chapters![index].url;
                       final sentByAzkar = LocaleKeys.sentByAzkarApp.tr();
                       Share.share(
-                          "$title\n$text\n$sentByAzkar\n👇👇👇\n$appLink");
+                          "$subtitle\n$text\n\nAudio 🔊\n\n👇👇👇\n$audioUrl\n\n👇👇👇\n$sentByAzkar\n$appLink");
                     },
                     max: widget.book.chapters!.length.toDouble() - 1,
                     image: widget.book.image ?? "_",
@@ -165,14 +206,15 @@ class BookContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           
+            const SizedBox(
+              height: 20,
+            ),
             Center(
               child: Image.asset(
                 "icons/pattern.png",
                 height: 60,
               ),
             ),
-          
             const SizedBox(
               height: 20,
             ),
@@ -211,7 +253,7 @@ class BookContent extends StatelessWidget {
                 letterSpacing: 1.0,
                 color: Colors.blueGrey[900],
                 fontSize: 14.0,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
               ),
             ),
             Center(
@@ -223,26 +265,28 @@ class BookContent extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 16),
               child: Center(
-                  child: Text(
-                page.toString(),
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              )),
+                child: Text(
+                  page.toString(),
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
             const SizedBox(
               height: 20,
             ),
-            _ReadingAudioPlayer(
-              positioneDataStream: positioneDataStream,
-              audioPlayer: audioPlayer,
-              onShareTap: onShareTap,
-              max: max,
-              scrollController: scrollController,
-              page: page!,
-              chapters: chapters,
-              onNextPagePressed: onNextPagePressed,
-              onPreviousPagePressed: onPreviousPagePressed,
-            ),
+            if (chapters.isAudioUrl == true)
+              ReadingAudioPlayer(
+                positioneDataStream: positioneDataStream,
+                audioPlayer: audioPlayer,
+                onShareTap: onShareTap,
+                max: max,
+                scrollController: scrollController,
+                page: page!,
+                chapters: chapters,
+                onNextPagePressed: onNextPagePressed,
+                onPreviousPagePressed: onPreviousPagePressed,
+              ),
             const SizedBox(
               height: 20,
             ),
@@ -253,7 +297,7 @@ class BookContent extends StatelessWidget {
   }
 }
 
-class _ReadingAudioPlayer extends StatelessWidget {
+class ReadingAudioPlayer extends StatelessWidget {
   final void Function()? onPreviousPagePressed;
   final void Function()? onNextPagePressed;
   final void Function()? onShareTap;
@@ -264,7 +308,7 @@ class _ReadingAudioPlayer extends StatelessWidget {
   final double max;
   final LibChapters chapters;
 
-  const _ReadingAudioPlayer({
+  const ReadingAudioPlayer({
     required this.onPreviousPagePressed,
     required this.onNextPagePressed,
     required this.onShareTap,
@@ -372,48 +416,7 @@ class _ReadingAudioPlayer extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 5, vertical: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: onPreviousPagePressed,
-                      style: ElevatedButton.styleFrom(
-                        elevation: 1,
-                        backgroundColor: Colors.blueGrey.shade100,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: const Icon(
-                        Icons.skip_previous_sharp,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: onShareTap,
-                      child: Image.asset(
-                        "icons/shared.png",
-                        height: 30,
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: onNextPagePressed,
-                      style: ElevatedButton.styleFrom(
-                        elevation: 1,
-                        backgroundColor: Colors.blueGrey.shade100,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: const Icon(
-                        Icons.skip_next,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            const  SizedBox(height: 40,),
             ],
           )
         : const SizedBox();
@@ -462,11 +465,11 @@ class _ReadingAudioPlayer extends StatelessWidget {
 //   Widget build(BuildContext context) {
 //     final name = basename(widget.file!.path);
 //     return Scaffold(
-      
+
 //       appBar: AppBar(title:  Text(name),),
 //       body: PDFView(
 //         filePath: widget.file!.path ,
-        
+
 //       ),
 //     );
 //   }

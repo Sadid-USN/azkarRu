@@ -1,3 +1,4 @@
+import 'package:avrod/screens/booksScreen/book_reading_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -29,7 +30,8 @@ class LibraryScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: StreamBuilder<QuerySnapshot>(
         stream: controller.books,
-        builder: ((BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        builder:
+            ((BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return const Center(child: Text('Something went wrong'));
           }
@@ -57,28 +59,30 @@ class LibraryScreen extends StatelessWidget {
                 SizedBox(
                   height: 50,
                   child: ListView(
-                    padding: const EdgeInsets.only(right: 5.0, left: 5.0, top: 8),
+                    padding:
+                        const EdgeInsets.only(right: 5.0, left: 5.0, top: 8),
                     scrollDirection: Axis.horizontal,
                     children: controller.categories.keys
                         .map(
                           (category) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 3),
-                        child: FilterChip(
-                          selected: controller.selectedCategories.contains(category),
-                          label: Text(
-                            controller.getTranslatedCategory(category.tr()),
-                            style: const TextStyle(
-                              color: Colors.black87,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
+                            padding: const EdgeInsets.symmetric(horizontal: 3),
+                            child: FilterChip(
+                              selected: controller.selectedCategories
+                                  .contains(category),
+                              label: Text(
+                                controller.getTranslatedCategory(category.tr()),
+                                style: const TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              onSelected: (vaSelected) {
+                                controller.toggleCategory(category);
+                              },
                             ),
                           ),
-                          onSelected: (vaSelected) {
-                            controller.toggleCategory(category);
-                          },
-                        ),
-                      ),
-                    )
+                        )
                         .toList(),
                   ),
                 ),
@@ -92,7 +96,8 @@ class LibraryScreen extends StatelessWidget {
                         final chapters = filteredBooksList[index].chapters;
 
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 5, top: 10, left: 10, right: 10),
+                          padding: const EdgeInsets.only(
+                              bottom: 5, top: 10, left: 10, right: 10),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
@@ -106,10 +111,12 @@ class LibraryScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: ((context) {
-                                    return OverviewPage(
+                                    return BookReading(
                                       index: index,
                                       book: filteredBooksList[index],
-                                      title: filteredBooksList[index].title ?? "null",
+                                      onPageChanged: (pageIndex) {
+                                        pageIndex = index;
+                                      },
                                     );
                                   }),
                                 ),
@@ -118,15 +125,18 @@ class LibraryScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 Hero(
-                                  tag: filteredBooksList[index].image ?? noImage,
+                                  tag:
+                                      filteredBooksList[index].image ?? noImage,
                                   child: _BookImageCard(
                                     id: filteredBooksList[index].id ?? "0.0",
-                                    image: filteredBooksList[index].image ?? noImage,
+                                    image: filteredBooksList[index].image ??
+                                        noImage,
                                   ),
                                 ),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       _BuildRow(
                                         label: LocaleKeys.libTitle.tr(),
@@ -134,7 +144,8 @@ class LibraryScreen extends StatelessWidget {
                                       ),
                                       _BuildRow(
                                         label: LocaleKeys.category.tr(),
-                                        data: translateCategory(book.category ?? "_"),
+                                        data: translateCategory(
+                                            book.category ?? "_"),
                                       ),
                                       _BuildRow(
                                         label: LocaleKeys.language.tr(),
@@ -142,7 +153,9 @@ class LibraryScreen extends StatelessWidget {
                                       ),
                                       _BuildRow(
                                         label: LocaleKeys.pages.tr(),
-                                        data: book.chapters?.length.toString() ?? "_",
+                                        data:
+                                            book.chapters?.length.toString() ??
+                                                "_",
                                       ),
                                     ],
                                   ),

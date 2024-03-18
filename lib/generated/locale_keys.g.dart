@@ -80,5 +80,6 @@ abstract class  LocaleKeys {
   static const supportText6 = 'supportText6';
   static const favoriteText = 'favoriteText';
   static const locationErrorTexr = 'locationErrorTexr';
+  static const toContents = 'toContents';
 
 }

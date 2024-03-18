@@ -27,7 +27,10 @@ class AllLanguageLibraryScreen extends StatelessWidget {
 
 class CardContainer extends StatelessWidget {
   final void Function()? onTap;
-  const CardContainer({required this.onTap});
+  const CardContainer({
+    required this.onTap,
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -56,7 +59,7 @@ class CardContainer extends StatelessWidget {
         ),
         alignment: Alignment.centerLeft, //to align its child
         padding: EdgeInsets.all(20),
-        child: Text(
+        child: const Text(
           'English books',
           style: TextStyle(
             fontSize: 18,

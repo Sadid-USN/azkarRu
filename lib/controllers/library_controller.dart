@@ -17,14 +17,19 @@ class LibraryController extends ChangeNotifier {
   late int currentPage;
   late PageController pageController;
   late Box savePageBox;
-  late int? lastReadedPage;
+  late int lastReadedPage;
   late int? getCurrentIndexAudio;
   late LibBookModel book;
+  late Map<String, int> lastReadedPages;
   GetStorage colorBox = GetStorage();
   Map<String, Set<String>> clickedChaptersMap = {};
   LibraryController() {
+    savePageBox = Hive.box('pageBox');
+
     book = const LibBookModel();
     _loadClickedChapters();
+
+    lastReadedPages = {};
   }
   void _loadClickedChapters() {
     final bookId = book.id.toString();
@@ -70,18 +75,24 @@ class LibraryController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void getLastReadedPage(int? lastReadedPage) {
-  //   lastReadedPage = savePageBox.get(
-  //     book.id,
-  //   );
-  //   if (lastReadedPage != null) {
-  //     currentPage = lastReadedPage;
-  //     pageController = PageController(initialPage: lastReadedPage ?? 0);
-  //   } else {
-  //     currentPage = 0;
-  //     pageController = PageController(initialPage: currentPage);
-  //   }
-  // }
+  void getLastReadedPage({required String bookId}) {
+    var savedPage = savePageBox.get(bookId);
+    lastReadedPages[bookId] = savedPage != null ? savedPage as int : 0;
+
+    currentPage = lastReadedPages[bookId] ?? 0;
+    pageController = PageController(initialPage: currentPage ?? 0);
+  }
+
+  void updateCurrentPage({required String bookId, required int page}) {
+    lastReadedPages[bookId] = page;
+
+    notifyListeners();
+  }
+
+  void saveLastReadedPage({required String bookId, required int page}) {
+    lastReadedPages[bookId] = page;
+    savePageBox.put(bookId, page);
+  }
 
   Stream<PositioneData> get positioneDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositioneData>(
