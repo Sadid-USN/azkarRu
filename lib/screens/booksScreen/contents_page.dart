@@ -2,7 +2,8 @@ import 'package:avrod/colors/colors.dart';
 import 'package:avrod/controllers/library_controller.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
 import 'package:avrod/models/lib_book_model.dart';
-import 'package:avrod/screens/booksScreen/reading_books_labrary_screen.dart';
+import 'package:avrod/screens/booksScreen/book_reading_screen.dart';
+import 'package:avrod/screens/booksScreen/sellected_content_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,14 +39,14 @@ class ContentsPage extends StatelessWidget {
       ),
       body: Consumer<LibraryController>(
         builder: (context, value, child) {
-         final getbook = value.book = bookModel!;
+          final getbook = value.book = bookModel!;
           return ListView.separated(
             separatorBuilder: (context, index) {
               return const Divider();
             },
             itemCount: getbook.chapters?.length ?? 0,
             itemBuilder: (context, index) {
-               final chapter = getbook.chapters?[index];
+              final chapter = getbook.chapters?[index];
 
               return Align(
                 alignment: Alignment.topLeft,
@@ -68,13 +69,15 @@ class ContentsPage extends StatelessWidget {
                   ),
                   onTap: () {
                     value.saveChapterTextColor(index);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return BookReading(
-                        book: bookModel!,
-                        index: index,
-                      );
-                    }));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return SellectedContentScreen(
+                          page: index + 1,
+                          chapter: getbook.chapters![index],
+                        );
+                      }),
+                    );
                   },
                 ),
               );

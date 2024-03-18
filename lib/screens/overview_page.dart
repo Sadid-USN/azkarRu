@@ -316,7 +316,7 @@ class _BottomSheet extends StatelessWidget {
                       MaterialPageRoute(builder: (context) {
                         return ContentsPage(
                           bookModel: book,
-                          indexPage: index,
+                          // indexPage: index,
                         );
 
                         // BookReading(

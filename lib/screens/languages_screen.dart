@@ -82,26 +82,36 @@ class LangugesScreen extends StatelessWidget {
 class LangButton extends StatelessWidget {
   final void Function()? onPressed;
   final String title;
+  final Color? backgroundColor;
+  final Size? minimumSize;
+  final Widget? child;
+  final EdgeInsets? padding;
   const LangButton({
     Key? key,
     required this.onPressed,
     required this.title,
+    this.backgroundColor,
+    this.minimumSize,
+    this.child,
+    this.padding,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: padding?? const EdgeInsets.only(left: 20, right: 20),
         child: ElevatedButton(
           onPressed:
               onPressed, // This child can be everything. I want to choose a beautiful Text Widget
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromARGB(255, 243, 225, 183),
-            textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            minimumSize:
+            backgroundColor:
+                backgroundColor ?? const Color.fromARGB(255, 243, 225, 183),
+            textStyle:
+                const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            minimumSize: minimumSize ??
                 const Size(150, 50), //change size of this beautiful button
-    
+
             shadowColor: Colors
                 .grey, //shadow prop is a very nice prop for every button or card widgets.
             elevation: 5, // we can set elevation of this beautiful button
@@ -112,11 +122,14 @@ class LangButton extends StatelessWidget {
             ),
             tapTargetSize: MaterialTapTargetSize.padded,
           ), //This prop for beautiful expressions
-          child: Text(
-            title,
-            style: GoogleFonts.ptSerif(
-                fontSize: 18, fontWeight: FontWeight.w500, color: textColor),
-          ),
+          child: child ??
+              Text(
+                title,
+                style: GoogleFonts.ptSerif(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: textColor),
+              ),
         ),
       ),
     );

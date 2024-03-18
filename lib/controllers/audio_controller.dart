@@ -1,14 +1,10 @@
 import 'package:animate_icons/animate_icons.dart';
-import 'package:avrod/controllers/radio_conteroller.dart';
-
 import 'package:avrod/models/book_model.dart';
 import 'package:avrod/generated/locale_keys.g.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:sizer/sizer.dart';
 
 class AudioController extends ChangeNotifier {
@@ -16,7 +12,7 @@ class AudioController extends ChangeNotifier {
   int currentIndex = 0;
 
   AudioController() {
-      // _tabController = TabController();
+    // _tabController = TabController();
     loadSelectedCategories();
     selectedCategories
         .addAll(categories.keys); // Добавьте все категории по умолчанию
@@ -41,8 +37,7 @@ class AudioController extends ChangeNotifier {
   final String _boxName = 'selectedCategories';
 
   Chapters? chapter;
-  // late TabController _tabController;
-  // TabController? get tabController => _tabController;
+
 
   final AnimateIconController copyController = AnimateIconController();
   final AnimateIconController controller = AnimateIconController();
@@ -50,10 +45,6 @@ class AudioController extends ChangeNotifier {
 
   bool isPlaying = false;
   String? currentUrl;
-
-  // late final AudioPlayer _audioPlayer = AudioPlayer();
-
-  // AudioPlayer get audioPlayer => _audioPlayer;
 
   final Stream<QuerySnapshot> books = FirebaseFirestore.instance
       .collection('books')
@@ -137,3 +128,23 @@ class AudioController extends ChangeNotifier {
     }
   }
 }
+
+// Future<List<LibBookModel>> fetchBooks() async {
+//   final QuerySnapshot snapshot = await FirebaseFirestore.instance
+//       .collection('books')
+//   // .orderBy('author',)
+//       .get();
+//
+//   final booksList = snapshot.docs.map((DocumentSnapshot doc) {
+//     final bookData = doc.data() as Map<String, dynamic>;
+//     bookData['id'] = doc.id;
+//     return LibBookModel.fromJson(bookData);
+//   }).toList();
+//
+//   final filteredBooksList = booksList.where((book) {
+//     return selectedCategories.contains(book.category);
+//   }).toList();
+//
+//   // return the list of filtered books
+//   return filteredBooksList;
+// }

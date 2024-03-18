@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:avrod/screens/booksScreen/reading_books_labrary_screen.dart';
+import 'package:avrod/screens/booksScreen/book_reading_screen.dart';
 import 'package:flutter/material.dart';
 
 // void openPDF(BuildContext context, File file) =>
@@ -20,7 +20,7 @@ import 'package:flutter/material.dart';
 
 // import 'package:sizer/sizer.dart';
 // import 'all_book.dart';
-// import 'reading_books_labrary_screen.dart';
+// import 'book_reading_screen.dart';
 
 // class ListOfAllBooks extends StatefulWidget {
 //   final int? bookIndex;
