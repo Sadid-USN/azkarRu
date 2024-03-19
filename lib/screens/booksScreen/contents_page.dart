@@ -40,48 +40,55 @@ class ContentsPage extends StatelessWidget {
       body: Consumer<LibraryController>(
         builder: (context, value, child) {
           final getbook = value.book = bookModel!;
-          return ListView.separated(
-            separatorBuilder: (context, index) {
-              return const Divider();
+          return WillPopScope(
+            onWillPop: () async {
+              value.audioPlayer.stop();
+              Navigator.of(context).pop();
+              return true;
             },
-            itemCount: getbook.chapters?.length ?? 0,
-            itemBuilder: (context, index) {
-              final chapter = getbook.chapters?[index];
+            child: ListView.separated(
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
+              itemCount: getbook.chapters?.length ?? 0,
+              itemBuilder: (context, index) {
+                final chapter = getbook.chapters?[index];
 
-              return Align(
-                alignment: Alignment.topLeft,
-                child: ListTile(
-                  title: Text(
-                    chapter?.subtitle ?? "",
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.ptSerif(
-                      fontSize: 14.0,
-                      color: value.getChapterTextColor(index),
+                return Align(
+                  alignment: Alignment.topLeft,
+                  child: ListTile(
+                    title: Text(
+                      chapter?.subtitle ?? "",
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.ptSerif(
+                        fontSize: 14.0,
+                        color: value.getChapterTextColor(index),
+                      ),
                     ),
-                  ),
-                  trailing: Text(
-                    " ・・・  ${index + 1}",
-                    style: GoogleFonts.ptSerif(
-                      fontSize: 14.0,
-                      color: value.getChapterTextColor(index),
+                    trailing: Text(
+                      " ・・・  ${index + 1}",
+                      style: GoogleFonts.ptSerif(
+                        fontSize: 14.0,
+                        color: value.getChapterTextColor(index),
+                      ),
                     ),
+                    onTap: () {
+                      value.saveChapterTextColor(index);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return SellectedContentScreen(
+                            page: index + 1,
+                            chapter: getbook.chapters![index],
+                          );
+                        }),
+                      );
+                    },
                   ),
-                  onTap: () {
-                    value.saveChapterTextColor(index);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return SellectedContentScreen(
-                          page: index + 1,
-                          chapter: getbook.chapters![index],
-                        );
-                      }),
-                    );
-                  },
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
         },
       ),

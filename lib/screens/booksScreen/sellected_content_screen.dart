@@ -30,13 +30,11 @@ class SellectedContentScreen extends StatelessWidget {
       builder: (context, value, child) => Scaffold(
           backgroundColor: bgColor,
           extendBodyBehindAppBar: true,
-          body: PopScope(
-            canPop: true,
-            onPopInvoked: (bool didPop) async {
-              if (didPop) {
-                value.audioPlayer.stop();
-                Navigator.of(context).pop();
-              }
+          body: WillPopScope(
+            onWillPop: () async {
+              value.audioPlayer.stop();
+              Navigator.of(context).pop();
+              return true;
             },
             child: SingleChildScrollView(
               child: Padding(

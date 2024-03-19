@@ -13,6 +13,8 @@ import 'package:avrod/models/lib_book_model.dart';
 import 'package:avrod/screens/booksScreen/library_screen.dart';
 import 'package:avrod/widgets/costom_button.dart';
 
+import 'booksScreen/book_reading_screen.dart';
+
 class OverviewPage extends StatelessWidget {
   final int? index;
   final LibBookModel? book;
@@ -112,7 +114,7 @@ class OverviewPage extends StatelessWidget {
                   onTap: () async {
                     const url =
                         'https://play.google.com/store/apps/details?id=com.darulasar.Azkar&hl=en&gl=US';
-          
+
                     if (await canLaunchUrl(Uri.parse(url))) {
                       await launchUrl(Uri.parse(url));
                     } else {
@@ -314,15 +316,11 @@ class _BottomSheet extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
-                        return ContentsPage(
-                          bookModel: book,
-                          // indexPage: index,
+                        return BookReading(
+                          book: book,
+                          index: index,
+                          onPageChanged: (val) {},
                         );
-
-                        // BookReading(
-                        //   book: book,
-                        //   index: index,
-                        // );
                       }),
                     );
                   },

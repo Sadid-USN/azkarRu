@@ -70,6 +70,7 @@ class _BookReadingState extends State<BookReading> {
             title: '',
             child: const Icon(Icons.subject),
             onPressed: () {
+              value.audioPlayer.stop();
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -130,13 +131,11 @@ class _BookReadingState extends State<BookReading> {
           },
           itemCount: widget.book.chapters!.length,
           itemBuilder: (context, index) {
-            return PopScope(
-              canPop: true,
-              onPopInvoked: (bool didPop) async {
-                if (didPop) {
-                  value.audioPlayer.stop();
-                  Navigator.of(context).pop();
-                }
+            return WillPopScope(
+              onWillPop: () async {
+                value.audioPlayer.stop();
+                Navigator.of(context).pop();
+                return true;
               },
               child: SafeArea(
                 child: SingleChildScrollView(
@@ -416,7 +415,9 @@ class ReadingAudioPlayer extends StatelessWidget {
                   ],
                 ),
               ),
-            const  SizedBox(height: 40,),
+              const SizedBox(
+                height: 40,
+              ),
             ],
           )
         : const SizedBox();

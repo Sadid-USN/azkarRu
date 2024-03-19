@@ -111,12 +111,10 @@ class LibraryScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: ((context) {
-                                    return BookReading(
+                                    return OverviewPage(
                                       index: index,
                                       book: filteredBooksList[index],
-                                      onPageChanged: (pageIndex) {
-                                        pageIndex = index;
-                                      },
+                                      title: filteredBooksList[index].title,
                                     );
                                   }),
                                 ),
